@@ -1,0 +1,7 @@
+$hyoo_match_app $mol_page
+	title \$hyoo_match: pay-free dating
+	yard $hyoo_sync_client
+		peer <= Peer null
+	tools /
+		<= Online $hyoo_sync_online
+			yard <= yard
