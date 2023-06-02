@@ -14,7 +14,7 @@ namespace $ {
 		
 		@ $mol_mem
 		places( next?: readonly string[] ) {
-			return this.sub( '$hyoo_match_single:places', $hyoo_crowd_list ).list( next )
+			return this.sub( '$hyoo_match_single:places', $hyoo_crowd_list ).list( next ).map( String )
 		}
 		
 		@ $mol_mem

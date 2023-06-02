@@ -4,6 +4,8 @@ $hyoo_match_app $mol_book2
 		<= Welcome $mol_page
 			title \$hyoo_match: pay-free dating
 			tools /
+				<= Source $mol_link_source
+					uri \https://github.com/hyoo-ru/match.hyoo.ru/
 				<= Online $hyoo_sync_online
 					yard <= yard $hyoo_sync_client
 		<= Single $hyoo_match_single_page
