@@ -17,11 +17,9 @@ namespace $.$$ {
 		},
 		
 		Camera: {
+			aspectRatio: 1,
 			border: {
 				radius: $mol_gap.round,
-			},
-			flex: {
-				grow: 0,
 			},
 		},
 		
