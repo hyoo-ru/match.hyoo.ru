@@ -1,5 +1,7 @@
 $hyoo_match_app $mol_book2
 	self $hyoo_match_single
+	plugins /
+		<= Theme $mol_theme_auto
 	pages /
 		<= Welcome $mol_page
 			title \$hyoo_match: pay-free dating
@@ -8,6 +10,7 @@ $hyoo_match_app $mol_book2
 					uri \https://github.com/hyoo-ru/match.hyoo.ru/
 				<= Online $hyoo_sync_online
 					yard <= yard $hyoo_sync_client
+				<= Lights $mol_lights_toggle
 		<= Single $hyoo_match_single_page
 			single <= self
 		<= Settings $hyoo_match_single_settings

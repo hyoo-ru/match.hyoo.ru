@@ -4,8 +4,9 @@ $hyoo_match_single_page $mol_page
 		greet => greet
 		places => places
 	body /
-		<= Photo $mol_image
-			uri <= photo \
+		<= Gallery $mol_view sub /
+			<= Photo $mol_image
+				uri <= photo \
 		<= Places $hyoo_match_places
 			enabled false
 			Pick null

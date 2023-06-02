@@ -12,10 +12,24 @@ namespace $.$$ {
 			},
 		},
 		
+		Shot: {
+			padding: $mol_gap.block,
+		},
+		
 		Camera: {
+			border: {
+				radius: $mol_gap.round,
+			},
 			flex: {
 				grow: 0,
 			},
+		},
+		
+		Hint: {
+			position: 'absolute',
+			left: $mol_gap.block,
+			top: $mol_gap.block,
+			color: $mol_theme.text,
 		},
 		
 		Places: {
@@ -23,6 +37,12 @@ namespace $.$$ {
 				shrink: 0,
 				grow: 0,
 			},
+		},
+		
+		Syntax: {
+			margin: { bottom: `-2.5rem` },
+    		alignSelf: `flex-end`,
+			zIndex: $mol_layer.speck,
 		},
 		
 	} )

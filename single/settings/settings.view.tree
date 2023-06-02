@@ -10,18 +10,17 @@ $hyoo_match_single_settings $mol_page
 	Title $mol_string_button
 		hint \Name
 		value? <=> title?
-	tools /
-		<= Syntax $mol_link_iconed
-			hint \MarkedText Syntax
-			uri \https://marked.hyoo.ru/
-			title \
 	body /
-		<= Shot $mol_button
+		<= Shot $mol_button_minor
 			hint \Shot
 			click? <=> capture? null
 			sub /
 				<= Camera $mol_video_camera
 					dom_node_actual => video
+					aspect 1
+				<= Hint $mol_hint
+					dictionary *
+						shot \Click to take a shot
 		<= Places_field $mol_form_field
 			name \Places
 			Content <= Places $hyoo_match_places
@@ -55,6 +54,10 @@ $hyoo_match_single_settings $mol_page
 						options *
 							male \Males
 							female \Females
+		<= Syntax $mol_link_iconed
+			hint \MarkedText Syntax
+			uri \https://marked.hyoo.ru/
+			title \
 		<= Greet_field $mol_form_field
 			name \Greeting
 			Content <= Greet $mol_textarea

@@ -6,6 +6,10 @@ namespace $.$$ {
 			basis: `40rem`,
 		},
 		
+		Gallery: {
+			padding: $mol_gap.block,
+		},
+		
 		Places: {
 			flex: {
 				shrink: 0,
