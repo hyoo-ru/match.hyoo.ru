@@ -778,6 +778,21 @@ $mol_hint $mol_check
 	hint_close @ \Hide
 	hint_open @ \Hint
 
+$mol_check_list $mol_view
+	Option* $mol_check
+		checked?val <=> option_checked*?val false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value?val \
+
 $mol_labeler $mol_list
 	rows /
 		<= Label $mol_view
@@ -795,21 +810,6 @@ $mol_form_field $mol_labeler
 		<= Bid $mol_view
 			sub / <= bid \
 	content / <= control null
-
-$mol_check_list $mol_view
-	Option* $mol_check
-		checked?val <=> option_checked*?val false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value?val \
 
 $mol_row $mol_view
 
@@ -922,10 +922,6 @@ $hyoo_match_single_settings $mol_page
 				<= Hint $mol_hint
 					dictionary *
 						shot \Click to take a shot
-		<= Places_field $mol_form_field
-			name \Places
-			Content <= Places $hyoo_match_places
-				value? <=> places?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
 				name \I am ...
@@ -935,12 +931,12 @@ $hyoo_match_single_settings $mol_page
 						options *
 							young \Young
 							adult \Adult
-							olden \Olden
+							mature \Mature
 					<= Sex_self $mol_switch
 						value? <=> sex_self?
 						options *
-							male \Male
 							female \Female
+							male \Male
 			<= Pref $mol_form_field
 				name \I like ...
 				Content <= Pref_controls $mol_list rows /
@@ -949,12 +945,16 @@ $hyoo_match_single_settings $mol_page
 						options *
 							young \Young
 							adult \Adult
-							olden \Olden
+							mature \Mature
 					<= Sex_pref $mol_check_list
 						option_checked*? <=> sex_pref*?
 						options *
-							male \Males
 							female \Females
+							male \Males
+		<= Places_field $mol_form_field
+			name \Places
+			Content <= Places $hyoo_match_places
+				value? <=> places?
 		<= Syntax $mol_link_iconed
 			hint \MarkedText Syntax
 			uri \https://marked.hyoo.ru/

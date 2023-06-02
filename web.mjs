@@ -13174,121 +13174,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_labeler extends $mol_list {
-        rows() {
-            return [
-                this.Label(),
-                this.Content()
-            ];
-        }
-        label() {
-            return [
-                this.title()
-            ];
-        }
-        Label() {
-            const obj = new this.$.$mol_view();
-            obj.minimal_height = () => 32;
-            obj.sub = () => this.label();
-            return obj;
-        }
-        content() {
-            return [];
-        }
-        Content() {
-            const obj = new this.$.$mol_view();
-            obj.minimal_height = () => 24;
-            obj.sub = () => this.content();
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_labeler.prototype, "Label", null);
-    __decorate([
-        $mol_mem
-    ], $mol_labeler.prototype, "Content", null);
-    $.$mol_labeler = $mol_labeler;
-})($ || ($ = {}));
-//mol/labeler/-view.tree/labeler.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
-})($ || ($ = {}));
-//mol/labeler/-css/labeler.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_form_field extends $mol_labeler {
-        bids() {
-            return [];
-        }
-        label() {
-            return [
-                this.name(),
-                this.Bid()
-            ];
-        }
-        content() {
-            return [
-                this.control()
-            ];
-        }
-        name() {
-            return "";
-        }
-        bid() {
-            return "";
-        }
-        Bid() {
-            const obj = new this.$.$mol_view();
-            obj.sub = () => [
-                this.bid()
-            ];
-            return obj;
-        }
-        control() {
-            return null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_form_field.prototype, "Bid", null);
-    $.$mol_form_field = $mol_form_field;
-})($ || ($ = {}));
-//mol/form/field/-view.tree/field.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_form_field extends $.$mol_form_field {
-            bid() {
-                return this.bids().filter(Boolean)[0] ?? '';
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_form_field.prototype, "bid", null);
-        $$.$mol_form_field = $mol_form_field;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/form/field/field.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/form/field/field.view.css", "[mol_form_field] {\n\talign-items: stretch;\n}\n\n[mol_form_field_bid] {\n\tcolor: var(--mol_theme_focus);\n\tdisplay: inline-block;\n\ttext-shadow: 0 0;\n}\n\n[mol_form_field_content] {\n\tborder-radius: var(--mol_gap_round);\n}\n");
-})($ || ($ = {}));
-//mol/form/field/-css/field.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_check_list extends $mol_view {
         Option(id) {
             const obj = new this.$.$mol_check();
@@ -13418,6 +13303,121 @@ var $;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 //mol/switch/switch.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_labeler extends $mol_list {
+        rows() {
+            return [
+                this.Label(),
+                this.Content()
+            ];
+        }
+        label() {
+            return [
+                this.title()
+            ];
+        }
+        Label() {
+            const obj = new this.$.$mol_view();
+            obj.minimal_height = () => 32;
+            obj.sub = () => this.label();
+            return obj;
+        }
+        content() {
+            return [];
+        }
+        Content() {
+            const obj = new this.$.$mol_view();
+            obj.minimal_height = () => 24;
+            obj.sub = () => this.content();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_labeler.prototype, "Label", null);
+    __decorate([
+        $mol_mem
+    ], $mol_labeler.prototype, "Content", null);
+    $.$mol_labeler = $mol_labeler;
+})($ || ($ = {}));
+//mol/labeler/-view.tree/labeler.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
+})($ || ($ = {}));
+//mol/labeler/-css/labeler.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_form_field extends $mol_labeler {
+        bids() {
+            return [];
+        }
+        label() {
+            return [
+                this.name(),
+                this.Bid()
+            ];
+        }
+        content() {
+            return [
+                this.control()
+            ];
+        }
+        name() {
+            return "";
+        }
+        bid() {
+            return "";
+        }
+        Bid() {
+            const obj = new this.$.$mol_view();
+            obj.sub = () => [
+                this.bid()
+            ];
+            return obj;
+        }
+        control() {
+            return null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_form_field.prototype, "Bid", null);
+    $.$mol_form_field = $mol_form_field;
+})($ || ($ = {}));
+//mol/form/field/-view.tree/field.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_form_field extends $.$mol_form_field {
+            bid() {
+                return this.bids().filter(Boolean)[0] ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_form_field.prototype, "bid", null);
+        $$.$mol_form_field = $mol_form_field;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/form/field/field.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/form/field/field.view.css", "[mol_form_field] {\n\talign-items: stretch;\n}\n\n[mol_form_field_bid] {\n\tcolor: var(--mol_theme_focus);\n\tdisplay: inline-block;\n\ttext-shadow: 0 0;\n}\n\n[mol_form_field_content] {\n\tborder-radius: var(--mol_gap_round);\n}\n");
+})($ || ($ = {}));
+//mol/form/field/-css/field.view.css.ts
 ;
 "use strict";
 var $;
@@ -13872,8 +13872,8 @@ var $;
         body() {
             return [
                 this.Shot(),
-                this.Places_field(),
                 this.Tags(),
+                this.Places_field(),
                 this.Syntax(),
                 this.Greet_field()
             ];
@@ -13908,24 +13908,13 @@ var $;
             ];
             return obj;
         }
-        Places() {
-            const obj = new this.$.$hyoo_match_places();
-            obj.value = (next) => this.places(next);
-            return obj;
-        }
-        Places_field() {
-            const obj = new this.$.$mol_form_field();
-            obj.name = () => "Places";
-            obj.Content = () => this.Places();
-            return obj;
-        }
         Age_self() {
             const obj = new this.$.$mol_switch();
             obj.value = (next) => this.age_self(next);
             obj.options = () => ({
                 young: "Young",
                 adult: "Adult",
-                olden: "Olden"
+                mature: "Mature"
             });
             return obj;
         }
@@ -13933,8 +13922,8 @@ var $;
             const obj = new this.$.$mol_switch();
             obj.value = (next) => this.sex_self(next);
             obj.options = () => ({
-                male: "Male",
-                female: "Female"
+                female: "Female",
+                male: "Male"
             });
             return obj;
         }
@@ -13958,7 +13947,7 @@ var $;
             obj.options = () => ({
                 young: "Young",
                 adult: "Adult",
-                olden: "Olden"
+                mature: "Mature"
             });
             return obj;
         }
@@ -13966,8 +13955,8 @@ var $;
             const obj = new this.$.$mol_check_list();
             obj.option_checked = (id, next) => this.sex_pref(id, next);
             obj.options = () => ({
-                male: "Males",
-                female: "Females"
+                female: "Females",
+                male: "Males"
             });
             return obj;
         }
@@ -13991,6 +13980,17 @@ var $;
                 this.Self(),
                 this.Pref()
             ];
+            return obj;
+        }
+        Places() {
+            const obj = new this.$.$hyoo_match_places();
+            obj.value = (next) => this.places(next);
+            return obj;
+        }
+        Places_field() {
+            const obj = new this.$.$mol_form_field();
+            obj.name = () => "Places";
+            obj.Content = () => this.Places();
             return obj;
         }
         Syntax() {
@@ -14033,12 +14033,6 @@ var $;
     ], $hyoo_match_single_settings.prototype, "Shot", null);
     __decorate([
         $mol_mem
-    ], $hyoo_match_single_settings.prototype, "Places", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_settings.prototype, "Places_field", null);
-    __decorate([
-        $mol_mem
     ], $hyoo_match_single_settings.prototype, "Age_self", null);
     __decorate([
         $mol_mem
@@ -14064,6 +14058,12 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Tags", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_settings.prototype, "Places", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_settings.prototype, "Places_field", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Syntax", null);
@@ -14191,11 +14191,9 @@ var $;
                 padding: $mol_gap.block,
             },
             Camera: {
+                aspectRatio: 1,
                 border: {
                     radius: $mol_gap.round,
-                },
-                flex: {
-                    grow: 0,
                 },
             },
             Hint: {

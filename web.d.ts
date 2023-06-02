@@ -3656,40 +3656,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_labeler extends $mol_list {
-        rows(): readonly any[];
-        label(): readonly $mol_view_content[];
-        Label(): $mol_view;
-        content(): readonly any[];
-        Content(): $mol_view;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_form_field extends $mol_labeler {
-        bids(): readonly string[];
-        label(): readonly any[];
-        content(): readonly any[];
-        name(): string;
-        bid(): string;
-        Bid(): $mol_view;
-        control(): any;
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_form_field extends $.$mol_form_field {
-        bid(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     class $mol_check_list extends $mol_view {
         Option(id: any): $$.$mol_check;
         options(): Record<string, any>;
@@ -3730,6 +3696,40 @@ declare namespace $.$$ {
         value(next?: any): any;
         option_checked(key: string, next?: boolean): boolean;
     }
+}
+
+declare namespace $ {
+    class $mol_labeler extends $mol_list {
+        rows(): readonly any[];
+        label(): readonly $mol_view_content[];
+        Label(): $mol_view;
+        content(): readonly any[];
+        Content(): $mol_view;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_form_field extends $mol_labeler {
+        bids(): readonly string[];
+        label(): readonly any[];
+        content(): readonly any[];
+        name(): string;
+        bid(): string;
+        Bid(): $mol_view;
+        control(): any;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_form_field extends $.$mol_form_field {
+        bid(): string;
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -3839,8 +3839,6 @@ declare namespace $ {
         Camera(): $$.$mol_video_camera;
         Hint(): $$.$mol_hint;
         Shot(): $mol_button_minor;
-        Places(): $hyoo_match_places;
-        Places_field(): $$.$mol_form_field;
         Age_self(): $$.$mol_switch;
         Sex_self(): $$.$mol_switch;
         Self_controls(): $$.$mol_list;
@@ -3850,6 +3848,8 @@ declare namespace $ {
         Pref_controls(): $$.$mol_list;
         Pref(): $$.$mol_form_field;
         Tags(): $mol_form_group;
+        Places(): $hyoo_match_places;
+        Places_field(): $$.$mol_form_field;
         Syntax(): $$.$mol_link_iconed;
         Greet(): $$.$mol_textarea;
         Greet_field(): $$.$mol_form_field;
