@@ -1,0 +1,62 @@
+$hyoo_match_single_settings $mol_page
+	single $hyoo_match_single
+		title? => title?
+		greet? => greet?
+		places? => places?
+		sex_self? => sex_self?
+		age_self? => age_self?
+		sex_pref*? => sex_pref*?
+		age_pref*? => age_pref*?
+	Title $mol_string_button
+		hint \Name
+		value? <=> title?
+	tools /
+		<= Syntax $mol_link_iconed
+			hint \MarkedText Syntax
+			uri \https://marked.hyoo.ru/
+			title \
+	body /
+		<= Shot $mol_button
+			hint \Shot
+			click? <=> capture? null
+			sub /
+				<= Camera $mol_video_camera
+					dom_node_actual => video
+		<= Places_field $mol_form_field
+			name \Places
+			Content <= Places $hyoo_match_places
+				value? <=> places?
+		<= Tags $mol_form_group sub /
+			<= Self $mol_form_field
+				name \I am ...
+				Content <= Self_controls $mol_list rows /
+					<= Age_self $mol_switch
+						value? <=> age_self?
+						options *
+							young \Young
+							adult \Adult
+							olden \Olden
+					<= Sex_self $mol_switch
+						value? <=> sex_self?
+						options *
+							male \Male
+							female \Female
+			<= Pref $mol_form_field
+				name \I like ...
+				Content <= Pref_controls $mol_list rows /
+					<= Age_pref $mol_check_list
+						option_checked*? <=> age_pref*?
+						options *
+							young \Young
+							adult \Adult
+							olden \Olden
+					<= Sex_pref $mol_check_list
+						option_checked*? <=> sex_pref*?
+						options *
+							male \Males
+							female \Females
+		<= Greet_field $mol_form_field
+			name \Greeting
+			Content <= Greet $mol_textarea
+				hint \get your partner interested
+				value? <=> greet?

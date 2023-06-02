@@ -1,0 +1,7 @@
+$hyoo_match_places $mol_select_list
+	dictionary *
+		ru \Russia
+		ru-spb \Saint-Petersburg
+		ru-msk \Moscow
+		moon \Moon
+		mars \Mars

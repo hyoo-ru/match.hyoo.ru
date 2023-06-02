@@ -1,7 +1,12 @@
-$hyoo_match_app $mol_page
-	title \$hyoo_match: pay-free dating
-	yard $hyoo_sync_client
-		peer <= Peer null
-	tools /
-		<= Online $hyoo_sync_online
-			yard <= yard
+$hyoo_match_app $mol_book2
+	self $hyoo_match_single
+	pages /
+		<= Welcome $mol_page
+			title \$hyoo_match: pay-free dating
+			tools /
+				<= Online $hyoo_sync_online
+					yard <= yard $hyoo_sync_client
+		<= Single $hyoo_match_single_page
+			single <= self
+		<= Settings $hyoo_match_single_settings
+			single <= self

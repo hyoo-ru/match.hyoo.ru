@@ -1,0 +1,15 @@
+$hyoo_match_single_page $mol_page
+	single $hyoo_match_single
+		title => title
+		greet => greet
+		places => places
+	tools /
+	body /
+		<= Photo $mol_image
+			uri <= photo \
+		<= Places $hyoo_match_places
+			enabled false
+			Pick null
+			value? <= places
+		<= Brief $mol_text
+			text <= greet
