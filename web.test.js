@@ -440,9 +440,6 @@ var $;
 //mol/assert/assert.test.ts
 ;
 "use strict";
-//mol/type/equals/equals.ts
-;
-"use strict";
 //mol/type/equals/equals.test.ts
 ;
 "use strict";
@@ -1815,250 +1812,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_style_sheet_test1 extends $mol_view {
-        Item() { return new $mol_view; }
-    }
-    $.$mol_style_sheet_test1 = $mol_style_sheet_test1;
-    class $mol_style_sheet_test2 extends $mol_view {
-        List() { return new $mol_style_sheet_test1; }
-    }
-    $.$mol_style_sheet_test2 = $mol_style_sheet_test2;
-    $mol_test({
-        'component block styles'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                display: 'block',
-                zIndex: 1,
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tdisplay: block;\n\tz-index: 1;\n}\n');
-        },
-        'various units'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { px, per } = $mol_style_unit;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                width: per(50),
-                height: px(50),
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\twidth: 50%;\n\theight: 50px;\n}\n');
-        },
-        'various functions'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { calc } = $mol_style_func;
-            const { px, per } = $mol_style_unit;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                width: calc(`${per(100)} - ${px(1)}`),
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\twidth: calc(100% - 1px);\n}\n');
-        },
-        'property groups'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { px } = $mol_style_unit;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                flex: {
-                    grow: 5
-                }
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tflex-grow: 5;\n}\n');
-        },
-        'custom properties'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                '--isVariable': 'yes',
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\t--is-variable: yes;\n}\n');
-        },
-        'custom property groups'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { px } = $mol_style_unit;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                '--variable': {
-                    test: px(5)
-                }
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\t--variable-test: 5px;\n}\n');
-        },
-        'property shorthand'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { px } = $mol_style_unit;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                padding: [px(5), 'auto']
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tpadding: 5px auto;\n}\n');
-        },
-        'sequenced values'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { url } = $mol_style_func;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                background: {
-                    image: [[url('foo')], [url('bar')]],
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tbackground-image: url("foo"),url("bar");\n}\n');
-        },
-        'sequenced structs'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const { rem } = $mol_style_unit;
-            const { hsla } = $mol_style_func;
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                box: {
-                    shadow: [
-                        {
-                            inset: true,
-                            x: 0,
-                            y: 0,
-                            blur: rem(.5),
-                            spread: 0,
-                            color: 'red',
-                        },
-                        {
-                            inset: false,
-                            x: 0,
-                            y: 0,
-                            blur: rem(.5),
-                            spread: 0,
-                            color: 'blue',
-                        },
-                    ],
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tbox-shadow: inset 0 0 0.5rem 0 red,0 0 0.5rem 0 blue;\n}\n');
-        },
-        'component block styles with pseudo class'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                ':focus': {
-                    color: 'red',
-                    display: 'block',
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test]:focus {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-        'component block styles with pseudo element'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                '::first-line': {
-                    color: 'red',
-                    display: 'block',
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test]::first-line {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-        'component block styles with media query'() {
-            class $mol_style_sheet_test extends $mol_view {
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                '@media': {
-                    'print': {
-                        color: 'red',
-                        display: 'block',
-                    },
-                },
-            });
-            $mol_assert_equal(sheet, '@media print {\n[mol_style_sheet_test] {\n\tcolor: red;\n\tdisplay: block;\n}\n}\n');
-        },
-        'component block styles with attribute value'() {
-            class $mol_style_sheet_test extends $mol_view {
-                attr() {
-                    return {
-                        mol_theme: '$mol_theme_dark'
-                    };
-                }
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                '@': {
-                    mol_theme: {
-                        '$mol_theme_dark': {
-                            color: 'red',
-                            display: 'block',
-                        },
-                    },
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test]:where([mol_theme="$mol_theme_dark"]) {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-        'component element styles'() {
-            class $mol_style_sheet_test extends $mol_view {
-                Item() { return new $mol_view; }
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                Item: {
-                    color: 'red',
-                    display: 'block',
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test_item] {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-        'component element of element styles'() {
-            const sheet = $mol_style_sheet($mol_style_sheet_test2, {
-                List: {
-                    Item: {
-                        color: 'red',
-                        display: 'block',
-                    },
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test2_list_item] {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-        'component element styles with block attribute value'() {
-            class $mol_style_sheet_test extends $mol_view {
-                Item() { return new $mol_view; }
-                attr() {
-                    return {
-                        mol_theme: '$mol_theme_dark'
-                    };
-                }
-            }
-            const sheet = $mol_style_sheet($mol_style_sheet_test, {
-                '@': {
-                    mol_theme: {
-                        '$mol_theme_dark': {
-                            Item: {
-                                color: 'red',
-                            },
-                        },
-                    },
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test]:where([mol_theme="$mol_theme_dark"]) :where([mol_style_sheet_test_item]) {\n\tcolor: red;\n}\n');
-        },
-        'inner component styles by class'() {
-            const sheet = $mol_style_sheet($mol_style_sheet_test2, {
-                $mol_style_sheet_test1: {
-                    color: 'red',
-                    display: 'block',
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test2] :where([mol_style_sheet_test1]) {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-        'child component styles by class'() {
-            const sheet = $mol_style_sheet($mol_style_sheet_test2, {
-                '>': {
-                    $mol_style_sheet_test1: {
-                        color: 'red',
-                        display: 'block',
-                    },
-                },
-            });
-            $mol_assert_equal(sheet, '[mol_style_sheet_test2] > :where([mol_style_sheet_test1]) {\n\tcolor: red;\n\tdisplay: block;\n}\n');
-        },
-    });
-})($ || ($ = {}));
-//mol/style/sheet/sheet.test.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_view_tree_test_simple extends $mol_view {
         some() {
             return 1;
@@ -2709,539 +2462,6 @@ var $;
 ;
 "use strict";
 var $;
-(function ($) {
-    class $mol_file_not_found extends Error {
-    }
-    $.$mol_file_not_found = $mol_file_not_found;
-    class $mol_file extends $mol_object {
-        static absolute(path) {
-            throw new Error('Not implemented yet');
-        }
-        static relative(path) {
-            throw new Error('Not implemented yet');
-        }
-        static base = '';
-        path() {
-            return '.';
-        }
-        parent() {
-            return this.resolve('..');
-        }
-        reset() {
-            try {
-                this.stat(null);
-            }
-            catch (error) {
-                if (error instanceof $mol_file_not_found)
-                    return;
-                return $mol_fail_hidden(error);
-            }
-        }
-        version() {
-            return this.stat()?.mtime.getTime().toString(36).toUpperCase() ?? '';
-        }
-        watcher() {
-            console.warn('$mol_file_web.watcher() not implemented');
-            return {
-                destructor() { }
-            };
-        }
-        exists(next) {
-            let exists = Boolean(this.stat());
-            if (next === undefined)
-                return exists;
-            if (next === exists)
-                return exists;
-            if (next)
-                this.parent().exists(true);
-            this.ensure();
-            this.reset();
-            return next;
-        }
-        type() {
-            return this.stat()?.type ?? '';
-        }
-        name() {
-            return this.path().replace(/^.*\//, '');
-        }
-        ext() {
-            const match = /((?:\.\w+)+)$/.exec(this.path());
-            return match ? match[1].substring(1) : '';
-        }
-        text(next, virt) {
-            if (virt) {
-                const now = new Date;
-                this.stat({
-                    type: 'file',
-                    size: 0,
-                    atime: now,
-                    mtime: now,
-                    ctime: now,
-                }, 'virt');
-                return next;
-            }
-            if (next === undefined) {
-                return $mol_charset_decode(this.buffer(undefined));
-            }
-            else {
-                const buffer = next === undefined ? undefined : $mol_charset_encode(next);
-                this.buffer(buffer);
-                return next;
-            }
-        }
-        find(include, exclude) {
-            const found = [];
-            const sub = this.sub();
-            for (const child of sub) {
-                const child_path = child.path();
-                if (exclude && child_path.match(exclude))
-                    continue;
-                if (!include || child_path.match(include))
-                    found.push(child);
-                if (child.type() === 'dir') {
-                    const sub_child = child.find(include, exclude);
-                    for (const child of sub_child)
-                        found.push(child);
-                }
-            }
-            return found;
-        }
-        size() {
-            switch (this.type()) {
-                case 'file': return this.stat()?.size ?? 0;
-                default: return 0;
-            }
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_file.prototype, "exists", null);
-    __decorate([
-        $mol_mem
-    ], $mol_file.prototype, "text", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_file, "absolute", null);
-    $.$mol_file = $mol_file;
-})($ || ($ = {}));
-//mol/file/file.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_dom_parse(text, type = 'application/xhtml+xml') {
-        const parser = new $mol_dom_context.DOMParser();
-        const doc = parser.parseFromString(text, type);
-        const error = doc.getElementsByTagName('parsererror');
-        if (error.length)
-            throw new Error(error[0].textContent);
-        return doc;
-    }
-    $.$mol_dom_parse = $mol_dom_parse;
-})($ || ($ = {}));
-//mol/dom/parse/parse.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_fetch_response extends $mol_object2 {
-        native;
-        constructor(native) {
-            super();
-            this.native = native;
-        }
-        status() {
-            const types = ['unknown', 'inform', 'success', 'redirect', 'wrong', 'failed'];
-            return types[Math.floor(this.native.status / 100)];
-        }
-        code() {
-            return this.native.status;
-        }
-        message() {
-            return this.native.statusText || `HTTP Error ${this.code()}`;
-        }
-        headers() {
-            return this.native.headers;
-        }
-        mime() {
-            return this.headers().get('content-type');
-        }
-        stream() {
-            return this.native.body;
-        }
-        text() {
-            const buffer = this.buffer();
-            const native = this.native;
-            const mime = native.headers.get('content-type') || '';
-            const [, charset] = /charset=(.*)/.exec(mime) || [, 'utf-8'];
-            const decoder = new TextDecoder(charset);
-            return decoder.decode(buffer);
-        }
-        json() {
-            return $mol_wire_sync(this.native).json();
-        }
-        buffer() {
-            return $mol_wire_sync(this.native).arrayBuffer();
-        }
-        xml() {
-            return $mol_dom_parse(this.text(), 'application/xml');
-        }
-        xhtml() {
-            return $mol_dom_parse(this.text(), 'application/xhtml+xml');
-        }
-        html() {
-            return $mol_dom_parse(this.text(), 'text/html');
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $mol_fetch_response.prototype, "stream", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch_response.prototype, "text", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch_response.prototype, "buffer", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch_response.prototype, "xml", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch_response.prototype, "xhtml", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch_response.prototype, "html", null);
-    $.$mol_fetch_response = $mol_fetch_response;
-    class $mol_fetch extends $mol_object2 {
-        static request(input, init = {}) {
-            const native = globalThis.fetch ?? $node['undici'].fetch;
-            const controller = new AbortController();
-            let done = false;
-            const promise = native(input, {
-                ...init,
-                signal: controller.signal,
-            }).finally(() => {
-                done = true;
-            });
-            return Object.assign(promise, {
-                destructor: () => {
-                    if (!done && !controller.signal.aborted)
-                        controller.abort();
-                },
-            });
-        }
-        static response(input, init) {
-            return new $mol_fetch_response($mol_wire_sync(this).request(input, init));
-        }
-        static success(input, init) {
-            const response = this.response(input, init);
-            if (response.status() === 'success')
-                return response;
-            throw new Error(response.message());
-        }
-        static stream(input, init) {
-            return this.success(input, init).stream();
-        }
-        static text(input, init) {
-            return this.success(input, init).text();
-        }
-        static json(input, init) {
-            return this.success(input, init).json();
-        }
-        static buffer(input, init) {
-            return this.success(input, init).buffer();
-        }
-        static xml(input, init) {
-            return this.success(input, init).xml();
-        }
-        static xhtml(input, init) {
-            return this.success(input, init).xhtml();
-        }
-        static html(input, init) {
-            return this.success(input, init).html();
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "response", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "success", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "stream", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "text", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "json", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "buffer", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "xml", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "xhtml", null);
-    __decorate([
-        $mol_action
-    ], $mol_fetch, "html", null);
-    $.$mol_fetch = $mol_fetch;
-})($ || ($ = {}));
-//mol/fetch/fetch.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_file_web extends $mol_file {
-        static absolute(path) {
-            return this.make({
-                path: $mol_const(path)
-            });
-        }
-        static relative(path) {
-            return this.absolute(new URL(path, this.base).toString());
-        }
-        static base = $mol_dom_context.document
-            ? new URL('.', $mol_dom_context.document.currentScript['src']).toString()
-            : '';
-        buffer(next) {
-            if (next !== undefined)
-                throw new Error(`Saving content not supported: ${this.path}`);
-            const response = $mol_fetch.response(this.path());
-            if (response.native.status === 404)
-                throw new $mol_file_not_found(`File not found: ${this.path()}`);
-            return new Uint8Array(response.buffer());
-        }
-        stat(next, virt) {
-            let stat = next;
-            if (next === undefined) {
-                const content = this.text();
-                const ctime = new Date();
-                stat = {
-                    type: 'file',
-                    size: content.length,
-                    ctime,
-                    atime: ctime,
-                    mtime: ctime
-                };
-            }
-            this.parent().watcher();
-            return stat;
-        }
-        resolve(path) {
-            let res = this.path() + '/' + path;
-            while (true) {
-                let prev = res;
-                res = res.replace(/\/[^\/.]+\/\.\.\//, '/');
-                if (prev === res)
-                    break;
-            }
-            return this.constructor.absolute(res);
-        }
-        ensure() {
-            throw new Error('$mol_file_web.ensure() not implemented');
-        }
-        sub() {
-            throw new Error('$mol_file_web.sub() not implemented');
-        }
-        relate(base = this.constructor.relative('.')) {
-            throw new Error('$mol_file_web.relate() not implemented');
-        }
-        append(next) {
-            throw new Error('$mol_file_web.append() not implemented');
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_file_web.prototype, "buffer", null);
-    __decorate([
-        $mol_mem
-    ], $mol_file_web.prototype, "stat", null);
-    __decorate([
-        $mol_mem
-    ], $mol_file_web.prototype, "sub", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_file_web, "absolute", null);
-    $.$mol_file_web = $mol_file_web;
-    $.$mol_file = $mol_file_web;
-})($ || ($ = {}));
-//mol/file/file.web.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_huggingface_run(space, method, ...data) {
-        while (true) {
-            try {
-                if (typeof method === 'number') {
-                    return $mol_wire_sync(this).$mol_huggingface_ws(space, method, ...data);
-                }
-                else {
-                    return this.$mol_huggingface_rest(space, method, ...data);
-                }
-            }
-            catch (error) {
-                if ($mol_promise_like(error))
-                    $mol_fail_hidden(error);
-                if (error instanceof Error && error.message === `Queue full`) {
-                    $mol_fail_log(error);
-                    continue;
-                }
-                $mol_fail_hidden(error);
-            }
-        }
-    }
-    $.$mol_huggingface_run = $mol_huggingface_run;
-    function $mol_huggingface_rest(space, method, ...data) {
-        const uri = `https://${space}.hf.space/run/${method}`;
-        const response = $mol_fetch.json(uri, {
-            method: 'post',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ data }),
-        });
-        if ('error' in response) {
-            $mol_fail(new Error(response.error ?? 'Unknown API error'));
-        }
-        return response.data;
-    }
-    $.$mol_huggingface_rest = $mol_huggingface_rest;
-    function $mol_huggingface_ws(space, fn_index, ...data) {
-        const session_hash = $mol_guid();
-        const socket = new WebSocket(`wss://${space}.hf.space/queue/join`);
-        const promise = new Promise((done, fail) => {
-            socket.onclose = event => {
-                if (event.reason)
-                    fail(new Error(event.reason));
-            };
-            socket.onerror = event => {
-                fail(new Error(`Socket error`));
-            };
-            socket.onmessage = event => {
-                const message = JSON.parse(event.data);
-                switch (message.msg) {
-                    case 'send_hash':
-                        return socket.send(JSON.stringify({ session_hash, fn_index }));
-                    case 'estimation': return;
-                    case 'queue_full':
-                        fail(new Error(`Queue full`));
-                    case 'send_data':
-                        return socket.send(JSON.stringify({ session_hash, fn_index, data }));
-                    case 'process_starts': return;
-                    case 'process_completed':
-                        if (message.success) {
-                            return done(message.output.data);
-                        }
-                        else {
-                            return fail(new Error(message.output.error ?? `Unknown API error`));
-                        }
-                    default:
-                        return fail(new Error(`Unknown message type: ${message.msg}`));
-                }
-            };
-        });
-        return Object.assign(promise, {
-            destructor: () => socket.close()
-        });
-    }
-    $.$mol_huggingface_ws = $mol_huggingface_ws;
-})($ || ($ = {}));
-//mol/huggingface/huggingface.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $hyoo_lingua_translate(lang, text) {
-        if (!text.trim())
-            return '';
-        const cache_key = `$hyoo_lingua_translate(${JSON.stringify(lang)},${JSON.stringify(text)})`;
-        const cached = this.$mol_state_local.value(cache_key);
-        if (cached)
-            return String(cached);
-        const translated = this.$mol_huggingface_run('hyoo-translate', 0, lang, text)[0];
-        return this.$mol_state_local.value(cache_key, translated);
-    }
-    $.$hyoo_lingua_translate = $hyoo_lingua_translate;
-})($ || ($ = {}));
-//hyoo/lingua/translate/translate.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_locale extends $mol_object {
-        static lang_default() {
-            return 'en';
-        }
-        static lang(next) {
-            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
-        }
-        static source(lang) {
-            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
-        }
-        static texts(lang, next) {
-            if (next)
-                return next;
-            try {
-                return this.source(lang).valueOf();
-            }
-            catch (error) {
-                if ($mol_fail_catch(error)) {
-                    const def = this.lang_default();
-                    if (lang === def)
-                        throw error;
-                }
-            }
-            return {};
-        }
-        static text(key) {
-            const lang = this.lang();
-            const target = this.texts(lang)[key];
-            if (target)
-                return target;
-            this.warn(key);
-            const en = this.texts('en')[key];
-            if (!en)
-                return key;
-            try {
-                return $mol_wire_sync($hyoo_lingua_translate).call(this.$, lang, en);
-            }
-            catch (error) {
-                $mol_fail_log(error);
-            }
-            return en;
-        }
-        static warn(key) {
-            console.warn(`Not translated to "${this.lang()}": ${key}`);
-            return null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang_default", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "source", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "texts", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "text", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "warn", null);
-    $.$mol_locale = $mol_locale;
-})($ || ($ = {}));
-//mol/locale/locale.ts
-;
-"use strict";
-var $;
 (function ($_1) {
     $mol_test_mocks.push($ => {
         class $mol_locale_mock extends $mol_locale {
@@ -3552,6 +2772,250 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_style_sheet_test1 extends $mol_view {
+        Item() { return new $mol_view; }
+    }
+    $.$mol_style_sheet_test1 = $mol_style_sheet_test1;
+    class $mol_style_sheet_test2 extends $mol_view {
+        List() { return new $mol_style_sheet_test1; }
+    }
+    $.$mol_style_sheet_test2 = $mol_style_sheet_test2;
+    $mol_test({
+        'component block styles'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                display: 'block',
+                zIndex: 1,
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tdisplay: block;\n\tz-index: 1;\n}\n');
+        },
+        'various units'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { px, per } = $mol_style_unit;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                width: per(50),
+                height: px(50),
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\twidth: 50%;\n\theight: 50px;\n}\n');
+        },
+        'various functions'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { calc } = $mol_style_func;
+            const { px, per } = $mol_style_unit;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                width: calc(`${per(100)} - ${px(1)}`),
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\twidth: calc(100% - 1px);\n}\n');
+        },
+        'property groups'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { px } = $mol_style_unit;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                flex: {
+                    grow: 5
+                }
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tflex-grow: 5;\n}\n');
+        },
+        'custom properties'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                '--isVariable': 'yes',
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\t--is-variable: yes;\n}\n');
+        },
+        'custom property groups'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { px } = $mol_style_unit;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                '--variable': {
+                    test: px(5)
+                }
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\t--variable-test: 5px;\n}\n');
+        },
+        'property shorthand'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { px } = $mol_style_unit;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                padding: [px(5), 'auto']
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tpadding: 5px auto;\n}\n');
+        },
+        'sequenced values'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { url } = $mol_style_func;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                background: {
+                    image: [[url('foo')], [url('bar')]],
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tbackground-image: url("foo"),url("bar");\n}\n');
+        },
+        'sequenced structs'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const { rem } = $mol_style_unit;
+            const { hsla } = $mol_style_func;
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                box: {
+                    shadow: [
+                        {
+                            inset: true,
+                            x: 0,
+                            y: 0,
+                            blur: rem(.5),
+                            spread: 0,
+                            color: 'red',
+                        },
+                        {
+                            inset: false,
+                            x: 0,
+                            y: 0,
+                            blur: rem(.5),
+                            spread: 0,
+                            color: 'blue',
+                        },
+                    ],
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test] {\n\tbox-shadow: inset 0 0 0.5rem 0 red,0 0 0.5rem 0 blue;\n}\n');
+        },
+        'component block styles with pseudo class'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                ':focus': {
+                    color: 'red',
+                    display: 'block',
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test]:focus {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+        'component block styles with pseudo element'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                '::first-line': {
+                    color: 'red',
+                    display: 'block',
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test]::first-line {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+        'component block styles with media query'() {
+            class $mol_style_sheet_test extends $mol_view {
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                '@media': {
+                    'print': {
+                        color: 'red',
+                        display: 'block',
+                    },
+                },
+            });
+            $mol_assert_equal(sheet, '@media print {\n[mol_style_sheet_test] {\n\tcolor: red;\n\tdisplay: block;\n}\n}\n');
+        },
+        'component block styles with attribute value'() {
+            class $mol_style_sheet_test extends $mol_view {
+                attr() {
+                    return {
+                        mol_theme: '$mol_theme_dark'
+                    };
+                }
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                '@': {
+                    mol_theme: {
+                        '$mol_theme_dark': {
+                            color: 'red',
+                            display: 'block',
+                        },
+                    },
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test]:where([mol_theme="$mol_theme_dark"]) {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+        'component element styles'() {
+            class $mol_style_sheet_test extends $mol_view {
+                Item() { return new $mol_view; }
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                Item: {
+                    color: 'red',
+                    display: 'block',
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test_item] {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+        'component element of element styles'() {
+            const sheet = $mol_style_sheet($mol_style_sheet_test2, {
+                List: {
+                    Item: {
+                        color: 'red',
+                        display: 'block',
+                    },
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test2_list_item] {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+        'component element styles with block attribute value'() {
+            class $mol_style_sheet_test extends $mol_view {
+                Item() { return new $mol_view; }
+                attr() {
+                    return {
+                        mol_theme: '$mol_theme_dark'
+                    };
+                }
+            }
+            const sheet = $mol_style_sheet($mol_style_sheet_test, {
+                '@': {
+                    mol_theme: {
+                        '$mol_theme_dark': {
+                            Item: {
+                                color: 'red',
+                            },
+                        },
+                    },
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test]:where([mol_theme="$mol_theme_dark"]) :where([mol_style_sheet_test_item]) {\n\tcolor: red;\n}\n');
+        },
+        'inner component styles by class'() {
+            const sheet = $mol_style_sheet($mol_style_sheet_test2, {
+                $mol_style_sheet_test1: {
+                    color: 'red',
+                    display: 'block',
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test2] :where([mol_style_sheet_test1]) {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+        'child component styles by class'() {
+            const sheet = $mol_style_sheet($mol_style_sheet_test2, {
+                '>': {
+                    $mol_style_sheet_test1: {
+                        color: 'red',
+                        display: 'block',
+                    },
+                },
+            });
+            $mol_assert_equal(sheet, '[mol_style_sheet_test2] > :where([mol_style_sheet_test1]) {\n\tcolor: red;\n\tdisplay: block;\n}\n');
+        },
+    });
+})($ || ($ = {}));
+//mol/style/sheet/sheet.test.ts
+;
+"use strict";
+var $;
+(function ($) {
     $mol_test({
         'config by value'() {
             const N = $mol_data_setup((a) => a, 5);
@@ -3777,120 +3241,6 @@ var $;
 var $;
 (function ($) {
     $mol_test({
-        'fresh'() {
-            const clock = new $hyoo_crowd_clock;
-            clock.see_peer('b_33', 1);
-            clock.see_peer('m_66', 2);
-            $mol_assert_ok(clock.fresh('m_66', 3));
-            $mol_assert_ok(clock.fresh('x_99', 1));
-            $mol_assert_not(clock.fresh('m_66', 1));
-        },
-        'fork'() {
-            const left = new $hyoo_crowd_clock;
-            left.see_peer('b_33', 1);
-            left.see_peer('m_66', 2);
-            const right = new $hyoo_crowd_clock(left);
-            $mol_assert_equal(right.last_time, 2);
-            $mol_assert_like([...right], [
-                ['b_33', 1],
-                ['m_66', 2],
-            ]);
-        },
-        'generate'() {
-            const clock = new $hyoo_crowd_clock;
-            clock.see_peer('b_33', $mol_int62_min + 1);
-            clock.see_peer('m_66', $mol_int62_min + 2);
-            const now = clock.now();
-            const time1 = clock.tick('b_33');
-            $mol_assert_like(time1, now);
-            $mol_assert_like(clock.last_time, now);
-            clock.see_peer('m_66', clock.now() + 10);
-            const time2 = clock.tick('m_66');
-            $mol_assert_like(time2, now + 11);
-            $mol_assert_like(clock.last_time, now + 11);
-        },
-        'ahead'() {
-            const clock1 = new $hyoo_crowd_clock;
-            clock1.see_peer('b_33', 1);
-            clock1.see_peer('m_66', 2);
-            const clock2 = new $hyoo_crowd_clock;
-            clock2.see_peer('b_33', 1);
-            clock2.see_peer('x_99', 2);
-            const clock3 = new $hyoo_crowd_clock;
-            clock3.see_peer('b_33', 1);
-            clock3.see_peer('m_66', 2);
-            clock3.see_peer('x_99', 2);
-            $mol_assert_ok(clock1.ahead(clock2));
-            $mol_assert_ok(clock2.ahead(clock1));
-            $mol_assert_ok(clock3.ahead(clock1));
-            $mol_assert_ok(clock3.ahead(clock2));
-            $mol_assert_not(clock1.ahead(clock3));
-            $mol_assert_not(clock2.ahead(clock3));
-        },
-        'bin'() {
-            const clocks1 = [new $hyoo_crowd_clock, new $hyoo_crowd_clock];
-            clocks1[$hyoo_crowd_unit_group.auth].see_peer('b_33', 1);
-            clocks1[$hyoo_crowd_unit_group.data].see_peer('b_33', 2);
-            const bin = $hyoo_crowd_clock_bin.from('2_b', clocks1, 0);
-            $mol_assert_like(bin.land(), '2_b');
-            const clocks2 = [new $hyoo_crowd_clock, new $hyoo_crowd_clock];
-            clocks2[$hyoo_crowd_unit_group.auth].see_bin(bin, $hyoo_crowd_unit_group.auth);
-            clocks2[$hyoo_crowd_unit_group.data].see_bin(bin, $hyoo_crowd_unit_group.data);
-            $mol_assert_like(clocks2.map(clock => new Map(clock)), [
-                new Map([
-                    ['b_33', 1],
-                ]),
-                new Map([
-                    ['b_33', 2],
-                ]),
-            ]);
-        },
-    });
-})($ || ($ = {}));
-//hyoo/crowd/clock/clock.test.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_reconcile({ prev, from, to, next, equal, drop, insert, update, }) {
-        if (!update)
-            update = (next, prev, lead) => insert(next, drop(prev, lead));
-        let p = from;
-        let n = 0;
-        let lead = p ? prev[p - 1] : null;
-        if (to > prev.length)
-            $mol_fail(new RangeError(`To(${to}) greater then length(${prev.length})`));
-        if (from > to)
-            $mol_fail(new RangeError(`From(${to}) greater then to(${to})`));
-        while (p < to || n < next.length) {
-            if (p < to && n < next.length && equal(next[n], prev[p])) {
-                lead = prev[p];
-                ++p;
-                ++n;
-            }
-            else if (next.length - n > to - p) {
-                lead = insert(next[n], lead);
-                ++n;
-            }
-            else if (next.length - n < to - p) {
-                lead = drop(prev[p], lead);
-                ++p;
-            }
-            else {
-                lead = update(next[n], prev[p], lead);
-                ++p;
-                ++n;
-            }
-        }
-    }
-    $.$mol_reconcile = $mol_reconcile;
-})($ || ($ = {}));
-//mol/reconcile/reconcile.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
         'same list'() {
             const list = $mol_jsx("body", null,
                 $mol_jsx("p", { "data-rev": "old" }, "a"),
@@ -4027,294 +3377,10 @@ var $;
 //mol/reconcile/reconcile.test.tsx
 ;
 "use strict";
-//mol/type/merge/merge.ts
-;
-"use strict";
 //mol/type/merge/merge.test.ts
 ;
 "use strict";
-//mol/type/intersect/intersect.ts
-;
-"use strict";
 //mol/type/intersect/intersect.test.ts
-;
-"use strict";
-//mol/unicode/unicode.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_regexp extends RegExp {
-        groups;
-        constructor(source, flags = 'gsu', groups = []) {
-            super(source, flags);
-            this.groups = groups;
-        }
-        *[Symbol.matchAll](str) {
-            const index = this.lastIndex;
-            this.lastIndex = 0;
-            try {
-                while (this.lastIndex < str.length) {
-                    const found = this.exec(str);
-                    if (!found)
-                        break;
-                    yield found;
-                }
-            }
-            finally {
-                this.lastIndex = index;
-            }
-        }
-        [Symbol.match](str) {
-            const res = [...this[Symbol.matchAll](str)].filter(r => r.groups).map(r => r[0]);
-            if (!res.length)
-                return null;
-            return res;
-        }
-        [Symbol.split](str) {
-            const res = [];
-            let token_last = null;
-            for (let token of this[Symbol.matchAll](str)) {
-                if (token.groups && (token_last ? token_last.groups : true))
-                    res.push('');
-                res.push(token[0]);
-                token_last = token;
-            }
-            if (!res.length)
-                res.push('');
-            return res;
-        }
-        test(str) {
-            return Boolean(str.match(this));
-        }
-        exec(str) {
-            const from = this.lastIndex;
-            if (from >= str.length)
-                return null;
-            const res = super.exec(str);
-            if (res === null) {
-                this.lastIndex = str.length;
-                if (!str)
-                    return null;
-                return Object.assign([str.slice(from)], {
-                    index: from,
-                    input: str,
-                });
-            }
-            if (from === this.lastIndex) {
-                $mol_fail(new Error('Captured empty substring'));
-            }
-            const groups = {};
-            const skipped = str.slice(from, this.lastIndex - res[0].length);
-            if (skipped) {
-                this.lastIndex = this.lastIndex - res[0].length;
-                return Object.assign([skipped], {
-                    index: from,
-                    input: res.input,
-                });
-            }
-            for (let i = 0; i < this.groups.length; ++i) {
-                const group = this.groups[i];
-                groups[group] = groups[group] || res[i + 1] || '';
-            }
-            return Object.assign(res, { groups });
-        }
-        generate(params) {
-            return null;
-        }
-        get native() {
-            return new RegExp(this.source, this.flags);
-        }
-        static repeat(source, min = 0, max = Number.POSITIVE_INFINITY) {
-            const regexp = $mol_regexp.from(source);
-            const upper = Number.isFinite(max) ? max : '';
-            const str = `(?:${regexp.source}){${min},${upper}}?`;
-            const regexp2 = new $mol_regexp(str, regexp.flags, regexp.groups);
-            regexp2.generate = params => {
-                const res = regexp.generate(params);
-                if (res)
-                    return res;
-                if (min > 0)
-                    return res;
-                return '';
-            };
-            return regexp2;
-        }
-        static repeat_greedy(source, min = 0, max = Number.POSITIVE_INFINITY) {
-            const regexp = $mol_regexp.from(source);
-            const upper = Number.isFinite(max) ? max : '';
-            const str = `(?:${regexp.source}){${min},${upper}}`;
-            const regexp2 = new $mol_regexp(str, regexp.flags, regexp.groups);
-            regexp2.generate = params => {
-                const res = regexp.generate(params);
-                if (res)
-                    return res;
-                if (min > 0)
-                    return res;
-                return '';
-            };
-            return regexp2;
-        }
-        static vary(sources) {
-            const groups = [];
-            const chunks = sources.map(source => {
-                const regexp = $mol_regexp.from(source);
-                groups.push(...regexp.groups);
-                return regexp.source;
-            });
-            return new $mol_regexp(`(?:${chunks.join('|')})`, '', groups);
-        }
-        static optional(source) {
-            return $mol_regexp.repeat_greedy(source, 0, 1);
-        }
-        static force_after(source) {
-            const regexp = $mol_regexp.from(source);
-            return new $mol_regexp(`(?=${regexp.source})`, regexp.flags, regexp.groups);
-        }
-        static forbid_after(source) {
-            const regexp = $mol_regexp.from(source);
-            return new $mol_regexp(`(?!${regexp.source})`, regexp.flags, regexp.groups);
-        }
-        static from(source, { ignoreCase, multiline } = {
-            ignoreCase: false,
-            multiline: false,
-        }) {
-            let flags = 'gsu';
-            if (multiline)
-                flags += 'm';
-            if (ignoreCase)
-                flags += 'i';
-            if (typeof source === 'number') {
-                const src = `\\u{${source.toString(16)}}`;
-                const regexp = new $mol_regexp(src, flags);
-                regexp.generate = () => src;
-                return regexp;
-            }
-            if (typeof source === 'string') {
-                const src = source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                const regexp = new $mol_regexp(src, flags);
-                regexp.generate = () => source;
-                return regexp;
-            }
-            else if (source instanceof $mol_regexp) {
-                const regexp = new $mol_regexp(source.source, flags, source.groups);
-                regexp.generate = params => source.generate(params);
-                return regexp;
-            }
-            if (source instanceof RegExp) {
-                const test = new RegExp('|' + source.source);
-                const groups = Array.from({ length: test.exec('').length - 1 }, (_, i) => String(i + 1));
-                const regexp = new $mol_regexp(source.source, source.flags, groups);
-                regexp.generate = () => '';
-                return regexp;
-            }
-            if (Array.isArray(source)) {
-                const patterns = source.map(src => Array.isArray(src)
-                    ? $mol_regexp.optional(src)
-                    : $mol_regexp.from(src));
-                const chunks = patterns.map(pattern => pattern.source);
-                const groups = [];
-                let index = 0;
-                for (const pattern of patterns) {
-                    for (let group of pattern.groups) {
-                        if (Number(group) >= 0) {
-                            groups.push(String(index++));
-                        }
-                        else {
-                            groups.push(group);
-                        }
-                    }
-                }
-                const regexp = new $mol_regexp(chunks.join(''), flags, groups);
-                regexp.generate = params => {
-                    let res = '';
-                    for (const pattern of patterns) {
-                        let sub = pattern.generate(params);
-                        if (sub === null)
-                            return '';
-                        res += sub;
-                    }
-                    return res;
-                };
-                return regexp;
-            }
-            else {
-                const groups = [];
-                const chunks = Object.keys(source).map(name => {
-                    groups.push(name);
-                    const regexp = $mol_regexp.from(source[name]);
-                    groups.push(...regexp.groups);
-                    return `(${regexp.source})`;
-                });
-                const regexp = new $mol_regexp(`(?:${chunks.join('|')})`, flags, groups);
-                const validator = new RegExp('^' + regexp.source + '$', flags);
-                regexp.generate = (params) => {
-                    for (let option in source) {
-                        if (option in params) {
-                            if (typeof params[option] === 'boolean') {
-                                if (!params[option])
-                                    continue;
-                            }
-                            else {
-                                const str = String(params[option]);
-                                if (str.match(validator))
-                                    return str;
-                                $mol_fail(new Error(`Wrong param: ${option}=${str}`));
-                            }
-                        }
-                        else {
-                            if (typeof source[option] !== 'object')
-                                continue;
-                        }
-                        const res = $mol_regexp.from(source[option]).generate(params);
-                        if (res)
-                            return res;
-                    }
-                    return null;
-                };
-                return regexp;
-            }
-        }
-        static unicode_only(...category) {
-            return new $mol_regexp(`\\p{${category.join('=')}}`);
-        }
-        static unicode_except(...category) {
-            return new $mol_regexp(`\\P{${category.join('=')}}`);
-        }
-        static char_range(from, to) {
-            return new $mol_regexp(`${$mol_regexp.from(from).source}-${$mol_regexp.from(to).source}`);
-        }
-        static char_only(...allowed) {
-            const regexp = allowed.map(f => $mol_regexp.from(f).source).join('');
-            return new $mol_regexp(`[${regexp}]`);
-        }
-        static char_except(...forbidden) {
-            const regexp = forbidden.map(f => $mol_regexp.from(f).source).join('');
-            return new $mol_regexp(`[^${regexp}]`);
-        }
-        static decimal_only = $mol_regexp.from(/\d/gsu);
-        static decimal_except = $mol_regexp.from(/\D/gsu);
-        static latin_only = $mol_regexp.from(/\w/gsu);
-        static latin_except = $mol_regexp.from(/\W/gsu);
-        static space_only = $mol_regexp.from(/\s/gsu);
-        static space_except = $mol_regexp.from(/\S/gsu);
-        static word_break_only = $mol_regexp.from(/\b/gsu);
-        static word_break_except = $mol_regexp.from(/\B/gsu);
-        static tab = $mol_regexp.from(/\t/gsu);
-        static slash_back = $mol_regexp.from(/\\/gsu);
-        static nul = $mol_regexp.from(/\0/gsu);
-        static char_any = $mol_regexp.from(/./gsu);
-        static begin = $mol_regexp.from(/^/gsu);
-        static end = $mol_regexp.from(/$/gsu);
-        static or = $mol_regexp.from(/|/gsu);
-        static line_end = $mol_regexp.from({
-            win_end: [['\r'], '\n'],
-            mac_end: '\r',
-        });
-    }
-    $.$mol_regexp = $mol_regexp;
-})($ || ($ = {}));
-//mol/regexp/regexp.ts
 ;
 "use strict";
 var $;
@@ -4604,81 +3670,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    const { unicode_only, line_end, tab, repeat_greedy, optional, forbid_after, force_after, char_only, char_except } = $mol_regexp;
-    $.$hyoo_crowd_tokenizer = $mol_regexp.from({
-        token: {
-            'line-break': line_end,
-            'indents': repeat_greedy(tab, 1),
-            'emoji': [
-                unicode_only('Extended_Pictographic'),
-                optional(unicode_only('Emoji_Modifier')),
-                repeat_greedy([
-                    unicode_only('Emoji_Component'),
-                    unicode_only('Extended_Pictographic'),
-                    optional(unicode_only('Emoji_Modifier')),
-                ]),
-            ],
-            'link': /\b(https?:\/\/[^\s,.;:!?")]+(?:[,.;:!?")][^\s,.;:!?")]+)+)/,
-            'Word': [
-                [
-                    forbid_after(line_end),
-                    unicode_only('White_Space'),
-                ],
-                repeat_greedy(char_only([
-                    unicode_only('General_Category', 'Uppercase_Letter'),
-                    unicode_only('Diacritic'),
-                    unicode_only('General_Category', 'Number'),
-                ]), 1),
-                repeat_greedy(char_only([
-                    unicode_only('General_Category', 'Lowercase_Letter'),
-                    unicode_only('Diacritic'),
-                    unicode_only('General_Category', 'Number'),
-                ])),
-            ],
-            'word': [
-                [
-                    forbid_after(line_end),
-                    unicode_only('White_Space'),
-                ],
-                repeat_greedy(char_only([
-                    unicode_only('General_Category', 'Lowercase_Letter'),
-                    unicode_only('Diacritic'),
-                    unicode_only('General_Category', 'Number'),
-                ]), 1),
-            ],
-            'spaces': [
-                forbid_after(line_end),
-                repeat_greedy(unicode_only('White_Space'), 1),
-                force_after(unicode_only('White_Space')),
-            ],
-            'space': [
-                forbid_after(line_end),
-                unicode_only('White_Space'),
-                forbid_after([
-                    unicode_only('White_Space'),
-                    unicode_only('General_Category', 'Uppercase_Letter'),
-                    unicode_only('General_Category', 'Lowercase_Letter'),
-                    unicode_only('Diacritic'),
-                    unicode_only('General_Category', 'Number'),
-                ]),
-            ],
-            'others': [
-                repeat_greedy(char_except([
-                    unicode_only('General_Category', 'Uppercase_Letter'),
-                    unicode_only('General_Category', 'Lowercase_Letter'),
-                    unicode_only('Diacritic'),
-                    unicode_only('General_Category', 'Number'),
-                    unicode_only('White_Space'),
-                ]), 1),
-            ],
-        },
-    }).native;
-})($ || ($ = {}));
-//hyoo/crowd/tokenizer/tokenizer.ts
-;
-"use strict";
-var $;
-(function ($) {
     $mol_test({
         'empty string'() {
             $mol_assert_like(''.match($hyoo_crowd_tokenizer), null);
@@ -4717,182 +3708,347 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_crowd_text extends $hyoo_crowd_node {
-        text(next) {
-            if (next === undefined) {
-                return this.str();
+    $mol_test({
+        'number'() {
+            const dict = new $mol_dict();
+            $mol_assert_equal(dict.get(123), undefined);
+            $mol_assert_equal(dict.has(123), false);
+            dict.set(123, 321);
+            $mol_assert_equal(dict.get(123), 321);
+            $mol_assert_equal(dict.has(123), true);
+            dict.delete(123);
+            $mol_assert_equal(dict.get(123), undefined);
+            $mol_assert_equal(dict.has(123), false);
+        },
+        'pojo as key'() {
+            const dict = new $mol_dict();
+            $mol_assert_equal(dict.get({ foo: 123 }), undefined);
+            $mol_assert_equal(dict.has({ foo: 123 }), false);
+            dict.set({ foo: 123 }, 321);
+            $mol_assert_equal(dict.get({ foo: 123 }), 321);
+            $mol_assert_equal(dict.has({ foo: 123 }), true);
+            dict.delete({ foo: 123 });
+            $mol_assert_equal(dict.get({ foo: 123 }), undefined);
+            $mol_assert_equal(dict.has({ foo: 123 }), false);
+        },
+        'array as key'() {
+            const dict = new $mol_dict();
+            $mol_assert_equal(dict.get([123]), undefined);
+            $mol_assert_equal(dict.has([123]), false);
+            dict.set([123], 321);
+            $mol_assert_equal(dict.get([123]), 321);
+            $mol_assert_equal(dict.has([123]), true);
+            dict.delete([123]);
+            $mol_assert_equal(dict.get([123]), undefined);
+            $mol_assert_equal(dict.has([123]), false);
+        },
+        'html element as key'() {
+            const el = $mol_jsx("div", null);
+            const dict = new $mol_dict();
+            $mol_assert_equal(dict.get(el), undefined);
+            $mol_assert_equal(dict.has(el), false);
+            dict.set(el, 321);
+            $mol_assert_equal(dict.get(el), 321);
+            $mol_assert_equal(dict.has(el), true);
+            $mol_assert_equal(dict.get($mol_jsx("div", null)), undefined);
+            $mol_assert_equal(dict.has($mol_jsx("div", null)), false);
+            dict.delete(el);
+            $mol_assert_equal(dict.get(el), undefined);
+            $mol_assert_equal(dict.has(el), false);
+        },
+        'for-of key restore'() {
+            const dict = new $mol_dict([[[123], 321]]);
+            const keys = [];
+            const vals = [];
+            for (const [key, val] of dict) {
+                keys.push(key);
+                vals.push(val);
             }
-            else {
-                const prev = this.units();
-                const lines = next.match(/.*\n|.+$/g) ?? [];
-                $mol_reconcile({
-                    prev,
-                    from: 0,
-                    to: prev.length,
-                    next: lines,
-                    equal: (next, prev) => {
-                        if (typeof prev.data === 'string')
-                            return false;
-                        return this.land.node(prev.self, $hyoo_crowd_text).str() === next;
-                    },
-                    drop: (prev, lead) => this.land.wipe(prev),
-                    insert: (next, lead) => {
-                        const unit = this.land.put(this.head, this.land.id_new(), lead?.self ?? '0_0', []);
-                        this.land.node(unit.self, $hyoo_crowd_text).str(next);
-                        return unit;
-                    },
-                    update: (next, prev, lead) => {
-                        this.land.node(prev.self, $hyoo_crowd_text).str(next);
-                        return prev;
-                    },
-                });
-                return next;
-            }
-        }
-        str(next) {
-            if (next === undefined) {
-                let str = '';
-                for (const unit of this.units()) {
-                    if (typeof unit.data === 'string')
-                        str += unit.data;
-                    else
-                        str += this.land.node(unit.self, $hyoo_crowd_text).str();
-                }
-                return str;
-            }
-            else {
-                this.write(next, 0, -1);
-                return next;
-            }
-        }
-        write(next, str_from = -1, str_to = str_from) {
-            const list = this.units();
-            let from = str_from < 0 ? list.length : 0;
-            let word = '';
-            while (from < list.length) {
-                word = String(list[from].data);
-                if (str_from <= word.length) {
-                    next = word.slice(0, str_from) + next;
-                    break;
-                }
-                str_from -= word.length;
-                if (str_to > 0)
-                    str_to -= word.length;
-                from++;
-            }
-            let to = str_to < 0 ? list.length : from;
-            while (to < list.length) {
-                word = String(list[to].data);
-                to++;
-                if (str_to < word.length) {
-                    next = next + word.slice(str_to);
-                    break;
-                }
-                str_to -= word.length;
-            }
-            if (from && from === list.length) {
-                --from;
-                next = String(list[from].data) + next;
-            }
-            const words = next.match($hyoo_crowd_tokenizer) ?? [];
-            this.as($hyoo_crowd_list).insert(words, from, to);
-            return this;
-        }
-        point_by_offset(offset) {
-            let off = offset;
-            for (const unit of this.units()) {
-                if (typeof unit.data === 'string') {
-                    const len = String(unit.data).length;
-                    if (off <= len)
-                        return [unit.self, off];
-                    else
-                        off -= len;
-                }
-                else {
-                    const found = this.land.node(unit.self, $hyoo_crowd_text).point_by_offset(off);
-                    if (found[0] !== '0_0')
-                        return found;
-                    off = found[1];
-                }
-            }
-            return ['0_0', off];
-        }
-        offset_by_point([self, offset]) {
-            for (const unit of this.units()) {
-                if (unit.self === self)
-                    return [self, offset];
-                if (typeof unit.data === 'string') {
-                    offset += unit.data.length;
-                }
-                else {
-                    const found = this.land.node(unit.self, $hyoo_crowd_text).offset_by_point([self, offset]);
-                    if (found[0] !== '0_0')
-                        return [self, found[1]];
-                    offset = found[1];
-                }
-            }
-            return ['0_0', offset];
-        }
-        selection(peer, next) {
-            const reg = this.land.selection(peer);
-            if (next) {
-                reg.value(next.map(offset => this.point_by_offset(offset)));
-                return next;
-            }
-            else {
-                this.units();
-                return reg.value()
-                    ?.map(point => this.offset_by_point(point)[1]) ?? [0, 0];
-            }
-        }
-    }
-    $.$hyoo_crowd_text = $hyoo_crowd_text;
+            $mol_assert_like(keys, [[123]]);
+            $mol_assert_like(vals, [321]);
+        },
+        'method iterators key restore'() {
+            const dict = new $mol_dict([[[123], 321]]);
+            $mol_assert_like([...dict.keys()], [[123]]);
+            $mol_assert_like([...dict.values()], [321]);
+            $mol_assert_like([...dict.entries()], [[[123], 321]]);
+        },
+        'forEach key restore'() {
+            const dict = new $mol_dict([[[123], 321]]);
+            const keys = [];
+            const vals = [];
+            dict.forEach((val, key) => {
+                keys.push(key);
+                vals.push(val);
+            });
+            $mol_assert_like(keys, [[123]]);
+            $mol_assert_like(vals, [321]);
+        },
+    });
 })($ || ($ = {}));
-//hyoo/crowd/text/text.ts
+//mol/dict/dict.test.tsx
 ;
 "use strict";
 var $;
 (function ($) {
     $mol_test({
-        async 'string: Offset <=> Point'() {
-            const store = $hyoo_crowd_land.make({});
-            store.chief.as($hyoo_crowd_text).str('fooBar');
-            const [first, second] = store.chief.units();
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .point_by_offset(0), [first.self, 0]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .offset_by_point([first.self, 0]), [first.self, 0]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .point_by_offset(3), [first.self, 3]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .offset_by_point([first.self, 3]), [first.self, 3]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .offset_by_point([first.self, 5]), [first.self, 5]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .point_by_offset(5), [second.self, 2]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .offset_by_point([second.self, 2]), [second.self, 5]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .point_by_offset(6), [second.self, 3]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .offset_by_point([second.self, 3]), [second.self, 6]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .point_by_offset(7), ['0_0', 1]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text)
-                .offset_by_point(['0_0', 1]), ['0_0', 7]);
+        'fresh'() {
+            const clock = new $hyoo_crowd_clock;
+            clock.see_peer('b_33', 1);
+            clock.see_peer('m_66', 2);
+            $mol_assert_ok(clock.fresh('m_66', 3));
+            $mol_assert_ok(clock.fresh('x_99', 1));
+            $mol_assert_not(clock.fresh('m_66', 1));
         },
-        async 'text: Offset <=> Point'() {
-            const store = $hyoo_crowd_land.make({});
-            store.chief.as($hyoo_crowd_text).text('foo bar\n666 777');
-            const [first, second] = store.chief.nodes($hyoo_crowd_text);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text).point_by_offset(0), [first.units()[0].self, 0]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text).offset_by_point([first.units()[0].self, 0]), [first.units()[0].self, 0]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text).point_by_offset(8), [first.units()[2].self, 1]);
-            $mol_assert_like(store.chief.as($hyoo_crowd_text).offset_by_point([first.units()[2].self, 1]), [first.units()[2].self, 8]);
+        'fork'() {
+            const left = new $hyoo_crowd_clock;
+            left.see_peer('b_33', 1);
+            left.see_peer('m_66', 2);
+            const right = new $hyoo_crowd_clock(left);
+            $mol_assert_equal(right.last_time, 2);
+            $mol_assert_like([...right], [
+                ['b_33', 1],
+                ['m_66', 2],
+            ]);
+        },
+        'generate'() {
+            const clock = new $hyoo_crowd_clock;
+            clock.see_peer('b_33', $mol_int62_min + 1);
+            clock.see_peer('m_66', $mol_int62_min + 2);
+            const now = clock.now();
+            const time1 = clock.tick('b_33');
+            $mol_assert_like(time1, now);
+            $mol_assert_like(clock.last_time, now);
+            clock.see_peer('m_66', clock.now() + 10);
+            const time2 = clock.tick('m_66');
+            $mol_assert_like(time2, now + 11);
+            $mol_assert_like(clock.last_time, now + 11);
+        },
+        'ahead'() {
+            const clock1 = new $hyoo_crowd_clock;
+            clock1.see_peer('b_33', 1);
+            clock1.see_peer('m_66', 2);
+            const clock2 = new $hyoo_crowd_clock;
+            clock2.see_peer('b_33', 1);
+            clock2.see_peer('x_99', 2);
+            const clock3 = new $hyoo_crowd_clock;
+            clock3.see_peer('b_33', 1);
+            clock3.see_peer('m_66', 2);
+            clock3.see_peer('x_99', 2);
+            $mol_assert_ok(clock1.ahead(clock2));
+            $mol_assert_ok(clock2.ahead(clock1));
+            $mol_assert_ok(clock3.ahead(clock1));
+            $mol_assert_ok(clock3.ahead(clock2));
+            $mol_assert_not(clock1.ahead(clock3));
+            $mol_assert_not(clock2.ahead(clock3));
+        },
+        'bin'() {
+            const clocks1 = [new $hyoo_crowd_clock, new $hyoo_crowd_clock];
+            clocks1[$hyoo_crowd_unit_group.auth].see_peer('b_33', 1);
+            clocks1[$hyoo_crowd_unit_group.data].see_peer('b_33', 2);
+            const bin = $hyoo_crowd_clock_bin.from('2_b', clocks1, 0);
+            $mol_assert_like(bin.land(), '2_b');
+            const clocks2 = [new $hyoo_crowd_clock, new $hyoo_crowd_clock];
+            clocks2[$hyoo_crowd_unit_group.auth].see_bin(bin, $hyoo_crowd_unit_group.auth);
+            clocks2[$hyoo_crowd_unit_group.data].see_bin(bin, $hyoo_crowd_unit_group.data);
+            $mol_assert_like(clocks2.map(clock => new Map(clock)), [
+                new Map([
+                    ['b_33', 1],
+                ]),
+                new Map([
+                    ['b_33', 2],
+                ]),
+            ]);
         },
     });
 })($ || ($ = {}));
-//hyoo/crowd/text/text.test.ts
+//hyoo/crowd/clock/clock.test.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        async 'world delta & apply'() {
+            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const land1 = await world1.grab();
+            const land2 = await world1.grab();
+            land1.chief.as($hyoo_crowd_list).list([123, 456]);
+            land2.chief.as($hyoo_crowd_list).list([456, 789]);
+            for await (const batch of world1.delta()) {
+                $mol_assert_like((await world2.apply(batch)).forbid, new Map);
+            }
+            $mol_assert_like(world2.land(land1.id()).chief.as($hyoo_crowd_list).list(), [123, 456]);
+            $mol_assert_like(world2.land(land2.id()).chief.as($hyoo_crowd_list).list(), [456, 789]);
+        },
+        async 'land delta & apply'() {
+            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const land = world1.land(world1.peer.id);
+            land.chief.as($hyoo_crowd_list).list([123, 456]);
+            const batch = await world1.delta_batch(land);
+            $mol_assert_like((await world2.apply(batch)).forbid, new Map);
+            $mol_assert_like(world2.land(land.id()).chief.as($hyoo_crowd_list).list(), [123, 456]);
+        },
+        async 'ignore changes from far future'() {
+            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const land = await world1.grab();
+            const clock = land.clock_data;
+            clock.see_time(clock.now() + 60 * 60 * 24 * 10);
+            land.chief.as($hyoo_crowd_reg).numb(123);
+            const batch = await world1.delta_batch(land);
+            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['Far future']);
+            $mol_assert_like(world2.land(land.id()).delta().length, 3);
+        },
+        async 'ignore auth as another peer'() {
+            const world1 = new $hyoo_crowd_world({ ...await $hyoo_crowd_peer.generate(), id: '1_1' });
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const land = await world1.grab();
+            land.chief.as($hyoo_crowd_reg).numb(123);
+            const batch = await world1.delta_batch(land);
+            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['Alien join key', 'No auth key']);
+            $mol_assert_like(world2.land(land.id()).delta().length, 2);
+        },
+        async 'ignore auth without key'() {
+            const world1 = new $hyoo_crowd_world({ ...await $hyoo_crowd_peer.generate(), key_public_serial: [] });
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const land = world1.land('1_1');
+            land.chief.as($hyoo_crowd_reg).numb(123);
+            const batch = await world1.delta_batch(land);
+            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['No join key', 'Level too low']);
+            $mol_assert_like(world2.land(land.id()).delta().length, 0);
+        },
+        async 'ignore changes with wrong signs'() {
+            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const land = await world1.grab();
+            const batch = await world1.delta_batch(land);
+            batch[152] = ~batch[152];
+            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['Wrong join sign', 'Level too low']);
+            $mol_assert_like(world2.land(land.id()).delta().length, 0);
+        },
+        async 'ignore update auth except auth removing'() {
+            const peer = await $hyoo_crowd_peer.generate();
+            const world1 = new $hyoo_crowd_world(peer);
+            const world2 = new $hyoo_crowd_world(peer);
+            const land1 = await world1.grab();
+            const land2 = world2.land(land1.id());
+            land2.clock_auth.tick(peer.id);
+            land2.clock_data.tick(peer.id);
+            land1.chief.as($hyoo_crowd_reg).numb(123);
+            land2.chief.as($hyoo_crowd_reg).numb(234);
+            const batch = await world1.delta_batch(land1);
+            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
+            $mol_assert_like(land2.delta().length, 5);
+            land1.chief.as($hyoo_crowd_reg).numb(345);
+            land1.leave();
+            const batch2 = await world1.delta_batch(land1);
+            $mol_assert_like([...(await world2.apply(batch2)).forbid.values()], ['No auth key']);
+            $mol_assert_like(land2.chief.as($hyoo_crowd_reg).numb(), 123);
+        },
+        async 'levels'() {
+            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const peer = await $hyoo_crowd_peer.generate();
+            const land1 = await world1.grab();
+            const land2 = world2.land(land1.id());
+            land1.chief.sub('foo', $hyoo_crowd_reg).numb(123);
+            for await (const batch of world1.delta()) {
+                $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
+            }
+            land2.chief.sub('foo', $hyoo_crowd_reg).numb(234);
+            land2.chief.sub('bar', $hyoo_crowd_reg).numb(234);
+            land2.level(peer.id, $hyoo_crowd_peer_level.law);
+            $mol_assert_like(land1.delta().length, 4);
+            level_get: {
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], ['Level too low', 'Level too low']);
+                $mol_assert_like(land1.delta().length, 5);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 123);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 0);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.get);
+            }
+            level_add: {
+                land1.level(land2.peer().id, $hyoo_crowd_peer_level.add);
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], ['Level too low']);
+                $mol_assert_like(land1.delta().length, 7);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 123);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.get);
+            }
+            level_mod: {
+                land1.level(land2.peer().id, $hyoo_crowd_peer_level.mod);
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
+                $mol_assert_like(land1.delta().length, 7);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.get);
+            }
+            level_law: {
+                land1.level(land2.peer().id, $hyoo_crowd_peer_level.law);
+                for await (const batch of world1.delta()) {
+                    $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
+                }
+                land2.level(peer.id, $hyoo_crowd_peer_level.law);
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
+                $mol_assert_like(land1.delta().length, 8);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.law);
+            }
+        },
+        async 'default level'() {
+            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
+            const peer = await $hyoo_crowd_peer.generate();
+            const land1 = await world1.grab();
+            const land2 = world2.land(land1.id());
+            land1.chief.sub('foo', $hyoo_crowd_reg).numb(123);
+            const batch = await world1.delta_batch(land1);
+            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
+            land2.chief.sub('foo', $hyoo_crowd_reg).numb(234);
+            land2.chief.sub('bar', $hyoo_crowd_reg).numb(234);
+            land2.level(peer.id, $hyoo_crowd_peer_level.law);
+            $mol_assert_like(land1.delta().length, 4);
+            level_add: {
+                land1.level_base($hyoo_crowd_peer_level.add);
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], ['Level too low']);
+                $mol_assert_like(land1.delta().length, 7);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 123);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.add);
+            }
+            level_mod: {
+                land1.level_base($hyoo_crowd_peer_level.mod);
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
+                $mol_assert_like(land1.delta().length, 7);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.mod);
+            }
+            level_law: {
+                land1.level_base($hyoo_crowd_peer_level.law);
+                for await (const batch of world1.delta()) {
+                    $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
+                }
+                land2.level(peer.id, $hyoo_crowd_peer_level.law);
+                const batch = await world2.delta_batch(land2);
+                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
+                $mol_assert_like(land1.delta().length, 7);
+                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
+                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.law);
+            }
+        },
+    });
+})($ || ($ = {}));
+//hyoo/crowd/world/world.test.ts
 ;
 "use strict";
 var $;
@@ -5349,158 +4505,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_test({
-        'number'() {
-            const dict = new $mol_dict();
-            $mol_assert_equal(dict.get(123), undefined);
-            $mol_assert_equal(dict.has(123), false);
-            dict.set(123, 321);
-            $mol_assert_equal(dict.get(123), 321);
-            $mol_assert_equal(dict.has(123), true);
-            dict.delete(123);
-            $mol_assert_equal(dict.get(123), undefined);
-            $mol_assert_equal(dict.has(123), false);
-        },
-        'pojo as key'() {
-            const dict = new $mol_dict();
-            $mol_assert_equal(dict.get({ foo: 123 }), undefined);
-            $mol_assert_equal(dict.has({ foo: 123 }), false);
-            dict.set({ foo: 123 }, 321);
-            $mol_assert_equal(dict.get({ foo: 123 }), 321);
-            $mol_assert_equal(dict.has({ foo: 123 }), true);
-            dict.delete({ foo: 123 });
-            $mol_assert_equal(dict.get({ foo: 123 }), undefined);
-            $mol_assert_equal(dict.has({ foo: 123 }), false);
-        },
-        'array as key'() {
-            const dict = new $mol_dict();
-            $mol_assert_equal(dict.get([123]), undefined);
-            $mol_assert_equal(dict.has([123]), false);
-            dict.set([123], 321);
-            $mol_assert_equal(dict.get([123]), 321);
-            $mol_assert_equal(dict.has([123]), true);
-            dict.delete([123]);
-            $mol_assert_equal(dict.get([123]), undefined);
-            $mol_assert_equal(dict.has([123]), false);
-        },
-        'html element as key'() {
-            const el = $mol_jsx("div", null);
-            const dict = new $mol_dict();
-            $mol_assert_equal(dict.get(el), undefined);
-            $mol_assert_equal(dict.has(el), false);
-            dict.set(el, 321);
-            $mol_assert_equal(dict.get(el), 321);
-            $mol_assert_equal(dict.has(el), true);
-            $mol_assert_equal(dict.get($mol_jsx("div", null)), undefined);
-            $mol_assert_equal(dict.has($mol_jsx("div", null)), false);
-            dict.delete(el);
-            $mol_assert_equal(dict.get(el), undefined);
-            $mol_assert_equal(dict.has(el), false);
-        },
-        'for-of key restore'() {
-            const dict = new $mol_dict([[[123], 321]]);
-            const keys = [];
-            const vals = [];
-            for (const [key, val] of dict) {
-                keys.push(key);
-                vals.push(val);
-            }
-            $mol_assert_like(keys, [[123]]);
-            $mol_assert_like(vals, [321]);
-        },
-        'method iterators key restore'() {
-            const dict = new $mol_dict([[[123], 321]]);
-            $mol_assert_like([...dict.keys()], [[123]]);
-            $mol_assert_like([...dict.values()], [321]);
-            $mol_assert_like([...dict.entries()], [[[123], 321]]);
-        },
-        'forEach key restore'() {
-            const dict = new $mol_dict([[[123], 321]]);
-            const keys = [];
-            const vals = [];
-            dict.forEach((val, key) => {
-                keys.push(key);
-                vals.push(val);
-            });
-            $mol_assert_like(keys, [[123]]);
-            $mol_assert_like(vals, [321]);
-        },
-    });
-})($ || ($ = {}));
-//mol/dict/dict.test.tsx
-;
-"use strict";
-var $;
-(function ($) {
-    class $hyoo_crowd_list extends $hyoo_crowd_node {
-        list(next) {
-            const units = this.units();
-            if (next === undefined) {
-                return units.map(unit => unit.data);
-            }
-            else {
-                this.insert(next, 0, units.length);
-                return next;
-            }
-        }
-        set(next) {
-            return new Set(this.list(next && [...next]));
-        }
-        insert(next, from = this.units().length, to = from) {
-            $mol_reconcile({
-                prev: this.units(),
-                from,
-                to,
-                next,
-                equal: (next, prev) => $mol_compare_deep(prev.data, next),
-                drop: (prev, lead) => this.land.wipe(prev),
-                insert: (next, lead) => this.land.put(this.head, this.land.id_new(), lead?.self ?? '0_0', next),
-                update: (next, prev, lead) => this.land.put(prev.head, prev.self, lead?.self ?? '0_0', next),
-            });
-        }
-        move(from, to) {
-            const units = this.units();
-            const lead = to ? units[to - 1] : null;
-            this.land.move(units[from], this.head, lead?.self ?? '0_0');
-        }
-        cut(seat) {
-            return this.land.wipe(this.units()[seat]);
-        }
-        has(val) {
-            for (const unit of this.units()) {
-                if (unit.data === val)
-                    return true;
-            }
-            return false;
-        }
-        add(val) {
-            if (this.has(val))
-                return;
-            this.insert([val]);
-        }
-        drop(val) {
-            for (const unit of this.units()) {
-                if (unit.data !== val)
-                    continue;
-                this.land.wipe(unit);
-            }
-        }
-        node_make(val, Node) {
-            this.insert([val]);
-            const unit = this.units().at(-1);
-            return this.land.node(unit.self, Node);
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $hyoo_crowd_list.prototype, "set", null);
-    $.$hyoo_crowd_list = $hyoo_crowd_list;
-})($ || ($ = {}));
-//hyoo/crowd/list/list.ts
-;
-"use strict";
-var $;
-(function ($) {
     async function make_land(id = '1_1') {
         return $hyoo_crowd_land.make({
             id: $mol_const(id),
@@ -5534,187 +4538,126 @@ var $;
 var $;
 (function ($) {
     $mol_test({
-        async 'world delta & apply'() {
-            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const land1 = await world1.grab();
-            const land2 = await world1.grab();
-            land1.chief.as($hyoo_crowd_list).list([123, 456]);
-            land2.chief.as($hyoo_crowd_list).list([456, 789]);
-            for await (const batch of world1.delta()) {
-                $mol_assert_like((await world2.apply(batch)).forbid, new Map);
-            }
-            $mol_assert_like(world2.land(land1.id()).chief.as($hyoo_crowd_list).list(), [123, 456]);
-            $mol_assert_like(world2.land(land2.id()).chief.as($hyoo_crowd_list).list(), [456, 789]);
+        async 'string: Offset <=> Point'() {
+            const store = $hyoo_crowd_land.make({});
+            store.chief.as($hyoo_crowd_text).str('fooBar');
+            const [first, second] = store.chief.units();
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .point_by_offset(0), [first.self, 0]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .offset_by_point([first.self, 0]), [first.self, 0]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .point_by_offset(3), [first.self, 3]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .offset_by_point([first.self, 3]), [first.self, 3]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .offset_by_point([first.self, 5]), [first.self, 5]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .point_by_offset(5), [second.self, 2]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .offset_by_point([second.self, 2]), [second.self, 5]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .point_by_offset(6), [second.self, 3]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .offset_by_point([second.self, 3]), [second.self, 6]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .point_by_offset(7), ['0_0', 1]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text)
+                .offset_by_point(['0_0', 1]), ['0_0', 7]);
         },
-        async 'land delta & apply'() {
-            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const land = world1.land(world1.peer.id);
-            land.chief.as($hyoo_crowd_list).list([123, 456]);
-            const batch = await world1.delta_batch(land);
-            $mol_assert_like((await world2.apply(batch)).forbid, new Map);
-            $mol_assert_like(world2.land(land.id()).chief.as($hyoo_crowd_list).list(), [123, 456]);
-        },
-        async 'ignore changes from far future'() {
-            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const land = await world1.grab();
-            const clock = land.clock_data;
-            clock.see_time(clock.now() + 60 * 60 * 24 * 10);
-            land.chief.as($hyoo_crowd_reg).numb(123);
-            const batch = await world1.delta_batch(land);
-            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['Far future']);
-            $mol_assert_like(world2.land(land.id()).delta().length, 3);
-        },
-        async 'ignore auth as another peer'() {
-            const world1 = new $hyoo_crowd_world({ ...await $hyoo_crowd_peer.generate(), id: '1_1' });
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const land = await world1.grab();
-            land.chief.as($hyoo_crowd_reg).numb(123);
-            const batch = await world1.delta_batch(land);
-            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['Alien join key', 'No auth key']);
-            $mol_assert_like(world2.land(land.id()).delta().length, 2);
-        },
-        async 'ignore auth without key'() {
-            const world1 = new $hyoo_crowd_world({ ...await $hyoo_crowd_peer.generate(), key_public_serial: [] });
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const land = world1.land('1_1');
-            land.chief.as($hyoo_crowd_reg).numb(123);
-            const batch = await world1.delta_batch(land);
-            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['No join key', 'Level too low']);
-            $mol_assert_like(world2.land(land.id()).delta().length, 0);
-        },
-        async 'ignore changes with wrong signs'() {
-            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const land = await world1.grab();
-            const batch = await world1.delta_batch(land);
-            batch[152] = ~batch[152];
-            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], ['Wrong join sign', 'Level too low']);
-            $mol_assert_like(world2.land(land.id()).delta().length, 0);
-        },
-        async 'ignore update auth except auth removing'() {
-            const peer = await $hyoo_crowd_peer.generate();
-            const world1 = new $hyoo_crowd_world(peer);
-            const world2 = new $hyoo_crowd_world(peer);
-            const land1 = await world1.grab();
-            const land2 = world2.land(land1.id());
-            land2.clock_auth.tick(peer.id);
-            land2.clock_data.tick(peer.id);
-            land1.chief.as($hyoo_crowd_reg).numb(123);
-            land2.chief.as($hyoo_crowd_reg).numb(234);
-            const batch = await world1.delta_batch(land1);
-            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
-            $mol_assert_like(land2.delta().length, 5);
-            land1.chief.as($hyoo_crowd_reg).numb(345);
-            land1.leave();
-            const batch2 = await world1.delta_batch(land1);
-            $mol_assert_like([...(await world2.apply(batch2)).forbid.values()], ['No auth key']);
-            $mol_assert_like(land2.chief.as($hyoo_crowd_reg).numb(), 123);
-        },
-        async 'levels'() {
-            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const peer = await $hyoo_crowd_peer.generate();
-            const land1 = await world1.grab();
-            const land2 = world2.land(land1.id());
-            land1.chief.sub('foo', $hyoo_crowd_reg).numb(123);
-            for await (const batch of world1.delta()) {
-                $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
-            }
-            land2.chief.sub('foo', $hyoo_crowd_reg).numb(234);
-            land2.chief.sub('bar', $hyoo_crowd_reg).numb(234);
-            land2.level(peer.id, $hyoo_crowd_peer_level.law);
-            $mol_assert_like(land1.delta().length, 4);
-            level_get: {
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], ['Level too low', 'Level too low']);
-                $mol_assert_like(land1.delta().length, 5);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 123);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 0);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.get);
-            }
-            level_add: {
-                land1.level(land2.peer().id, $hyoo_crowd_peer_level.add);
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], ['Level too low']);
-                $mol_assert_like(land1.delta().length, 7);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 123);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.get);
-            }
-            level_mod: {
-                land1.level(land2.peer().id, $hyoo_crowd_peer_level.mod);
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
-                $mol_assert_like(land1.delta().length, 7);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.get);
-            }
-            level_law: {
-                land1.level(land2.peer().id, $hyoo_crowd_peer_level.law);
-                for await (const batch of world1.delta()) {
-                    $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
-                }
-                land2.level(peer.id, $hyoo_crowd_peer_level.law);
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
-                $mol_assert_like(land1.delta().length, 8);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.law);
-            }
-        },
-        async 'default level'() {
-            const world1 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const world2 = new $hyoo_crowd_world(await $hyoo_crowd_peer.generate());
-            const peer = await $hyoo_crowd_peer.generate();
-            const land1 = await world1.grab();
-            const land2 = world2.land(land1.id());
-            land1.chief.sub('foo', $hyoo_crowd_reg).numb(123);
-            const batch = await world1.delta_batch(land1);
-            $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
-            land2.chief.sub('foo', $hyoo_crowd_reg).numb(234);
-            land2.chief.sub('bar', $hyoo_crowd_reg).numb(234);
-            land2.level(peer.id, $hyoo_crowd_peer_level.law);
-            $mol_assert_like(land1.delta().length, 4);
-            level_add: {
-                land1.level_base($hyoo_crowd_peer_level.add);
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], ['Level too low']);
-                $mol_assert_like(land1.delta().length, 7);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 123);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.add);
-            }
-            level_mod: {
-                land1.level_base($hyoo_crowd_peer_level.mod);
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
-                $mol_assert_like(land1.delta().length, 7);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.mod);
-            }
-            level_law: {
-                land1.level_base($hyoo_crowd_peer_level.law);
-                for await (const batch of world1.delta()) {
-                    $mol_assert_like([...(await world2.apply(batch)).forbid.values()], []);
-                }
-                land2.level(peer.id, $hyoo_crowd_peer_level.law);
-                const batch = await world2.delta_batch(land2);
-                $mol_assert_like([...(await world1.apply(batch)).forbid.values()], []);
-                $mol_assert_like(land1.delta().length, 7);
-                $mol_assert_like(land1.chief.sub('foo', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.chief.sub('bar', $hyoo_crowd_reg).numb(), 234);
-                $mol_assert_like(land1.level(peer.id), $hyoo_crowd_peer_level.law);
-            }
+        async 'text: Offset <=> Point'() {
+            const store = $hyoo_crowd_land.make({});
+            store.chief.as($hyoo_crowd_text).text('foo bar\n666 777');
+            const [first, second] = store.chief.nodes($hyoo_crowd_text);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text).point_by_offset(0), [first.units()[0].self, 0]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text).offset_by_point([first.units()[0].self, 0]), [first.units()[0].self, 0]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text).point_by_offset(8), [first.units()[2].self, 1]);
+            $mol_assert_like(store.chief.as($hyoo_crowd_text).offset_by_point([first.units()[2].self, 1]), [first.units()[2].self, 8]);
         },
     });
 })($ || ($ = {}));
-//hyoo/crowd/world/world.test.ts
+//hyoo/crowd/text/text.test.ts
+;
+"use strict";
+var $;
+(function ($) {
+    async function make_land(id = '1_1') {
+        return $hyoo_crowd_land.make({
+            id: $mol_const(id),
+            peer: $mol_const(await $hyoo_crowd_peer.generate()),
+        });
+    }
+    $mol_test({
+        async 'save and load buffers'() {
+            const land = await make_land();
+            const node = land.chief.as($hyoo_crowd_blob);
+            const source = new Uint8Array(2 ** 15 + 1);
+            source[2 ** 15 + 1] = 255;
+            node.buffer(source);
+            $mol_assert_like(node.list().length, 2);
+            $mol_assert_like(node.buffer(), source);
+        },
+        async 'save and load blobs'() {
+            const land = await make_land();
+            const node = land.chief.as($hyoo_crowd_blob);
+            const source = new Uint8Array(2 ** 15 + 1);
+            source[2 ** 15 + 1] = 255;
+            await $mol_wire_async(node).blob(new $mol_blob([source], { type: 'test/test' }));
+            $mol_assert_like('test/test', node.blob().type);
+            $mol_assert_like(source, new Uint8Array(await node.blob().arrayBuffer()));
+        },
+    });
+})($ || ($ = {}));
+//hyoo/crowd/blob/blob.test.ts
+;
+"use strict";
+var $;
+(function ($_1) {
+    $mol_test_mocks.push(context => {
+        class $mol_state_arg_mock extends $mol_state_arg {
+            static $ = context;
+            static href(next) { return next || ''; }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_state_arg_mock, "href", null);
+        context.$mol_state_arg = $mol_state_arg_mock;
+    });
+    $mol_test({
+        'args as dictionary'($) {
+            $.$mol_state_arg.href('#!foo=bar/xxx');
+            $mol_assert_like($.$mol_state_arg.dict(), { foo: 'bar', xxx: '' });
+            $.$mol_state_arg.dict({ foo: null, yyy: '', lol: '123' });
+            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!yyy/lol=123');
+        },
+        'one value from args'($) {
+            $.$mol_state_arg.href('#!foo=bar/xxx');
+            $mol_assert_equal($.$mol_state_arg.value('foo'), 'bar');
+            $mol_assert_equal($.$mol_state_arg.value('xxx'), '');
+            $.$mol_state_arg.value('foo', 'lol');
+            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!foo=lol/xxx');
+            $.$mol_state_arg.value('foo', '');
+            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!foo/xxx');
+            $.$mol_state_arg.value('foo', null);
+            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!xxx');
+        },
+        'nested args'($) {
+            const base = new $.$mol_state_arg('nested.');
+            class Nested extends $mol_state_arg {
+                constructor(prefix) {
+                    super(base.prefix + prefix);
+                }
+                static value = (key, next) => base.value(key, next);
+            }
+            $.$mol_state_arg.href('#!foo=bar/nested.xxx=123');
+            $mol_assert_equal(Nested.value('foo'), null);
+            $mol_assert_equal(Nested.value('xxx'), '123');
+            Nested.value('foo', 'lol');
+            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!foo=bar/nested.xxx=123/nested.foo=lol');
+        },
+    });
+})($ || ($ = {}));
+//mol/state/arg/arg.web.test.ts
 ;
 "use strict";
 var $;
@@ -5891,50 +4834,147 @@ var $;
 "use strict";
 var $;
 (function ($_1) {
-    $mol_test_mocks.push(context => {
-        class $mol_state_arg_mock extends $mol_state_arg {
-            static $ = context;
-            static href(next) { return next || ''; }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_state_arg_mock, "href", null);
-        context.$mol_state_arg = $mol_state_arg_mock;
-    });
+    var $$;
+    (function ($$) {
+        $mol_test({
+            'handle clicks by default'($) {
+                let clicked = false;
+                const clicker = $mol_button.make({
+                    $,
+                    click: (event) => { clicked = true; },
+                });
+                const element = clicker.dom_tree();
+                const event = $mol_dom_context.document.createEvent('mouseevent');
+                event.initEvent('click', true, true);
+                element.dispatchEvent(event);
+                $mol_assert_ok(clicked);
+            },
+            'no handle clicks if disabled'($) {
+                let clicked = false;
+                const clicker = $mol_button.make({
+                    $,
+                    click: (event) => { clicked = true; },
+                    enabled: () => false,
+                });
+                const element = clicker.dom_tree();
+                const event = $mol_dom_context.document.createEvent('mouseevent');
+                event.initEvent('click', true, true);
+                element.dispatchEvent(event);
+                $mol_assert_not(clicked);
+            },
+            'Store error'($) {
+                const clicker = $mol_button.make({
+                    $,
+                    click: (event) => $.$mol_fail(new Error('Test error')),
+                });
+                const event = $mol_dom_context.document.createEvent('mouseevent');
+                $mol_assert_fail(() => clicker.event_activate(event), 'Test error');
+                $mol_assert_equal(clicker.status()[0].message, 'Test error');
+            },
+        });
+    })($$ = $_1.$$ || ($_1.$$ = {}));
+})($ || ($ = {}));
+//mol/button/button.test.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_test({
+            'Empty needle'() {
+                const app = new $mol_dimmer;
+                app.needle = () => '  ';
+                app.haystack = () => 'foo  bar';
+                $mol_assert_like(app.strings(), ['foo  bar']);
+            },
+            'Empty haystack'() {
+                const app = new $mol_dimmer;
+                app.needle = () => 'foo  bar';
+                app.haystack = () => '';
+                $mol_assert_like(app.strings(), ['']);
+            },
+            'Not found'() {
+                const app = new $mol_dimmer;
+                app.needle = () => 'foo';
+                app.haystack = () => ' bar ';
+                $mol_assert_like(app.strings(), [' bar ']);
+            },
+            'One found'() {
+                const app = new $mol_dimmer;
+                app.needle = () => 'foo';
+                app.haystack = () => ' barfoo ';
+                $mol_assert_like(app.strings(), [' bar', 'foo', ' ']);
+            },
+            'Multiple found'() {
+                const app = new $mol_dimmer;
+                app.needle = () => 'foo';
+                app.haystack = () => ' foobarfoo foo';
+                $mol_assert_like(app.strings(), [' ', 'foo', 'bar', 'foo', ' ', 'foo']);
+            },
+            'Fuzzy search'() {
+                const app = new $mol_dimmer;
+                app.needle = () => 'foo bar';
+                app.haystack = () => ' barfoo ';
+                $mol_assert_like(app.strings(), [' ', 'bar', '', 'foo', ' ']);
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/dimmer/dimmer.test.ts
+;
+"use strict";
+var $;
+(function ($) {
     $mol_test({
-        'args as dictionary'($) {
-            $.$mol_state_arg.href('#!foo=bar/xxx');
-            $mol_assert_like($.$mol_state_arg.dict(), { foo: 'bar', xxx: '' });
-            $.$mol_state_arg.dict({ foo: null, yyy: '', lol: '123' });
-            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!yyy/lol=123');
-        },
-        'one value from args'($) {
-            $.$mol_state_arg.href('#!foo=bar/xxx');
-            $mol_assert_equal($.$mol_state_arg.value('foo'), 'bar');
-            $mol_assert_equal($.$mol_state_arg.value('xxx'), '');
-            $.$mol_state_arg.value('foo', 'lol');
-            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!foo=lol/xxx');
-            $.$mol_state_arg.value('foo', '');
-            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!foo/xxx');
-            $.$mol_state_arg.value('foo', null);
-            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!xxx');
-        },
-        'nested args'($) {
-            const base = new $.$mol_state_arg('nested.');
-            class Nested extends $mol_state_arg {
-                constructor(prefix) {
-                    super(base.prefix + prefix);
-                }
-                static value = (key, next) => base.value(key, next);
-            }
-            $.$mol_state_arg.href('#!foo=bar/nested.xxx=123');
-            $mol_assert_equal(Nested.value('foo'), null);
-            $mol_assert_equal(Nested.value('xxx'), '123');
-            Nested.value('foo', 'lol');
-            $mol_assert_equal($.$mol_state_arg.href().replace(/.*#/, '#'), '#!foo=bar/nested.xxx=123/nested.foo=lol');
+        '$mol_syntax2_md_flow'() {
+            const check = (input, right) => {
+                const tokens = [];
+                $mol_syntax2_md_flow.tokenize(input, (...token) => tokens.push(token));
+                $mol_assert_like(tokens, right);
+            };
+            check('Hello,\nWorld..\r\n\r\n\nof Love!', [
+                ['block', 'Hello,\n', ['Hello,', '\n'], 0],
+                ['block', 'World..\r\n\r\n\n', ['World..', '\r\n\r\n\n'], 7],
+                ['block', 'of Love!', ['of Love!', ''], 19],
+            ]);
+            check('# Header1\n\nHello!\n\n## Header2', [
+                ['header', '# Header1\n\n', ['#', ' ', 'Header1', '\n\n'], 0],
+                ['block', 'Hello!\n\n', ['Hello!', '\n\n'], 11],
+                ['header', '## Header2', ['##', ' ', 'Header2', ''], 19],
+            ]);
+            check('```\nstart()\n```\n\n```jam.js\nrestart()\n```\n\nHello!\n\n```\nstop()\n```', [
+                ['code', '```\nstart()\n```\n\n', ['```', '', 'start()\n', '```', '\n\n'], 0],
+                ['code', '```jam.js\nrestart()\n```\n\n', ['```', 'jam.js', 'restart()\n', '```', '\n\n'], 17],
+                ['block', 'Hello!\n\n', ['Hello!', '\n\n'], 42],
+                ['code', '```\nstop()\n```', ['```', '', 'stop()\n', '```', ''], 50],
+            ]);
+            check('| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n| Cell11 | Cell12\n| Cell21 | Cell22\n', [
+                ['table', '| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n', ['| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n', '\n'], 0],
+                ['table', '| Cell11 | Cell12\n| Cell21 | Cell22\n', ['| Cell11 | Cell12\n| Cell21 | Cell22\n', ''], 68],
+            ]);
         },
     });
 })($ || ($ = {}));
-//mol/state/arg/arg.web.test.ts
+//mol/syntax2/md/md.test.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'null by default'() {
+            const key = String(Math.random());
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+        'storing'() {
+            const key = String(Math.random());
+            $mol_state_session.value(key, '$mol_state_session_test');
+            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
+            $mol_state_session.value(key, null);
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+    });
+})($ || ($ = {}));
+//mol/state/session/session.test.ts
 
 //# sourceMappingURL=web.test.js.map

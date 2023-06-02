@@ -72,4 +72,5 @@
 \/hyoo/sync
 	build $hyoo_sync_revision \git rev-parse --short HEAD
 \/hyoo/match/app
+	include \/mol/offline/install
 	deploy \/hyoo/match/logo/logo.svg
