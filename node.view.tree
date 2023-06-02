@@ -15,6 +15,9 @@ $mol_book2 $mol_scroll
 	Placeholder $mol_view
 	Gap* $mol_view title \
 
+$mol_theme_auto $mol_plugin
+	attr * mol_theme <= theme \
+
 $mol_link $mol_view
 	uri \
 	dom_name \a
@@ -90,6 +93,64 @@ $hyoo_sync_online $mol_link
 		^
 		title <= message <= hint \$hyoo_sync
 
+$mol_speck $mol_view
+	attr *
+		^
+		mol_theme <= theme \$mol_theme_accent
+	style *
+		^
+		minHeight \1em
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	click?event null
+	event_click?event null
+	event *
+		^
+		click?event <=> event_activate?event null
+		dblclick?event <=> clicks?event null
+		keydown?event <=> event_key_press?event null 
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_safe <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+		value <= error \
+
+$mol_button_typed $mol_button
+	minimal_height 40
+	minimal_width 40
+
+$mol_button_minor $mol_button_typed
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_6
+	hint @ \Toggle lights
+	checked?val <=> lights?val false
+
 $mol_page $mol_view
 	dom_name \article
 	field *
@@ -155,55 +216,6 @@ $mol_pop_bubble $mol_view
 		^
 		mol_pop_align <= align \
 		tabindex 0
-
-$mol_speck $mol_view
-	attr *
-		^
-		mol_theme <= theme \$mol_theme_accent
-	style *
-		^
-		minHeight \1em
-	sub /
-		<= value null
-
-$mol_button $mol_view
-	enabled true
-	click?event null
-	event_click?event null
-	event *
-		^
-		click?event <=> event_activate?event null
-		dblclick?event <=> clicks?event null
-		keydown?event <=> event_key_press?event null 
-	attr *
-		^
-		disabled <= disabled false
-		role \button
-		tabindex <= tab_index 0
-		title <= hint_safe <= hint \
-	sub /$mol_view_content
-		<= title
-	Speck $mol_speck
-		value <= error \
-
-$mol_button_typed $mol_button
-	minimal_height 40
-	minimal_width 40
-
-$mol_button_minor $mol_button_typed
-
-$mol_check $mol_button_minor
-	attr *
-		^
-		mol_check_checked <= checked? false
-		aria-checked <= aria_checked \false
-		role <= aria_role \checkbox
-	sub /$mol_view_content
-		<= Icon null
-		<= label /
-			<= Title $mol_view
-				sub /
-					<= title \
 
 $mol_pick $mol_pop
 	event *
@@ -703,8 +715,9 @@ $hyoo_match_single_page $mol_page
 		greet => greet
 		places => places
 	body /
-		<= Photo $mol_image
-			uri <= photo \
+		<= Gallery $mol_view sub /
+			<= Photo $mol_image
+				uri <= photo \
 		<= Places $hyoo_match_places
 			enabled false
 			Pick null
@@ -740,6 +753,9 @@ $mol_video_camera $mol_video_player
 	controls false
 	video_constraints *
 		facingMode <= facing \user
+		aspectRatio <= aspect 1
+		width * ideal <= width <= size 720
+		height * ideal <= height <= size
 	video_settings *
 		brightness <= brightness 128
 		sharpness <= sharpness 3
@@ -749,6 +765,18 @@ $mol_video_camera $mol_video_player
 			* colorTemperature <= temperature 4000
 			* torch <= torch true
 
+
+$mol_icon_help $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5C10.34,5 9,6.34 9,8H6C6,4.69 8.69,2 12,2Z
+
+$mol_icon_help_circle $mol_icon path \M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7C10.9,7 10,7.9 10,9H8C8,6.79 9.79,5 12,5C14.21,5 16,6.79 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.47 17.5,2 12,2Z
+
+$mol_icon_help_circle_outline $mol_icon path \M11,18H13V16H11V18M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6C9.79,6 8,7.79 8,10H10C10,8.9 10.9,8 12,8C13.1,8 14,8.9 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10C16,7.79 14.21,6 12,6Z
+
+$mol_hint $mol_check
+	dictionary *
+	Icon $mol_icon_help_circle_outline
+	hint_close @ \Hide
+	hint_open @ \Hint
 
 $mol_labeler $mol_list
 	rows /
@@ -883,18 +911,17 @@ $hyoo_match_single_settings $mol_page
 	Title $mol_string_button
 		hint \Name
 		value? <=> title?
-	tools /
-		<= Syntax $mol_link_iconed
-			hint \MarkedText Syntax
-			uri \https://marked.hyoo.ru/
-			title \
 	body /
-		<= Shot $mol_button
+		<= Shot $mol_button_minor
 			hint \Shot
 			click? <=> capture? null
 			sub /
 				<= Camera $mol_video_camera
 					dom_node_actual => video
+					aspect 1
+				<= Hint $mol_hint
+					dictionary *
+						shot \Click to take a shot
 		<= Places_field $mol_form_field
 			name \Places
 			Content <= Places $hyoo_match_places
@@ -928,6 +955,10 @@ $hyoo_match_single_settings $mol_page
 						options *
 							male \Males
 							female \Females
+		<= Syntax $mol_link_iconed
+			hint \MarkedText Syntax
+			uri \https://marked.hyoo.ru/
+			title \
 		<= Greet_field $mol_form_field
 			name \Greeting
 			Content <= Greet $mol_textarea
@@ -936,6 +967,8 @@ $hyoo_match_single_settings $mol_page
 
 $hyoo_match_app $mol_book2
 	self $hyoo_match_single
+	plugins /
+		<= Theme $mol_theme_auto
 	pages /
 		<= Welcome $mol_page
 			title \$hyoo_match: pay-free dating
@@ -944,6 +977,7 @@ $hyoo_match_app $mol_book2
 					uri \https://github.com/hyoo-ru/match.hyoo.ru/
 				<= Online $hyoo_sync_online
 					yard <= yard $hyoo_sync_client
+				<= Lights $mol_lights_toggle
 		<= Single $hyoo_match_single_page
 			single <= self
 		<= Settings $hyoo_match_single_settings

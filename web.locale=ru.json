@@ -1,4 +1,7 @@
 {
+	"$mol_hint_hint_close": "Скрыть",
+	"$mol_hint_hint_open": "Подсказка",
+	"$mol_lights_toggle_hint": "Переключить освещение",
 	"$mol_link_source_hint": "Исходные коды",
 	"$mol_select_Filter_hint": "Фильтр..",
 	"$mol_select_hint": "Выбрать..",

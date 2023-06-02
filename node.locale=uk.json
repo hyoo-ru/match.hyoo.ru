@@ -1,4 +1,7 @@
 {
+	"$mol_hint_hint_close": "Приховати",
+	"$mol_hint_hint_open": "Підказка",
+	"$mol_lights_toggle_hint": "Переключити освітлення",
 	"$mol_select_Filter_hint": "Фільтр",
 	"$mol_select_hint": "Обрати",
 	"$mol_select_list_badge_hint": "Прибрати",
