@@ -16635,6 +16635,7 @@ var $;
                 this.Places_field(),
                 this.Syntax(),
                 this.Greet_field(),
+                this.Contacts_hint(),
                 this.Contacts_field()
             ];
         }
@@ -16812,9 +16813,9 @@ var $;
         }
         Syntax() {
             const obj = new this.$.$mol_link_iconed();
-            obj.hint = () => "MarkedText Syntax";
+            obj.hint = () => "MarkedText";
             obj.uri = () => "https://marked.hyoo.ru/";
-            obj.title = () => "";
+            obj.title = () => "Syntax";
             return obj;
         }
         Greet() {
@@ -16830,6 +16831,11 @@ var $;
                 this.bid_required("greet")
             ];
             obj.Content = () => this.Greet();
+            return obj;
+        }
+        Contacts_hint() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => "Only for matches";
             return obj;
         }
         Contacts() {
@@ -16920,6 +16926,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Greet_field", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_settings.prototype, "Contacts_hint", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Contacts", null);
@@ -17092,6 +17101,13 @@ var $;
                 left: $mol_gap.block,
                 top: $mol_gap.block,
                 color: $mol_theme.text,
+            },
+            Contacts_hint: {
+                padding: $mol_gap.text,
+                color: $mol_theme.shade,
+                margin: { bottom: `-2.5rem` },
+                alignSelf: `flex-end`,
+                zIndex: $mol_layer.speck,
             },
             Places: {
                 flex: {

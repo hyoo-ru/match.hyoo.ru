@@ -4361,6 +4361,7 @@ declare namespace $ {
         Syntax(): $$.$mol_link_iconed;
         Greet(): $$.$mol_textarea;
         Greet_field(): $$.$mol_form_field;
+        Contacts_hint(): $$.$mol_paragraph;
         Contacts(): $$.$mol_textarea;
         Contacts_field(): $$.$mol_form_field;
     }
