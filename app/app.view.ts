@@ -8,8 +8,10 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		pair() {
-			this.self().skipped().list()
-			return this.lobby().find_pair( this.self() )!
+			this.lobby().land.clocks
+			const found = this.lobby().find_pair( this.self() )!
+			if( !found ) this.self().skipped().list()
+			return found
 		}
 		
 		@ $mol_mem
