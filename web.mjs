@@ -12929,7 +12929,7 @@ var $;
             return 128;
         }
         sharpness() {
-            return 3;
+            return 2;
         }
         contrast() {
             return 32;
