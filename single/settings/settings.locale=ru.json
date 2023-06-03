@@ -24,7 +24,7 @@
 	"$hyoo_match_single_settings_Syntax_title": "Синтаксис",
 	"$hyoo_match_single_settings_Greet_hint": "заинтересуйте вашу пару",
 	"$hyoo_match_single_settings_Greet_field_name": "Приветствие",
-	"$hyoo_match_single_settings_Contacts_hint_title": "Только для взаимных",
+	"$hyoo_match_single_settings_Contacts_hint_title": "Для взаимных",
 	"$hyoo_match_single_settings_Contacts_hint": "номер телефона, id соцсети и тд",
 	"$hyoo_match_single_settings_Contacts_field_name": "Контакты"
 }
