@@ -12351,7 +12351,7 @@ var $;
 (function ($) {
     class $hyoo_match_final extends $mol_page {
         title() {
-            return "End of time";
+            return this.$.$mol_locale.text('$hyoo_match_final_title');
         }
         body() {
             return [
