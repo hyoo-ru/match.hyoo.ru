@@ -6,6 +6,11 @@ namespace $.$$ {
 			return URL.createObjectURL( this.single().photo()! )
 		}
 		
+		shot_bid() {
+			if( this.photo_fresh() ) return ''
+			return super.shot_bid()
+		}
+		
 		@ $mol_mem
 		live( next?: boolean ) {
 			
@@ -28,6 +33,25 @@ namespace $.$$ {
 			return this.live()
 				? [ this.Camera(), this.Hint() ]
 				: [ this.Photo(), this.Hint() ]
+		}
+		
+		Next() {
+			if( !this.ready() ) return null as never
+			return super.Next()
+		}
+		
+		bid_required(
+			name: $mol_type_keys_extract< Omit< $hyoo_match_single_settings, `bid_${string}` > , ()=> string >
+		) {
+			if( this[ name ]() ) return ''
+			return super.bid_required( name )
+		}
+		
+		bid_one(
+			name: $mol_type_keys_extract< Omit< $hyoo_match_single_settings, `bid_${string}` > , ()=> any[] >
+		) {
+			if( this[ name ]().length ) return ''
+			return super.bid_one( name )
 		}
 		
 	}

@@ -33,7 +33,6 @@ namespace $ {
 			
 			const skipped = self.skipped()
 			const Single = this.world()!.Fund( $hyoo_match_single )
-			const time_from = Date.now() - 1000 * 60 * 60 * 6
 			
 			for( const place of self.places() ) {
 				
@@ -53,7 +52,6 @@ namespace $ {
 					if( skipped.has( id ) ) continue
 					
 					const single = Single.Item( id )
-					if( single.photo_stamp() < time_from ) continue
 					if( !single.ready() ) continue
 					
 					return single

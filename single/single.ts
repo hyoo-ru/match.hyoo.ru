@@ -11,7 +11,7 @@ namespace $ {
 			if( !this.sex_self() ) return false
 			if( !this.age_pref_all().length ) return false
 			if( !this.sex_pref_all().length ) return false
-			if( !this.photo() ) return false
+			if( !this.photo_fresh() ) return false
 			return true
 		}
 		
@@ -28,6 +28,15 @@ namespace $ {
 		@ $mol_mem
 		photo_stamp() {
 			return this.photo_node()?.land.last_stamp() || new $mol_time_moment( '2000-01-01' ).valueOf()
+		}
+		
+		@ $mol_mem
+		photo_fresh() {
+			
+			const stamp = this.photo_node()?.land.last_stamp()
+			if( !stamp ) return false
+			
+			return stamp > $mol_state_time.now( 60 * 1000 ) - 1000 * 60 * 60 * 32
 		}
 		
 		@ $mol_mem
