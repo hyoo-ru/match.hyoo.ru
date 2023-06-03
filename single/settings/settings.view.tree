@@ -85,9 +85,9 @@ $hyoo_match_single_settings $mol_page
 			Content <= Places $hyoo_match_places
 				value? <=> places?
 		<= Syntax $mol_link_iconed
-			hint \MarkedText Syntax
+			hint \MarkedText
 			uri \https://marked.hyoo.ru/
-			title \
+			title \Syntax
 		<= Greet_field $mol_form_field
 			name \Greeting
 			bids /
@@ -95,6 +95,7 @@ $hyoo_match_single_settings $mol_page
 			Content <= Greet $mol_textarea
 				hint \get your partner interested
 				value? <=> greet?
+		<= Contacts_hint $mol_paragraph title \Only for matches
 		<= Contacts_field $mol_form_field
 			name \Contacts
 			bids /

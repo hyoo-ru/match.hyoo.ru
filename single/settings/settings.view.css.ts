@@ -26,6 +26,14 @@ namespace $.$$ {
 			color: $mol_theme.text,
 		},
 		
+		Contacts_hint: {
+			padding: $mol_gap.text,
+			color: $mol_theme.shade,
+			margin: { bottom: `-2.5rem` },
+			alignSelf: `flex-end`,
+			zIndex: $mol_layer.speck,
+		},
+		
 		Places: {
 			flex: {
 				shrink: 0,
@@ -35,7 +43,7 @@ namespace $.$$ {
 		
 		Syntax: {
 			margin: { bottom: `-2.5rem` },
-    		alignSelf: `flex-end`,
+			alignSelf: `flex-end`,
 			zIndex: $mol_layer.speck,
 		},
 		
