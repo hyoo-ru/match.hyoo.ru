@@ -1,15 +1,34 @@
 $hyoo_match_single_page $mol_page
+	title \Look around
 	single $hyoo_match_single
-		title => title
+		title => name
 		greet => greet
+		contacts => contacts
 		places => places
+		photo_moment => photo_moment
+	title_content / <= name
+	tools /
+		<= Moment $mol_date
+			value_moment <= photo_moment
 	body /
-		<= Gallery $mol_view sub /
+		<= Gallery $mol_stack sub /
 			<= Photo $mol_image
 				uri <= photo \
+			<= Skip $mol_button_minor
+				hint \Skip
+				click? <=> skip? null
+				sub /
+					<= Skip_icon $mol_icon_window_close
+			<= Like $mol_button_minor
+				hint \Like
+				click? <=> like? null
+				sub /
+					<= Like_icon $mol_icon_heart_outline
 		<= Places $hyoo_match_places
 			enabled false
 			Pick null
 			value? <= places
 		<= Brief $mol_text
 			text <= greet
+		<= Contacts $mol_text
+			text <= contacts

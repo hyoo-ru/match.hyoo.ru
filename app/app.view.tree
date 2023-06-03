@@ -1,17 +1,28 @@
-$hyoo_match_app $mol_book2
+$hyoo_match_app $mol_book2_catalog
 	self $hyoo_match_single
+	pair $hyoo_match_single
 	plugins /
 		<= Theme $mol_theme_auto
-	pages /
-		<= Welcome $mol_page
-			title \$hyoo_match: pay-free dating
-			tools /
-				<= Source $mol_link_source
-					uri \https://github.com/hyoo-ru/match.hyoo.ru/
-				<= Online $hyoo_sync_online
-					yard <= yard $hyoo_sync_client
-				<= Lights $mol_lights_toggle
-		<= Single $hyoo_match_single_page
+	auto /
+		<= lobby_update null
+	menu_title \Pay-free dating
+	menu_tools /
+		<= Lights $mol_lights_toggle
+	menu_foot /
+		<= Online $hyoo_sync_online
+			yard <= yard $hyoo_sync_client
+		<= Source $mol_link_source
+			uri \https://github.com/hyoo-ru/match.hyoo.ru/
+		<= Support $mol_link_iconed
+			hint \Support
+			uri \https://t.me/nin_jin
+			sub /
+				<= Support_icon $mol_icon_face_agent
+	Placeholder null
+	spreads *
+		look <= Look $hyoo_match_single_page
+			single <= pair
+		settings <= Settings $hyoo_match_single_settings
 			single <= self
-		<= Settings $hyoo_match_single_settings
-			single <= self
+		keys <= Keys $hyoo_meta_safe
+			yard <= yard

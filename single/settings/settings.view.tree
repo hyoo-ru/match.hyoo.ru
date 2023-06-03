@@ -1,26 +1,31 @@
 $hyoo_match_single_settings $mol_page
+	title \Settings
 	single $hyoo_match_single
-		title? => title?
+		title? => name?
 		greet? => greet?
+		contacts? => contacts?
 		places? => places?
 		sex_self? => sex_self?
 		age_self? => age_self?
 		sex_pref*? => sex_pref*?
 		age_pref*? => age_pref*?
-	Title $mol_string_button
-		hint \Name
-		value? <=> title?
 	body /
-		<= Shot $mol_button_minor
+		<= Shot $mol_check
 			hint \Shot
-			click? <=> capture? null
-			sub /
+			checked? <=> live? true
+			sub <= shot_content /
+				<= Photo $mol_image
+					uri <= photo \
 				<= Camera $mol_video_camera
 					dom_node_actual => video
 					aspect 1
 				<= Hint $mol_hint
 					dictionary *
 						shot \Click to take a shot
+		<= Name_field $mol_form_field
+			name \Name
+			Content <= Name $mol_string
+				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
 				name \I am ...
@@ -63,3 +68,8 @@ $hyoo_match_single_settings $mol_page
 			Content <= Greet $mol_textarea
 				hint \get your partner interested
 				value? <=> greet?
+		<= Contacts_field $mol_form_field
+			name \Contacts
+			Content <= Contacts $mol_textarea
+				hint \phone number, social network id etc
+				value? <=> contacts?

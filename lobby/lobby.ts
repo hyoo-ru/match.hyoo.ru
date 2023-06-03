@@ -1,0 +1,57 @@
+namespace $ {
+	
+	export class $hyoo_match_lobby extends $hyoo_meta_model {
+		
+		@ $mol_mem_key
+		lookup( path: [ place: string, sex_self: string, sex_pref: string, age_self: string, age_pref: string ] ) {
+			const key = $mol_int62_hash_string( path.join( '/' ) )
+			return this.sub( key, $hyoo_crowd_list )
+		}
+		
+		lookup_has(
+			path: [ place: string, age_self: string, sex_self: string, age_pref: string, sex_pref: string ],
+			next?: boolean,
+		) {
+			return this.lookup( path ).has( this.land.peer_id(), next )
+		}
+		
+		lookup_list(
+			path: [ place: string, sex_self: string, sex_pref: string, age_self: string, age_pref: string ]
+		) {
+			return this.lookup( path ).list()
+				.map( val => $mol_int62_string_ensure( val ) )
+				.filter( $mol_guard_defined )
+		}
+		
+		@ $mol_action
+		find_pair( self: $hyoo_match_single ) {
+			
+			const age_self = self.age_self()
+			const sex_self = self.sex_self()
+			const age_pref = self.age_pref_all()
+			const sex_pref = self.sex_pref_all()
+			
+			for( const place of self.places() ) {
+				
+				
+				let citizens = [] as $mol_int62_string[]
+				
+				for( const age of age_pref ) {
+					for( const sex of sex_pref ) {
+						
+						const list = this.lookup_list([ place, age, sex, age_self, sex_self ]) 
+						for( const id of list ) citizens.push( id )
+						
+					}
+				}
+				
+				if( citizens.length ) return $mol_array_lottery( citizens )
+				
+			}
+			
+			return null
+		}
+		
+	}
+	
+}
