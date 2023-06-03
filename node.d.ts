@@ -2574,6 +2574,7 @@ declare namespace $ {
         photo_node(): $hyoo_crowd_blob | null;
         photo(next?: $mol_blob): Blob | undefined;
         photo_stamp(): number;
+        photo_fresh(): boolean;
         photo_moment(): $mol_time_moment;
         greet(next?: string): string;
         contacts(next?: string): string;
@@ -4383,6 +4384,8 @@ declare namespace $ {
 declare namespace $ {
     class $hyoo_match_single_settings extends $mol_page {
         title(): string;
+        ready(): boolean;
+        photo_fresh(): boolean;
         name(next?: any): string;
         greet(next?: any): string;
         contacts(next?: any): string;
@@ -4390,9 +4393,16 @@ declare namespace $ {
         sex_self(next?: any): string;
         age_self(next?: any): string;
         sex_pref(id: any, next?: any): boolean;
+        sex_pref_all(): string[];
         age_pref(id: any, next?: any): boolean;
+        age_pref_all(): string[];
         single(): $hyoo_match_single;
+        bid_required(id: any): string;
+        bid_one(id: any): string;
+        tools(): readonly any[];
         body(): readonly any[];
+        Next(): $$.$mol_link;
+        shot_bid(): string;
         live(next?: any): boolean;
         photo(): string;
         Photo(): $$.$mol_image;
@@ -4401,6 +4411,7 @@ declare namespace $ {
         Hint(): $$.$mol_hint;
         shot_content(): readonly any[];
         Shot(): $$.$mol_check;
+        Shot_field(): $$.$mol_form_field;
         Name(): $$.$mol_string;
         Name_field(): $$.$mol_form_field;
         Age_self(): $$.$mol_switch;
@@ -4438,8 +4449,12 @@ declare namespace $ {
 declare namespace $.$$ {
     class $hyoo_match_single_settings extends $.$hyoo_match_single_settings {
         photo(): string;
+        shot_bid(): string;
         live(next?: boolean): boolean;
         shot_content(): ($mol_video_camera | $mol_hint)[] | ($mol_image | $mol_hint)[];
+        Next(): $mol_link;
+        bid_required(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => string>): string;
+        bid_one(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => any[]>): string;
     }
 }
 
@@ -4781,7 +4796,7 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_drag extends $.$mol_drag {
-        status(next?: "drag" | "ready"): "drag" | "ready";
+        status(next?: "ready" | "drag"): "ready" | "drag";
         drag_start(event: DragEvent): void;
         drag_end(event: DragEvent): void;
     }
@@ -4805,7 +4820,7 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_drop extends $.$mol_drop {
-        status(next?: "drag" | "ready"): "drag" | "ready";
+        status(next?: "ready" | "drag"): "ready" | "drag";
         protected _target: EventTarget | null;
         enter(event: DragEvent): void;
         move(event: DragEvent): void;

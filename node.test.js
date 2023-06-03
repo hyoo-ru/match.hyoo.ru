@@ -9547,7 +9547,7 @@ var $;
                 return false;
             if (!this.sex_pref_all().length)
                 return false;
-            if (!this.photo())
+            if (!this.photo_fresh())
                 return false;
             return true;
         }
@@ -9559,6 +9559,12 @@ var $;
         }
         photo_stamp() {
             return this.photo_node()?.land.last_stamp() || new $mol_time_moment('2000-01-01').valueOf();
+        }
+        photo_fresh() {
+            const stamp = this.photo_node()?.land.last_stamp();
+            if (!stamp)
+                return false;
+            return stamp > $mol_state_time.now(60 * 1000) - 1000 * 60 * 60 * 32;
         }
         photo_moment() {
             return new $mol_time_moment(this.photo_stamp());
@@ -9618,6 +9624,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single.prototype, "photo_stamp", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single.prototype, "photo_fresh", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single.prototype, "photo_moment", null);
@@ -16567,6 +16576,12 @@ var $;
         title() {
             return "Preferences";
         }
+        ready() {
+            return this.single().ready();
+        }
+        photo_fresh() {
+            return this.single().photo_fresh();
+        }
         name(next) {
             return this.single().title(next);
         }
@@ -16588,16 +16603,33 @@ var $;
         sex_pref(id, next) {
             return this.single().sex_pref(id, next);
         }
+        sex_pref_all() {
+            return this.single().sex_pref_all();
+        }
         age_pref(id, next) {
             return this.single().age_pref(id, next);
+        }
+        age_pref_all() {
+            return this.single().age_pref_all();
         }
         single() {
             const obj = new this.$.$hyoo_match_single();
             return obj;
         }
+        bid_required(id) {
+            return "Required";
+        }
+        bid_one(id) {
+            return "At least one";
+        }
+        tools() {
+            return [
+                this.Next()
+            ];
+        }
         body() {
             return [
-                this.Shot(),
+                this.Shot_field(),
                 this.Name_field(),
                 this.Tags(),
                 this.Places_field(),
@@ -16605,6 +16637,17 @@ var $;
                 this.Greet_field(),
                 this.Contacts_field()
             ];
+        }
+        Next() {
+            const obj = new this.$.$mol_link();
+            obj.title = () => "Ready ✅";
+            obj.arg = () => ({
+                "": "look"
+            });
+            return obj;
+        }
+        shot_bid() {
+            return "Fresh required";
         }
         live(next) {
             if (next !== undefined)
@@ -16648,6 +16691,15 @@ var $;
             obj.sub = () => this.shot_content();
             return obj;
         }
+        Shot_field() {
+            const obj = new this.$.$mol_form_field();
+            obj.name = () => "Today photo";
+            obj.bids = () => [
+                this.shot_bid()
+            ];
+            obj.Content = () => this.Shot();
+            return obj;
+        }
         Name() {
             const obj = new this.$.$mol_string();
             obj.value = (next) => this.name(next);
@@ -16656,6 +16708,9 @@ var $;
         Name_field() {
             const obj = new this.$.$mol_form_field();
             obj.name = () => "Name";
+            obj.bids = () => [
+                this.bid_required("name")
+            ];
             obj.Content = () => this.Name();
             return obj;
         }
@@ -16689,6 +16744,10 @@ var $;
         Self() {
             const obj = new this.$.$mol_form_field();
             obj.name = () => "I am ...";
+            obj.bids = () => [
+                this.bid_required("age_self"),
+                this.bid_required("sex_self")
+            ];
             obj.Content = () => this.Self_controls();
             return obj;
         }
@@ -16722,6 +16781,10 @@ var $;
         Pref() {
             const obj = new this.$.$mol_form_field();
             obj.name = () => "I like ...";
+            obj.bids = () => [
+                this.bid_one("age_pref_all"),
+                this.bid_one("sex_pref_all")
+            ];
             obj.Content = () => this.Pref_controls();
             return obj;
         }
@@ -16741,6 +16804,9 @@ var $;
         Places_field() {
             const obj = new this.$.$mol_form_field();
             obj.name = () => "Places";
+            obj.bids = () => [
+                this.bid_one("places")
+            ];
             obj.Content = () => this.Places();
             return obj;
         }
@@ -16760,6 +16826,9 @@ var $;
         Greet_field() {
             const obj = new this.$.$mol_form_field();
             obj.name = () => "Greeting";
+            obj.bids = () => [
+                this.bid_required("greet")
+            ];
             obj.Content = () => this.Greet();
             return obj;
         }
@@ -16772,6 +16841,9 @@ var $;
         Contacts_field() {
             const obj = new this.$.$mol_form_field();
             obj.name = () => "Contacts";
+            obj.bids = () => [
+                this.bid_required("contacts")
+            ];
             obj.Content = () => this.Contacts();
             return obj;
         }
@@ -16779,6 +16851,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "single", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_settings.prototype, "Next", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "live", null);
@@ -16794,6 +16869,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Shot", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_settings.prototype, "Shot_field", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Name", null);
@@ -16937,6 +17015,11 @@ var $;
             photo() {
                 return URL.createObjectURL(this.single().photo());
             }
+            shot_bid() {
+                if (this.photo_fresh())
+                    return '';
+                return super.shot_bid();
+            }
             live(next) {
                 if (next === undefined) {
                     const photo = this.single().photo();
@@ -16953,6 +17036,21 @@ var $;
                 return this.live()
                     ? [this.Camera(), this.Hint()]
                     : [this.Photo(), this.Hint()];
+            }
+            Next() {
+                if (!this.ready())
+                    return null;
+                return super.Next();
+            }
+            bid_required(name) {
+                if (this[name]())
+                    return '';
+                return super.bid_required(name);
+            }
+            bid_one(name) {
+                if (this[name]().length)
+                    return '';
+                return super.bid_one(name);
             }
         }
         __decorate([
@@ -17843,7 +17941,6 @@ var $;
             const sex_pref = self.sex_pref_all();
             const skipped = self.skipped();
             const Single = this.world().Fund($hyoo_match_single);
-            const time_from = Date.now() - 1000 * 60 * 60 * 6;
             for (const place of self.places()) {
                 let ids = [];
                 for (const age of age_pref) {
@@ -17857,8 +17954,6 @@ var $;
                     if (skipped.has(id))
                         continue;
                     const single = Single.Item(id);
-                    if (single.photo_stamp() < time_from)
-                        continue;
                     if (!single.ready())
                         continue;
                     return single;

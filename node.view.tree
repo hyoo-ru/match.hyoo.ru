@@ -1136,6 +1136,8 @@ $mol_textarea_edit $mol_string
 $hyoo_match_single_settings $mol_page
 	title \Preferences
 	single $hyoo_match_single
+		ready => ready
+		photo_fresh => photo_fresh
 		title? => name?
 		greet? => greet?
 		contacts? => contacts?
@@ -1143,27 +1145,45 @@ $hyoo_match_single_settings $mol_page
 		sex_self? => sex_self?
 		age_self? => age_self?
 		sex_pref*? => sex_pref*?
+		sex_pref_all => sex_pref_all
 		age_pref*? => age_pref*?
+		age_pref_all => age_pref_all
+	bid_required* \Required
+	bid_one* \At least one
+	tools /
+		<= Next $mol_link
+			title \Ready ✅
+			arg * \
+				\look
 	body /
-		<= Shot $mol_check
-			hint \Shot
-			checked? <=> live? true
-			sub <= shot_content /
-				<= Photo $mol_image
-					uri <= photo \
-				<= Camera $mol_video_camera
-					dom_node_actual => video
-					aspect 1
-				<= Hint $mol_hint
-					dictionary *
-						shot \Click to take a shot
+		<= Shot_field $mol_form_field
+			name \Today photo
+			bids /
+				<= shot_bid \Fresh required
+			Content <= Shot $mol_check
+				hint \Shot
+				checked? <=> live? true
+				sub <= shot_content /
+					<= Photo $mol_image
+						uri <= photo \
+					<= Camera $mol_video_camera
+						dom_node_actual => video
+						aspect 1
+					<= Hint $mol_hint
+						dictionary *
+							shot \Click to take a shot
 		<= Name_field $mol_form_field
 			name \Name
+			bids /
+				<= bid_required*name
 			Content <= Name $mol_string
 				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
 				name \I am ...
+				bids /
+					<= bid_required*age_self
+					<= bid_required*sex_self
 				Content <= Self_controls $mol_list rows /
 					<= Age_self $mol_switch
 						value? <=> age_self?
@@ -1178,6 +1198,9 @@ $hyoo_match_single_settings $mol_page
 							male \Male
 			<= Pref $mol_form_field
 				name \I like ...
+				bids /
+					<= bid_one*age_pref_all
+					<= bid_one*sex_pref_all
 				Content <= Pref_controls $mol_list rows /
 					<= Age_pref $mol_check_list
 						option_checked*? <=> age_pref*?
@@ -1192,6 +1215,8 @@ $hyoo_match_single_settings $mol_page
 							male \Males
 		<= Places_field $mol_form_field
 			name \Places
+			bids /
+				<= bid_one*places
 			Content <= Places $hyoo_match_places
 				value? <=> places?
 		<= Syntax $mol_link_iconed
@@ -1200,11 +1225,15 @@ $hyoo_match_single_settings $mol_page
 			title \
 		<= Greet_field $mol_form_field
 			name \Greeting
+			bids /
+				<= bid_required*greet
 			Content <= Greet $mol_textarea
 				hint \get your partner interested
 				value? <=> greet?
 		<= Contacts_field $mol_form_field
 			name \Contacts
+			bids /
+				<= bid_required*contacts
 			Content <= Contacts $mol_textarea
 				hint \phone number, social network id etc
 				value? <=> contacts?
