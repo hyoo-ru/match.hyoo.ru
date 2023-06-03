@@ -1,8 +1,8 @@
 $hyoo_match_intro $mol_page
-	title \Introduction
+	title @ \Introduction
 	body /
 		<= Content $mol_text
-			text \
+			text @ \
 				\" 🚧 No pay wall!
 				\" 🎭 No fakes!
 				\" 😴 No dead souls!

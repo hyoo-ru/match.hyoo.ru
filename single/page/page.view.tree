@@ -1,5 +1,5 @@
 $hyoo_match_single_page $mol_page
-	title \Look around
+	title @ \Look around
 	single $hyoo_match_single
 		title => name
 		greet => greet
@@ -15,12 +15,12 @@ $hyoo_match_single_page $mol_page
 			<= Photo $mol_image
 				uri <= photo \
 			<= Skip $mol_button_minor
-				hint \Skip
+				hint @ \Skip
 				click? <=> skip? null
 				sub /
 					<= Skip_icon $mol_icon_window_close
 			<= Like $mol_button_minor
-				hint \Like
+				hint @ \Like
 				click? <=> like? null
 				sub /
 					<= Like_icon $mol_icon_heart_outline

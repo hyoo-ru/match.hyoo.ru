@@ -1,5 +1,5 @@
 $hyoo_match_single_settings $mol_page
-	title \Preferences
+	title @ \Preferences
 	single $hyoo_match_single
 		ready => ready
 		photo_fresh => photo_fresh
@@ -13,20 +13,20 @@ $hyoo_match_single_settings $mol_page
 		sex_pref_all => sex_pref_all
 		age_pref*? => age_pref*?
 		age_pref_all => age_pref_all
-	bid_required* \Required
-	bid_one* \At least one
+	bid_required* @ \Required
+	bid_one* @ \At least one
 	tools /
 		<= Next $mol_link
-			title \Ready ✅
+			title @ \Ready ✅
 			arg * \
 				\look
 	body /
 		<= Shot_field $mol_form_field
-			name \Today photo
+			name @ \Today photo
 			bids /
-				<= shot_bid \Fresh required
+				<= shot_bid @ \Fresh required
 			Content <= Shot $mol_check
-				hint \Shot
+				hint @ \Shot
 				checked? <=> live? true
 				sub <= shot_content /
 					<= Photo $mol_image
@@ -36,16 +36,16 @@ $hyoo_match_single_settings $mol_page
 						aspect 1
 					<= Hint $mol_hint
 						dictionary *
-							shot \Click to take a shot
+							shot @ \Click to take a shot
 		<= Name_field $mol_form_field
-			name \Name
+			name @ \Name
 			bids /
 				<= bid_required*name
 			Content <= Name $mol_string
 				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
-				name \I am ...
+				name @ \I am ...
 				bids /
 					<= bid_required*age_self
 					<= bid_required*sex_self
@@ -53,16 +53,16 @@ $hyoo_match_single_settings $mol_page
 					<= Age_self $mol_switch
 						value? <=> age_self?
 						options *
-							young \Young
-							adult \Adult
-							mature \Mature
+							young @ \Young
+							adult @ \Adult
+							mature @ \Mature
 					<= Sex_self $mol_switch
 						value? <=> sex_self?
 						options *
-							female \Female
-							male \Male
+							female @ \Female
+							male @ \Male
 			<= Pref $mol_form_field
-				name \I like ...
+				name @ \I like ...
 				bids /
 					<= bid_one*age_pref_all
 					<= bid_one*sex_pref_all
@@ -70,16 +70,16 @@ $hyoo_match_single_settings $mol_page
 					<= Age_pref $mol_check_list
 						option_checked*? <=> age_pref*?
 						options *
-							young \Young
-							adult \Adult
-							mature \Mature
+							young @ \Young
+							adult @ \Adult
+							mature @ \Mature
 					<= Sex_pref $mol_check_list
 						option_checked*? <=> sex_pref*?
 						options *
-							female \Females
-							male \Males
+							female @ \Females
+							male @ \Males
 		<= Places_field $mol_form_field
-			name \Places
+			name @ \Places
 			bids /
 				<= bid_one*places
 			Content <= Places $hyoo_match_places
@@ -87,19 +87,19 @@ $hyoo_match_single_settings $mol_page
 		<= Syntax $mol_link_iconed
 			hint \MarkedText
 			uri \https://marked.hyoo.ru/
-			title \Syntax
+			title @ \Syntax
 		<= Greet_field $mol_form_field
-			name \Greeting
+			name @ \Greeting
 			bids /
 				<= bid_required*greet
 			Content <= Greet $mol_textarea
-				hint \get your partner interested
+				hint @ \get your pair interested
 				value? <=> greet?
-		<= Contacts_hint $mol_paragraph title \Only for matches
+		<= Contacts_hint $mol_paragraph title @ \Only for matches
 		<= Contacts_field $mol_form_field
-			name \Contacts
+			name @ \Contacts
 			bids /
 				<= bid_required*contacts
 			Content <= Contacts $mol_textarea
-				hint \phone number, social network id etc
+				hint @ \phone number, social network id etc
 				value? <=> contacts?
