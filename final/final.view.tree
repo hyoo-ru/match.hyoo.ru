@@ -1,0 +1,7 @@
+$hyoo_match_final $mol_page
+	title \End of time
+	body /
+		<= Content $mol_text
+			text \
+				\" 💤 Wating for new singles
+				\" 📰 Tell everyone about \\$hyoo_match\https://match.hyoo.ru/\\

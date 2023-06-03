@@ -1,5 +1,5 @@
 $hyoo_match_single_settings $mol_page
-	title \Settings
+	title \Preferences
 	single $hyoo_match_single
 		title? => name?
 		greet? => greet?

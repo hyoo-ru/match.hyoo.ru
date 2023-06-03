@@ -31,21 +31,33 @@ namespace $ {
 			const age_pref = self.age_pref_all()
 			const sex_pref = self.sex_pref_all()
 			
+			const skipped = self.skipped()
+			const Single = this.world()!.Fund( $hyoo_match_single )
+			const time_from = Date.now() - 1000 * 60 * 60 * 6
+			
 			for( const place of self.places() ) {
 				
-				
-				let citizens = [] as $mol_int62_string[]
+				let ids = [] as $mol_int62_string[]
 				
 				for( const age of age_pref ) {
 					for( const sex of sex_pref ) {
 						
 						const list = this.lookup_list([ place, age, sex, age_self, sex_self ]) 
-						for( const id of list ) citizens.push( id )
+						for( const id of list ) ids.push( id )
 						
 					}
 				}
 				
-				if( citizens.length ) return $mol_array_lottery( citizens )
+				for( const id of $mol_array_shuffle( ids ) ) {
+					
+					if( skipped.has( id ) ) continue
+					
+					const single = Single.Item( id )
+					if( single.photo_stamp() < time_from ) continue
+					if( !single.ready() ) continue
+					
+					return single
+				}
 				
 			}
 			

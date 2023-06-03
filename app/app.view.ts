@@ -8,8 +8,8 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		pair() {
-			const id = this.lobby().find_pair( this.self() )
-			return id ? this.yard().world().Fund( $hyoo_match_single ).Item( id ) : null as never
+			this.self().skipped().list()
+			return this.lobby().find_pair( this.self() )!
 		}
 		
 		@ $mol_mem
@@ -18,6 +18,11 @@ namespace $.$$ {
 			const rights = new Uint8Array( $mol_fetch.buffer( require( `/hyoo/match/app/${land_id}!${land_id}.bin` ) ) )
 			$mol_wire_sync( this.yard().world() ).apply( rights )	
 			return this.yard().land( land_id ).chief.as( $hyoo_match_lobby )
+		}
+		
+		@ $mol_mem
+		intro() {
+			return this.yard().land( 'sqw0i3_b8924n' ).chief.as( $hyoo_page_side )
 		}
 		
 		@ $mol_mem
@@ -59,6 +64,18 @@ namespace $.$$ {
 				}
 			}
 			
+		}
+		
+		@ $mol_mem
+		Look() {
+			if( !this.pair() ) return this.Final()
+			return super.Pair()
+		}
+		
+		redirects() {
+			if( this.spread() === 'look' ) {
+				if( !this.self().ready() ) this.spread( 'settings' )
+			}
 		}
 		
 	}

@@ -11,12 +11,32 @@ namespace $.$$ {
 			position: 'center',
 		},
 		
-		Settings: {
+		Intro: {
 			margin: [ 0, 'auto' ],
+			flex: {
+				basis: '40rem',
+			},
 		},
 		
-		Look: {
+		Final: {
 			margin: [ 0, 'auto' ],
+			flex: {
+				basis: '40rem',
+			},
+		},
+		
+		Settings: {
+			margin: [ 0, 'auto' ],
+			flex: {
+				basis: `40rem`,
+			},
+		},
+		
+		Pair: {
+			margin: [ 0, 'auto' ],
+			flex: {
+				basis: `40rem`,
+			},
 		},
 		
 	} )

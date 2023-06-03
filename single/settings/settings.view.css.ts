@@ -2,10 +2,6 @@ namespace $.$$ {
 	
 	$mol_style_define( $hyoo_match_single_settings, {
 		
-		flex: {
-			basis: `40rem`,
-		},
-		
 		Tools: {
 			flex: {
 				grow: 0,

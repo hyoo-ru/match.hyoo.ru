@@ -6,5 +6,20 @@ namespace $.$$ {
 			return URL.createObjectURL( this.single().photo()! )
 		}
 		
+		@ $mol_mem
+		self() {
+			return this.single().world()!.home().chief.as( $hyoo_match_single )
+		}
+		
+		like() {
+			this.self().skipped().add( this.single().id() )
+			this.single().liked( true )
+		}
+		
+		skip() {
+			this.self().skipped().add( this.single().id() )
+			this.single().liked( false )
+		}
+		
 	}
 }

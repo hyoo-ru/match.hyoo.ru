@@ -1,0 +1,18 @@
+$hyoo_match_intro $mol_page
+	title \Introduction
+	body /
+		<= Content $mol_text
+			text \
+				\" 🚧 No pay wall!
+				\" 🎭 No fakes!
+				\" 😴 No dead souls!
+				\
+				\= Usage
+				\" 🤳 Fill your \\profile\#!=settings\\
+				\" 💗 Like other \\singles\#!=look\\
+				\" 📅 Update \\photo\#!=settings\\ every day
+				\" 💬 Enjoy with your pair
+				\
+				\= Gratitude
+				\" 📰 Tell everyone about \\$hyoo_match\https://match.hyoo.ru/\\
+				\" 💸 Support with \\donates\https://boosty.to/hyoo\\

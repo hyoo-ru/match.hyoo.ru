@@ -16,14 +16,23 @@ namespace $ {
 		}
 		
 		@ $mol_mem
+		photo_node() {
+			return this.yoke( '$hyoo_match_single:photo', $hyoo_crowd_blob )
+		}
+
+		@ $mol_mem
 		photo( next?: $mol_blob ) {
-			return this.yoke( '$hyoo_match_single:photo', $hyoo_crowd_blob )?.blob( next )
+			return this.photo_node()?.blob( next )
+		}
+		
+		@ $mol_mem
+		photo_stamp() {
+			return this.photo_node()?.land.last_stamp() || new $mol_time_moment( '2000-01-01' ).valueOf()
 		}
 		
 		@ $mol_mem
 		photo_moment() {
-			const stamp = this.yoke( '$hyoo_match_single:photo', $hyoo_crowd_blob )?.land.last_stamp()
-			return new $mol_time_moment( stamp || '2000-01-01' )
+			return new $mol_time_moment( this.photo_stamp() )
 		}
 		
 		@ $mol_mem
@@ -52,23 +61,47 @@ namespace $ {
 		}
 		
 		@ $mol_mem
+		sex_pref_node() {
+			return this.sub( '$hyoo_match_single:sex_pref', $hyoo_crowd_list )
+		}
+		
+		@ $mol_mem
 		sex_pref_all( next?: readonly string[] ) {
-			return this.sub( '$hyoo_match_single:sex_pref', $hyoo_crowd_list ).list( next ).map( String )
+			return this.sex_pref_node().list( next ).map( String )
 		}
 		
 		@ $mol_mem_key
 		sex_pref( name: string, next?: boolean ) {
-			return this.sub( '$hyoo_match_single:sex_pref', $hyoo_crowd_list ).has( name, next )
+			return this.sex_pref_node().has( name, next )
+		}
+		
+		@ $mol_mem
+		age_pref_node() {
+			return this.sub( '$hyoo_match_single:age_pref', $hyoo_crowd_list )
 		}
 		
 		@ $mol_mem
 		age_pref_all( next?: readonly string[] ) {
-			return this.sub( '$hyoo_match_single:age_pref', $hyoo_crowd_list ).list( next ).map( String )
+			return this.age_pref_node().list( next ).map( String )
 		}
 		
 		@ $mol_mem_key
 		age_pref( name: string, next?: boolean ) {
-			return this.sub( '$hyoo_match_single:age_pref', $hyoo_crowd_list ).has( name, next )
+			return this.age_pref_node().has( name, next )
+		}
+		
+		@ $mol_mem
+		likes() {
+			return this.sub( '$hyoo_match_single:likes', $hyoo_crowd_counter )
+		}
+		
+		liked( next?: boolean ) {
+			return this.likes().counted( next )
+		}
+		
+		@ $mol_mem
+		skipped() {
+			return this.sub( '$hyoo_match_single:skipped', $hyoo_crowd_list )
 		}
 		
 	}
