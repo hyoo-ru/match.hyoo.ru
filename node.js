@@ -23482,10 +23482,10 @@ var $;
                 return this.yard().home().chief.as($hyoo_match_single);
             }
             pair() {
-                this.lobby().land.clocks;
+                this.self().skipped().list();
                 const found = this.lobby().find_pair(this.self());
                 if (!found)
-                    this.self().skipped().list();
+                    this.lobby().land.clocks;
                 return found;
             }
             lobby() {
