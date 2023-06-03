@@ -8,9 +8,9 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		pair() {
-			this.lobby().land.clocks
+			this.self().skipped().list()
 			const found = this.lobby().find_pair( this.self() )!
-			if( !found ) this.self().skipped().list()
+			if( !found ) this.lobby().land.clocks
 			return found
 		}
 		
