@@ -22991,8 +22991,11 @@ var $;
                 return this.yard().home().chief.as($hyoo_match_single);
             }
             pair() {
-                this.self().skipped().list();
-                return this.lobby().find_pair(this.self());
+                this.lobby().land.clocks;
+                const found = this.lobby().find_pair(this.self());
+                if (!found)
+                    this.self().skipped().list();
+                return found;
             }
             lobby() {
                 const land_id = '3rmugz_mehovk';
