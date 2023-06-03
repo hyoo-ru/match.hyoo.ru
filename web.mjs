@@ -11745,7 +11745,7 @@ var $;
         }
         Content() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "\" 💤 Wating for new singles\n\" 📰 Tell everyone about \\\\$hyoo_match\\https://match.hyoo.ru/\\\\";
+            obj.text = () => this.$.$mol_locale.text('$hyoo_match_final_Content_text');
             return obj;
         }
     }
@@ -13444,7 +13444,7 @@ var $;
 (function ($) {
     class $hyoo_match_single_page extends $mol_page {
         title() {
-            return "Look around";
+            return this.$.$mol_locale.text('$hyoo_match_single_page_title');
         }
         name() {
             return this.single().title();
@@ -13507,7 +13507,7 @@ var $;
         }
         Skip() {
             const obj = new this.$.$mol_button_minor();
-            obj.hint = () => "Skip";
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_single_page_Skip_hint');
             obj.click = (next) => this.skip(next);
             obj.sub = () => [
                 this.Skip_icon()
@@ -13525,7 +13525,7 @@ var $;
         }
         Like() {
             const obj = new this.$.$mol_button_minor();
-            obj.hint = () => "Like";
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_single_page_Like_hint');
             obj.click = (next) => this.like(next);
             obj.sub = () => [
                 this.Like_icon()
@@ -15070,7 +15070,7 @@ var $;
 (function ($) {
     class $hyoo_match_intro extends $mol_page {
         title() {
-            return "Introduction";
+            return this.$.$mol_locale.text('$hyoo_match_intro_title');
         }
         body() {
             return [
@@ -15079,7 +15079,7 @@ var $;
         }
         Content() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "\" 🚧 No pay wall!\n\" 🎭 No fakes!\n\" 😴 No dead souls!\n\n= Usage\n\" 🤳 Fill your \\\\profile\\#!=settings\\\\\n\" 💗 Like other \\\\singles\\#!=look\\\\\n\" 📅 Update \\\\photo\\#!=settings\\\\ every day\n\" 💬 Enjoy with your pair\n\n= Gratitude\n\" 📰 Tell everyone about \\\\$hyoo_match\\https://match.hyoo.ru/\\\\\n\" 💸 Support with \\\\donates\\https://boosty.to/hyoo\\\\";
+            obj.text = () => this.$.$mol_locale.text('$hyoo_match_intro_Content_text');
             return obj;
         }
     }
@@ -16274,7 +16274,7 @@ var $;
 (function ($) {
     class $hyoo_match_single_settings extends $mol_page {
         title() {
-            return "Preferences";
+            return this.$.$mol_locale.text('$hyoo_match_single_settings_title');
         }
         ready() {
             return this.single().ready();
@@ -16317,10 +16317,10 @@ var $;
             return obj;
         }
         bid_required(id) {
-            return "Required";
+            return this.$.$mol_locale.text('$hyoo_match_single_settings_bid_required');
         }
         bid_one(id) {
-            return "At least one";
+            return this.$.$mol_locale.text('$hyoo_match_single_settings_bid_one');
         }
         tools() {
             return [
@@ -16341,14 +16341,14 @@ var $;
         }
         Next() {
             const obj = new this.$.$mol_link();
-            obj.title = () => "Ready ✅";
+            obj.title = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Next_title');
             obj.arg = () => ({
                 "": "look"
             });
             return obj;
         }
         shot_bid() {
-            return "Fresh required";
+            return this.$.$mol_locale.text('$hyoo_match_single_settings_shot_bid');
         }
         live(next) {
             if (next !== undefined)
@@ -16374,7 +16374,7 @@ var $;
         Hint() {
             const obj = new this.$.$mol_hint();
             obj.dictionary = () => ({
-                shot: "Click to take a shot"
+                shot: this.$.$mol_locale.text('$hyoo_match_single_settings_Hint_dictionary_shot')
             });
             return obj;
         }
@@ -16387,14 +16387,14 @@ var $;
         }
         Shot() {
             const obj = new this.$.$mol_check();
-            obj.hint = () => "Shot";
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Shot_hint');
             obj.checked = (next) => this.live(next);
             obj.sub = () => this.shot_content();
             return obj;
         }
         Shot_field() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "Today photo";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Shot_field_name');
             obj.bids = () => [
                 this.shot_bid()
             ];
@@ -16408,7 +16408,7 @@ var $;
         }
         Name_field() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "Name";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Name_field_name');
             obj.bids = () => [
                 this.bid_required("name")
             ];
@@ -16419,9 +16419,9 @@ var $;
             const obj = new this.$.$mol_switch();
             obj.value = (next) => this.age_self(next);
             obj.options = () => ({
-                young: "Young",
-                adult: "Adult",
-                mature: "Mature"
+                young: this.$.$mol_locale.text('$hyoo_match_single_settings_Age_self_options_young'),
+                adult: this.$.$mol_locale.text('$hyoo_match_single_settings_Age_self_options_adult'),
+                mature: this.$.$mol_locale.text('$hyoo_match_single_settings_Age_self_options_mature')
             });
             return obj;
         }
@@ -16429,8 +16429,8 @@ var $;
             const obj = new this.$.$mol_switch();
             obj.value = (next) => this.sex_self(next);
             obj.options = () => ({
-                female: "Female",
-                male: "Male"
+                female: this.$.$mol_locale.text('$hyoo_match_single_settings_Sex_self_options_female'),
+                male: this.$.$mol_locale.text('$hyoo_match_single_settings_Sex_self_options_male')
             });
             return obj;
         }
@@ -16444,7 +16444,7 @@ var $;
         }
         Self() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "I am ...";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Self_name');
             obj.bids = () => [
                 this.bid_required("age_self"),
                 this.bid_required("sex_self")
@@ -16456,9 +16456,9 @@ var $;
             const obj = new this.$.$mol_check_list();
             obj.option_checked = (id, next) => this.age_pref(id, next);
             obj.options = () => ({
-                young: "Young",
-                adult: "Adult",
-                mature: "Mature"
+                young: this.$.$mol_locale.text('$hyoo_match_single_settings_Age_pref_options_young'),
+                adult: this.$.$mol_locale.text('$hyoo_match_single_settings_Age_pref_options_adult'),
+                mature: this.$.$mol_locale.text('$hyoo_match_single_settings_Age_pref_options_mature')
             });
             return obj;
         }
@@ -16466,8 +16466,8 @@ var $;
             const obj = new this.$.$mol_check_list();
             obj.option_checked = (id, next) => this.sex_pref(id, next);
             obj.options = () => ({
-                female: "Females",
-                male: "Males"
+                female: this.$.$mol_locale.text('$hyoo_match_single_settings_Sex_pref_options_female'),
+                male: this.$.$mol_locale.text('$hyoo_match_single_settings_Sex_pref_options_male')
             });
             return obj;
         }
@@ -16481,7 +16481,7 @@ var $;
         }
         Pref() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "I like ...";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Pref_name');
             obj.bids = () => [
                 this.bid_one("age_pref_all"),
                 this.bid_one("sex_pref_all")
@@ -16504,7 +16504,7 @@ var $;
         }
         Places_field() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "Places";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Places_field_name');
             obj.bids = () => [
                 this.bid_one("places")
             ];
@@ -16515,18 +16515,18 @@ var $;
             const obj = new this.$.$mol_link_iconed();
             obj.hint = () => "MarkedText";
             obj.uri = () => "https://marked.hyoo.ru/";
-            obj.title = () => "Syntax";
+            obj.title = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Syntax_title');
             return obj;
         }
         Greet() {
             const obj = new this.$.$mol_textarea();
-            obj.hint = () => "get your partner interested";
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Greet_hint');
             obj.value = (next) => this.greet(next);
             return obj;
         }
         Greet_field() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "Greeting";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Greet_field_name');
             obj.bids = () => [
                 this.bid_required("greet")
             ];
@@ -16535,18 +16535,18 @@ var $;
         }
         Contacts_hint() {
             const obj = new this.$.$mol_paragraph();
-            obj.title = () => "Only for matches";
+            obj.title = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Contacts_hint_title');
             return obj;
         }
         Contacts() {
             const obj = new this.$.$mol_textarea();
-            obj.hint = () => "phone number, social network id etc";
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Contacts_hint');
             obj.value = (next) => this.contacts(next);
             return obj;
         }
         Contacts_field() {
             const obj = new this.$.$mol_form_field();
-            obj.name = () => "Contacts";
+            obj.name = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Contacts_field_name');
             obj.bids = () => [
                 this.bid_required("contacts")
             ];
@@ -17474,7 +17474,7 @@ var $;
             ];
         }
         menu_title() {
-            return "Pay-free dating";
+            return "$hyoo_match";
         }
         menu_foot() {
             return [
@@ -17534,7 +17534,7 @@ var $;
         }
         Support() {
             const obj = new this.$.$mol_link_iconed();
-            obj.hint = () => "Support";
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_app_Support_hint');
             obj.uri = () => "https://t.me/nin_jin";
             obj.sub = () => [
                 this.Support_icon()
