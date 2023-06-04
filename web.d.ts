@@ -3236,7 +3236,11 @@ declare namespace $ {
 declare namespace $ {
     class $hyoo_match_final extends $mol_page {
         title(): string;
+        self(): $hyoo_match_single;
+        tools(): readonly any[];
         body(): readonly any[];
+        reset(next?: any): any;
+        Reset(): $mol_button_minor;
         Content(): $$.$mol_text;
     }
 }
@@ -3255,6 +3259,12 @@ declare namespace $ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $hyoo_match_final extends $.$hyoo_match_final {
+        reset(): void;
+    }
 }
 
 declare namespace $ {
@@ -4046,7 +4056,9 @@ declare namespace $ {
 declare namespace $ {
     class $hyoo_match_intro extends $mol_page {
         title(): string;
+        tools(): readonly any[];
         body(): readonly any[];
+        Next(): $$.$mol_link;
         Content(): $$.$mol_text;
     }
 }
@@ -4378,7 +4390,7 @@ declare namespace $ {
         menu_tools(): readonly any[];
         menu_foot(): readonly any[];
         Placeholder(): any;
-        Final(): $hyoo_match_final;
+        Final(): $$.$hyoo_match_final;
         Pair(): $$.$hyoo_match_single_page;
         spreads(): Record<string, any>;
         Theme(): $$.$mol_theme_auto;

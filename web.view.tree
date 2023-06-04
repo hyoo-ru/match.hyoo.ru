@@ -662,7 +662,12 @@ $mol_text_list_item $mol_paragraph
 		mol_text_list_item_index <= index 0
 
 $hyoo_match_final $mol_page
-	title @ \Wating for people
+	title @ \Wating
+	self $hyoo_match_single
+	tools /
+		<= Reset $mol_button_minor
+			title @ \Again 💦
+			click? <=> reset? null
 	body /
 		<= Content $mol_text
 			text @ \
@@ -1069,6 +1074,11 @@ $mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C
 
 $hyoo_match_intro $mol_page
 	title @ \Intro
+	tools /
+		<= Next $mol_link
+			title @ \Let's go 💨
+			arg * \
+				\settings
 	body /
 		<= Content $mol_text
 			text @ \
@@ -1375,6 +1385,7 @@ $hyoo_match_app $mol_book2_catalog
 				<= Support_icon $mol_icon_face_agent
 	Placeholder null
 	Final $hyoo_match_final
+		self <= self
 	Pair $hyoo_match_single_page
 		pair <= pair
 	spreads *
