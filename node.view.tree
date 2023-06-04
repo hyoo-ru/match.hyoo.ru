@@ -1344,6 +1344,7 @@ $hyoo_match_single_settings $mol_page
 				<= bid_one*places
 			Content <= Places $hyoo_match_places
 				value? <=> places?
+				pick_enabled <= places_enabled true
 		<= Syntax $mol_link_iconed
 			hint \MarkedText
 			uri \https://marked.hyoo.ru/

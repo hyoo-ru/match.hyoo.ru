@@ -13270,6 +13270,7 @@ var $;
                 new $mol_after_frame(() => {
                     if (!this.pick_enabled())
                         return;
+                    this.Pick().filter_pattern('');
                     this.Pick().Trigger().focused(true);
                     this.Pick().open();
                 });
@@ -16619,9 +16620,13 @@ var $;
             ];
             return obj;
         }
+        places_enabled() {
+            return true;
+        }
         Places() {
             const obj = new this.$.$hyoo_match_places();
             obj.value = (next) => this.places(next);
+            obj.pick_enabled = () => this.places_enabled();
             return obj;
         }
         Places_field() {
@@ -16882,6 +16887,9 @@ var $;
                 if (this[name]().length)
                     return '';
                 return super.bid_one(name);
+            }
+            places_enabled() {
+                return this.places().length < 4;
             }
         }
         __decorate([

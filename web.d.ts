@@ -4374,6 +4374,7 @@ declare namespace $ {
         Pref_controls(): $$.$mol_list;
         Pref(): $$.$mol_form_field;
         Tags(): $mol_form_group;
+        places_enabled(): boolean;
         Places(): $hyoo_match_places;
         Places_field(): $$.$mol_form_field;
         Syntax(): $$.$mol_link_iconed;
@@ -4407,6 +4408,7 @@ declare namespace $.$$ {
         Next(): $mol_link;
         bid_required(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => string>): string;
         bid_one(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => any[]>): string;
+        places_enabled(): boolean;
     }
 }
 
