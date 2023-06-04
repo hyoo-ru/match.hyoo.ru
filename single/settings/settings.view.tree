@@ -1,5 +1,5 @@
 $hyoo_match_single_settings $mol_page
-	title @ \Preferences
+	title @ \Profile
 	single $hyoo_match_single
 		ready => ready
 		photo_fresh => photo_fresh

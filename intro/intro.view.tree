@@ -3,17 +3,17 @@ $hyoo_match_intro $mol_page
 	body /
 		<= Content $mol_text
 			text @ \
-				\" 🚧 No pay wall!
-				\" 🎭 No fakes!
-				\" 😴 No dead souls!
-				\" 📸 Focus on the partner!
+				\" 🚧 No pay wall and advertising!
+				\" 🎭 No fakes and dead souls!
+				\" 📸 Focus on finding a couple!
 				\
 				\= Usage
-				\" 🤳 Fill your \\profile\#!=settings\\
-				\" 💗 Like other \\singles\#!=look\\
-				\" 📅 Update \\photo\#!=settings\\ every day
-				\" 💬 Enjoy with your pair
+				\" 🤳 Fill out your \\profile\#!=settings\\
+				\" 💗 Like other \\people\#!=look\\
+				\" 📅 Update your photo every day
+				\" 💬 Enjoy the two of you
+				\" 🔄 Come back in an hour
 				\
 				\= Gratitude
-				\" 📰 Tell everyone about \\$hyoo_match\https://match.hyoo.ru/\\
-				\" 💸 Support with \\donates\https://boosty.to/hyoo\\
+				\" Tell friends about https://match.hyoo.ru/
+				\" Support us with \\donates\https://boosty.to/hyoo\\
