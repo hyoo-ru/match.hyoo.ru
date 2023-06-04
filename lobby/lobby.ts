@@ -26,6 +26,8 @@ namespace $ {
 		@ $mol_action
 		find_pair( self: $hyoo_match_single ) {
 			
+			if( !self.ready() ) return null
+			
 			const age_self = self.age_self()
 			const sex_self = self.sex_self()
 			const age_pref = self.age_pref_all()
@@ -33,6 +35,16 @@ namespace $ {
 			
 			const skipped = self.skipped()
 			const Single = this.world()!.Fund( $hyoo_match_single )
+			
+			for( const id of $mol_array_shuffle( self.likes().list() ) ) {
+					
+				if( skipped.has( id ) ) continue
+				
+				const single = Single.Item( id )
+				if( !single.ready() ) continue
+				
+				return single
+			}
 			
 			for( const place of self.places() ) {
 				

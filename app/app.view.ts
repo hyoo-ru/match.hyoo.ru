@@ -69,9 +69,9 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		Look() {
-			if( !this.pair() ) return this.Final()
-			return super.Pair()
+		look_pages() {
+			if( !this.pair() ) return [ this.Final() ]
+			return [ this.Pair() ]
 		}
 		
 		redirects() {

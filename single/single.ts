@@ -109,6 +109,14 @@ namespace $ {
 		}
 		
 		@ $mol_mem
+		mutual() {
+			const Single = this.world()!.Fund( $hyoo_match_single )
+			return this.likes().list()
+				.map( id => Single.Item( id ) )
+				.filter( pair => pair.likes().list().includes( this.id() ) )
+		}
+		
+		@ $mol_mem
 		skipped() {
 			return this.sub( '$hyoo_match_single:skipped', $hyoo_crowd_list )
 		}

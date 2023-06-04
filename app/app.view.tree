@@ -22,11 +22,14 @@ $hyoo_match_app $mol_book2_catalog
 	Final $hyoo_match_final
 	Pair $hyoo_match_single_page
 		single <= pair
+		Contacts null
+	Match $hyoo_match_single_page
+		single <= pair
 	spreads *
 		\
 			<= Intro $hyoo_match_intro
 		settings <= Settings $hyoo_match_single_settings
 			single <= self
-		look <= Look $mol_page
+		look <= Look $mol_book2 pages <= look_pages /
 		keys <= Keys $hyoo_meta_safe
 			yard <= yard

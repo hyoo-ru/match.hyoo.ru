@@ -12,13 +12,13 @@ namespace $.$$ {
 		}
 		
 		like() {
-			this.self().skipped().add( this.single().id() )
 			this.single().liked( true )
+			this.self().skipped().add( this.single().id() )
 		}
 		
 		skip() {
-			this.self().skipped().add( this.single().id() )
 			this.single().liked( false )
+			this.self().skipped().add( this.single().id() )
 		}
 		
 	}
