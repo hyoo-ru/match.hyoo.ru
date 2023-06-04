@@ -6,11 +6,6 @@
 			"src": "../../../hyoo/match/logo/logo.png",
 			"type": "image/png",
 			"sizes": "512x512"
-		},
-		{
-			"src": "../../../hyoo/match/logo/logo.svg",
-			"type": "image/svg",
-			"sizes": "512x512"
 		}
 	],
 	"start_url": "../../..",
