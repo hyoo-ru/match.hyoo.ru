@@ -9556,6 +9556,8 @@ var $;
                 return false;
             if (!this.sex_pref_all().length)
                 return false;
+            if (!this.places().length)
+                return false;
             if (!this.photo_fresh())
                 return false;
             return true;
@@ -13881,6 +13883,7 @@ var $;
                 new $mol_after_frame(() => {
                     if (!this.pick_enabled())
                         return;
+                    this.Pick().filter_pattern('');
                     this.Pick().Trigger().focused(true);
                     this.Pick().open();
                 });
