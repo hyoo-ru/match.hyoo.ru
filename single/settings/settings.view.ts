@@ -54,5 +54,9 @@ namespace $.$$ {
 			return super.bid_one( name )
 		}
 		
+		places_enabled() {
+			return this.places().length < 4
+		}
+		
 	}
 }
