@@ -10,7 +10,6 @@
 		{
 			"src": "../../../hyoo/match/logo/logo.png",
 			"type": "image/png",
-			"purpose": "maskable",
 			"sizes": "512x512"
 		}
 	],
