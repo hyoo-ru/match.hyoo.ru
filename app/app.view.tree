@@ -7,6 +7,8 @@ $hyoo_match_app $mol_book2_catalog
 		<= lobby_update null
 		<= redirects null
 	menu_title \$hyoo_match
+	menu_tools /
+		<= Lights $mol_lights_toggle
 	menu_foot /
 		<= Online $hyoo_sync_online
 			yard <= yard $hyoo_sync_client
@@ -17,7 +19,6 @@ $hyoo_match_app $mol_book2_catalog
 			uri \https://t.me/nin_jin
 			sub /
 				<= Support_icon $mol_icon_face_agent
-		<= Lights $mol_lights_toggle
 	Placeholder null
 	Final $hyoo_match_final
 	Pair $hyoo_match_single_page

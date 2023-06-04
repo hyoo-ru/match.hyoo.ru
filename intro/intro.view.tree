@@ -1,5 +1,5 @@
 $hyoo_match_intro $mol_page
-	title @ \Introduction
+	title @ \Intro
 	body /
 		<= Content $mol_text
 			text @ \

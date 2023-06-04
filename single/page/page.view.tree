@@ -1,5 +1,5 @@
 $hyoo_match_single_page $mol_page
-	title @ \Look around
+	title @ \Persons
 	self $hyoo_match_single
 	pair $hyoo_match_single
 		title => name
