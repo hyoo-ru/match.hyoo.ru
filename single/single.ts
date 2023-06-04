@@ -11,6 +11,7 @@ namespace $ {
 			if( !this.sex_self() ) return false
 			if( !this.age_pref_all().length ) return false
 			if( !this.sex_pref_all().length ) return false
+			if( !this.places().length ) return false
 			if( !this.photo_fresh() ) return false
 			return true
 		}
