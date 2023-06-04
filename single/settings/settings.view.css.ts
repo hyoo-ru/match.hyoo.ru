@@ -20,11 +20,12 @@ namespace $.$$ {
 			},
 		},
 		
-		Hint: {
+		Shot_hint: {
 			position: 'absolute',
 			left: $mol_gap.block,
 			top: $mol_gap.block,
 			color: $mol_theme.text,
+			padding: $mol_gap.text,
 		},
 		
 		Contacts_hint: {

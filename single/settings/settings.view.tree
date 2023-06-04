@@ -26,7 +26,6 @@ $hyoo_match_single_settings $mol_page
 			bids /
 				<= shot_bid @ \Fresh required
 			Content <= Shot $mol_check
-				hint @ \Shot
 				checked? <=> live? true
 				sub <= shot_content /
 					<= Photo $mol_image
@@ -34,9 +33,7 @@ $hyoo_match_single_settings $mol_page
 					<= Camera $mol_video_camera
 						dom_node_actual => video
 						aspect 1
-					<= Hint $mol_hint
-						dictionary *
-							shot @ \Click to take a shot
+					<= Shot_hint $mol_paragraph title @ \Click to shot
 		<= Name_field $mol_form_field
 			name @ \Name
 			bids /

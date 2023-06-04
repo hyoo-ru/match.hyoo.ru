@@ -31,8 +31,8 @@ namespace $.$$ {
 		@ $mol_mem
 		shot_content() {
 			return this.live()
-				? [ this.Camera(), this.Hint() ]
-				: [ this.Photo(), this.Hint() ]
+				? [ this.Camera(), this.Shot_hint() ]
+				: [ this.Photo(), this.Shot_hint() ]
 		}
 		
 		Next() {
