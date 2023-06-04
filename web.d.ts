@@ -4369,140 +4369,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_icon_eye extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_password extends $mol_view {
-        type(val?: any): string;
-        sub(): readonly any[];
-        hint(): string;
-        value(val?: any): string;
-        submit(event?: any): any;
-        enabled(): boolean;
-        Pass(): $$.$mol_string;
-        checked(val?: any): boolean;
-        Show_icon(): $mol_icon_eye;
-        Show(): $mol_check_icon;
-        content(): readonly any[];
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_password extends $.$mol_password {
-        checked(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    class $hyoo_meta_safe extends $mol_page {
-        title(): string;
-        yard(): $hyoo_sync_yard<unknown>;
-        bid_pass_long(): string;
-        key_size(): number;
-        attr(): Record<string, any>;
-        body(): readonly any[];
-        Expot_bid(): $$.$mol_text;
-        password_bid(): string;
-        password(next?: any): string;
-        Password(): $$.$mol_password;
-        Password_field(): $$.$mol_form_field;
-        recall_enabled(): boolean;
-        recall(next?: any): string;
-        Recall(): $$.$mol_string;
-        Recall_field(): $$.$mol_form_field;
-        Export_pass(): $$.$mol_list;
-        export_link(): string;
-        Export_link(): $$.$mol_link;
-        export_rows(): readonly any[];
-        Export_block(): $$.$mol_list;
-        Iport_descr(): $$.$mol_text;
-        Import_pass(): $$.$mol_list;
-        import_switch(next?: any): any;
-        peer_new(): string;
-        Peer_new(): $$.$mol_avatar;
-        impot_switch_title(): string;
-        Import_switch(): $mol_button_minor;
-        import_rows(): readonly any[];
-        Import_block(): $$.$mol_list;
-        content(): readonly any[];
-        Content(): $$.$mol_list;
-    }
-}
-
-declare namespace $ {
-    function $mol_base64_decode(base64: string): Uint8Array;
-}
-
-declare namespace $ {
-    function $mol_base64_decode_web(base64Str: string): Uint8Array;
-}
-
-declare namespace $ {
-    class $mol_crypto_secret extends Object {
-        readonly native: CryptoKey & {
-            type: 'private';
-        };
-        static size: number;
-        static extra: number;
-        constructor(native: CryptoKey & {
-            type: 'private';
-        });
-        static generate(): Promise<$mol_crypto_secret>;
-        static from(serial: BufferSource | string): Promise<$mol_crypto_secret>;
-        serial(): Promise<ArrayBuffer>;
-        encrypt(open: BufferSource, salt: BufferSource): Promise<ArrayBuffer>;
-        decrypt(closed: BufferSource, salt: BufferSource): Promise<ArrayBuffer>;
-    }
-}
-
-declare namespace $ {
-    class $mol_after_work extends $mol_object2 {
-        delay: number;
-        task: () => void;
-        id: any;
-        constructor(delay: number, task: () => void);
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-    function $mol_wait_rest_async(this: $): Promise<unknown>;
-    function $mol_wait_rest(this: $): unknown;
-}
-
-declare namespace $ {
-    function $mol_base64_encode(src: string | Uint8Array): string;
-}
-
-declare namespace $ {
-    function $mol_base64_encode_web(str: string | Uint8Array): string;
-}
-
-declare namespace $.$$ {
-    class $hyoo_meta_safe extends $.$hyoo_meta_safe {
-        password_bid(): string;
-        content(): $mol_list[];
-        recall(next?: string): string;
-        recall_enabled(): boolean;
-        peer_current(): `${string}_${string}`;
-        peer_new(): `${string}_${string}`;
-        key_import(next?: string | null): string | null;
-        key_new(): string | null;
-        import_switch(): void;
-        key_export(): string;
-        export_rows(): ($mol_link | $mol_list | $mol_text)[];
-        import_rows(): ($mol_list | $mol_button_minor | $mol_text)[];
-        export_link(): string;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
     class $hyoo_match_app extends $mol_book2_catalog {
         self(): $hyoo_match_single;
         pair(): $hyoo_match_single;
@@ -4527,7 +4393,6 @@ declare namespace $ {
         Settings(): $$.$hyoo_match_single_settings;
         look_pages(): readonly any[];
         Look(): $$.$mol_book2;
-        Keys(): $$.$hyoo_meta_safe;
     }
 }
 
@@ -5552,6 +5417,140 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_icon_eye extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_password extends $mol_view {
+        type(val?: any): string;
+        sub(): readonly any[];
+        hint(): string;
+        value(val?: any): string;
+        submit(event?: any): any;
+        enabled(): boolean;
+        Pass(): $$.$mol_string;
+        checked(val?: any): boolean;
+        Show_icon(): $mol_icon_eye;
+        Show(): $mol_check_icon;
+        content(): readonly any[];
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_password extends $.$mol_password {
+        checked(next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    class $hyoo_meta_safe extends $mol_page {
+        title(): string;
+        yard(): $hyoo_sync_yard<unknown>;
+        bid_pass_long(): string;
+        key_size(): number;
+        attr(): Record<string, any>;
+        body(): readonly any[];
+        Expot_bid(): $$.$mol_text;
+        password_bid(): string;
+        password(next?: any): string;
+        Password(): $$.$mol_password;
+        Password_field(): $$.$mol_form_field;
+        recall_enabled(): boolean;
+        recall(next?: any): string;
+        Recall(): $$.$mol_string;
+        Recall_field(): $$.$mol_form_field;
+        Export_pass(): $$.$mol_list;
+        export_link(): string;
+        Export_link(): $$.$mol_link;
+        export_rows(): readonly any[];
+        Export_block(): $$.$mol_list;
+        Iport_descr(): $$.$mol_text;
+        Import_pass(): $$.$mol_list;
+        import_switch(next?: any): any;
+        peer_new(): string;
+        Peer_new(): $$.$mol_avatar;
+        impot_switch_title(): string;
+        Import_switch(): $mol_button_minor;
+        import_rows(): readonly any[];
+        Import_block(): $$.$mol_list;
+        content(): readonly any[];
+        Content(): $$.$mol_list;
+    }
+}
+
+declare namespace $ {
+    function $mol_base64_decode(base64: string): Uint8Array;
+}
+
+declare namespace $ {
+    function $mol_base64_decode_web(base64Str: string): Uint8Array;
+}
+
+declare namespace $ {
+    class $mol_crypto_secret extends Object {
+        readonly native: CryptoKey & {
+            type: 'private';
+        };
+        static size: number;
+        static extra: number;
+        constructor(native: CryptoKey & {
+            type: 'private';
+        });
+        static generate(): Promise<$mol_crypto_secret>;
+        static from(serial: BufferSource | string): Promise<$mol_crypto_secret>;
+        serial(): Promise<ArrayBuffer>;
+        encrypt(open: BufferSource, salt: BufferSource): Promise<ArrayBuffer>;
+        decrypt(closed: BufferSource, salt: BufferSource): Promise<ArrayBuffer>;
+    }
+}
+
+declare namespace $ {
+    class $mol_after_work extends $mol_object2 {
+        delay: number;
+        task: () => void;
+        id: any;
+        constructor(delay: number, task: () => void);
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
+    function $mol_wait_rest_async(this: $): Promise<unknown>;
+    function $mol_wait_rest(this: $): unknown;
+}
+
+declare namespace $ {
+    function $mol_base64_encode(src: string | Uint8Array): string;
+}
+
+declare namespace $ {
+    function $mol_base64_encode_web(str: string | Uint8Array): string;
+}
+
+declare namespace $.$$ {
+    class $hyoo_meta_safe extends $.$hyoo_meta_safe {
+        password_bid(): string;
+        content(): $mol_list[];
+        recall(next?: string): string;
+        recall_enabled(): boolean;
+        peer_current(): `${string}_${string}`;
+        peer_new(): `${string}_${string}`;
+        key_import(next?: string | null): string | null;
+        key_new(): string | null;
+        import_switch(): void;
+        key_export(): string;
+        export_rows(): ($mol_link | $mol_list | $mol_text)[];
+        import_rows(): ($mol_list | $mol_button_minor | $mol_text)[];
+        export_link(): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
     class $mol_icon_key extends $mol_icon {
         path(): string;
     }
@@ -5673,7 +5672,7 @@ declare namespace $.$$ {
         book_side(): $hyoo_page_side;
         book_pages_node(): $hyoo_crowd_list;
         side_menu_showed(next?: boolean): boolean;
-        pages(): ($mol_view | $hyoo_meta_safe | $hyoo_page_side_menu | $hyoo_page_side_view | $hyoo_page_side_edit | $hyoo_page_side_info | $hyoo_meta_rights)[];
+        pages(): ($mol_view | $hyoo_page_side_menu | $hyoo_page_side_view | $hyoo_page_side_edit | $hyoo_page_side_info | $hyoo_meta_rights | $hyoo_meta_safe)[];
         page_add(): void;
         side_add(id: $mol_int62_string): void;
         ref_track(): void;

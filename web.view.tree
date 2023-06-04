@@ -662,12 +662,13 @@ $mol_text_list_item $mol_paragraph
 		mol_text_list_item_index <= index 0
 
 $hyoo_match_final $mol_page
-	title @ \End of time
+	title @ \Wating for people
 	body /
 		<= Content $mol_text
 			text @ \
-				\" 💤 Wating for new singles
-				\" 📰 Tell everyone about \\$hyoo_match\https://match.hyoo.ru/\\
+				\Tell the others for now:
+				\" 🔥 The Tinder is gone... Meet https://match.hyoo.ru - a dating service that benefits from you finding a couple and taking off into the sunset.
+				\" No fakes, dead souls, advertising and pay wall. Share it with your friends - let them find their soulmate too 💞
 
 $mol_pick $mol_pop
 	event *
@@ -1071,20 +1072,20 @@ $hyoo_match_intro $mol_page
 	body /
 		<= Content $mol_text
 			text @ \
-				\" 🚧 No pay wall!
-				\" 🎭 No fakes!
-				\" 😴 No dead souls!
-				\" 📸 Focus on the partner!
+				\" 🚧 No pay wall and advertising!
+				\" 🎭 No fakes and dead souls!
+				\" 📸 Focus on finding a couple!
 				\
 				\= Usage
-				\" 🤳 Fill your \\profile\#!=settings\\
-				\" 💗 Like other \\singles\#!=look\\
-				\" 📅 Update \\photo\#!=settings\\ every day
-				\" 💬 Enjoy with your pair
+				\" 🤳 Fill out your \\profile\#!=settings\\
+				\" 💗 Like other \\people\#!=look\\
+				\" 📅 Update your photo every day
+				\" 💬 Enjoy the two of you
+				\" 🔄 Come back in an hour
 				\
 				\= Gratitude
-				\" 📰 Tell everyone about \\$hyoo_match\https://match.hyoo.ru/\\
-				\" 💸 Support with \\donates\https://boosty.to/hyoo\\
+				\" Tell friends about https://match.hyoo.ru/
+				\" Support us with \\donates\https://boosty.to/hyoo\\
 
 $mol_video_player $mol_view
 	dom_name \video
@@ -1248,7 +1249,7 @@ $mol_textarea_edit $mol_string
 		scrollTop 0
 
 $hyoo_match_single_settings $mol_page
-	title @ \Preferences
+	title @ \Profile
 	single $hyoo_match_single
 		ready => ready
 		photo_fresh => photo_fresh
@@ -1351,60 +1352,6 @@ $hyoo_match_single_settings $mol_page
 				hint @ \phone number, social network id etc
 				value? <=> contacts?
 
-$mol_icon_eye $mol_icon path \M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
-
-$mol_password $mol_view
-	type?val \password
-	sub <= content /
-		<= Pass $mol_string
-			type <= type
-			hint <= hint \
-			value?val <=> value?val \
-			submit?event <=> submit?event null
-			enabled <= enabled true
-		<= Show $mol_check_icon
-			checked?val <=> checked?val true
-			Icon <= Show_icon $mol_icon_eye
-
-$hyoo_meta_safe $mol_page
-	title @ \Private keys
-	yard $hyoo_sync_yard
-	bid_pass_long @ \> 7 letters
-	key_size 133
-	attr *
-		^
-		mol_theme \$mol_theme_special
-	body /
-		<= Content $mol_list rows <= content /
-			<= Export_block $mol_list rows <= export_rows /
-				<= Expot_bid $mol_text text @ \Your private keys are stored in the browser. In order not to lose them, it is recommended to come up with a strong password for exporting them.
-				<= Export_pass $mol_list rows /
-					<= Password_field $mol_form_field
-						name @ \Password
-						bids / <= password_bid \
-						Content <= Password $mol_password
-							value? <=> password? \
-					<= Recall_field $mol_form_field
-						name @ \Hint for recall
-						Content <= Recall $mol_string
-							enabled <= recall_enabled true
-							value? <=> recall? \
-				<= Export_link $mol_link
-					uri <= export_link \
-					title @ \This link contains your encrypted prvate keys. Save it to a secure place on another physical device. Using this link you can restore your private keys by enterig same password.
-			<= Import_block $mol_list rows <= import_rows /
-				<= Iport_descr $mol_text text @ \
-					\To import a private key, you must enter the password from it.
-					\**If the current key is not saved, it will be lost forever.**
-				<= Import_pass $mol_list rows /
-					<= Recall_field
-					<= Password_field
-				<= Import_switch $mol_button_minor
-					click? <=> import_switch? null
-					sub /
-						<= Peer_new $mol_avatar id <= peer_new \
-						<= impot_switch_title @ \Switch
-
 $hyoo_match_app $mol_book2_catalog
 	self $hyoo_match_single
 	pair $hyoo_match_single
@@ -1435,7 +1382,7 @@ $hyoo_match_app $mol_book2_catalog
 		settings <= Settings $hyoo_match_single_settings
 			single <= self
 		look <= Look $mol_book2 pages <= look_pages /
-		keys <= Keys $hyoo_meta_safe
+		- keys <= Keys $hyoo_meta_safe
 			yard <= yard
 
 $hyoo_meta_link $mol_link
@@ -1955,6 +1902,60 @@ $hyoo_meta_rights $mol_page
 							<= Editor_fill_all $mol_button_minor
 								title @ \Allow anyone
 								click? <=> editor_fill_all? null
+
+$mol_icon_eye $mol_icon path \M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
+
+$mol_password $mol_view
+	type?val \password
+	sub <= content /
+		<= Pass $mol_string
+			type <= type
+			hint <= hint \
+			value?val <=> value?val \
+			submit?event <=> submit?event null
+			enabled <= enabled true
+		<= Show $mol_check_icon
+			checked?val <=> checked?val true
+			Icon <= Show_icon $mol_icon_eye
+
+$hyoo_meta_safe $mol_page
+	title @ \Private keys
+	yard $hyoo_sync_yard
+	bid_pass_long @ \> 7 letters
+	key_size 133
+	attr *
+		^
+		mol_theme \$mol_theme_special
+	body /
+		<= Content $mol_list rows <= content /
+			<= Export_block $mol_list rows <= export_rows /
+				<= Expot_bid $mol_text text @ \Your private keys are stored in the browser. In order not to lose them, it is recommended to come up with a strong password for exporting them.
+				<= Export_pass $mol_list rows /
+					<= Password_field $mol_form_field
+						name @ \Password
+						bids / <= password_bid \
+						Content <= Password $mol_password
+							value? <=> password? \
+					<= Recall_field $mol_form_field
+						name @ \Hint for recall
+						Content <= Recall $mol_string
+							enabled <= recall_enabled true
+							value? <=> recall? \
+				<= Export_link $mol_link
+					uri <= export_link \
+					title @ \This link contains your encrypted prvate keys. Save it to a secure place on another physical device. Using this link you can restore your private keys by enterig same password.
+			<= Import_block $mol_list rows <= import_rows /
+				<= Iport_descr $mol_text text @ \
+					\To import a private key, you must enter the password from it.
+					\**If the current key is not saved, it will be lost forever.**
+				<= Import_pass $mol_list rows /
+					<= Recall_field
+					<= Password_field
+				<= Import_switch $mol_button_minor
+					click? <=> import_switch? null
+					sub /
+						<= Peer_new $mol_avatar id <= peer_new \
+						<= impot_switch_title @ \Switch
 
 $mol_icon_key $mol_icon path \M7,14C5.9,14 5,13.1 5,12C5,10.9 5.9,10 7,10C8.1,10 9,10.9 9,12C9,13.1 8.1,14 7,14M12.65,10C11.83,7.67 9.61,6 7,6C3.69,6 1,8.69 1,12C1,15.31 3.69,18 7,18C9.61,18 11.83,16.33 12.65,14H17V18H21V14H23V10H12.65Z
 

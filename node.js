@@ -17212,625 +17212,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_eye extends $mol_icon {
-        path() {
-            return "M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z";
-        }
-    }
-    $.$mol_icon_eye = $mol_icon_eye;
-})($ || ($ = {}));
-//mol/icon/eye/-view.tree/eye.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_password extends $mol_view {
-        type(val) {
-            if (val !== undefined)
-                return val;
-            return "password";
-        }
-        sub() {
-            return this.content();
-        }
-        hint() {
-            return "";
-        }
-        value(val) {
-            if (val !== undefined)
-                return val;
-            return "";
-        }
-        submit(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        enabled() {
-            return true;
-        }
-        Pass() {
-            const obj = new this.$.$mol_string();
-            obj.type = () => this.type();
-            obj.hint = () => this.hint();
-            obj.value = (val) => this.value(val);
-            obj.submit = (event) => this.submit(event);
-            obj.enabled = () => this.enabled();
-            return obj;
-        }
-        checked(val) {
-            if (val !== undefined)
-                return val;
-            return true;
-        }
-        Show_icon() {
-            const obj = new this.$.$mol_icon_eye();
-            return obj;
-        }
-        Show() {
-            const obj = new this.$.$mol_check_icon();
-            obj.checked = (val) => this.checked(val);
-            obj.Icon = () => this.Show_icon();
-            return obj;
-        }
-        content() {
-            return [
-                this.Pass(),
-                this.Show()
-            ];
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "type", null);
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "value", null);
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "submit", null);
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "Pass", null);
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "checked", null);
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "Show_icon", null);
-    __decorate([
-        $mol_mem
-    ], $mol_password.prototype, "Show", null);
-    $.$mol_password = $mol_password;
-})($ || ($ = {}));
-//mol/password/-view.tree/password.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_password extends $.$mol_password {
-            checked(next) {
-                this.type(next ? 'text' : 'password');
-                return next ?? false;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_password.prototype, "checked", null);
-        $$.$mol_password = $mol_password;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/password/password.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $hyoo_meta_safe extends $mol_page {
-        title() {
-            return this.$.$mol_locale.text('$hyoo_meta_safe_title');
-        }
-        yard() {
-            const obj = new this.$.$hyoo_sync_yard();
-            return obj;
-        }
-        bid_pass_long() {
-            return this.$.$mol_locale.text('$hyoo_meta_safe_bid_pass_long');
-        }
-        key_size() {
-            return 133;
-        }
-        attr() {
-            return {
-                ...super.attr(),
-                mol_theme: "$mol_theme_special"
-            };
-        }
-        body() {
-            return [
-                this.Content()
-            ];
-        }
-        Expot_bid() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => this.$.$mol_locale.text('$hyoo_meta_safe_Expot_bid_text');
-            return obj;
-        }
-        password_bid() {
-            return "";
-        }
-        password(next) {
-            if (next !== undefined)
-                return next;
-            return "";
-        }
-        Password() {
-            const obj = new this.$.$mol_password();
-            obj.value = (next) => this.password(next);
-            return obj;
-        }
-        Password_field() {
-            const obj = new this.$.$mol_form_field();
-            obj.name = () => this.$.$mol_locale.text('$hyoo_meta_safe_Password_field_name');
-            obj.bids = () => [
-                this.password_bid()
-            ];
-            obj.Content = () => this.Password();
-            return obj;
-        }
-        recall_enabled() {
-            return true;
-        }
-        recall(next) {
-            if (next !== undefined)
-                return next;
-            return "";
-        }
-        Recall() {
-            const obj = new this.$.$mol_string();
-            obj.enabled = () => this.recall_enabled();
-            obj.value = (next) => this.recall(next);
-            return obj;
-        }
-        Recall_field() {
-            const obj = new this.$.$mol_form_field();
-            obj.name = () => this.$.$mol_locale.text('$hyoo_meta_safe_Recall_field_name');
-            obj.Content = () => this.Recall();
-            return obj;
-        }
-        Export_pass() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => [
-                this.Password_field(),
-                this.Recall_field()
-            ];
-            return obj;
-        }
-        export_link() {
-            return "";
-        }
-        Export_link() {
-            const obj = new this.$.$mol_link();
-            obj.uri = () => this.export_link();
-            obj.title = () => this.$.$mol_locale.text('$hyoo_meta_safe_Export_link_title');
-            return obj;
-        }
-        export_rows() {
-            return [
-                this.Expot_bid(),
-                this.Export_pass(),
-                this.Export_link()
-            ];
-        }
-        Export_block() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => this.export_rows();
-            return obj;
-        }
-        Iport_descr() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => this.$.$mol_locale.text('$hyoo_meta_safe_Iport_descr_text');
-            return obj;
-        }
-        Import_pass() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => [
-                this.Recall_field(),
-                this.Password_field()
-            ];
-            return obj;
-        }
-        import_switch(next) {
-            if (next !== undefined)
-                return next;
-            return null;
-        }
-        peer_new() {
-            return "";
-        }
-        Peer_new() {
-            const obj = new this.$.$mol_avatar();
-            obj.id = () => this.peer_new();
-            return obj;
-        }
-        impot_switch_title() {
-            return this.$.$mol_locale.text('$hyoo_meta_safe_impot_switch_title');
-        }
-        Import_switch() {
-            const obj = new this.$.$mol_button_minor();
-            obj.click = (next) => this.import_switch(next);
-            obj.sub = () => [
-                this.Peer_new(),
-                this.impot_switch_title()
-            ];
-            return obj;
-        }
-        import_rows() {
-            return [
-                this.Iport_descr(),
-                this.Import_pass(),
-                this.Import_switch()
-            ];
-        }
-        Import_block() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => this.import_rows();
-            return obj;
-        }
-        content() {
-            return [
-                this.Export_block(),
-                this.Import_block()
-            ];
-        }
-        Content() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => this.content();
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "yard", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Expot_bid", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "password", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Password", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Password_field", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "recall", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Recall", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Recall_field", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Export_pass", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Export_link", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Export_block", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Iport_descr", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Import_pass", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "import_switch", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Peer_new", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Import_switch", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Import_block", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_meta_safe.prototype, "Content", null);
-    $.$hyoo_meta_safe = $hyoo_meta_safe;
-})($ || ($ = {}));
-//hyoo/meta/safe/-view.tree/safe.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_base64_decode(base64) {
-        throw new Error('Not implemented');
-    }
-    $.$mol_base64_decode = $mol_base64_decode;
-})($ || ($ = {}));
-//mol/base64/decode/decode.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_base64_decode_node(base64Str) {
-        const buffer = Buffer.from(base64Str, 'base64');
-        return new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength);
-    }
-    $.$mol_base64_decode_node = $mol_base64_decode_node;
-    $.$mol_base64_decode = $mol_base64_decode_node;
-})($ || ($ = {}));
-//mol/base64/decode/decode.node.ts
-;
-"use strict";
-var $;
-(function ($) {
-    const algorithm = {
-        name: 'AES-GCM',
-        length: 128,
-        tagLength: 32,
-    };
-    class $mol_crypto_secret extends Object {
-        native;
-        static size = 16;
-        static extra = 4;
-        constructor(native) {
-            super();
-            this.native = native;
-        }
-        static async generate() {
-            return new this(await $mol_crypto_native.subtle.generateKey(algorithm, true, ['encrypt', 'decrypt']));
-        }
-        static async from(serial) {
-            if (typeof serial === 'string') {
-                serial = $mol_charset_encode(serial);
-                serial = await $mol_crypto_native.subtle.digest('SHA-256', serial);
-            }
-            return new this(await $mol_crypto_native.subtle.importKey('raw', serial, algorithm, true, ['encrypt', 'decrypt']));
-        }
-        async serial() {
-            return await $mol_crypto_native.subtle.exportKey('raw', this.native);
-        }
-        async encrypt(open, salt) {
-            return await $mol_crypto_native.subtle.encrypt({
-                ...algorithm,
-                iv: salt,
-            }, this.native, open);
-        }
-        async decrypt(closed, salt) {
-            return await $mol_crypto_native.subtle.decrypt({
-                ...algorithm,
-                iv: salt,
-            }, this.native, closed);
-        }
-    }
-    $.$mol_crypto_secret = $mol_crypto_secret;
-})($ || ($ = {}));
-//mol/crypto/secret/secret.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_after_work extends $mol_object2 {
-        delay;
-        task;
-        id;
-        constructor(delay, task) {
-            super();
-            this.delay = delay;
-            this.task = task;
-            this.id = requestIdleCallback(task, { timeout: delay });
-        }
-        destructor() {
-            cancelIdleCallback(this.id);
-        }
-    }
-    $.$mol_after_work = $mol_after_work;
-    if (typeof requestIdleCallback !== 'function') {
-        $.$mol_after_work = $mol_after_timeout;
-    }
-})($ || ($ = {}));
-//mol/after/work/work.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_wait_rest_async() {
-        return new Promise(done => {
-            new this.$mol_after_work(16, () => done(null));
-        });
-    }
-    $.$mol_wait_rest_async = $mol_wait_rest_async;
-    function $mol_wait_rest() {
-        return this.$mol_wire_sync(this).$mol_wait_rest_async();
-    }
-    $.$mol_wait_rest = $mol_wait_rest;
-})($ || ($ = {}));
-//mol/wait/rest/rest.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_base64_encode(src) {
-        throw new Error('Not implemented');
-    }
-    $.$mol_base64_encode = $mol_base64_encode;
-})($ || ($ = {}));
-//mol/base64/encode/encode.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_base64_encode_node(str) {
-        if (!str)
-            return '';
-        if (Buffer.isBuffer(str))
-            return str.toString('base64');
-        return Buffer.from(str).toString('base64');
-    }
-    $.$mol_base64_encode_node = $mol_base64_encode_node;
-    $.$mol_base64_encode = $mol_base64_encode_node;
-})($ || ($ = {}));
-//mol/base64/encode/encode.node.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $hyoo_meta_safe extends $.$hyoo_meta_safe {
-            password_bid() {
-                const pass = this.password();
-                if (pass.length <= 7)
-                    return this.bid_pass_long();
-                return '';
-            }
-            content() {
-                return [
-                    this.key_import()
-                        ? this.Import_block()
-                        : this.Export_block()
-                ];
-            }
-            recall(next) {
-                const serial = this.key_import();
-                if (!serial)
-                    return next ?? '';
-                const pack = $mol_base64_decode(serial);
-                return $mol_charset_decode(pack.slice(this.key_size()));
-            }
-            recall_enabled() {
-                return !this.key_import();
-            }
-            peer_current() {
-                return this.yard().peer().id;
-            }
-            peer_new() {
-                return $mol_int62_hash_string(this.$.$mol_crypto_auditor_private_to_public(this.key_new()));
-            }
-            key_import(next) {
-                return this.$.$mol_state_arg.value('hyoo_meta_key', next) ?? null;
-            }
-            key_new() {
-                const serial = this.key_import();
-                if (!serial)
-                    return null;
-                try {
-                    const pack = $mol_base64_decode(serial);
-                    const closed = pack.slice(0, this.key_size());
-                    const salt = pack.slice(this.key_size());
-                    const pass = this.password();
-                    const secret = $mol_wire_sync(this.$.$mol_crypto_secret).from(pass);
-                    const opened = $mol_wire_sync(secret).decrypt(closed, salt);
-                    return $mol_charset_decode(opened);
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return null;
-                }
-            }
-            import_switch() {
-                this.yard().peer(this.key_new());
-                this.password('');
-                this.key_import(null);
-                this.$.$mol_wait_rest();
-                this.$.$mol_dom_context.location.reload();
-            }
-            key_export() {
-                const pass = this.password();
-                const recall = this.recall() || '...';
-                const secret = $mol_wire_sync(this.$.$mol_crypto_secret).from(pass);
-                const salt = $mol_charset_encode(recall);
-                const open = this.$.$mol_charset_encode(this.yard().peer().key_private_serial);
-                const closed = new Uint8Array($mol_wire_sync(secret).encrypt(open, salt));
-                const pack = new Uint8Array(this.key_size() + salt.byteLength);
-                pack.set(closed, 0);
-                pack.set(salt, this.key_size());
-                return this.$.$mol_base64_encode(pack);
-            }
-            export_rows() {
-                return [
-                    this.Expot_bid(),
-                    this.Export_pass(),
-                    ...this.password_bid() ? [] : [this.Export_link()],
-                ];
-            }
-            import_rows() {
-                return [
-                    this.Iport_descr(),
-                    this.Import_pass(),
-                    ...this.key_new() ? [this.Import_switch()] : [],
-                ];
-            }
-            export_link() {
-                return this.$.$mol_state_arg.link({
-                    hyoo_meta_key: this.key_export(),
-                });
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "password_bid", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "content", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "recall", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "peer_current", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "peer_new", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "key_new", null);
-        __decorate([
-            $mol_action
-        ], $hyoo_meta_safe.prototype, "import_switch", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "key_export", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_meta_safe.prototype, "export_link", null);
-        $$.$hyoo_meta_safe = $hyoo_meta_safe;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//hyoo/meta/safe/safe.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($hyoo_meta_safe, {
-            flex: {
-                basis: `20rem`,
-            },
-            Export_block: {
-                gap: $mol_gap.block,
-            },
-            Import_block: {
-                gap: $mol_gap.block,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//hyoo/meta/safe/safe.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $hyoo_match_app extends $mol_book2_catalog {
         self() {
             const obj = new this.$.$hyoo_match_single();
@@ -17878,8 +17259,7 @@ var $;
             return {
                 "": this.Intro(),
                 settings: this.Settings(),
-                look: this.Look(),
-                keys: this.Keys()
+                look: this.Look()
             };
         }
         Theme() {
@@ -17940,11 +17320,6 @@ var $;
             obj.pages = () => this.look_pages();
             return obj;
         }
-        Keys() {
-            const obj = new this.$.$hyoo_meta_safe();
-            obj.yard = () => this.yard();
-            return obj;
-        }
     }
     __decorate([
         $mol_mem
@@ -17988,9 +17363,6 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "Look", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_app.prototype, "Keys", null);
     $.$hyoo_match_app = $hyoo_match_app;
 })($ || ($ = {}));
 //hyoo/match/app/-view.tree/app.view.tree.ts
@@ -22723,6 +22095,625 @@ var $;
     });
 })($ || ($ = {}));
 //hyoo/meta/rights/rights.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_icon_eye extends $mol_icon {
+        path() {
+            return "M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z";
+        }
+    }
+    $.$mol_icon_eye = $mol_icon_eye;
+})($ || ($ = {}));
+//mol/icon/eye/-view.tree/eye.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_password extends $mol_view {
+        type(val) {
+            if (val !== undefined)
+                return val;
+            return "password";
+        }
+        sub() {
+            return this.content();
+        }
+        hint() {
+            return "";
+        }
+        value(val) {
+            if (val !== undefined)
+                return val;
+            return "";
+        }
+        submit(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        enabled() {
+            return true;
+        }
+        Pass() {
+            const obj = new this.$.$mol_string();
+            obj.type = () => this.type();
+            obj.hint = () => this.hint();
+            obj.value = (val) => this.value(val);
+            obj.submit = (event) => this.submit(event);
+            obj.enabled = () => this.enabled();
+            return obj;
+        }
+        checked(val) {
+            if (val !== undefined)
+                return val;
+            return true;
+        }
+        Show_icon() {
+            const obj = new this.$.$mol_icon_eye();
+            return obj;
+        }
+        Show() {
+            const obj = new this.$.$mol_check_icon();
+            obj.checked = (val) => this.checked(val);
+            obj.Icon = () => this.Show_icon();
+            return obj;
+        }
+        content() {
+            return [
+                this.Pass(),
+                this.Show()
+            ];
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "type", null);
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "value", null);
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "submit", null);
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "Pass", null);
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "checked", null);
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "Show_icon", null);
+    __decorate([
+        $mol_mem
+    ], $mol_password.prototype, "Show", null);
+    $.$mol_password = $mol_password;
+})($ || ($ = {}));
+//mol/password/-view.tree/password.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_password extends $.$mol_password {
+            checked(next) {
+                this.type(next ? 'text' : 'password');
+                return next ?? false;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_password.prototype, "checked", null);
+        $$.$mol_password = $mol_password;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/password/password.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $hyoo_meta_safe extends $mol_page {
+        title() {
+            return this.$.$mol_locale.text('$hyoo_meta_safe_title');
+        }
+        yard() {
+            const obj = new this.$.$hyoo_sync_yard();
+            return obj;
+        }
+        bid_pass_long() {
+            return this.$.$mol_locale.text('$hyoo_meta_safe_bid_pass_long');
+        }
+        key_size() {
+            return 133;
+        }
+        attr() {
+            return {
+                ...super.attr(),
+                mol_theme: "$mol_theme_special"
+            };
+        }
+        body() {
+            return [
+                this.Content()
+            ];
+        }
+        Expot_bid() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.$.$mol_locale.text('$hyoo_meta_safe_Expot_bid_text');
+            return obj;
+        }
+        password_bid() {
+            return "";
+        }
+        password(next) {
+            if (next !== undefined)
+                return next;
+            return "";
+        }
+        Password() {
+            const obj = new this.$.$mol_password();
+            obj.value = (next) => this.password(next);
+            return obj;
+        }
+        Password_field() {
+            const obj = new this.$.$mol_form_field();
+            obj.name = () => this.$.$mol_locale.text('$hyoo_meta_safe_Password_field_name');
+            obj.bids = () => [
+                this.password_bid()
+            ];
+            obj.Content = () => this.Password();
+            return obj;
+        }
+        recall_enabled() {
+            return true;
+        }
+        recall(next) {
+            if (next !== undefined)
+                return next;
+            return "";
+        }
+        Recall() {
+            const obj = new this.$.$mol_string();
+            obj.enabled = () => this.recall_enabled();
+            obj.value = (next) => this.recall(next);
+            return obj;
+        }
+        Recall_field() {
+            const obj = new this.$.$mol_form_field();
+            obj.name = () => this.$.$mol_locale.text('$hyoo_meta_safe_Recall_field_name');
+            obj.Content = () => this.Recall();
+            return obj;
+        }
+        Export_pass() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => [
+                this.Password_field(),
+                this.Recall_field()
+            ];
+            return obj;
+        }
+        export_link() {
+            return "";
+        }
+        Export_link() {
+            const obj = new this.$.$mol_link();
+            obj.uri = () => this.export_link();
+            obj.title = () => this.$.$mol_locale.text('$hyoo_meta_safe_Export_link_title');
+            return obj;
+        }
+        export_rows() {
+            return [
+                this.Expot_bid(),
+                this.Export_pass(),
+                this.Export_link()
+            ];
+        }
+        Export_block() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => this.export_rows();
+            return obj;
+        }
+        Iport_descr() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.$.$mol_locale.text('$hyoo_meta_safe_Iport_descr_text');
+            return obj;
+        }
+        Import_pass() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => [
+                this.Recall_field(),
+                this.Password_field()
+            ];
+            return obj;
+        }
+        import_switch(next) {
+            if (next !== undefined)
+                return next;
+            return null;
+        }
+        peer_new() {
+            return "";
+        }
+        Peer_new() {
+            const obj = new this.$.$mol_avatar();
+            obj.id = () => this.peer_new();
+            return obj;
+        }
+        impot_switch_title() {
+            return this.$.$mol_locale.text('$hyoo_meta_safe_impot_switch_title');
+        }
+        Import_switch() {
+            const obj = new this.$.$mol_button_minor();
+            obj.click = (next) => this.import_switch(next);
+            obj.sub = () => [
+                this.Peer_new(),
+                this.impot_switch_title()
+            ];
+            return obj;
+        }
+        import_rows() {
+            return [
+                this.Iport_descr(),
+                this.Import_pass(),
+                this.Import_switch()
+            ];
+        }
+        Import_block() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => this.import_rows();
+            return obj;
+        }
+        content() {
+            return [
+                this.Export_block(),
+                this.Import_block()
+            ];
+        }
+        Content() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => this.content();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "yard", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Expot_bid", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "password", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Password", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Password_field", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "recall", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Recall", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Recall_field", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Export_pass", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Export_link", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Export_block", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Iport_descr", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Import_pass", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "import_switch", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Peer_new", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Import_switch", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Import_block", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_meta_safe.prototype, "Content", null);
+    $.$hyoo_meta_safe = $hyoo_meta_safe;
+})($ || ($ = {}));
+//hyoo/meta/safe/-view.tree/safe.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_base64_decode(base64) {
+        throw new Error('Not implemented');
+    }
+    $.$mol_base64_decode = $mol_base64_decode;
+})($ || ($ = {}));
+//mol/base64/decode/decode.ts
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_base64_decode_node(base64Str) {
+        const buffer = Buffer.from(base64Str, 'base64');
+        return new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength);
+    }
+    $.$mol_base64_decode_node = $mol_base64_decode_node;
+    $.$mol_base64_decode = $mol_base64_decode_node;
+})($ || ($ = {}));
+//mol/base64/decode/decode.node.ts
+;
+"use strict";
+var $;
+(function ($) {
+    const algorithm = {
+        name: 'AES-GCM',
+        length: 128,
+        tagLength: 32,
+    };
+    class $mol_crypto_secret extends Object {
+        native;
+        static size = 16;
+        static extra = 4;
+        constructor(native) {
+            super();
+            this.native = native;
+        }
+        static async generate() {
+            return new this(await $mol_crypto_native.subtle.generateKey(algorithm, true, ['encrypt', 'decrypt']));
+        }
+        static async from(serial) {
+            if (typeof serial === 'string') {
+                serial = $mol_charset_encode(serial);
+                serial = await $mol_crypto_native.subtle.digest('SHA-256', serial);
+            }
+            return new this(await $mol_crypto_native.subtle.importKey('raw', serial, algorithm, true, ['encrypt', 'decrypt']));
+        }
+        async serial() {
+            return await $mol_crypto_native.subtle.exportKey('raw', this.native);
+        }
+        async encrypt(open, salt) {
+            return await $mol_crypto_native.subtle.encrypt({
+                ...algorithm,
+                iv: salt,
+            }, this.native, open);
+        }
+        async decrypt(closed, salt) {
+            return await $mol_crypto_native.subtle.decrypt({
+                ...algorithm,
+                iv: salt,
+            }, this.native, closed);
+        }
+    }
+    $.$mol_crypto_secret = $mol_crypto_secret;
+})($ || ($ = {}));
+//mol/crypto/secret/secret.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_after_work extends $mol_object2 {
+        delay;
+        task;
+        id;
+        constructor(delay, task) {
+            super();
+            this.delay = delay;
+            this.task = task;
+            this.id = requestIdleCallback(task, { timeout: delay });
+        }
+        destructor() {
+            cancelIdleCallback(this.id);
+        }
+    }
+    $.$mol_after_work = $mol_after_work;
+    if (typeof requestIdleCallback !== 'function') {
+        $.$mol_after_work = $mol_after_timeout;
+    }
+})($ || ($ = {}));
+//mol/after/work/work.ts
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_wait_rest_async() {
+        return new Promise(done => {
+            new this.$mol_after_work(16, () => done(null));
+        });
+    }
+    $.$mol_wait_rest_async = $mol_wait_rest_async;
+    function $mol_wait_rest() {
+        return this.$mol_wire_sync(this).$mol_wait_rest_async();
+    }
+    $.$mol_wait_rest = $mol_wait_rest;
+})($ || ($ = {}));
+//mol/wait/rest/rest.ts
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_base64_encode(src) {
+        throw new Error('Not implemented');
+    }
+    $.$mol_base64_encode = $mol_base64_encode;
+})($ || ($ = {}));
+//mol/base64/encode/encode.ts
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_base64_encode_node(str) {
+        if (!str)
+            return '';
+        if (Buffer.isBuffer(str))
+            return str.toString('base64');
+        return Buffer.from(str).toString('base64');
+    }
+    $.$mol_base64_encode_node = $mol_base64_encode_node;
+    $.$mol_base64_encode = $mol_base64_encode_node;
+})($ || ($ = {}));
+//mol/base64/encode/encode.node.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_meta_safe extends $.$hyoo_meta_safe {
+            password_bid() {
+                const pass = this.password();
+                if (pass.length <= 7)
+                    return this.bid_pass_long();
+                return '';
+            }
+            content() {
+                return [
+                    this.key_import()
+                        ? this.Import_block()
+                        : this.Export_block()
+                ];
+            }
+            recall(next) {
+                const serial = this.key_import();
+                if (!serial)
+                    return next ?? '';
+                const pack = $mol_base64_decode(serial);
+                return $mol_charset_decode(pack.slice(this.key_size()));
+            }
+            recall_enabled() {
+                return !this.key_import();
+            }
+            peer_current() {
+                return this.yard().peer().id;
+            }
+            peer_new() {
+                return $mol_int62_hash_string(this.$.$mol_crypto_auditor_private_to_public(this.key_new()));
+            }
+            key_import(next) {
+                return this.$.$mol_state_arg.value('hyoo_meta_key', next) ?? null;
+            }
+            key_new() {
+                const serial = this.key_import();
+                if (!serial)
+                    return null;
+                try {
+                    const pack = $mol_base64_decode(serial);
+                    const closed = pack.slice(0, this.key_size());
+                    const salt = pack.slice(this.key_size());
+                    const pass = this.password();
+                    const secret = $mol_wire_sync(this.$.$mol_crypto_secret).from(pass);
+                    const opened = $mol_wire_sync(secret).decrypt(closed, salt);
+                    return $mol_charset_decode(opened);
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return null;
+                }
+            }
+            import_switch() {
+                this.yard().peer(this.key_new());
+                this.password('');
+                this.key_import(null);
+                this.$.$mol_wait_rest();
+                this.$.$mol_dom_context.location.reload();
+            }
+            key_export() {
+                const pass = this.password();
+                const recall = this.recall() || '...';
+                const secret = $mol_wire_sync(this.$.$mol_crypto_secret).from(pass);
+                const salt = $mol_charset_encode(recall);
+                const open = this.$.$mol_charset_encode(this.yard().peer().key_private_serial);
+                const closed = new Uint8Array($mol_wire_sync(secret).encrypt(open, salt));
+                const pack = new Uint8Array(this.key_size() + salt.byteLength);
+                pack.set(closed, 0);
+                pack.set(salt, this.key_size());
+                return this.$.$mol_base64_encode(pack);
+            }
+            export_rows() {
+                return [
+                    this.Expot_bid(),
+                    this.Export_pass(),
+                    ...this.password_bid() ? [] : [this.Export_link()],
+                ];
+            }
+            import_rows() {
+                return [
+                    this.Iport_descr(),
+                    this.Import_pass(),
+                    ...this.key_new() ? [this.Import_switch()] : [],
+                ];
+            }
+            export_link() {
+                return this.$.$mol_state_arg.link({
+                    hyoo_meta_key: this.key_export(),
+                });
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "password_bid", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "content", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "recall", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "peer_current", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "peer_new", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "key_new", null);
+        __decorate([
+            $mol_action
+        ], $hyoo_meta_safe.prototype, "import_switch", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "key_export", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_meta_safe.prototype, "export_link", null);
+        $$.$hyoo_meta_safe = $hyoo_meta_safe;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//hyoo/meta/safe/safe.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_meta_safe, {
+            flex: {
+                basis: `20rem`,
+            },
+            Export_block: {
+                gap: $mol_gap.block,
+            },
+            Import_block: {
+                gap: $mol_gap.block,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//hyoo/meta/safe/safe.view.css.ts
 ;
 "use strict";
 var $;
