@@ -5,6 +5,7 @@
 		{
 			"src": "../../../hyoo/match/logo/logo.svg",
 			"type": "image/svg",
+			"purpose": "any maskable",
 			"sizes": "512x512"
 		},
 		{
