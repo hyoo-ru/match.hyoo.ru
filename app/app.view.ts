@@ -9,7 +9,7 @@ namespace $.$$ {
 		@ $mol_mem
 		pair() {
 			
-			this.self().skipped().list()
+			this.self().skipped()!.list()
 			
 			const found = this.lobby().find_pair( this.self() )!
 			

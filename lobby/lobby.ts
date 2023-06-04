@@ -33,7 +33,7 @@ namespace $ {
 			const age_pref = self.age_pref_all()
 			const sex_pref = self.sex_pref_all()
 			
-			const skipped = self.skipped()
+			const skipped = self.skipped()!
 			const Single = this.world()!.Fund( $hyoo_match_single )
 			
 			for( const id of self.likes().list() ) {
