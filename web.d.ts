@@ -3675,6 +3675,36 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $ {
+    class $mol_check_icon extends $mol_check {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_icon_brightness_6 extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_lights_toggle extends $mol_check_icon {
+        Icon(): $mol_icon_brightness_6;
+        hint(): string;
+        checked(val?: any): boolean;
+        Lights_icon(): $mol_icon_brightness_6;
+        lights(val?: any): boolean;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
+}
+
 declare let $hyoo_sync_revision: string;
 
 declare namespace $ {
@@ -4014,36 +4044,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_check_icon extends $mol_check {
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_icon_brightness_6 extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_lights_toggle extends $mol_check_icon {
-        Icon(): $mol_icon_brightness_6;
-        hint(): string;
-        checked(val?: any): boolean;
-        Lights_icon(): $mol_icon_brightness_6;
-        lights(val?: any): boolean;
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
     class $hyoo_match_intro extends $mol_page {
         title(): string;
         body(): readonly any[];
@@ -4375,6 +4375,7 @@ declare namespace $ {
         plugins(): readonly any[];
         auto(): readonly any[];
         menu_title(): string;
+        menu_tools(): readonly any[];
         menu_foot(): readonly any[];
         Placeholder(): any;
         Final(): $hyoo_match_final;
@@ -4383,12 +4384,12 @@ declare namespace $ {
         Theme(): $$.$mol_theme_auto;
         lobby_update(): any;
         redirects(): any;
+        Lights(): $$.$mol_lights_toggle;
         yard(): $hyoo_sync_client;
         Online(): $$.$hyoo_sync_online;
         Source(): $mol_link_source;
         Support_icon(): $mol_icon_face_agent;
         Support(): $$.$mol_link_iconed;
-        Lights(): $$.$mol_lights_toggle;
         Intro(): $hyoo_match_intro;
         Settings(): $$.$hyoo_match_single_settings;
         look_pages(): readonly any[];

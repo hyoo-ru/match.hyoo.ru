@@ -982,7 +982,7 @@ $hyoo_match_places $mol_select_list
 		venus \Венера
 
 $hyoo_match_single_page $mol_page
-	title @ \Look around
+	title @ \Persons
 	self $hyoo_match_single
 	pair $hyoo_match_single
 		title => name
@@ -1025,6 +1025,15 @@ $hyoo_match_single_page $mol_page
 $mol_theme_auto $mol_plugin
 	attr * mol_theme <= theme \
 
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_6
+	hint @ \Toggle lights
+	checked?val <=> lights?val false
+
 $mol_avatar $mol_icon
 	view_box \0 0 24 24
 	id \
@@ -1058,17 +1067,8 @@ $mol_icon_face $mol_icon path \M9,11.75C8.31,11.75 7.75,12.31 7.75,13C7.75,13.69
 
 $mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C19.26,11.28 19.15,10.59 18.96,9.95C18.31,10.1 17.63,10.18 16.92,10.18C13.86,10.18 11.15,8.67 9.5,6.34C8.61,8.5 6.91,10.26 4.77,11.22C4.73,11.47 4.73,11.74 4.73,12C4.73,16.02 7.98,19.27 12,19.27C13.05,19.27 14.06,19.04 14.97,18.63C15.54,19.72 15.8,20.26 15.78,20.26C14.14,20.81 12.87,21.08 12,21.08C9.58,21.08 7.27,20.13 5.57,18.42C4.53,17.38 3.76,16.11 3.33,14.73H2V10.18H3.09C3.93,6.04 7.6,2.92 12,2.92C14.4,2.92 16.71,3.87 18.42,5.58C19.69,6.84 20.54,8.45 20.89,10.18H22V14.67H22V14.69L22,14.73H21.94L18.38,18L13.08,17.4V15.73H17.91L18.72,14.76M9.27,11.77C9.57,11.77 9.86,11.89 10.07,12.11C10.28,12.32 10.4,12.61 10.4,12.91C10.4,13.21 10.28,13.5 10.07,13.71C9.86,13.92 9.57,14.04 9.27,14.04C8.64,14.04 8.13,13.54 8.13,12.91C8.13,12.28 8.64,11.77 9.27,11.77M14.72,11.77C15.35,11.77 15.85,12.28 15.85,12.91C15.85,13.54 15.35,14.04 14.72,14.04C14.09,14.04 13.58,13.54 13.58,12.91C13.58,12.28 14.09,11.77 14.72,11.77Z
 
-$mol_check_icon $mol_check
-
-$mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z
-
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_6
-	hint @ \Toggle lights
-	checked?val <=> lights?val false
-
 $hyoo_match_intro $mol_page
-	title @ \Introduction
+	title @ \Intro
 	body /
 		<= Content $mol_text
 			text @ \
@@ -1361,6 +1361,8 @@ $hyoo_match_app $mol_book2_catalog
 		<= lobby_update null
 		<= redirects null
 	menu_title \$hyoo_match
+	menu_tools /
+		<= Lights $mol_lights_toggle
 	menu_foot /
 		<= Online $hyoo_sync_online
 			yard <= yard $hyoo_sync_client
@@ -1371,7 +1373,6 @@ $hyoo_match_app $mol_book2_catalog
 			uri \https://t.me/nin_jin
 			sub /
 				<= Support_icon $mol_icon_face_agent
-		<= Lights $mol_lights_toggle
 	Placeholder null
 	Final $hyoo_match_final
 	Pair $hyoo_match_single_page
