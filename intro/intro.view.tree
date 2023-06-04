@@ -1,5 +1,10 @@
 $hyoo_match_intro $mol_page
 	title @ \Intro
+	tools /
+		<= Next $mol_link
+			title @ \Let's go 💨
+			arg * \
+				\settings
 	body /
 		<= Content $mol_text
 			text @ \

@@ -1,5 +1,10 @@
 $hyoo_match_final $mol_page
-	title @ \Wating for people
+	title @ \Wating
+	self $hyoo_match_single
+	tools /
+		<= Reset $mol_button_minor
+			title @ \Again 💦
+			click? <=> reset? null
 	body /
 		<= Content $mol_text
 			text @ \

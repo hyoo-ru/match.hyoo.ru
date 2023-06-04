@@ -21,6 +21,7 @@ $hyoo_match_app $mol_book2_catalog
 				<= Support_icon $mol_icon_face_agent
 	Placeholder null
 	Final $hyoo_match_final
+		self <= self
 	Pair $hyoo_match_single_page
 		pair <= pair
 	spreads *
