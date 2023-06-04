@@ -15583,173 +15583,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_help extends $mol_icon {
-        path() {
-            return "M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5C10.34,5 9,6.34 9,8H6C6,4.69 8.69,2 12,2Z";
-        }
-    }
-    $.$mol_icon_help = $mol_icon_help;
-})($ || ($ = {}));
-//mol/icon/help/-view.tree/help.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_icon_help_circle extends $mol_icon {
-        path() {
-            return "M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7C10.9,7 10,7.9 10,9H8C8,6.79 9.79,5 12,5C14.21,5 16,6.79 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.47 17.5,2 12,2Z";
-        }
-    }
-    $.$mol_icon_help_circle = $mol_icon_help_circle;
-})($ || ($ = {}));
-//mol/icon/help/circle/-view.tree/circle.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_icon_help_circle_outline extends $mol_icon {
-        path() {
-            return "M11,18H13V16H11V18M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6C9.79,6 8,7.79 8,10H10C10,8.9 10.9,8 12,8C13.1,8 14,8.9 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10C16,7.79 14.21,6 12,6Z";
-        }
-    }
-    $.$mol_icon_help_circle_outline = $mol_icon_help_circle_outline;
-})($ || ($ = {}));
-//mol/icon/help/circle/outline/-view.tree/outline.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_hint extends $mol_check {
-        dictionary() {
-            return {};
-        }
-        Icon() {
-            const obj = new this.$.$mol_icon_help_circle_outline();
-            return obj;
-        }
-        hint_close() {
-            return this.$.$mol_locale.text('$mol_hint_hint_close');
-        }
-        hint_open() {
-            return this.$.$mol_locale.text('$mol_hint_hint_open');
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_hint.prototype, "Icon", null);
-    $.$mol_hint = $mol_hint;
-})($ || ($ = {}));
-//mol/hint/-view.tree/hint.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_array_lottery(list) {
-        return list[Math.floor(Math.random() * list.length)];
-    }
-    $.$mol_array_lottery = $mol_array_lottery;
-})($ || ($ = {}));
-//mol/array/lottery/lottery.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($mol_hint, {
-            color: $mol_theme.shade,
-            flex: {
-                shrink: 1,
-            },
-            Icon: {
-                color: $mol_theme.control,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/hint/hint.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_hint extends $.$mol_hint {
-            keys_all() {
-                return Object.keys(this.dictionary());
-            }
-            keys_hidden(next) {
-                return new Set(this.$.$mol_state_local.value(`${this}`, next) ?? []);
-            }
-            keys_allowed() {
-                const hidden = this.keys_hidden();
-                return this.keys_all().filter(key => !hidden.has(key));
-            }
-            key_picked() {
-                return $mol_array_lottery(this.keys_allowed());
-            }
-            title() {
-                return this.dictionary()[this.key_picked()] ?? '';
-            }
-            sub() {
-                return this.checked()
-                    ? [this.title()]
-                    : [this.Icon()];
-            }
-            hint() {
-                return this.checked()
-                    ? this.hint_close()
-                    : this.hint_open();
-            }
-            checked(next) {
-                if (next === undefined)
-                    return this.keys_allowed().length > 0;
-                if (next) {
-                    if (this.keys_allowed().length === 0) {
-                        this.keys_hidden([]);
-                    }
-                }
-                else {
-                    this.keys_hidden([
-                        ...this.keys_hidden(),
-                        this.key_picked(),
-                    ]);
-                }
-                return next;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "keys_all", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "keys_hidden", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "keys_allowed", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "key_picked", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "title", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "sub", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "hint", null);
-        __decorate([
-            $mol_mem
-        ], $mol_hint.prototype, "checked", null);
-        $$.$mol_hint = $mol_hint;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/hint/hint.view.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_labeler extends $mol_list {
         rows() {
             return [
@@ -16496,23 +16329,20 @@ var $;
             obj.aspect = () => 1;
             return obj;
         }
-        Hint() {
-            const obj = new this.$.$mol_hint();
-            obj.dictionary = () => ({
-                shot: this.$.$mol_locale.text('$hyoo_match_single_settings_Hint_dictionary_shot')
-            });
+        Shot_hint() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Shot_hint_title');
             return obj;
         }
         shot_content() {
             return [
                 this.Photo(),
                 this.Camera(),
-                this.Hint()
+                this.Shot_hint()
             ];
         }
         Shot() {
             const obj = new this.$.$mol_check();
-            obj.hint = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Shot_hint');
             obj.checked = (next) => this.live(next);
             obj.sub = () => this.shot_content();
             return obj;
@@ -16700,7 +16530,7 @@ var $;
     ], $hyoo_match_single_settings.prototype, "Camera", null);
     __decorate([
         $mol_mem
-    ], $hyoo_match_single_settings.prototype, "Hint", null);
+    ], $hyoo_match_single_settings.prototype, "Shot_hint", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_settings.prototype, "Shot", null);
@@ -16872,8 +16702,8 @@ var $;
             }
             shot_content() {
                 return this.live()
-                    ? [this.Camera(), this.Hint()]
-                    : [this.Photo(), this.Hint()];
+                    ? [this.Camera(), this.Shot_hint()]
+                    : [this.Photo(), this.Shot_hint()];
             }
             Next() {
                 if (!this.ready())
@@ -16929,11 +16759,12 @@ var $;
                     radius: $mol_gap.round,
                 },
             },
-            Hint: {
+            Shot_hint: {
                 position: 'absolute',
                 left: $mol_gap.block,
                 top: $mol_gap.block,
                 color: $mol_theme.text,
+                padding: $mol_gap.text,
             },
             Contacts_hint: {
                 padding: $mol_gap.text,

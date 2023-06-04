@@ -4127,53 +4127,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_icon_help extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_icon_help_circle extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_icon_help_circle_outline extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_hint extends $mol_check {
-        dictionary(): Record<string, any>;
-        Icon(): $mol_icon_help_circle_outline;
-        hint_close(): string;
-        hint_open(): string;
-    }
-}
-
-declare namespace $ {
-    function $mol_array_lottery<Value>(list: readonly Value[]): Value;
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $.$$ {
-    class $mol_hint extends $.$mol_hint {
-        keys_all(): string[];
-        keys_hidden(next?: string[]): Set<string>;
-        keys_allowed(): string[];
-        key_picked(): string;
-        title(): any;
-        sub(): any[];
-        hint(): string;
-        checked(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
     class $mol_labeler extends $mol_list {
         rows(): readonly any[];
         label(): readonly $mol_view_content[];
@@ -4359,7 +4312,7 @@ declare namespace $ {
         Photo(): $$.$mol_image;
         video(): HTMLVideoElement;
         Camera(): $$.$mol_video_camera;
-        Hint(): $$.$mol_hint;
+        Shot_hint(): $$.$mol_paragraph;
         shot_content(): readonly any[];
         Shot(): $$.$mol_check;
         Shot_field(): $$.$mol_form_field;
@@ -4404,7 +4357,7 @@ declare namespace $.$$ {
         photo(): string;
         shot_bid(): string;
         live(next?: boolean): boolean;
-        shot_content(): ($mol_video_camera | $mol_hint)[] | ($mol_image | $mol_hint)[];
+        shot_content(): ($mol_paragraph | $mol_video_camera)[] | ($mol_paragraph | $mol_image)[];
         Next(): $mol_link;
         bid_required(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => string>): string;
         bid_one(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => any[]>): string;
