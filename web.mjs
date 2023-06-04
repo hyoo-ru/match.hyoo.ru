@@ -16802,6 +16802,7 @@ var $;
                 aspectRatio: 1,
             },
             Camera: {
+                aspectRatio: 1,
                 border: {
                     radius: $mol_gap.round,
                 },
