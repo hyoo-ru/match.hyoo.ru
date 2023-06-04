@@ -10,10 +10,10 @@ namespace $.$$ {
 		
 		Shot: {
 			padding: $mol_gap.block,
+			aspectRatio: 1,
 		},
 		
 		Camera: {
-			aspectRatio: 1,
 			border: {
 				radius: $mol_gap.round,
 			},
