@@ -76,4 +76,6 @@
 	deploy \/hyoo/page/logo/logo.svg
 \/hyoo/match/app
 	include \/mol/offline/install
+	deploy \/hyoo/match/app/manifest.json
 	deploy \/hyoo/match/logo/logo.svg
+	deploy \/hyoo/match/logo/logo.png
