@@ -8304,6 +8304,7 @@ var $;
                 id: $mol_const(knight.id),
                 peer: $mol_const(knight),
             });
+            land_outer.join();
             for (const peer of law)
                 land_outer.level(peer || this.peer.id, $hyoo_crowd_peer_level.law);
             for (const peer of mod)
@@ -9616,6 +9617,12 @@ var $;
         liked(next) {
             return this.likes().counted(next);
         }
+        mutual() {
+            const Single = this.world().Fund($hyoo_match_single);
+            return this.likes().list()
+                .map(id => Single.Item(id))
+                .filter(pair => pair.likes().list().includes(this.id()));
+        }
         skipped() {
             return this.sub('$hyoo_match_single:skipped', $hyoo_crowd_list);
         }
@@ -9674,6 +9681,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single.prototype, "likes", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single.prototype, "mutual", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single.prototype, "skipped", null);
@@ -14226,12 +14236,12 @@ var $;
                 return this.single().world().home().chief.as($hyoo_match_single);
             }
             like() {
-                this.self().skipped().add(this.single().id());
                 this.single().liked(true);
+                this.self().skipped().add(this.single().id());
             }
             skip() {
-                this.self().skipped().add(this.single().id());
                 this.single().liked(false);
+                this.self().skipped().add(this.single().id());
             }
         }
         __decorate([
@@ -17209,9 +17219,9 @@ var $;
             },
             Shot: {
                 padding: $mol_gap.block,
+                aspectRatio: 1,
             },
             Camera: {
-                aspectRatio: 1,
                 border: {
                     radius: $mol_gap.round,
                 },
@@ -17908,6 +17918,12 @@ var $;
         Pair() {
             const obj = new this.$.$hyoo_match_single_page();
             obj.single = () => this.pair();
+            obj.Contacts = () => null;
+            return obj;
+        }
+        Match() {
+            const obj = new this.$.$hyoo_match_single_page();
+            obj.single = () => this.pair();
             return obj;
         }
         spreads() {
@@ -17968,8 +17984,12 @@ var $;
             obj.single = () => this.self();
             return obj;
         }
+        look_pages() {
+            return [];
+        }
         Look() {
-            const obj = new this.$.$mol_page();
+            const obj = new this.$.$mol_book2();
+            obj.pages = () => this.look_pages();
             return obj;
         }
         Keys() {
@@ -17990,6 +18010,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "Pair", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_app.prototype, "Match", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "Theme", null);
@@ -18071,12 +18094,22 @@ var $;
                 .filter($mol_guard_defined);
         }
         find_pair(self) {
+            if (!self.ready())
+                return null;
             const age_self = self.age_self();
             const sex_self = self.sex_self();
             const age_pref = self.age_pref_all();
             const sex_pref = self.sex_pref_all();
             const skipped = self.skipped();
             const Single = this.world().Fund($hyoo_match_single);
+            for (const id of $mol_array_shuffle(self.likes().list())) {
+                if (skipped.has(id))
+                    continue;
+                const single = Single.Item(id);
+                if (!single.ready())
+                    continue;
+                return single;
+            }
             for (const place of self.places()) {
                 let ids = [];
                 for (const age of age_pref) {
@@ -23526,10 +23559,10 @@ var $;
                     }
                 }
             }
-            Look() {
+            look_pages() {
                 if (!this.pair())
-                    return this.Final();
-                return super.Pair();
+                    return [this.Final()];
+                return [this.Pair()];
             }
             redirects() {
                 if (this.spread() === 'look') {
@@ -23555,7 +23588,7 @@ var $;
         ], $hyoo_match_app.prototype, "lobby_update", null);
         __decorate([
             $mol_mem
-        ], $hyoo_match_app.prototype, "Look", null);
+        ], $hyoo_match_app.prototype, "look_pages", null);
         $$.$hyoo_match_app = $hyoo_match_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

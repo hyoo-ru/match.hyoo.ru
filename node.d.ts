@@ -2589,6 +2589,7 @@ declare namespace $ {
         age_pref(name: string, next?: boolean): boolean;
         likes(): $hyoo_crowd_counter;
         liked(next?: boolean): boolean | undefined;
+        mutual(): $hyoo_match_single[];
         skipped(): $hyoo_crowd_list;
     }
 }
@@ -4607,6 +4608,7 @@ declare namespace $ {
         Placeholder(): any;
         Final(): $hyoo_match_final;
         Pair(): $$.$hyoo_match_single_page;
+        Match(): $$.$hyoo_match_single_page;
         spreads(): Record<string, any>;
         Theme(): $$.$mol_theme_auto;
         lobby_update(): any;
@@ -4619,7 +4621,8 @@ declare namespace $ {
         Lights(): $$.$mol_lights_toggle;
         Intro(): $hyoo_match_intro;
         Settings(): $$.$hyoo_match_single_settings;
-        Look(): $mol_page;
+        look_pages(): readonly any[];
+        Look(): $$.$mol_book2;
         Keys(): $$.$hyoo_meta_safe;
     }
 }
@@ -4629,7 +4632,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_array_shuffle<Item>(array: Item[]): Item[];
+    function $mol_array_shuffle<Item>(array: readonly Item[]): Item[];
 }
 
 declare namespace $ {
@@ -5824,7 +5827,7 @@ declare namespace $.$$ {
         lobby(): $hyoo_match_lobby;
         intro(): $hyoo_page_side;
         lobby_update(): void;
-        Look(): $hyoo_match_single_page | $hyoo_match_final;
+        look_pages(): $hyoo_match_final[] | $hyoo_match_single_page[];
         redirects(): void;
     }
 }
