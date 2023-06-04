@@ -21,10 +21,7 @@ $hyoo_match_app $mol_book2_catalog
 	Placeholder null
 	Final $hyoo_match_final
 	Pair $hyoo_match_single_page
-		single <= pair
-		Contacts null
-	Match $hyoo_match_single_page
-		single <= pair
+		pair <= pair
 	spreads *
 		\
 			<= Intro $hyoo_match_intro

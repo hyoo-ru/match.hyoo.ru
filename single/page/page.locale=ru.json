@@ -1,5 +1,6 @@
 {
 	"$hyoo_match_single_page_title": "Оглядеться",
 	"$hyoo_match_single_page_Skip_hint": "Пропустить",
-	"$hyoo_match_single_page_Like_hint": "Нравится"
+	"$hyoo_match_single_page_Like_hint": "Нравится",
+	"$hyoo_match_single_page_Match_hint_text": "++Удача!++ --У вас есть час для свидания.--"
 }

@@ -25,6 +25,19 @@ namespace $.$$ {
 			height: 'auto',
 		},
 		
+		Mutual: {
+			alignSelf: 'flex-end',
+			justifySelf: 'self-start',
+			padding: $mol_gap.block,
+			width: '50%',
+			color: $mol_theme.special,
+			'--mol_theme_hover': 'transparent',
+		},
+		Mutual_icon: {
+			width: '50%',
+			height: 'auto',
+		},
+		
 		Like: {
 			alignSelf: 'stretch',
 			justifySelf: 'self-start',

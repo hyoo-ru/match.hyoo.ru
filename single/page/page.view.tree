@@ -1,17 +1,19 @@
 $hyoo_match_single_page $mol_page
 	title @ \Look around
-	single $hyoo_match_single
+	self $hyoo_match_single
+	pair $hyoo_match_single
 		title => name
 		greet => greet
 		contacts => contacts
 		places => places
 		photo_moment => photo_moment
+	mutual false
 	title_content / <= name
 	tools /
 		<= Moment $mol_date
 			value_moment <= photo_moment
 	body /
-		<= Gallery $mol_stack sub /
+		<= Gallery $mol_stack sub <= gallery /
 			<= Photo $mol_image
 				uri <= photo \
 			<= Skip $mol_button_minor
@@ -19,16 +21,20 @@ $hyoo_match_single_page $mol_page
 				click? <=> skip? null
 				sub /
 					<= Skip_icon $mol_icon_window_close
+			<= Mutual $mol_row sub /
+				<= Mutual_icon $mol_icon_heart_flash
 			<= Like $mol_button_minor
 				hint @ \Like
 				click? <=> like? null
 				sub /
 					<= Like_icon $mol_icon_heart_outline
+		<= Match $mol_list rows /
+			<= Match_hint $mol_text text @ \++Match!++ --You have an hour for a date.--
+			<= Contacts $mol_text
+				text <= contacts
 		<= Places $hyoo_match_places
 			enabled false
 			Pick null
 			value? <= places
 		<= Brief $mol_text
 			text <= greet
-		<= Contacts $mol_text
-			text <= contacts

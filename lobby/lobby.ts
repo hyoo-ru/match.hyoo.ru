@@ -36,11 +36,11 @@ namespace $ {
 			const skipped = self.skipped()
 			const Single = this.world()!.Fund( $hyoo_match_single )
 			
-			for( const id of $mol_array_shuffle( self.likes().list() ) ) {
-					
-				if( skipped.has( id ) ) continue
+			for( const id of self.likes().list() ) {
+				
 				
 				const single = Single.Item( id )
+				if( !single.liked() && skipped.has( id ) ) continue
 				if( !single.ready() ) continue
 				
 				return single
