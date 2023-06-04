@@ -2590,7 +2590,7 @@ declare namespace $ {
         likes(): $hyoo_crowd_counter;
         liked(next?: boolean): boolean | undefined;
         mutual(): $hyoo_match_single[];
-        skipped(): $hyoo_crowd_list;
+        skipped(): $hyoo_crowd_list | null;
     }
 }
 
@@ -3607,6 +3607,20 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_icon_heart_flash extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_row extends $mol_view {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_icon_heart_outline extends $mol_icon {
         path(): string;
     }
@@ -3726,12 +3740,14 @@ declare namespace $ {
 declare namespace $ {
     class $hyoo_match_single_page extends $mol_page {
         title(): string;
+        self(): $hyoo_match_single;
         name(): string;
         greet(): string;
         contacts(): string;
         places(): string[];
         photo_moment(): $mol_time_moment;
-        single(): $hyoo_match_single;
+        pair(): $hyoo_match_single;
+        mutual(): boolean;
         title_content(): readonly any[];
         tools(): readonly any[];
         body(): readonly any[];
@@ -3741,13 +3757,18 @@ declare namespace $ {
         skip(next?: any): any;
         Skip_icon(): $mol_icon_window_close;
         Skip(): $mol_button_minor;
+        Mutual_icon(): $mol_icon_heart_flash;
+        Mutual(): $mol_row;
         like(next?: any): any;
         Like_icon(): $mol_icon_heart_outline;
         Like(): $mol_button_minor;
+        gallery(): readonly any[];
         Gallery(): $mol_stack;
+        Match_hint(): $$.$mol_text;
+        Contacts(): $$.$mol_text;
+        Match(): $$.$mol_list;
         Places(): $hyoo_match_places;
         Brief(): $$.$mol_text;
-        Contacts(): $$.$mol_text;
     }
 }
 
@@ -3757,6 +3778,10 @@ declare namespace $.$$ {
         self(): $hyoo_match_single;
         like(): void;
         skip(): void;
+        mutual(): boolean;
+        dating(): boolean;
+        Match(): $mol_list;
+        gallery(): ($mol_button_minor | $mol_image | $mol_row)[];
     }
 }
 
@@ -4293,14 +4318,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_row extends $mol_view {
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     class $mol_form extends $mol_list {
         submit_allowed(): boolean;
         submit_blocked(): boolean;
@@ -4608,7 +4625,6 @@ declare namespace $ {
         Placeholder(): any;
         Final(): $hyoo_match_final;
         Pair(): $$.$hyoo_match_single_page;
-        Match(): $$.$hyoo_match_single_page;
         spreads(): Record<string, any>;
         Theme(): $$.$mol_theme_auto;
         lobby_update(): any;

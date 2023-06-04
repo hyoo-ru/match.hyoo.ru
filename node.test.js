@@ -9616,7 +9616,7 @@ var $;
                 .filter(pair => pair.likes().list().includes(this.id()));
         }
         skipped() {
-            return this.sub('$hyoo_match_single:skipped', $hyoo_crowd_list);
+            return this.yoke('$hyoo_match_single:skipped', $hyoo_crowd_list);
         }
     }
     __decorate([
@@ -9673,6 +9673,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_single.prototype, "likes", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single.prototype, "liked", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single.prototype, "mutual", null);
@@ -13409,6 +13412,34 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_icon_heart_flash extends $mol_icon {
+        path() {
+            return "M16.5,2.83C14.76,2.83 13.09,3.64 12,4.9C10.91,3.64 9.24,2.83 7.5,2.83C4.42,2.83 2,5.24 2,8.33C2,12.1 5.4,15.19 10.55,19.86L12,21.17L13.45,19.86C18.6,15.19 22,12.1 22,8.33C22,5.24 19.58,2.83 16.5,2.83M12,17.83V13.83H9L12,6.83V10.83H15";
+        }
+    }
+    $.$mol_icon_heart_flash = $mol_icon_heart_flash;
+})($ || ($ = {}));
+//mol/icon/heart/flash/-view.tree/flash.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_row extends $mol_view {
+    }
+    $.$mol_row = $mol_row;
+})($ || ($ = {}));
+//mol/row/-view.tree/row.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+//mol/row/-css/row.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_icon_heart_outline extends $mol_icon {
         path() {
             return "M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z";
@@ -14059,24 +14090,31 @@ var $;
         title() {
             return this.$.$mol_locale.text('$hyoo_match_single_page_title');
         }
-        name() {
-            return this.single().title();
-        }
-        greet() {
-            return this.single().greet();
-        }
-        contacts() {
-            return this.single().contacts();
-        }
-        places() {
-            return this.single().places();
-        }
-        photo_moment() {
-            return this.single().photo_moment();
-        }
-        single() {
+        self() {
             const obj = new this.$.$hyoo_match_single();
             return obj;
+        }
+        name() {
+            return this.pair().title();
+        }
+        greet() {
+            return this.pair().greet();
+        }
+        contacts() {
+            return this.pair().contacts();
+        }
+        places() {
+            return this.pair().places();
+        }
+        photo_moment() {
+            return this.pair().photo_moment();
+        }
+        pair() {
+            const obj = new this.$.$hyoo_match_single();
+            return obj;
+        }
+        mutual() {
+            return false;
         }
         title_content() {
             return [
@@ -14091,9 +14129,9 @@ var $;
         body() {
             return [
                 this.Gallery(),
+                this.Match(),
                 this.Places(),
-                this.Brief(),
-                this.Contacts()
+                this.Brief()
             ];
         }
         Moment() {
@@ -14127,6 +14165,17 @@ var $;
             ];
             return obj;
         }
+        Mutual_icon() {
+            const obj = new this.$.$mol_icon_heart_flash();
+            return obj;
+        }
+        Mutual() {
+            const obj = new this.$.$mol_row();
+            obj.sub = () => [
+                this.Mutual_icon()
+            ];
+            return obj;
+        }
         like(next) {
             if (next !== undefined)
                 return next;
@@ -14145,12 +14194,34 @@ var $;
             ];
             return obj;
         }
-        Gallery() {
-            const obj = new this.$.$mol_stack();
-            obj.sub = () => [
+        gallery() {
+            return [
                 this.Photo(),
                 this.Skip(),
+                this.Mutual(),
                 this.Like()
+            ];
+        }
+        Gallery() {
+            const obj = new this.$.$mol_stack();
+            obj.sub = () => this.gallery();
+            return obj;
+        }
+        Match_hint() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.$.$mol_locale.text('$hyoo_match_single_page_Match_hint_text');
+            return obj;
+        }
+        Contacts() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.contacts();
+            return obj;
+        }
+        Match() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => [
+                this.Match_hint(),
+                this.Contacts()
             ];
             return obj;
         }
@@ -14166,15 +14237,13 @@ var $;
             obj.text = () => this.greet();
             return obj;
         }
-        Contacts() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => this.contacts();
-            return obj;
-        }
     }
     __decorate([
         $mol_mem
-    ], $hyoo_match_single_page.prototype, "single", null);
+    ], $hyoo_match_single_page.prototype, "self", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_page.prototype, "pair", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_page.prototype, "Moment", null);
@@ -14192,6 +14261,12 @@ var $;
     ], $hyoo_match_single_page.prototype, "Skip", null);
     __decorate([
         $mol_mem
+    ], $hyoo_match_single_page.prototype, "Mutual_icon", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_page.prototype, "Mutual", null);
+    __decorate([
+        $mol_mem
     ], $hyoo_match_single_page.prototype, "like", null);
     __decorate([
         $mol_mem
@@ -14204,13 +14279,19 @@ var $;
     ], $hyoo_match_single_page.prototype, "Gallery", null);
     __decorate([
         $mol_mem
+    ], $hyoo_match_single_page.prototype, "Match_hint", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_page.prototype, "Contacts", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_page.prototype, "Match", null);
+    __decorate([
+        $mol_mem
     ], $hyoo_match_single_page.prototype, "Places", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_single_page.prototype, "Brief", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_page.prototype, "Contacts", null);
     $.$hyoo_match_single_page = $hyoo_match_single_page;
 })($ || ($ = {}));
 //hyoo/match/single/page/-view.tree/page.view.tree.ts
@@ -14222,18 +14303,44 @@ var $;
     (function ($$) {
         class $hyoo_match_single_page extends $.$hyoo_match_single_page {
             photo() {
-                return URL.createObjectURL(this.single().photo());
+                return URL.createObjectURL(this.pair().photo());
             }
             self() {
-                return this.single().world().home().chief.as($hyoo_match_single);
+                return this.pair().world().home().chief.as($hyoo_match_single);
             }
             like() {
-                this.single().liked(true);
-                this.self().skipped().add(this.single().id());
+                const pair = this.pair();
+                pair.liked(true);
+                this.self().skipped().add(pair.id());
             }
             skip() {
-                this.single().liked(false);
-                this.self().skipped().add(this.single().id());
+                const pair = this.pair();
+                pair.liked(false);
+                this.self().skipped().add(pair.id());
+            }
+            mutual() {
+                if (!this.pair().liked())
+                    return false;
+                if (!this.self().likes().list().includes(this.pair().id()))
+                    return false;
+                return true;
+            }
+            dating() {
+                if (!this.mutual())
+                    return false;
+                return this.self().skipped().land.last_stamp() > $mol_state_time.now(1000 * 60) - 1000 * 60 * 60;
+            }
+            Match() {
+                return this.mutual() ? super.Match() : null;
+            }
+            gallery() {
+                return [
+                    this.Photo(),
+                    this.mutual()
+                        ? this.Mutual()
+                        : this.Like(),
+                    ...this.dating() ? [] : [this.Skip()],
+                ];
             }
         }
         __decorate([
@@ -14242,6 +14349,15 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_match_single_page.prototype, "self", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_single_page.prototype, "mutual", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_single_page.prototype, "dating", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_single_page.prototype, "gallery", null);
         $$.$hyoo_match_single_page = $hyoo_match_single_page;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -14270,6 +14386,18 @@ var $;
                 '--mol_theme_hover': 'transparent',
             },
             Skip_icon: {
+                width: '50%',
+                height: 'auto',
+            },
+            Mutual: {
+                alignSelf: 'flex-end',
+                justifySelf: 'self-start',
+                padding: $mol_gap.block,
+                width: '50%',
+                color: $mol_theme.special,
+                '--mol_theme_hover': 'transparent',
+            },
+            Mutual_icon: {
                 width: '50%',
                 height: 'auto',
             },
@@ -16279,22 +16407,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_row extends $mol_view {
-    }
-    $.$mol_row = $mol_row;
-})($ || ($ = {}));
-//mol/row/-view.tree/row.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-//mol/row/-css/row.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_form extends $mol_list {
         submit_allowed() {
             return true;
@@ -17910,13 +18022,7 @@ var $;
         }
         Pair() {
             const obj = new this.$.$hyoo_match_single_page();
-            obj.single = () => this.pair();
-            obj.Contacts = () => null;
-            return obj;
-        }
-        Match() {
-            const obj = new this.$.$hyoo_match_single_page();
-            obj.single = () => this.pair();
+            obj.pair = () => this.pair();
             return obj;
         }
         spreads() {
@@ -18003,9 +18109,6 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "Pair", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_app.prototype, "Match", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "Theme", null);
@@ -18095,10 +18198,10 @@ var $;
             const sex_pref = self.sex_pref_all();
             const skipped = self.skipped();
             const Single = this.world().Fund($hyoo_match_single);
-            for (const id of $mol_array_shuffle(self.likes().list())) {
-                if (skipped.has(id))
-                    continue;
+            for (const id of self.likes().list()) {
                 const single = Single.Item(id);
+                if (!single.liked() && skipped.has(id))
+                    continue;
                 if (!single.ready())
                     continue;
                 return single;
@@ -23512,6 +23615,8 @@ var $;
                 const found = this.lobby().find_pair(this.self());
                 if (!found)
                     this.lobby().land.clocks;
+                else
+                    found.liked();
                 return found;
             }
             lobby() {
