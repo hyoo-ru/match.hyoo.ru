@@ -863,6 +863,10 @@ $mol_select_list $mol_view
 
 $hyoo_match_places $mol_select_list
 	dictionary *
+		- \Planetes
+		mars \Марс
+		moon \Луна
+		earth \Земля
 		- \Cities
 		RU-MOW \Москва
 		RU-SPE \Санкт-Петербург
@@ -980,11 +984,6 @@ $hyoo_match_places $mol_select_list
 		america-nord \Северная Америка
 		antarctica \Антарктида
 		australia \Автралия
-		- \Planetes
-		earth \Земля
-		moon \Луна
-		mars \Марс
-		venus \Венера
 
 $hyoo_match_single_page $mol_page
 	title @ \Persons

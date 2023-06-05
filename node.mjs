@@ -14014,6 +14014,9 @@ var $;
     class $hyoo_match_places extends $mol_select_list {
         dictionary() {
             return {
+                mars: "Марс",
+                moon: "Луна",
+                earth: "Земля",
                 "RU-MOW": "Москва",
                 "RU-SPE": "Санкт-Петербург",
                 "UA-40": "Севастополь",
@@ -14126,11 +14129,7 @@ var $;
                 "aerica-south": "Южная Америка",
                 "america-nord": "Северная Америка",
                 antarctica: "Антарктида",
-                australia: "Автралия",
-                earth: "Земля",
-                moon: "Луна",
-                mars: "Марс",
-                venus: "Венера"
+                australia: "Автралия"
             };
         }
     }
