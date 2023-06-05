@@ -102,7 +102,7 @@ namespace $ {
 		
 		@ $mol_mem
 		likes() {
-			return this.sub( '$hyoo_match_single:likes', $hyoo_crowd_counter )
+			return this.sub( '$hyoo_match_single:likes:2', $hyoo_crowd_counter )
 		}
 		
 		@ $mol_mem
@@ -120,7 +120,7 @@ namespace $ {
 		
 		@ $mol_mem
 		skipped() {
-			return this.yoke( '$hyoo_match_single:skipped', $hyoo_crowd_list )
+			return this.yoke( '$hyoo_match_single:skipped:2', $hyoo_crowd_list )
 		}
 		
 	}
