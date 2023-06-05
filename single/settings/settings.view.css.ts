@@ -26,6 +26,7 @@ namespace $.$$ {
 			top: $mol_gap.block,
 			color: $mol_theme.text,
 			padding: $mol_gap.text,
+			textShadow: '0 0 2px black',
 		},
 		
 		Contacts_hint: {
