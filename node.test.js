@@ -9606,7 +9606,7 @@ var $;
             return this.age_pref_node().has(name, next);
         }
         likes() {
-            return this.sub('$hyoo_match_single:likes', $hyoo_crowd_counter);
+            return this.sub('$hyoo_match_single:likes:2', $hyoo_crowd_counter);
         }
         liked(next) {
             return this.likes().counted(next);
@@ -9618,7 +9618,7 @@ var $;
                 .filter(pair => pair.likes().list().includes(this.id()));
         }
         skipped() {
-            return this.yoke('$hyoo_match_single:skipped', $hyoo_crowd_list);
+            return this.yoke('$hyoo_match_single:skipped:2', $hyoo_crowd_list);
         }
     }
     __decorate([
