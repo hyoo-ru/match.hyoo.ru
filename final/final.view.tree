@@ -6,8 +6,11 @@ $hyoo_match_final $mol_page
 			title @ \Again 💦
 			click? <=> reset? null
 	body /
+		<= Share $mol_button_share
+			capture <= Content
+			uri \/
+			title @ \Tell the others for now:
 		<= Content $mol_text
 			text @ \
-				\Tell the others for now:
 				\" 🔥 The Tinder is gone... Meet https://match.hyoo.ru - a dating service that benefits from you finding a couple and taking off into the sunset.
 				\" No fakes, dead souls, advertising and pay wall. Share it with your friends - let them find their soulmate too 💞
