@@ -4317,6 +4317,7 @@ declare namespace $ {
         bid_one(id: any): string;
         tools(): readonly any[];
         body(): readonly any[];
+        Incoplete(): $$.$mol_paragraph;
         Next(): $$.$mol_link;
         shot_bid(): string;
         live(next?: any): boolean;
@@ -4370,6 +4371,7 @@ declare namespace $.$$ {
         shot_bid(): string;
         live(next?: boolean): boolean;
         shot_content(): ($mol_paragraph | $mol_video_camera)[] | ($mol_paragraph | $mol_image)[];
+        Incoplete(): $mol_paragraph;
         Next(): $mol_link;
         bid_required(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => string>): string;
         bid_one(name: $mol_type_keys_extract<Omit<$hyoo_match_single_settings, `bid_${string}`>, () => any[]>): string;

@@ -16753,6 +16753,7 @@ var $;
         }
         tools() {
             return [
+                this.Incoplete(),
                 this.Next()
             ];
         }
@@ -16767,6 +16768,11 @@ var $;
                 this.Contacts_hint(),
                 this.Contacts_field()
             ];
+        }
+        Incoplete() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.$.$mol_locale.text('$hyoo_match_single_settings_Incoplete_title');
+            return obj;
         }
         Next() {
             const obj = new this.$.$mol_link();
@@ -16989,6 +16995,9 @@ var $;
     ], $hyoo_match_single_settings.prototype, "single", null);
     __decorate([
         $mol_mem
+    ], $hyoo_match_single_settings.prototype, "Incoplete", null);
+    __decorate([
+        $mol_mem
     ], $hyoo_match_single_settings.prototype, "Next", null);
     __decorate([
         $mol_mem
@@ -17176,6 +17185,11 @@ var $;
                     ? [this.Camera(), this.Shot_hint()]
                     : [this.Photo(), this.Shot_hint()];
             }
+            Incoplete() {
+                if (this.ready())
+                    return null;
+                return super.Incoplete();
+            }
             Next() {
                 if (!this.ready())
                     return null;
@@ -17219,6 +17233,10 @@ var $;
                 flex: {
                     grow: 0,
                 },
+            },
+            Incoplete: {
+                color: $mol_theme.focus,
+                padding: $mol_gap.text,
             },
             Shot: {
                 padding: $mol_gap.block,
@@ -23517,7 +23535,7 @@ var $;
                 return found;
             }
             lobby() {
-                const land_id = '3rmugz_mehovk';
+                const land_id = 'evbktk_nufd3e';
                 const rights = new Uint8Array($mol_fetch.buffer(require(`/hyoo/match/app/${land_id}!${land_id}.bin`)));
                 $mol_wire_sync(this.yard().world()).apply(rights);
                 return this.yard().land(land_id).chief.as($hyoo_match_lobby);
@@ -23632,7 +23650,7 @@ var $;
 })($ || ($ = {}));
 //hyoo/match/app/app.view.css.ts
 ;
-var $node = $node || {} ; $node[ "/hyoo/match/app/3rmugz_mehovk!3rmugz_mehovk.bin" ] = "data:application/octet-stream;base64,wyqUDTB+vdDDKpQNMH690MMqlA0wfr3QwyqUDTB+vdAAAAAAAAAAAAAAAAAAAAAAis2QzwAAWAAibFpuV1BaNGZnQmZrM2UzcExpLUdYSTZyQ3dwZlhqeGc2MW1TMUpGbGpnSUNXekkwMnhpUGxvTFNwS3gwM3FuekY2ZE8xOThiZDYzd0o5cHd3eFFoRXMivYgoSwSl8ATV2l14Rb6BxTdeYFOHhvMGN+lSr/J2rWqEoC0zgQtRBT9z9g/LTek+FQf2SoMV7OblNRr4E7HH9cMqlA0wfr3QwyqUDTB+vdDDKpQNMH690OPP4hHPDJHgAAAAAAAAAAAAAAAAAAAAAIvNkM8AAAEAMwAAAAAAAADdbnCWXkMEyNrNJVCX7r0uXYSZtM0bObIJ0p8+UjoVbX1Rs26K+ngF0KvQlsc/64FodCgUgGuem87F9ci3pX4hwyqUDTB+vdDDKpQNMH690MMqlA0wfr3QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjM2QzwAAAQAxAAAAAAAAAK4eMTUgQ1AB+1fkqhkI4eZ8NBqMxt4SbTjCBzAF50fpunpELvXLDH3Qrl2DJM6XFkR+9RFd6FkZ8yuZy5npwSU="
+var $node = $node || {} ; $node[ "/hyoo/match/app/evbktk_nufd3e!evbktk_nufd3e.bin" ] = "data:application/octet-stream;base64,KLWXNQqK8NUotZc1Corw1Si1lzUKivDVKLWXNQqK8NUAAAAAAAAAAAAAAAAAAAAAr3K+zwAAWAAiX09IM1FJdUJqV2FIaHF0dDVjRm1uV0dUNXdPc3o2cWZKNS1Tbmx0cExNRWpMNTdRWUFoNnF3RlFOT2xYczFNMC1LTTE4MWZ5MWZ1Wm04VmF0bF9HQXMiUw/6zD0ezKRQz+qqWxg5LY06j1806q/P3Y3BiFK6LS6rk2CMTTBkezKxlvm+TJw3Kok5OdU3QgXSZ+fT8PhKXCi1lzUKivDVKLWXNQqK8NUotZc1Corw1ePP4hHPDJHgAAAAAAAAAAAAAAAAAAAAALByvs8AAAEAMwAAAAAAAACFxVuuCU9JeG4UOPwrHRF1vSvLZiIrgWRyC11NJInUPeh9RkolCfHGUN3Scs76CNhmGtmXXBBvMtsBEEkiQpqzKLWXNQqK8NUotZc1Corw1Si1lzUKivDVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsXK+zwAAAQAxAAAAAAAAAEtDetoYpmt7cRomrYaX53jZ6Xp0pMJtMiDMdyk++jR2QGY41uMSGUr28832YM/X0PivFG4NTf7hj3hnQiluf0I="
 
 ;
 "use strict";
