@@ -17520,7 +17520,7 @@ var $;
                 }
                 if (next)
                     return true;
-                const pic = $mol_picture.fit(this.video());
+                const pic = $mol_picture.fit(this.video(), 720);
                 const blob = pic.format('image/jpeg');
                 this.single().photo(blob);
                 return false;
