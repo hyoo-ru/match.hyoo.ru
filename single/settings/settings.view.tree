@@ -16,7 +16,7 @@ $hyoo_match_single_settings $mol_page
 	bid_required* @ \Required
 	bid_one* @ \At least one
 	tools /
-		<= Incoplete $mol_paragraph title @ \isn't visible 💤
+		<= Incoplete $mol_paragraph title @ \isn't visible 🙈
 		<= Next $mol_link
 			title @ \is visible ✅
 			arg * \
