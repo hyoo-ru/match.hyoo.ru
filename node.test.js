@@ -9727,12 +9727,16 @@ var $;
         }
         sub() {
             return [
-                this.Icon()
+                this.Icon(),
+                this.title()
             ];
         }
         Icon() {
             const obj = new this.$.$mol_icon_share_variant();
             return obj;
+        }
+        title() {
+            return "";
         }
     }
     __decorate([
