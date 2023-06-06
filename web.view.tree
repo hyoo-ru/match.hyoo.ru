@@ -674,7 +674,7 @@ $mol_text_list_item $mol_paragraph
 		mol_text_list_item_index <= index 0
 
 $hyoo_match_final $mol_page
-	title @ \Wating
+	title @ \Waiting
 	self $hyoo_match_single
 	tools /
 		<= Reset $mol_button_minor
@@ -687,7 +687,7 @@ $hyoo_match_final $mol_page
 			title @ \Tell the others for now:
 		<= Content $mol_text
 			text @ \
-				\" 🔥 The Tinder is gone... Meet https://match.hyoo.ru - a dating service that benefits from you finding a couple and taking off into the sunset.
+				\" 🔥 The Tinder is gone... Meet **match.hyoo.ru** - a dating service that benefits from you finding a couple and taking off into the sunset.
 				\" No fakes, dead souls, advertising and pay wall. Share it with your friends - let them find their soulmate too 💞
 
 $mol_pick $mol_pop
@@ -1102,8 +1102,8 @@ $hyoo_match_intro $mol_page
 				\
 				\= Usage
 				\" 🤳 Fill out your \\profile\#!=settings\\
-				\" 💗 Like other \\people\#!=look\\
 				\" 📅 Update your photo every day
+				\" 💗 Like other \\persons\#!=look\\
 				\" 💬 Enjoy the two of you
 				\" 🔄 Come back in an hour
 				\
