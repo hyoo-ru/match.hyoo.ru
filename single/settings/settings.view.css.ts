@@ -8,6 +8,11 @@ namespace $.$$ {
 			},
 		},
 		
+		Incoplete: {
+			color: $mol_theme.focus,
+			padding: $mol_gap.text,
+		},
+		
 		Shot: {
 			padding: $mol_gap.block,
 			aspectRatio: 1,

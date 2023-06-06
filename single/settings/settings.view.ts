@@ -35,6 +35,11 @@ namespace $.$$ {
 				: [ this.Photo(), this.Shot_hint() ]
 		}
 		
+		Incoplete() {
+			if( this.ready() ) return null as never
+			return super.Incoplete()
+		}
+		
 		Next() {
 			if( !this.ready() ) return null as never
 			return super.Next()

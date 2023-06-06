@@ -1,8 +1,9 @@
 {
 	"$hyoo_match_single_settings_title": "Профиль",
 	"$hyoo_match_single_settings_bid_required": "Обязательно",
+	"$hyoo_match_single_settings_Incoplete_title": "скрыт ❌",
 	"$hyoo_match_single_settings_bid_one": "Хотябы один",
-	"$hyoo_match_single_settings_Next_title": "Готово ✅",
+	"$hyoo_match_single_settings_Next_title": "видим ✅",
 	"$hyoo_match_single_settings_shot_bid": "Нужно свежее",
 	"$hyoo_match_single_settings_Shot_hint_title": "Жми чтобы сфотаться",
 	"$hyoo_match_single_settings_Shot_field_name": "Сегодняшнее фото",
