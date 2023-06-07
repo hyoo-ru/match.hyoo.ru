@@ -4563,6 +4563,8 @@ declare namespace $ {
         sex_pref(): string[];
         age_pref(): string[];
         single(): $hyoo_match_single;
+        minimal_width(): number;
+        minimal_height(): number;
         sub(): readonly any[];
         photo(): string;
         Photo(): $$.$mol_image;

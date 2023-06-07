@@ -17211,6 +17211,12 @@ var $;
             const obj = new this.$.$hyoo_match_single();
             return obj;
         }
+        minimal_width() {
+            return 160;
+        }
+        minimal_height() {
+            return 200;
+        }
         sub() {
             return [
                 this.Photo(),
@@ -17415,7 +17421,7 @@ var $;
             single_list() {
                 if (!this.lobby().editable())
                     return [];
-                return this.lobby().land.residents().map(id => this.Single(id));
+                return this.lobby().land.residents().slice().reverse().map(id => this.Single(id));
             }
             single(id) {
                 return this.lobby().world().Fund($hyoo_match_single).Item(id);
@@ -17438,6 +17444,10 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($hyoo_match_lobby_page, {
+            flex: {
+                basis: `40rem`,
+                grow: 1,
+            },
             Single_list: {
                 gap: $mol_gap.block,
             },
