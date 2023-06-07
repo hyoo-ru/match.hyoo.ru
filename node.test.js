@@ -2837,7 +2837,12 @@ var $;
         ensure_visible(view, align = "start") {
             const path = this.view_find(v => v === view).next().value;
             this.force_render(new Set(path));
-            this.dom_final();
+            try {
+                this.dom_final();
+            }
+            catch (err) {
+                $mol_fail_log(err);
+            }
             view.dom_node().scrollIntoView({ block: align });
         }
         bring() {
@@ -14956,7 +14961,7 @@ var $;
 //mol/lights/toggle/toggle.view.ts
 ;
 "use strict";
-let $hyoo_sync_revision = "3406820";
+let $hyoo_sync_revision = "6ffbb1f";
 //hyoo/sync/-meta.tree/revision.meta.tree.ts
 ;
 "use strict";
@@ -15030,7 +15035,7 @@ var $;
         land_init(land) {
             this.db_land_init(land);
             try {
-                this.db_land_sync(land);
+                this.land_sync(land);
             }
             catch (error) {
                 $mol_fail_log(error);
