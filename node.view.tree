@@ -998,7 +998,7 @@ $hyoo_match_places $mol_select_list
 		aerica-south \Южная Америка
 		america-nord \Северная Америка
 		antarctica \Антарктида
-		australia \Автралия
+		oceania \Oceania
 
 $hyoo_match_single_page $mol_page
 	title @ \Persons

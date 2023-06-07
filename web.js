@@ -13855,7 +13855,7 @@ var $;
                 "aerica-south": "Южная Америка",
                 "america-nord": "Северная Америка",
                 antarctica: "Антарктида",
-                australia: "Автралия"
+                oceania: "Oceania"
             };
         }
     }
