@@ -4401,9 +4401,9 @@ declare namespace $ {
         readonly canvas: HTMLCanvasElement;
         constructor(canvas: HTMLCanvasElement);
         get context(): CanvasRenderingContext2D | null;
-        static fit(image: CanvasImageSource | Blob | string, width?: number, height?: number): $mol_picture;
-        static make(image: CanvasImageSource, width: number, height?: number): $mol_picture;
-        static sizes(image: CanvasImageSource): number[];
+        static fit(image: Exclude<CanvasImageSource, VideoFrame> | Blob | string, width?: number, height?: number): $mol_picture;
+        static make(image: Exclude<CanvasImageSource, VideoFrame>, width: number, height?: number): $mol_picture;
+        static sizes(image: Exclude<CanvasImageSource, VideoFrame>): number[];
         static load(uri: string): Promise<HTMLImageElement>;
         format(type: 'image/png' | 'image/jpeg' | 'image/webp', quality?: number): Blob | null;
     }

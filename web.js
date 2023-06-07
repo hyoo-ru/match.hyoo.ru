@@ -16915,11 +16915,6 @@ var $;
             return new this(canvas);
         }
         static sizes(image) {
-            if (image instanceof VideoFrame)
-                return [
-                    image.codedWidth,
-                    image.codedHeight,
-                ];
             if (image instanceof HTMLVideoElement)
                 return [
                     image.videoWidth,
