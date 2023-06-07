@@ -6,6 +6,7 @@ $hyoo_match_final $mol_page
 			title @ \Again 💦
 			click? <=> reset? null
 	body /
+		<= Result $mol_text text @ \There is no one under your criteria yet.
 		<= Share $mol_button_share
 			capture <= Content
 			uri \/
