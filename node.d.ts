@@ -4591,7 +4591,10 @@ declare namespace $ {
     class $hyoo_match_lobby_page extends $mol_page {
         title(): string;
         lobby(): $hyoo_match_lobby;
+        tools(): readonly any[];
         body(): readonly any[];
+        total(): number;
+        Total(): $$.$mol_paragraph;
         single(id: any): $hyoo_match_single;
         Single(id: any): $$.$hyoo_match_single_card;
         single_list(): readonly any[];
@@ -4601,6 +4604,8 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
+        singles(): `${string}_${string}`[];
+        total(): number;
         single_list(): $hyoo_match_single_card[];
         single(id: $mol_int62_string): $hyoo_match_single;
     }

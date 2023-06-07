@@ -17907,10 +17907,25 @@ var $;
             const obj = new this.$.$hyoo_match_lobby();
             return obj;
         }
+        tools() {
+            return [
+                this.Total()
+            ];
+        }
         body() {
             return [
                 this.Single_list()
             ];
+        }
+        total() {
+            return 0;
+        }
+        Total() {
+            const obj = new this.$.$mol_paragraph();
+            obj.sub = () => [
+                this.total()
+            ];
+            return obj;
         }
         single(id) {
             const obj = new this.$.$hyoo_match_single();
@@ -17936,6 +17951,9 @@ var $;
         $mol_mem
     ], $hyoo_match_lobby_page.prototype, "lobby", null);
     __decorate([
+        $mol_mem
+    ], $hyoo_match_lobby_page.prototype, "Total", null);
+    __decorate([
         $mol_mem_key
     ], $hyoo_match_lobby_page.prototype, "single", null);
     __decorate([
@@ -17954,15 +17972,24 @@ var $;
     var $$;
     (function ($$) {
         class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
-            single_list() {
+            singles() {
                 if (!this.lobby().editable())
                     return [];
-                return this.lobby().land.residents().slice().reverse().map(id => this.Single(id));
+                return this.lobby().land.residents().slice().reverse();
+            }
+            total() {
+                return this.singles().length;
+            }
+            single_list() {
+                return this.singles().map(id => this.Single(id));
             }
             single(id) {
                 return this.lobby().world().Fund($hyoo_match_single).Item(id);
             }
         }
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_lobby_page.prototype, "singles", null);
         __decorate([
             $mol_mem
         ], $hyoo_match_lobby_page.prototype, "single_list", null);
@@ -17980,6 +18007,9 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($hyoo_match_lobby_page, {
+            Total: {
+                padding: $mol_gap.text,
+            },
             flex: {
                 basis: `40rem`,
                 grow: 1,
