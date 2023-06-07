@@ -16,12 +16,7 @@ $hyoo_match_single_card $mol_view
 				enabled false
 				Pick null
 				value? <= places
-			<= Tags $mol_view sub /
-				<= Age_self $mol_paragraph title <= age_self
-				<= Sex_self $mol_paragraph title <= sex_self
-				\ ▶
-				<= Age_pref $mol_paragraph title <= age_pref
-				<= Sex_pref $mol_paragraph title <= sex_pref
+			<= Tags $mol_paragraph title <= tags \
 			<= Brief $mol_text
 				text <= greet
 			<= Contacts $mol_text

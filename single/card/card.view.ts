@@ -6,5 +6,10 @@ namespace $.$$ {
 			return URL.createObjectURL( this.single().photo()! )
 		}
 		
+		@ $mol_mem
+		tags() {
+			return `${ this.age_self() } ${ this.sex_self() } ▶ ${ this.age_pref().join( ' ' ) } | ${ this.sex_pref().join( ' ' ) }`
+		}
+		
 	}
 }
