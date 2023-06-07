@@ -1,0 +1,8 @@
+$hyoo_match_lobby_page $mol_page
+	title \Lobby
+	lobby $hyoo_match_lobby
+	body /
+		<= Single_list $mol_list
+			rows <= single_list /
+				<= Single*0_0 $hyoo_match_single_card
+					single <= single* $hyoo_match_single

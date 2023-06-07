@@ -85,5 +85,11 @@ namespace $.$$ {
 			}
 		}
 		
+		@ $mol_mem
+		menu_links() {
+			if( this.lobby().editable() ) return super.menu_links()
+			return super.menu_links().filter( item => item !== this.Menu_link( 'lobby' ) )
+		}
+		
 	}
 }
