@@ -4,7 +4,7 @@ namespace $.$$ {
 		@ $mol_mem
 		single_list() {
 			if( !this.lobby().editable() ) return []
-			return this.lobby().land.residents().map( id => this.Single( id ) )
+			return this.lobby().land.residents().slice().reverse().map( id => this.Single( id ) )
 		}
 		
 		@ $mol_mem_key

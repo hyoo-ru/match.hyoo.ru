@@ -8,6 +8,8 @@ $hyoo_match_single_card $mol_view
 		age_self => age_self
 		sex_pref_all => sex_pref
 		age_pref_all => age_pref
+	minimal_width 160
+	minimal_height 200
 	sub /
 		<= Photo $mol_image
 			uri <= photo \
