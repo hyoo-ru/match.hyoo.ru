@@ -2,9 +2,18 @@ namespace $.$$ {
 	export class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
 		
 		@ $mol_mem
-		single_list() {
+		singles() {
 			if( !this.lobby().editable() ) return []
-			return this.lobby().land.residents().slice().reverse().map( id => this.Single( id ) )
+			return this.lobby().land.residents().slice().reverse()
+		}
+		
+		total() {
+			return this.singles().length
+		}
+		
+		@ $mol_mem
+		single_list() {
+			return this.singles().map( id => this.Single( id ) )
 		}
 		
 		@ $mol_mem_key

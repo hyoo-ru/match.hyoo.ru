@@ -1,6 +1,8 @@
 $hyoo_match_lobby_page $mol_page
 	title \Lobby
 	lobby $hyoo_match_lobby
+	tools /
+		<= Total $mol_paragraph sub / <= total 0
 	body /
 		<= Single_list $mol_list
 			rows <= single_list /
