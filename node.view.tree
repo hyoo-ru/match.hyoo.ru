@@ -1150,7 +1150,7 @@ $mol_video_camera $mol_video_player
 		saturation <= saturation 64
 		advanced /
 			* colorTemperature <= temperature 4000
-			* torch <= torch true
+			* torch <= torch false
 
 
 $mol_labeler $mol_list

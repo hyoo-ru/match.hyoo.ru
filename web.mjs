@@ -15786,7 +15786,7 @@ var $;
             return 4000;
         }
         torch() {
-            return true;
+            return false;
         }
     }
     $.$mol_video_camera = $mol_video_camera;
