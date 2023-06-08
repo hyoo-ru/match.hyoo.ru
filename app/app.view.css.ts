@@ -45,8 +45,9 @@ namespace $.$$ {
 			},
 		},
 		
-		Total: {
+		Stats: {
 			padding: $mol_gap.text,
+			whiteSpace: 'pre-line',
 		},
 		
 	} )

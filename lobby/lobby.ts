@@ -3,7 +3,7 @@ namespace $ {
 	export class $hyoo_match_lobby extends $hyoo_meta_model {
 		
 		@ $mol_mem_key
-		lookup( path: [ place: string, sex_self: string, sex_pref: string, age_self: string, age_pref: string ] ) {
+		lookup( path: [ place: string, age_self: string, sex_self: string, age_pref: string, sex_pref: string ] ) {
 			const key = $mol_int62_hash_string( path.join( '/' ) )
 			return this.sub( key, $hyoo_crowd_list )
 		}
@@ -16,11 +16,36 @@ namespace $ {
 		}
 		
 		lookup_list(
-			path: [ place: string, sex_self: string, sex_pref: string, age_self: string, age_pref: string ]
+			path: [ place: string, age_self: string, sex_self: string, age_pref: string, sex_pref: string ]
 		) {
 			return this.lookup( path ).list()
 				.map( val => $mol_int62_string_ensure( val ) )
 				.filter( $mol_guard_defined )
+		}
+		
+		collect_all(
+			[ place, age_self, sex_self, age_pref, sex_pref ]:
+				[ place: string[], age_self: string[], sex_self: string[], age_pref: string[], sex_pref: string[] ]
+		) {
+			let ids = new Set< $mol_int62_string >()
+			
+			for( const p of place ) {
+				for( const as of age_self ) {
+					for( const ss of sex_self ) {
+						for( const ap of age_pref ) {
+							for( const sp of sex_pref ) {
+								
+								for( const id of this.lookup_list([ p, as, ss, ap, sp ]) ) {
+									ids.add( id )
+								}
+								
+							}
+						}
+					}
+				}
+			}
+			
+			return ids
 		}
 		
 		@ $mol_action

@@ -12,7 +12,7 @@ $hyoo_match_app $mol_book2_catalog
 		<= Lights $mol_lights_toggle
 	menu_body /
 		<= Menu_links
-		<= Total $mol_paragraph sub / <= total @ \{count} persons total
+		<= Stats $mol_paragraph title <= stats \
 	menu_foot /
 		<= Online $hyoo_sync_online
 			yard <= yard $hyoo_sync_client
