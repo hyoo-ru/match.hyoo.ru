@@ -81,15 +81,16 @@ namespace $.$$ {
 			const age_pref = Object.keys( this.Settings().Age_pref().options() )
 			const sex_pref = Object.keys( this.Settings().Sex_pref().options() )
 			
+			const girls = $mol_si_short( lobby.collect_all([ place, [ 'young' ], [ 'female' ], age_pref, sex_pref ]).size )
 			const boys = $mol_si_short( lobby.collect_all([ place, [ 'young' ], [ 'male' ], age_pref, sex_pref ]).size )
+			
+			const womans = $mol_si_short( lobby.collect_all([ place, [ 'adult' ], [ 'female' ], age_pref, sex_pref ]).size )
 			const mans = $mol_si_short( lobby.collect_all([ place, [ 'adult' ], [ 'male' ], age_pref, sex_pref ]).size )
+			
+			const grannies = $mol_si_short( lobby.collect_all([ place, [ 'mature' ], [ 'female' ], age_pref, sex_pref ]).size )
 			const gaffers = $mol_si_short( lobby.collect_all([ place, [ 'mature' ], [ 'male' ], age_pref, sex_pref ]).size )
 			
-			const girls = $mol_si_short( lobby.collect_all([ place, [ 'young' ], [ 'female' ], age_pref, sex_pref ]).size )
-			const womans = $mol_si_short( lobby.collect_all([ place, [ 'adult' ], [ 'female' ], age_pref, sex_pref ]).size )
-			const grannies = $mol_si_short( lobby.collect_all([ place, [ 'mature' ], [ 'female' ], age_pref, sex_pref ]).size )
-			
-			return `👧${girls}\t👩${womans}\t👵${grannies}\n👦${boys}\t👨${mans}\t👴${gaffers}`
+			return `👧${girls}\t👦${boys}\n👩${womans}\t👨${mans}\n👵${grannies}\t👴${gaffers}`
 		}
 		
 		@ $mol_mem
