@@ -2604,9 +2604,16 @@ declare namespace $ {
 
 declare namespace $ {
     class $hyoo_match_lobby extends $hyoo_meta_model {
-        lookup(path: [place: string, sex_self: string, sex_pref: string, age_self: string, age_pref: string]): $hyoo_crowd_list;
+        lookup(path: [place: string, age_self: string, sex_self: string, age_pref: string, sex_pref: string]): $hyoo_crowd_list;
         lookup_has(path: [place: string, age_self: string, sex_self: string, age_pref: string, sex_pref: string], next?: boolean): boolean;
-        lookup_list(path: [place: string, sex_self: string, sex_pref: string, age_self: string, age_pref: string]): `${string}_${string}`[];
+        lookup_list(path: [place: string, age_self: string, sex_self: string, age_pref: string, sex_pref: string]): `${string}_${string}`[];
+        collect_all([place, age_self, sex_self, age_pref, sex_pref]: [
+            place: string[],
+            age_self: string[],
+            sex_self: string[],
+            age_pref: string[],
+            sex_pref: string[]
+        ]): Set<`${string}_${string}`>;
         find_pair(self: $hyoo_match_single): $hyoo_match_single | null;
     }
 }
@@ -4787,8 +4794,8 @@ declare namespace $ {
         lobby_update(): any;
         redirects(): any;
         Lights(): $$.$mol_lights_toggle;
-        total(): string;
-        Total(): $$.$mol_paragraph;
+        stats(): string;
+        Stats(): $$.$mol_paragraph;
         yard(): $hyoo_sync_client;
         Online(): $$.$hyoo_sync_online;
         Source(): $mol_link_source;
@@ -5945,10 +5952,10 @@ declare namespace $.$$ {
         lobby(): $hyoo_match_lobby;
         intro(): $hyoo_page_side;
         lobby_update(): void;
+        stats(): string;
         look_pages(): $hyoo_match_final[] | $hyoo_match_single_page[];
         redirects(): void;
         menu_links(): readonly any[];
-        total(): string;
     }
 }
 

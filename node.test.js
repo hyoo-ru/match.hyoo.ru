@@ -9736,6 +9736,23 @@ var $;
                 .map(val => $mol_int62_string_ensure(val))
                 .filter($mol_guard_defined);
         }
+        collect_all([place, age_self, sex_self, age_pref, sex_pref]) {
+            let ids = new Set();
+            for (const p of place) {
+                for (const as of age_self) {
+                    for (const ss of sex_self) {
+                        for (const ap of age_pref) {
+                            for (const sp of sex_pref) {
+                                for (const id of this.lookup_list([p, as, ss, ap, sp])) {
+                                    ids.add(id);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return ids;
+        }
         find_pair(self) {
             if (!self.ready())
                 return null;
@@ -18764,7 +18781,7 @@ var $;
         menu_body() {
             return [
                 this.Menu_links(),
-                this.Total()
+                this.Stats()
             ];
         }
         menu_foot() {
@@ -18810,14 +18827,12 @@ var $;
             const obj = new this.$.$mol_lights_toggle();
             return obj;
         }
-        total() {
-            return this.$.$mol_locale.text('$hyoo_match_app_total');
+        stats() {
+            return "";
         }
-        Total() {
+        Stats() {
             const obj = new this.$.$mol_paragraph();
-            obj.sub = () => [
-                this.total()
-            ];
+            obj.title = () => this.stats();
             return obj;
         }
         yard() {
@@ -18898,7 +18913,7 @@ var $;
     ], $hyoo_match_app.prototype, "Lights", null);
     __decorate([
         $mol_mem
-    ], $hyoo_match_app.prototype, "Total", null);
+    ], $hyoo_match_app.prototype, "Stats", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "yard", null);
@@ -24229,6 +24244,19 @@ var $;
                     }
                 }
             }
+            stats() {
+                const lobby = this.lobby();
+                const place = Object.values(this.Settings().Places().options());
+                const age_pref = Object.keys(this.Settings().Age_pref().options());
+                const sex_pref = Object.keys(this.Settings().Sex_pref().options());
+                const boys = lobby.collect_all([place, ['young'], ['male'], age_pref, sex_pref]);
+                const mans = lobby.collect_all([place, ['adult'], ['male'], age_pref, sex_pref]);
+                const gaffers = lobby.collect_all([place, ['adult'], ['male'], age_pref, sex_pref]);
+                const girls = lobby.collect_all([place, ['young'], ['female'], age_pref, sex_pref]);
+                const womans = lobby.collect_all([place, ['adult'], ['female'], age_pref, sex_pref]);
+                const grannies = lobby.collect_all([place, ['adult'], ['female'], age_pref, sex_pref]);
+                return `👧${girls.size}\t👩${womans.size}\t👵${grannies.size}\n👦${boys.size}\t👨${mans.size}\t👴${gaffers.size}`;
+            }
             look_pages() {
                 if (!this.pair())
                     return [this.Final()];
@@ -24244,9 +24272,6 @@ var $;
                 if (this.lobby().editable())
                     return super.menu_links();
                 return super.menu_links().filter(item => item !== this.Menu_link('lobby'));
-            }
-            total() {
-                return super.total().replace('{count}', `${this.lobby().land.residents().length}`);
             }
         }
         __decorate([
@@ -24264,6 +24289,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_match_app.prototype, "lobby_update", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_app.prototype, "stats", null);
         __decorate([
             $mol_mem
         ], $hyoo_match_app.prototype, "look_pages", null);
@@ -24318,8 +24346,9 @@ var $;
                     justifyContent: 'space-between',
                 },
             },
-            Total: {
+            Stats: {
                 padding: $mol_gap.text,
+                whiteSpace: 'pre-line',
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
