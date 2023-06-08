@@ -1032,7 +1032,7 @@ $hyoo_match_single_page $mol_page
 				sub /
 					<= Like_icon $mol_icon_heart_outline
 		<= Match $mol_list rows /
-			<= Match_hint $mol_text text @ \++Match!++ --You have an hour for a date.--
+			<= Match_hint $mol_text text <= match_hint @ \++Match!++ --You have {timeout} min for a date.--
 			<= Contacts $mol_text
 				text <= contacts
 		<= Places $hyoo_match_places

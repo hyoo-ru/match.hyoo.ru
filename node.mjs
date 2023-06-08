@@ -14703,9 +14703,12 @@ var $;
             obj.sub = () => this.gallery();
             return obj;
         }
+        match_hint() {
+            return this.$.$mol_locale.text('$hyoo_match_single_page_match_hint');
+        }
         Match_hint() {
             const obj = new this.$.$mol_text();
-            obj.text = () => this.$.$mol_locale.text('$hyoo_match_single_page_Match_hint_text');
+            obj.text = () => this.match_hint();
             return obj;
         }
         Contacts() {
@@ -14795,6 +14798,75 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_time_interval extends $mol_time_base {
+        constructor(config) {
+            super();
+            if (typeof config === 'string') {
+                var chunks = config.split('/');
+                if (chunks[0]) {
+                    if (chunks[0][0].toUpperCase() === 'P') {
+                        this._duration = new $mol_time_duration(chunks[0]);
+                    }
+                    else {
+                        this._start = new $mol_time_moment(chunks[0]);
+                    }
+                }
+                else {
+                    this._start = new $mol_time_moment();
+                }
+                if (chunks[1]) {
+                    if (chunks[1][0].toUpperCase() === 'P') {
+                        this._duration = new $mol_time_duration(chunks[1]);
+                    }
+                    else {
+                        this._end = new $mol_time_moment(chunks[1]);
+                    }
+                }
+                else {
+                    this._end = new $mol_time_moment();
+                }
+                return;
+            }
+            if (config.start !== undefined)
+                this._start = new $mol_time_moment(config.start);
+            if (config.end !== undefined)
+                this._end = new $mol_time_moment(config.end);
+            if (config.duration !== undefined)
+                this._duration = new $mol_time_duration(config.duration);
+        }
+        _start;
+        get start() {
+            if (this._start)
+                return this._start;
+            return this._start = this._end.shift(this._duration.mult(-1));
+        }
+        _end;
+        get end() {
+            if (this._end)
+                return this._end;
+            return this._end = this._start.shift(this._duration);
+        }
+        _duration;
+        get duration() {
+            if (this._duration)
+                return this._duration;
+            return this._duration = new $mol_time_duration(this._end.valueOf() - this._start.valueOf());
+        }
+        toJSON() { return this.toString(); }
+        toString() {
+            return (this._start || this._duration || '').toString() + '/' + (this._end || this._duration || '').toString();
+        }
+        [Symbol.toPrimitive](mode) {
+            return this.toString();
+        }
+    }
+    $.$mol_time_interval = $mol_time_interval;
+})($ || ($ = {}));
+//mol/time/interval/interval.ts
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         class $hyoo_match_single_page extends $.$hyoo_match_single_page {
@@ -14821,10 +14893,17 @@ var $;
                     return false;
                 return true;
             }
-            dating() {
+            dating_range() {
                 if (!this.mutual())
-                    return false;
-                return this.self().skipped().land.last_stamp() > $mol_state_time.now(1000 * 60) - 1000 * 60 * 60;
+                    return null;
+                return new $mol_time_interval({
+                    start: new $mol_time_moment($mol_state_time.now(1000)),
+                    end: new $mol_time_moment(this.self().skipped().land.last_stamp()).shift('PT60m'),
+                });
+            }
+            match_hint() {
+                const min = Math.max(0, this.dating_range()?.duration.count('PT1m') ?? 0).toFixed(0);
+                return super.match_hint().replace('{timeout}', min);
             }
             Match() {
                 return this.mutual() ? super.Match() : null;
@@ -14835,7 +14914,7 @@ var $;
                     this.mutual()
                         ? this.Mutual()
                         : this.Like(),
-                    ...this.dating() ? [] : [this.Skip()],
+                    ...(this.dating_range()?.duration.valueOf() ?? 0) > 0 ? [] : [this.Skip()],
                 ];
             }
         }
@@ -14850,7 +14929,10 @@ var $;
         ], $hyoo_match_single_page.prototype, "mutual", null);
         __decorate([
             $mol_mem
-        ], $hyoo_match_single_page.prototype, "dating", null);
+        ], $hyoo_match_single_page.prototype, "dating_range", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_single_page.prototype, "match_hint", null);
         __decorate([
             $mol_mem
         ], $hyoo_match_single_page.prototype, "gallery", null);

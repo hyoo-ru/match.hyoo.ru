@@ -3747,11 +3747,32 @@ declare namespace $ {
         Like(): $mol_button_minor;
         gallery(): readonly any[];
         Gallery(): $mol_stack;
+        match_hint(): string;
         Match_hint(): $$.$mol_text;
         Contacts(): $$.$mol_text;
         Match(): $$.$mol_list;
         Places(): $hyoo_match_places;
         Brief(): $$.$mol_text;
+    }
+}
+
+declare namespace $ {
+    type $mol_time_interval_config = string | {
+        start?: $mol_time_moment_config;
+        end?: $mol_time_moment_config;
+        duration?: $mol_time_duration_config;
+    };
+    class $mol_time_interval extends $mol_time_base {
+        constructor(config: $mol_time_interval_config);
+        private _start;
+        get start(): $mol_time_moment;
+        private _end;
+        get end(): $mol_time_moment;
+        private _duration;
+        get duration(): $mol_time_duration;
+        toJSON(): string;
+        toString(): string;
+        [Symbol.toPrimitive](mode: 'default' | 'number' | 'string'): string;
     }
 }
 
@@ -3762,7 +3783,8 @@ declare namespace $.$$ {
         like(): void;
         skip(): void;
         mutual(): boolean;
-        dating(): boolean;
+        dating_range(): $mol_time_interval | null;
+        match_hint(): string;
         Match(): $mol_list;
         gallery(): ($mol_button_minor | $mol_image | $mol_row)[];
     }
