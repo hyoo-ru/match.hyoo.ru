@@ -33,5 +33,5 @@ $hyoo_match_app $mol_book2_catalog
 		look <= Look $mol_book2 pages <= look_pages /
 		lobby <= Lobby $hyoo_match_lobby_page
 			lobby <= lobby
-		- keys <= Keys $hyoo_meta_safe
+		safe <= Safe $hyoo_meta_safe
 			yard <= yard
