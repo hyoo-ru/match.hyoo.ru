@@ -31,7 +31,7 @@ $hyoo_match_app $mol_book2_catalog
 		settings <= Settings $hyoo_match_single_settings
 			single <= self
 		look <= Look $mol_book2 pages <= look_pages /
-		lobby <= Lobby $hyoo_match_lobby_page
-			lobby <= lobby
 		safe <= Safe $hyoo_meta_safe
 			yard <= yard
+		lobby <= Lobby $hyoo_match_lobby_page
+			lobby <= lobby

@@ -12,11 +12,21 @@ namespace $.$$ {
 		
 		Photo: {
 			padding: $mol_gap.block,
-			width: '10rem',
+			width: '7.5rem',
     		aspectRatio: 1,
 			flex: {
 				shrink: 0,
 			},
+		},
+		
+		Filters: {
+			flex: {
+				wrap: 'wrap',
+			},
+		},
+		
+		Name: {
+			padding: $mol_gap.text,
 		},
 		
 		Tags: {
