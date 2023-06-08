@@ -110,9 +110,9 @@ namespace $.$$ {
 			return super.menu_links().filter( item => item !== this.Menu_link( 'lobby' ) )
 		}
 		
-		total() {
-			return super.total().replace( '{count}', `${ this.lobby().land.residents().length }` )
-		}
+		// total() {
+		// 	return super.total().replace( '{count}', `${ this.lobby().land.residents().length }` )
+		// }
 		
 	}
 }
