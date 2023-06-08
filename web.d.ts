@@ -4641,10 +4641,7 @@ declare namespace $ {
     class $hyoo_match_lobby_page extends $mol_page {
         title(): string;
         lobby(): $hyoo_match_lobby;
-        tools(): readonly any[];
         body(): readonly any[];
-        total(): number;
-        Total(): $$.$mol_paragraph;
         single(id: any): $hyoo_match_single;
         Single(id: any): $$.$hyoo_match_single_card;
         single_list(): readonly any[];
@@ -4655,7 +4652,6 @@ declare namespace $ {
 declare namespace $.$$ {
     class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
         singles(): `${string}_${string}`[];
-        total(): number;
         single_list(): $hyoo_match_single_card[];
         single(id: $mol_int62_string): $hyoo_match_single;
     }
@@ -4673,6 +4669,7 @@ declare namespace $ {
         auto(): readonly any[];
         menu_title(): string;
         menu_tools(): readonly any[];
+        menu_body(): readonly any[];
         menu_foot(): readonly any[];
         Placeholder(): any;
         Final(): $$.$hyoo_match_final;
@@ -4682,6 +4679,8 @@ declare namespace $ {
         lobby_update(): any;
         redirects(): any;
         Lights(): $$.$mol_lights_toggle;
+        total(): string;
+        Total(): $$.$mol_paragraph;
         yard(): $hyoo_sync_client;
         Online(): $$.$hyoo_sync_online;
         Source(): $mol_link_source;
@@ -5841,6 +5840,7 @@ declare namespace $.$$ {
         look_pages(): $hyoo_match_final[] | $hyoo_match_single_page[];
         redirects(): void;
         menu_links(): readonly any[];
+        total(): string;
     }
 }
 

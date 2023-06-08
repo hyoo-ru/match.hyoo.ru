@@ -1463,8 +1463,6 @@ $hyoo_match_single_card $mol_view
 $hyoo_match_lobby_page $mol_page
 	title \Lobby
 	lobby $hyoo_match_lobby
-	tools /
-		<= Total $mol_paragraph sub / <= total 0
 	body /
 		<= Single_list $mol_list
 			rows <= single_list /
@@ -1483,6 +1481,9 @@ $hyoo_match_app $mol_book2_catalog
 	menu_title \$hyoo_match
 	menu_tools /
 		<= Lights $mol_lights_toggle
+	menu_body /
+		<= Menu_links
+		<= Total $mol_paragraph sub / <= total @ \{count} persons total
 	menu_foot /
 		<= Online $hyoo_sync_online
 			yard <= yard $hyoo_sync_client

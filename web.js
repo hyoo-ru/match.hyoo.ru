@@ -18105,25 +18105,10 @@ var $;
             const obj = new this.$.$hyoo_match_lobby();
             return obj;
         }
-        tools() {
-            return [
-                this.Total()
-            ];
-        }
         body() {
             return [
                 this.Single_list()
             ];
-        }
-        total() {
-            return 0;
-        }
-        Total() {
-            const obj = new this.$.$mol_paragraph();
-            obj.sub = () => [
-                this.total()
-            ];
-            return obj;
         }
         single(id) {
             const obj = new this.$.$hyoo_match_single();
@@ -18149,9 +18134,6 @@ var $;
         $mol_mem
     ], $hyoo_match_lobby_page.prototype, "lobby", null);
     __decorate([
-        $mol_mem
-    ], $hyoo_match_lobby_page.prototype, "Total", null);
-    __decorate([
         $mol_mem_key
     ], $hyoo_match_lobby_page.prototype, "single", null);
     __decorate([
@@ -18174,9 +18156,6 @@ var $;
                 if (!this.lobby().editable())
                     return [];
                 return this.lobby().land.residents().slice().reverse();
-            }
-            total() {
-                return this.singles().length;
             }
             single_list() {
                 return this.singles().map(id => this.Single(id));
@@ -18205,9 +18184,6 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($hyoo_match_lobby_page, {
-            Total: {
-                padding: $mol_gap.text,
-            },
             flex: {
                 basis: `40rem`,
                 grow: 1,
@@ -18255,6 +18231,12 @@ var $;
                 this.Lights()
             ];
         }
+        menu_body() {
+            return [
+                this.Menu_links(),
+                this.Total()
+            ];
+        }
         menu_foot() {
             return [
                 this.Online(),
@@ -18296,6 +18278,16 @@ var $;
         }
         Lights() {
             const obj = new this.$.$mol_lights_toggle();
+            return obj;
+        }
+        total() {
+            return this.$.$mol_locale.text('$hyoo_match_app_total');
+        }
+        Total() {
+            const obj = new this.$.$mol_paragraph();
+            obj.sub = () => [
+                this.total()
+            ];
             return obj;
         }
         yard() {
@@ -18374,6 +18366,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "Lights", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_app.prototype, "Total", null);
     __decorate([
         $mol_mem
     ], $hyoo_match_app.prototype, "yard", null);
@@ -23767,6 +23762,9 @@ var $;
                     return super.menu_links();
                 return super.menu_links().filter(item => item !== this.Menu_link('lobby'));
             }
+            total() {
+                return super.total().replace('{count}', `${this.lobby().land.residents().length}`);
+            }
         }
         __decorate([
             $mol_mem
@@ -23831,6 +23829,14 @@ var $;
                 flex: {
                     basis: `40rem`,
                 },
+            },
+            Menu: {
+                Body: {
+                    justifyContent: 'space-between',
+                },
+            },
+            Total: {
+                padding: $mol_gap.text,
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
