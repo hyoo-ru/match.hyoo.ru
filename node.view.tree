@@ -1378,43 +1378,6 @@ $hyoo_match_single_settings $mol_page
 				hint @ \phone number, social network id etc
 				value? <=> contacts?
 
-$hyoo_match_single_card $mol_view
-	single $hyoo_match_single
-		title => name
-		greet => greet
-		contacts => contacts
-		places => places
-		sex_self => sex_self
-		age_self => age_self
-		sex_pref_all => sex_pref
-		age_pref_all => age_pref
-	minimal_width 160
-	minimal_height 200
-	sub /
-		<= Photo $mol_image
-			uri <= photo \
-		<= Info $mol_list rows /
-			<= Places $hyoo_match_places
-				enabled false
-				Pick null
-				value? <= places
-			<= Tags $mol_paragraph title <= tags \
-			<= Brief $mol_text
-				text <= greet
-			<= Contacts $mol_text
-				text <= contacts
-
-$hyoo_match_lobby_page $mol_page
-	title \Lobby
-	lobby $hyoo_match_lobby
-	tools /
-		<= Total $mol_paragraph sub / <= total 0
-	body /
-		<= Single_list $mol_list
-			rows <= single_list /
-				<= Single*0_0 $hyoo_match_single_card
-					single <= single* $hyoo_match_single
-
 $mol_icon_eye $mol_icon path \M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
 
 $mol_password $mol_view
@@ -1469,6 +1432,45 @@ $hyoo_meta_safe $mol_page
 						<= Peer_new $mol_avatar id <= peer_new \
 						<= impot_switch_title @ \Switch
 
+$hyoo_match_single_card $mol_view
+	single $hyoo_match_single
+		title => name
+		greet => greet
+		contacts => contacts
+		places => places
+		sex_self => sex_self
+		age_self => age_self
+		sex_pref_all => sex_pref
+		age_pref_all => age_pref
+	minimal_width 120
+	minimal_height 120
+	sub /
+		<= Photo $mol_image
+			uri <= photo \
+		<= Info $mol_list rows /
+			<= Filters $mol_view sub /
+				<= Name $mol_paragraph title <= name
+				<= Tags $mol_paragraph title <= tags \
+				<= Places $hyoo_match_places
+					enabled false
+					Pick null
+					value? <= places
+			<= Brief $mol_text
+				text <= greet
+			<= Contacts $mol_text
+				text <= contacts
+
+$hyoo_match_lobby_page $mol_page
+	title \Lobby
+	lobby $hyoo_match_lobby
+	tools /
+		<= Total $mol_paragraph sub / <= total 0
+	body /
+		<= Single_list $mol_list
+			rows <= single_list /
+				<= Single*0_0 $hyoo_match_single_card
+					single <= single* $hyoo_match_single
+
 $hyoo_match_app $mol_book2_catalog
 	lobby $hyoo_match_lobby
 	self $hyoo_match_single
@@ -1502,10 +1504,10 @@ $hyoo_match_app $mol_book2_catalog
 		settings <= Settings $hyoo_match_single_settings
 			single <= self
 		look <= Look $mol_book2 pages <= look_pages /
-		lobby <= Lobby $hyoo_match_lobby_page
-			lobby <= lobby
 		safe <= Safe $hyoo_meta_safe
 			yard <= yard
+		lobby <= Lobby $hyoo_match_lobby_page
+			lobby <= lobby
 
 $hyoo_meta_link $mol_link
 	minimal_height 40

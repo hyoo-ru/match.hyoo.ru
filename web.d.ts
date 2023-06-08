@@ -4467,68 +4467,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $hyoo_match_single_card extends $mol_view {
-        name(): string;
-        greet(): string;
-        contacts(): string;
-        places(): string[];
-        sex_self(): string;
-        age_self(): string;
-        sex_pref(): string[];
-        age_pref(): string[];
-        single(): $hyoo_match_single;
-        minimal_width(): number;
-        minimal_height(): number;
-        sub(): readonly any[];
-        photo(): string;
-        Photo(): $$.$mol_image;
-        Places(): $hyoo_match_places;
-        tags(): string;
-        Tags(): $$.$mol_paragraph;
-        Brief(): $$.$mol_text;
-        Contacts(): $$.$mol_text;
-        Info(): $$.$mol_list;
-    }
-}
-
-declare namespace $.$$ {
-    class $hyoo_match_single_card extends $.$hyoo_match_single_card {
-        photo(): string;
-        tags(): string;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-    class $hyoo_match_lobby_page extends $mol_page {
-        title(): string;
-        lobby(): $hyoo_match_lobby;
-        tools(): readonly any[];
-        body(): readonly any[];
-        total(): number;
-        Total(): $$.$mol_paragraph;
-        single(id: any): $hyoo_match_single;
-        Single(id: any): $$.$hyoo_match_single_card;
-        single_list(): readonly any[];
-        Single_list(): $$.$mol_list;
-    }
-}
-
-declare namespace $.$$ {
-    class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
-        singles(): `${string}_${string}`[];
-        total(): number;
-        single_list(): $hyoo_match_single_card[];
-        single(id: $mol_int62_string): $hyoo_match_single;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
     class $mol_icon_eye extends $mol_icon {
         path(): string;
     }
@@ -4663,6 +4601,70 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $hyoo_match_single_card extends $mol_view {
+        name(): string;
+        greet(): string;
+        contacts(): string;
+        places(): string[];
+        sex_self(): string;
+        age_self(): string;
+        sex_pref(): string[];
+        age_pref(): string[];
+        single(): $hyoo_match_single;
+        minimal_width(): number;
+        minimal_height(): number;
+        sub(): readonly any[];
+        photo(): string;
+        Photo(): $$.$mol_image;
+        Name(): $$.$mol_paragraph;
+        tags(): string;
+        Tags(): $$.$mol_paragraph;
+        Places(): $hyoo_match_places;
+        Filters(): $mol_view;
+        Brief(): $$.$mol_text;
+        Contacts(): $$.$mol_text;
+        Info(): $$.$mol_list;
+    }
+}
+
+declare namespace $.$$ {
+    class $hyoo_match_single_card extends $.$hyoo_match_single_card {
+        photo(): string;
+        tags(): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+    class $hyoo_match_lobby_page extends $mol_page {
+        title(): string;
+        lobby(): $hyoo_match_lobby;
+        tools(): readonly any[];
+        body(): readonly any[];
+        total(): number;
+        Total(): $$.$mol_paragraph;
+        single(id: any): $hyoo_match_single;
+        Single(id: any): $$.$hyoo_match_single_card;
+        single_list(): readonly any[];
+        Single_list(): $$.$mol_list;
+    }
+}
+
+declare namespace $.$$ {
+    class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
+        singles(): `${string}_${string}`[];
+        total(): number;
+        single_list(): $hyoo_match_single_card[];
+        single(id: $mol_int62_string): $hyoo_match_single;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
     class $hyoo_match_app extends $mol_book2_catalog {
         lobby(): $hyoo_match_lobby;
         self(): $hyoo_match_single;
@@ -4689,8 +4691,8 @@ declare namespace $ {
         Settings(): $$.$hyoo_match_single_settings;
         look_pages(): readonly any[];
         Look(): $$.$mol_book2;
-        Lobby(): $$.$hyoo_match_lobby_page;
         Safe(): $$.$hyoo_meta_safe;
+        Lobby(): $$.$hyoo_match_lobby_page;
     }
 }
 

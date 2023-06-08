@@ -17800,313 +17800,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_match_single_card extends $mol_view {
-        name() {
-            return this.single().title();
-        }
-        greet() {
-            return this.single().greet();
-        }
-        contacts() {
-            return this.single().contacts();
-        }
-        places() {
-            return this.single().places();
-        }
-        sex_self() {
-            return this.single().sex_self();
-        }
-        age_self() {
-            return this.single().age_self();
-        }
-        sex_pref() {
-            return this.single().sex_pref_all();
-        }
-        age_pref() {
-            return this.single().age_pref_all();
-        }
-        single() {
-            const obj = new this.$.$hyoo_match_single();
-            return obj;
-        }
-        minimal_width() {
-            return 160;
-        }
-        minimal_height() {
-            return 200;
-        }
-        sub() {
-            return [
-                this.Photo(),
-                this.Info()
-            ];
-        }
-        photo() {
-            return "";
-        }
-        Photo() {
-            const obj = new this.$.$mol_image();
-            obj.uri = () => this.photo();
-            return obj;
-        }
-        Places() {
-            const obj = new this.$.$hyoo_match_places();
-            obj.enabled = () => false;
-            obj.Pick = () => null;
-            obj.value = (next) => this.places();
-            return obj;
-        }
-        tags() {
-            return "";
-        }
-        Tags() {
-            const obj = new this.$.$mol_paragraph();
-            obj.title = () => this.tags();
-            return obj;
-        }
-        Brief() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => this.greet();
-            return obj;
-        }
-        Contacts() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => this.contacts();
-            return obj;
-        }
-        Info() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => [
-                this.Places(),
-                this.Tags(),
-                this.Brief(),
-                this.Contacts()
-            ];
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "single", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "Photo", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "Places", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "Tags", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "Brief", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "Contacts", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_single_card.prototype, "Info", null);
-    $.$hyoo_match_single_card = $hyoo_match_single_card;
-})($ || ($ = {}));
-//hyoo/match/single/card/-view.tree/card.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $hyoo_match_single_card extends $.$hyoo_match_single_card {
-            photo() {
-                return URL.createObjectURL(this.single().photo());
-            }
-            tags() {
-                return `${this.age_self()} ${this.sex_self()} ▶ ${this.age_pref().join(' ')} | ${this.sex_pref().join(' ')}`;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $hyoo_match_single_card.prototype, "photo", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_match_single_card.prototype, "tags", null);
-        $$.$hyoo_match_single_card = $hyoo_match_single_card;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//hyoo/match/single/card/card.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($hyoo_match_single_card, {
-            background: {
-                color: $mol_theme.card,
-            },
-            flex: {
-                wrap: 'wrap',
-            },
-            Photo: {
-                padding: $mol_gap.block,
-                width: '10rem',
-                aspectRatio: 1,
-                flex: {
-                    shrink: 0,
-                },
-            },
-            Tags: {
-                padding: $mol_gap.text,
-                gap: $mol_gap.space,
-                color: $mol_theme.shade,
-                flex: {
-                    wrap: 'wrap',
-                },
-            },
-            Places: {
-                flex: {
-                    grow: 0,
-                },
-            },
-            Info: {
-                flex: {
-                    basis: '20rem',
-                    grow: 1,
-                },
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//hyoo/match/single/card/card.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $hyoo_match_lobby_page extends $mol_page {
-        title() {
-            return "Lobby";
-        }
-        lobby() {
-            const obj = new this.$.$hyoo_match_lobby();
-            return obj;
-        }
-        tools() {
-            return [
-                this.Total()
-            ];
-        }
-        body() {
-            return [
-                this.Single_list()
-            ];
-        }
-        total() {
-            return 0;
-        }
-        Total() {
-            const obj = new this.$.$mol_paragraph();
-            obj.sub = () => [
-                this.total()
-            ];
-            return obj;
-        }
-        single(id) {
-            const obj = new this.$.$hyoo_match_single();
-            return obj;
-        }
-        Single(id) {
-            const obj = new this.$.$hyoo_match_single_card();
-            obj.single = () => this.single(id);
-            return obj;
-        }
-        single_list() {
-            return [
-                this.Single("0_0")
-            ];
-        }
-        Single_list() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => this.single_list();
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_lobby_page.prototype, "lobby", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_lobby_page.prototype, "Total", null);
-    __decorate([
-        $mol_mem_key
-    ], $hyoo_match_lobby_page.prototype, "single", null);
-    __decorate([
-        $mol_mem_key
-    ], $hyoo_match_lobby_page.prototype, "Single", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_match_lobby_page.prototype, "Single_list", null);
-    $.$hyoo_match_lobby_page = $hyoo_match_lobby_page;
-})($ || ($ = {}));
-//hyoo/match/lobby/page/-view.tree/page.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
-            singles() {
-                if (!this.lobby().editable())
-                    return [];
-                return this.lobby().land.residents().slice().reverse();
-            }
-            total() {
-                return this.singles().length;
-            }
-            single_list() {
-                return this.singles().map(id => this.Single(id));
-            }
-            single(id) {
-                return this.lobby().world().Fund($hyoo_match_single).Item(id);
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $hyoo_match_lobby_page.prototype, "singles", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_match_lobby_page.prototype, "single_list", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_match_lobby_page.prototype, "single", null);
-        $$.$hyoo_match_lobby_page = $hyoo_match_lobby_page;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//hyoo/match/lobby/page/page.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($hyoo_match_lobby_page, {
-            Total: {
-                padding: $mol_gap.text,
-            },
-            flex: {
-                basis: `40rem`,
-                grow: 1,
-            },
-            Single_list: {
-                gap: $mol_gap.block,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//hyoo/match/lobby/page/page.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_icon_eye extends $mol_icon {
         path() {
             return "M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z";
@@ -18726,6 +18419,340 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $hyoo_match_single_card extends $mol_view {
+        name() {
+            return this.single().title();
+        }
+        greet() {
+            return this.single().greet();
+        }
+        contacts() {
+            return this.single().contacts();
+        }
+        places() {
+            return this.single().places();
+        }
+        sex_self() {
+            return this.single().sex_self();
+        }
+        age_self() {
+            return this.single().age_self();
+        }
+        sex_pref() {
+            return this.single().sex_pref_all();
+        }
+        age_pref() {
+            return this.single().age_pref_all();
+        }
+        single() {
+            const obj = new this.$.$hyoo_match_single();
+            return obj;
+        }
+        minimal_width() {
+            return 120;
+        }
+        minimal_height() {
+            return 120;
+        }
+        sub() {
+            return [
+                this.Photo(),
+                this.Info()
+            ];
+        }
+        photo() {
+            return "";
+        }
+        Photo() {
+            const obj = new this.$.$mol_image();
+            obj.uri = () => this.photo();
+            return obj;
+        }
+        Name() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.name();
+            return obj;
+        }
+        tags() {
+            return "";
+        }
+        Tags() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.tags();
+            return obj;
+        }
+        Places() {
+            const obj = new this.$.$hyoo_match_places();
+            obj.enabled = () => false;
+            obj.Pick = () => null;
+            obj.value = (next) => this.places();
+            return obj;
+        }
+        Filters() {
+            const obj = new this.$.$mol_view();
+            obj.sub = () => [
+                this.Name(),
+                this.Tags(),
+                this.Places()
+            ];
+            return obj;
+        }
+        Brief() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.greet();
+            return obj;
+        }
+        Contacts() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.contacts();
+            return obj;
+        }
+        Info() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => [
+                this.Filters(),
+                this.Brief(),
+                this.Contacts()
+            ];
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "single", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Photo", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Name", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Tags", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Places", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Filters", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Brief", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Contacts", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_single_card.prototype, "Info", null);
+    $.$hyoo_match_single_card = $hyoo_match_single_card;
+})($ || ($ = {}));
+//hyoo/match/single/card/-view.tree/card.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_match_single_card extends $.$hyoo_match_single_card {
+            photo() {
+                return URL.createObjectURL(this.single().photo());
+            }
+            tags() {
+                return `${this.age_self()} ${this.sex_self()} ▶ ${this.age_pref().join(' ')} | ${this.sex_pref().join(' ')}`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_single_card.prototype, "photo", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_single_card.prototype, "tags", null);
+        $$.$hyoo_match_single_card = $hyoo_match_single_card;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//hyoo/match/single/card/card.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_match_single_card, {
+            background: {
+                color: $mol_theme.card,
+            },
+            flex: {
+                wrap: 'wrap',
+            },
+            Photo: {
+                padding: $mol_gap.block,
+                width: '7.5rem',
+                aspectRatio: 1,
+                flex: {
+                    shrink: 0,
+                },
+            },
+            Filters: {
+                flex: {
+                    wrap: 'wrap',
+                },
+            },
+            Name: {
+                padding: $mol_gap.text,
+            },
+            Tags: {
+                padding: $mol_gap.text,
+                gap: $mol_gap.space,
+                color: $mol_theme.shade,
+                flex: {
+                    wrap: 'wrap',
+                },
+            },
+            Places: {
+                flex: {
+                    grow: 0,
+                },
+            },
+            Info: {
+                flex: {
+                    basis: '20rem',
+                    grow: 1,
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//hyoo/match/single/card/card.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $hyoo_match_lobby_page extends $mol_page {
+        title() {
+            return "Lobby";
+        }
+        lobby() {
+            const obj = new this.$.$hyoo_match_lobby();
+            return obj;
+        }
+        tools() {
+            return [
+                this.Total()
+            ];
+        }
+        body() {
+            return [
+                this.Single_list()
+            ];
+        }
+        total() {
+            return 0;
+        }
+        Total() {
+            const obj = new this.$.$mol_paragraph();
+            obj.sub = () => [
+                this.total()
+            ];
+            return obj;
+        }
+        single(id) {
+            const obj = new this.$.$hyoo_match_single();
+            return obj;
+        }
+        Single(id) {
+            const obj = new this.$.$hyoo_match_single_card();
+            obj.single = () => this.single(id);
+            return obj;
+        }
+        single_list() {
+            return [
+                this.Single("0_0")
+            ];
+        }
+        Single_list() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => this.single_list();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_lobby_page.prototype, "lobby", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_lobby_page.prototype, "Total", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_match_lobby_page.prototype, "single", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_match_lobby_page.prototype, "Single", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_match_lobby_page.prototype, "Single_list", null);
+    $.$hyoo_match_lobby_page = $hyoo_match_lobby_page;
+})($ || ($ = {}));
+//hyoo/match/lobby/page/-view.tree/page.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_match_lobby_page extends $.$hyoo_match_lobby_page {
+            singles() {
+                if (!this.lobby().editable())
+                    return [];
+                return this.lobby().land.residents().slice().reverse();
+            }
+            total() {
+                return this.singles().length;
+            }
+            single_list() {
+                return this.singles().map(id => this.Single(id));
+            }
+            single(id) {
+                return this.lobby().world().Fund($hyoo_match_single).Item(id);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_lobby_page.prototype, "singles", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_match_lobby_page.prototype, "single_list", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_match_lobby_page.prototype, "single", null);
+        $$.$hyoo_match_lobby_page = $hyoo_match_lobby_page;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//hyoo/match/lobby/page/page.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_match_lobby_page, {
+            Total: {
+                padding: $mol_gap.text,
+            },
+            flex: {
+                basis: `40rem`,
+                grow: 1,
+            },
+            Single_list: {
+                gap: $mol_gap.block,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//hyoo/match/lobby/page/page.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $hyoo_match_app extends $mol_book2_catalog {
         lobby() {
             const obj = new this.$.$hyoo_match_lobby();
@@ -18783,8 +18810,8 @@ var $;
                 "": this.Intro(),
                 settings: this.Settings(),
                 look: this.Look(),
-                lobby: this.Lobby(),
-                safe: this.Safe()
+                safe: this.Safe(),
+                lobby: this.Lobby()
             };
         }
         Theme() {
@@ -18845,14 +18872,14 @@ var $;
             obj.pages = () => this.look_pages();
             return obj;
         }
-        Lobby() {
-            const obj = new this.$.$hyoo_match_lobby_page();
-            obj.lobby = () => this.lobby();
-            return obj;
-        }
         Safe() {
             const obj = new this.$.$hyoo_meta_safe();
             obj.yard = () => this.yard();
+            return obj;
+        }
+        Lobby() {
+            const obj = new this.$.$hyoo_match_lobby_page();
+            obj.lobby = () => this.lobby();
             return obj;
         }
     }
@@ -18903,10 +18930,10 @@ var $;
     ], $hyoo_match_app.prototype, "Look", null);
     __decorate([
         $mol_mem
-    ], $hyoo_match_app.prototype, "Lobby", null);
+    ], $hyoo_match_app.prototype, "Safe", null);
     __decorate([
         $mol_mem
-    ], $hyoo_match_app.prototype, "Safe", null);
+    ], $hyoo_match_app.prototype, "Lobby", null);
     $.$hyoo_match_app = $hyoo_match_app;
 })($ || ($ = {}));
 //hyoo/match/app/-view.tree/app.view.tree.ts
