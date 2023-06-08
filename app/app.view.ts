@@ -83,11 +83,11 @@ namespace $.$$ {
 			
 			const boys = lobby.collect_all([ place, [ 'young' ], [ 'male' ], age_pref, sex_pref ])
 			const mans = lobby.collect_all([ place, [ 'adult' ], [ 'male' ], age_pref, sex_pref ])
-			const gaffers = lobby.collect_all([ place, [ 'adult' ], [ 'male' ], age_pref, sex_pref ])
+			const gaffers = lobby.collect_all([ place, [ 'mature' ], [ 'male' ], age_pref, sex_pref ])
 			
 			const girls = lobby.collect_all([ place, [ 'young' ], [ 'female' ], age_pref, sex_pref ])
 			const womans = lobby.collect_all([ place, [ 'adult' ], [ 'female' ], age_pref, sex_pref ])
-			const grannies = lobby.collect_all([ place, [ 'adult' ], [ 'female' ], age_pref, sex_pref ])
+			const grannies = lobby.collect_all([ place, [ 'mature' ], [ 'female' ], age_pref, sex_pref ])
 			
 			return `👧${ girls.size }\t👩${ womans.size }\t👵${ grannies.size }\n👦${ boys.size }\t👨${ mans.size }\t👴${ gaffers.size }`
 		}
