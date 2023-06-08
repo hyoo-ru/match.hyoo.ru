@@ -7,10 +7,6 @@ namespace $.$$ {
 			return this.lobby().land.residents().slice().reverse()
 		}
 		
-		total() {
-			return this.singles().length
-		}
-		
 		@ $mol_mem
 		single_list() {
 			return this.singles().map( id => this.Single( id ) )

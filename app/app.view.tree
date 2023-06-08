@@ -10,6 +10,9 @@ $hyoo_match_app $mol_book2_catalog
 	menu_title \$hyoo_match
 	menu_tools /
 		<= Lights $mol_lights_toggle
+	menu_body /
+		<= Menu_links
+		<= Total $mol_paragraph sub / <= total @ \{count} persons total
 	menu_foot /
 		<= Online $hyoo_sync_online
 			yard <= yard $hyoo_sync_client

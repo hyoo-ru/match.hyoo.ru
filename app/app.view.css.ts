@@ -39,6 +39,16 @@ namespace $.$$ {
 			},
 		},
 		
+		Menu: {
+			Body: {
+				justifyContent: 'space-between',
+			},
+		},
+		
+		Total: {
+			padding: $mol_gap.text,
+		},
+		
 	} )
 	
 }
