@@ -31,9 +31,21 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		dating() {
-			if( !this.mutual() ) return false
-			return this.self().skipped()!.land.last_stamp() > $mol_state_time.now( 1000 * 60 ) - 1000 * 60 * 60
+		dating_range() {
+			
+			if( !this.mutual() ) return null
+			
+			return new $mol_time_interval({
+				start: new $mol_time_moment( $mol_state_time.now( 1000 ) ),
+				end: new $mol_time_moment( this.self().skipped()!.land.last_stamp() ).shift( 'PT60m' ),
+			})
+			
+		}
+		
+		@ $mol_mem
+		match_hint() {
+			const min = Math.max( 0, this.dating_range()?.duration.count( 'PT1m' ) ?? 0 ).toFixed(0)
+			return super.match_hint().replace( '{timeout}', min )
 		}
 		
 		Match() {
@@ -47,7 +59,7 @@ namespace $.$$ {
 				this.mutual()
 					? this.Mutual()
 					: this.Like(),
-				... this.dating() ? [] : [ this.Skip() ],
+				... ( this.dating_range()?.duration.valueOf() ?? 0 ) > 0 ? [] : [ this.Skip() ],
 			]
 		}
 		

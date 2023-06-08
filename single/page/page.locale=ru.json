@@ -2,5 +2,5 @@
 	"$hyoo_match_single_page_title": "Персоны",
 	"$hyoo_match_single_page_Skip_hint": "Пропустить",
 	"$hyoo_match_single_page_Like_hint": "Нравится",
-	"$hyoo_match_single_page_Match_hint_text": "++Удача!++ --У вас есть час для свидания.--"
+	"$hyoo_match_single_page_match_hint": "++Удача!++ --У вас есть {timeout} мин. для свидания.--"
 }
