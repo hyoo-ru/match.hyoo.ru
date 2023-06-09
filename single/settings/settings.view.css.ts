@@ -48,11 +48,11 @@ namespace $.$$ {
 			},
 		},
 		
-		Syntax: {
-			margin: { bottom: `-2.5rem` },
-			alignSelf: `flex-end`,
-			zIndex: $mol_layer.speck,
-		},
+		// Syntax: {
+		// 	margin: { bottom: `-2.5rem` },
+		// 	alignSelf: `flex-end`,
+		// 	zIndex: $mol_layer.speck,
+		// },
 		
 	} )
 	
