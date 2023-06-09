@@ -4542,7 +4542,6 @@ declare namespace $ {
         places_enabled(): boolean;
         Places(): $hyoo_match_places;
         Places_field(): $$.$mol_form_field;
-        Syntax(): $$.$mol_link_iconed;
         Greet(): $$.$mol_textarea;
         Greet_field(): $$.$mol_form_field;
         Contacts_hint(): $$.$mol_paragraph;

@@ -674,22 +674,23 @@ $mol_text_list_item $mol_paragraph
 		mol_text_list_item_index <= index 0
 
 $hyoo_match_final $mol_page
-	title @ \Waiting
+	title \Ждём персон
 	self $hyoo_match_single
 	tools /
 		<= Reset $mol_button_minor
-			title @ \Again 💦
+			title \Заново 💦
 			click? <=> reset? null
 	body /
-		<= Result $mol_text text @ \There is no one under your criteria yet.
+		<= Result $mol_text text \Никого пока нет под ваши критерии 😭
 		<= Share $mol_button_share
 			capture <= Content
 			uri \/
-			title @ \Tell the others for now:
+			title \Расскажи остальным:
 		<= Content $mol_text
-			text @ \
-				\" 🔥 The Tinder is gone... Meet **match.hyoo.ru** - a dating service that benefits from you finding a couple and taking off into the sunset.
-				\" No fakes, dead souls, advertising and pay wall. Share it with your friends - let them find their soulmate too 💞
+			text \
+				\" 🔥 Tinder ушёл... встречай **match.hyoo.ru** - сервис знакомств, которому выгодно, чтобы ты нашёл себе пару и свалил в закат.
+				\" Никаких фейков, мёртвых душ, рекламы и вымогательства денег. Поделись с друзьями - пусть тоже найдут свою половинку 💞
+				\" Проект не коммерческий, так что вся надежда на тебя!
 
 $mol_pick $mol_pop
 	event *
@@ -1002,7 +1003,7 @@ $hyoo_match_places $mol_select_list
 		oceania \Oceania
 
 $hyoo_match_single_page $mol_page
-	title @ \Persons
+	title \Персоны
 	self $hyoo_match_single
 	pair $hyoo_match_single
 		title => name
@@ -1020,19 +1021,19 @@ $hyoo_match_single_page $mol_page
 			<= Photo $mol_image
 				uri <= photo \
 			<= Skip $mol_button_minor
-				hint @ \Skip
+				hint \Пропустить
 				click? <=> skip? null
 				sub /
 					<= Skip_icon $mol_icon_window_close
 			<= Mutual $mol_row sub /
 				<= Mutual_icon $mol_icon_heart_flash
 			<= Like $mol_button_minor
-				hint @ \Like
+				hint \Нравится
 				click? <=> like? null
 				sub /
 					<= Like_icon $mol_icon_heart_outline
 		<= Match $mol_list rows /
-			<= Match_hint $mol_text text <= match_hint @ \++Match!++ --You have {timeout} min for a date.--
+			<= Match_hint $mol_text text <= match_hint \++Удача!++ --У вас есть {timeout} мин. для свидания.--
 			<= Contacts $mol_text
 				text <= contacts
 		<= Places $hyoo_match_places
@@ -1088,29 +1089,32 @@ $mol_icon_face $mol_icon path \M9,11.75C8.31,11.75 7.75,12.31 7.75,13C7.75,13.69
 $mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C19.26,11.28 19.15,10.59 18.96,9.95C18.31,10.1 17.63,10.18 16.92,10.18C13.86,10.18 11.15,8.67 9.5,6.34C8.61,8.5 6.91,10.26 4.77,11.22C4.73,11.47 4.73,11.74 4.73,12C4.73,16.02 7.98,19.27 12,19.27C13.05,19.27 14.06,19.04 14.97,18.63C15.54,19.72 15.8,20.26 15.78,20.26C14.14,20.81 12.87,21.08 12,21.08C9.58,21.08 7.27,20.13 5.57,18.42C4.53,17.38 3.76,16.11 3.33,14.73H2V10.18H3.09C3.93,6.04 7.6,2.92 12,2.92C14.4,2.92 16.71,3.87 18.42,5.58C19.69,6.84 20.54,8.45 20.89,10.18H22V14.67H22V14.69L22,14.73H21.94L18.38,18L13.08,17.4V15.73H17.91L18.72,14.76M9.27,11.77C9.57,11.77 9.86,11.89 10.07,12.11C10.28,12.32 10.4,12.61 10.4,12.91C10.4,13.21 10.28,13.5 10.07,13.71C9.86,13.92 9.57,14.04 9.27,14.04C8.64,14.04 8.13,13.54 8.13,12.91C8.13,12.28 8.64,11.77 9.27,11.77M14.72,11.77C15.35,11.77 15.85,12.28 15.85,12.91C15.85,13.54 15.35,14.04 14.72,14.04C14.09,14.04 13.58,13.54 13.58,12.91C13.58,12.28 14.09,11.77 14.72,11.77Z
 
 $hyoo_match_intro $mol_page
-	title @ \Intro
+	title \Знакомство
 	tools /
 		<= Next $mol_link
-			title @ \Let's go 💨
+			title \Поехали 💨
 			arg * \
 				\settings
 	body /
 		<= Content $mol_text
-			text @ \
-				\" 🚧 No pay wall and advertising
-				\" 🎭 No fakes and zombies
-				\" 📸 Focus on a couple search
+			text \
+				\" 🚧 Без рекламы и вымогательства
+				\" 🎭 Без фейков и мёртвых душ
+				\" 📸 Фокус только на поиске пары
 				\
-				\= Usage
-				\" 🤳 Fill out your \\profile\#!=settings\\
-				\" 📅 Update your photo every day
-				\" 💗 Like other \\persons\#!=look\\
-				\" 💬 Enjoy the two of you
-				\" 🔄 Come back in an hour
+				\! **Правила**
+				\  ! \\Почему это работает?\https://page.hyoo.ru/#!=rkjlvv_lle0qa\\
 				\
-				\= Gratitude
-				\" \\Tell friends about $hyoo_match\https://page.hyoo.ru/#!=rkjlvv_lle0qa\\
-				\" \\Support us with donations\https://boosty.to/hyoo\\
+				\" 🤳 Заполни свой \\профиль\#!=settings\\
+				\" 📅 Обновляй фото каждый день
+				\" 💗 Лайкай других \\персон\#!=look\\
+				\" 💬 Общайся при взаимности
+				\" 🔄 Возвращайся через час
+				\
+				\**Это всё не ради денег, но ради любви**
+				\
+				\" \\Расскажи о $hyoo_match всем\https://match.hyoo.ru/\\
+				\" \\Поддержи нас рублём\https://boosty.to/hyoo\\
 
 $mol_video_player $mol_view
 	dom_name \video
@@ -1274,7 +1278,7 @@ $mol_textarea_edit $mol_string
 		scrollTop 0
 
 $hyoo_match_single_settings $mol_page
-	title @ \Profile
+	title \Профиль
 	single $hyoo_match_single
 		ready => ready
 		photo_fresh => photo_fresh
@@ -1288,19 +1292,19 @@ $hyoo_match_single_settings $mol_page
 		sex_pref_all => sex_pref_all
 		age_pref*? => age_pref*?
 		age_pref_all => age_pref_all
-	bid_required* @ \Required
-	bid_one* @ \At least one
+	bid_required* \Обязательно
+	bid_one* \Хотябы один
 	tools /
-		<= Incoplete $mol_paragraph title @ \isn't visible 🙈
+		<= Incoplete $mol_paragraph title \Недозаполнен 🙈
 		<= Next $mol_link
-			title @ \is visible ✅
+			title \Виден всем ✅
 			arg * \
 				\look
 	body /
 		<= Shot_field $mol_form_field
-			name @ \Today photo
+			name \Сегодняшнее фото
 			bids /
-				<= shot_bid @ \Fresh required
+				<= shot_bid \Нужно свежее
 			Content <= Shot $mol_check
 				checked? <=> live? true
 				sub <= shot_content /
@@ -1309,16 +1313,16 @@ $hyoo_match_single_settings $mol_page
 					<= Camera $mol_video_camera
 						dom_node_actual => video
 						aspect 1
-					<= Shot_hint $mol_paragraph title @ \Click to shot
+					<= Shot_hint $mol_paragraph title \Жми чтобы сфотаться
 		<= Name_field $mol_form_field
-			name @ \Name
+			name \Имя
 			bids /
 				<= bid_required*name
 			Content <= Name $mol_string
 				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
-				name @ \I am ...
+				name \Я ...
 				bids /
 					<= bid_required*age_self
 					<= bid_required*sex_self
@@ -1326,16 +1330,16 @@ $hyoo_match_single_settings $mol_page
 					<= Age_self $mol_switch
 						value? <=> age_self?
 						options *
-							young @ \Young
-							adult @ \Adult
-							mature @ \Mature
+							young \Молодой
+							adult \Взрослый
+							mature \Зрелый
 					<= Sex_self $mol_switch
 						value? <=> sex_self?
 						options *
-							female @ \Female
-							male @ \Male
+							female \Женщина
+							male \Мужчина
 			<= Pref $mol_form_field
-				name @ \I like ...
+				name @ \Мне нравятся ...
 				bids /
 					<= bid_one*age_pref_all
 					<= bid_one*sex_pref_all
@@ -1343,39 +1347,39 @@ $hyoo_match_single_settings $mol_page
 					<= Age_pref $mol_check_list
 						option_checked*? <=> age_pref*?
 						options *
-							young @ \Young
-							adult @ \Adult
-							mature @ \Mature
+							young \Молодые
+							adult \Взрослые
+							mature \Зрелые
 					<= Sex_pref $mol_check_list
 						option_checked*? <=> sex_pref*?
 						options *
-							female @ \Females
-							male @ \Males
+							female \Женщины
+							male \Мужчины
 		<= Places_field $mol_form_field
-			name @ \Places
+			name \Регионы
 			bids /
 				<= bid_one*places
 			Content <= Places $hyoo_match_places
 				value? <=> places?
 				pick_enabled <= places_enabled true
-		<= Syntax $mol_link_iconed
+		- <= Syntax $mol_link_iconed
 			hint \MarkedText
 			uri \https://marked.hyoo.ru/
 			title @ \Syntax
 		<= Greet_field $mol_form_field
-			name @ \Greeting
+			name \Приветствие
 			bids /
 				<= bid_required*greet
 			Content <= Greet $mol_textarea
-				hint @ \get your pair interested
+				hint \заинтересуйте вашу пару
 				value? <=> greet?
-		<= Contacts_hint $mol_paragraph title @ \Only for matches
+		<= Contacts_hint $mol_paragraph title \Для взаимных
 		<= Contacts_field $mol_form_field
-			name @ \Contacts
+			name \Контакты
 			bids /
 				<= bid_required*contacts
 			Content <= Contacts $mol_textarea
-				hint @ \phone number, social network id etc
+				hint \как с вами связаться
 				value? <=> contacts?
 
 $mol_icon_eye $mol_icon path \M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
@@ -1461,7 +1465,7 @@ $hyoo_match_single_card $mol_view
 				text <= contacts
 
 $hyoo_match_lobby_page $mol_page
-	title \Lobby
+	title \Народ
 	lobby $hyoo_match_lobby
 	body /
 		<= Single_list $mol_list
@@ -1490,7 +1494,7 @@ $hyoo_match_app $mol_book2_catalog
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/match.hyoo.ru/
 		<= Support $mol_link_iconed
-			hint @ \Support
+			hint \Поддержка
 			uri \https://t.me/nin_jin
 			sub /
 				<= Support_icon $mol_icon_face_agent
