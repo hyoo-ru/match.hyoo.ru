@@ -1,5 +1,5 @@
 $hyoo_match_lobby_page $mol_page
-	title \Lobby
+	title \Народ
 	lobby $hyoo_match_lobby
 	body /
 		<= Single_list $mol_list

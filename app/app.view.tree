@@ -19,7 +19,7 @@ $hyoo_match_app $mol_book2_catalog
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/match.hyoo.ru/
 		<= Support $mol_link_iconed
-			hint @ \Support
+			hint \Поддержка
 			uri \https://t.me/nin_jin
 			sub /
 				<= Support_icon $mol_icon_face_agent

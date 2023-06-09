@@ -1,5 +1,5 @@
 $hyoo_match_single_page $mol_page
-	title @ \Persons
+	title \Персоны
 	self $hyoo_match_single
 	pair $hyoo_match_single
 		title => name
@@ -17,19 +17,19 @@ $hyoo_match_single_page $mol_page
 			<= Photo $mol_image
 				uri <= photo \
 			<= Skip $mol_button_minor
-				hint @ \Skip
+				hint \Пропустить
 				click? <=> skip? null
 				sub /
 					<= Skip_icon $mol_icon_window_close
 			<= Mutual $mol_row sub /
 				<= Mutual_icon $mol_icon_heart_flash
 			<= Like $mol_button_minor
-				hint @ \Like
+				hint \Нравится
 				click? <=> like? null
 				sub /
 					<= Like_icon $mol_icon_heart_outline
 		<= Match $mol_list rows /
-			<= Match_hint $mol_text text <= match_hint @ \++Match!++ --You have {timeout} min for a date.--
+			<= Match_hint $mol_text text <= match_hint \++Удача!++ --У вас есть {timeout} мин. для свидания.--
 			<= Contacts $mol_text
 				text <= contacts
 		<= Places $hyoo_match_places

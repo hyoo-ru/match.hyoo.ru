@@ -1,5 +1,5 @@
 $hyoo_match_single_settings $mol_page
-	title @ \Profile
+	title \Профиль
 	single $hyoo_match_single
 		ready => ready
 		photo_fresh => photo_fresh
@@ -13,19 +13,19 @@ $hyoo_match_single_settings $mol_page
 		sex_pref_all => sex_pref_all
 		age_pref*? => age_pref*?
 		age_pref_all => age_pref_all
-	bid_required* @ \Required
-	bid_one* @ \At least one
+	bid_required* \Обязательно
+	bid_one* \Хотябы один
 	tools /
-		<= Incoplete $mol_paragraph title @ \isn't visible 🙈
+		<= Incoplete $mol_paragraph title \Недозаполнен 🙈
 		<= Next $mol_link
-			title @ \is visible ✅
+			title \Виден всем ✅
 			arg * \
 				\look
 	body /
 		<= Shot_field $mol_form_field
-			name @ \Today photo
+			name \Сегодняшнее фото
 			bids /
-				<= shot_bid @ \Fresh required
+				<= shot_bid \Нужно свежее
 			Content <= Shot $mol_check
 				checked? <=> live? true
 				sub <= shot_content /
@@ -34,16 +34,16 @@ $hyoo_match_single_settings $mol_page
 					<= Camera $mol_video_camera
 						dom_node_actual => video
 						aspect 1
-					<= Shot_hint $mol_paragraph title @ \Click to shot
+					<= Shot_hint $mol_paragraph title \Жми чтобы сфотаться
 		<= Name_field $mol_form_field
-			name @ \Name
+			name \Имя
 			bids /
 				<= bid_required*name
 			Content <= Name $mol_string
 				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
-				name @ \I am ...
+				name \Я ...
 				bids /
 					<= bid_required*age_self
 					<= bid_required*sex_self
@@ -51,16 +51,16 @@ $hyoo_match_single_settings $mol_page
 					<= Age_self $mol_switch
 						value? <=> age_self?
 						options *
-							young @ \Young
-							adult @ \Adult
-							mature @ \Mature
+							young \Молодой
+							adult \Взрослый
+							mature \Зрелый
 					<= Sex_self $mol_switch
 						value? <=> sex_self?
 						options *
-							female @ \Female
-							male @ \Male
+							female \Женщина
+							male \Мужчина
 			<= Pref $mol_form_field
-				name @ \I like ...
+				name @ \Мне нравятся ...
 				bids /
 					<= bid_one*age_pref_all
 					<= bid_one*sex_pref_all
@@ -68,37 +68,37 @@ $hyoo_match_single_settings $mol_page
 					<= Age_pref $mol_check_list
 						option_checked*? <=> age_pref*?
 						options *
-							young @ \Young
-							adult @ \Adult
-							mature @ \Mature
+							young \Молодые
+							adult \Взрослые
+							mature \Зрелые
 					<= Sex_pref $mol_check_list
 						option_checked*? <=> sex_pref*?
 						options *
-							female @ \Females
-							male @ \Males
+							female \Женщины
+							male \Мужчины
 		<= Places_field $mol_form_field
-			name @ \Places
+			name \Регионы
 			bids /
 				<= bid_one*places
 			Content <= Places $hyoo_match_places
 				value? <=> places?
 				pick_enabled <= places_enabled true
-		<= Syntax $mol_link_iconed
+		- <= Syntax $mol_link_iconed
 			hint \MarkedText
 			uri \https://marked.hyoo.ru/
 			title @ \Syntax
 		<= Greet_field $mol_form_field
-			name @ \Greeting
+			name \Приветствие
 			bids /
 				<= bid_required*greet
 			Content <= Greet $mol_textarea
-				hint @ \get your pair interested
+				hint \заинтересуйте вашу пару
 				value? <=> greet?
-		<= Contacts_hint $mol_paragraph title @ \Only for matches
+		<= Contacts_hint $mol_paragraph title \Для взаимных
 		<= Contacts_field $mol_form_field
-			name @ \Contacts
+			name \Контакты
 			bids /
 				<= bid_required*contacts
 			Content <= Contacts $mol_textarea
-				hint @ \phone number, social network id etc
+				hint \как с вами связаться
 				value? <=> contacts?

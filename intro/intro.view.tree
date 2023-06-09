@@ -1,24 +1,27 @@
 $hyoo_match_intro $mol_page
-	title @ \Intro
+	title \Знакомство
 	tools /
 		<= Next $mol_link
-			title @ \Let's go 💨
+			title \Поехали 💨
 			arg * \
 				\settings
 	body /
 		<= Content $mol_text
-			text @ \
-				\" 🚧 No pay wall and advertising
-				\" 🎭 No fakes and zombies
-				\" 📸 Focus on a couple search
+			text \
+				\" 🚧 Без рекламы и вымогательства
+				\" 🎭 Без фейков и мёртвых душ
+				\" 📸 Фокус только на поиске пары
 				\
-				\= Usage
-				\" 🤳 Fill out your \\profile\#!=settings\\
-				\" 📅 Update your photo every day
-				\" 💗 Like other \\persons\#!=look\\
-				\" 💬 Enjoy the two of you
-				\" 🔄 Come back in an hour
+				\! **Правила**
+				\  ! \\Почему это работает?\https://page.hyoo.ru/#!=rkjlvv_lle0qa\\
 				\
-				\= Gratitude
-				\" \\Tell friends about $hyoo_match\https://page.hyoo.ru/#!=rkjlvv_lle0qa\\
-				\" \\Support us with donations\https://boosty.to/hyoo\\
+				\" 🤳 Заполни свой \\профиль\#!=settings\\
+				\" 📅 Обновляй фото каждый день
+				\" 💗 Лайкай других \\персон\#!=look\\
+				\" 💬 Общайся при взаимности
+				\" 🔄 Возвращайся через час
+				\
+				\**Это всё не ради денег, но ради любви**
+				\
+				\" \\Расскажи о $hyoo_match всем\https://match.hyoo.ru/\\
+				\" \\Поддержи нас рублём\https://boosty.to/hyoo\\
