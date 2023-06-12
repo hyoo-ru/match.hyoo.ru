@@ -12244,7 +12244,7 @@ var $;
         }
         Result() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "Никого пока нет под ваши критерии 😭";
+            obj.text = () => "Никого пока нет под твои критерии 😭";
             return obj;
         }
         Share() {
@@ -23906,4 +23906,5 @@ var $;
 var $node = $node || {} ; $node[ "/hyoo/match/app/evbktk_nufd3e!evbktk_nufd3e.bin" ] = "data:application/octet-stream;base64,KLWXNQqK8NUotZc1Corw1Si1lzUKivDVKLWXNQqK8NUAAAAAAAAAAAAAAAAAAAAAr3K+zwAAWAAiX09IM1FJdUJqV2FIaHF0dDVjRm1uV0dUNXdPc3o2cWZKNS1Tbmx0cExNRWpMNTdRWUFoNnF3RlFOT2xYczFNMC1LTTE4MWZ5MWZ1Wm04VmF0bF9HQXMiUw/6zD0ezKRQz+qqWxg5LY06j1806q/P3Y3BiFK6LS6rk2CMTTBkezKxlvm+TJw3Kok5OdU3QgXSZ+fT8PhKXCi1lzUKivDVKLWXNQqK8NUotZc1Corw1ePP4hHPDJHgAAAAAAAAAAAAAAAAAAAAALByvs8AAAEAMwAAAAAAAACFxVuuCU9JeG4UOPwrHRF1vSvLZiIrgWRyC11NJInUPeh9RkolCfHGUN3Scs76CNhmGtmXXBBvMtsBEEkiQpqzKLWXNQqK8NUotZc1Corw1Si1lzUKivDVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsXK+zwAAAQAxAAAAAAAAAEtDetoYpmt7cRomrYaX53jZ6Xp0pMJtMiDMdyk++jR2QGY41uMSGUr28832YM/X0PivFG4NTf7hj3hnQiluf0I="
 
 
+export default $
 //# sourceMappingURL=web.js.map
