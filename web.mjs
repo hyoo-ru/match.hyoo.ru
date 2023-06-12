@@ -23045,8 +23045,8 @@ var $;
 var $;
 (function ($) {
     class $hyoo_page_menu extends $hyoo_meta_menu {
-        title_default() {
-            return this.$.$mol_locale.text('$hyoo_page_menu_title_default');
+        title() {
+            return this.$.$mol_locale.text('$hyoo_page_menu_title');
         }
         attr() {
             return {
@@ -23054,11 +23054,15 @@ var $;
                 mol_theme: "$mol_theme_special"
             };
         }
-        Title() {
-            const obj = new this.$.$hyoo_meta_link();
-            obj.meta = () => this.side();
-            obj.title = () => this.title();
-            return obj;
+        head() {
+            return [
+                this.Profile(),
+                this.Title(),
+                this.Tools()
+            ];
+        }
+        Logo() {
+            return null;
         }
         foot() {
             return [
@@ -23069,11 +23073,15 @@ var $;
                 this.Lights()
             ];
         }
-        title() {
-            return this.side().title();
-        }
         side() {
             const obj = new this.$.$hyoo_page_side();
+            return obj;
+        }
+        Profile() {
+            const obj = new this.$.$hyoo_meta_link();
+            obj.meta = () => this.side();
+            obj.hint = () => this.$.$mol_locale.text('$hyoo_page_menu_Profile_hint');
+            obj.Title = () => null;
             return obj;
         }
         Online() {
@@ -23127,10 +23135,10 @@ var $;
     }
     __decorate([
         $mol_mem
-    ], $hyoo_page_menu.prototype, "Title", null);
+    ], $hyoo_page_menu.prototype, "side", null);
     __decorate([
         $mol_mem
-    ], $hyoo_page_menu.prototype, "side", null);
+    ], $hyoo_page_menu.prototype, "Profile", null);
     __decorate([
         $mol_mem
     ], $hyoo_page_menu.prototype, "Online", null);
@@ -23168,9 +23176,6 @@ var $;
     var $$;
     (function ($$) {
         class $hyoo_page_menu extends $.$hyoo_page_menu {
-            title() {
-                return super.title() || this.title_default();
-            }
         }
         $$.$hyoo_page_menu = $hyoo_page_menu;
     })($$ = $.$$ || ($.$$ = {}));
