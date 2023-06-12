@@ -6,7 +6,7 @@ $hyoo_match_final $mol_page
 			title \Заново 💦
 			click? <=> reset? null
 	body /
-		<= Result $mol_text text \Никого пока нет под ваши критерии 😭
+		<= Result $mol_text text \Никого пока нет под твои критерии 😭
 		<= Share $mol_button_share
 			capture <= Content
 			uri \/
