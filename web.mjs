@@ -18374,7 +18374,7 @@ var $;
         Support() {
             const obj = new this.$.$mol_link_iconed();
             obj.hint = () => "Поддержка";
-            obj.uri = () => "https://t.me/nin_jin";
+            obj.uri = () => "https://t.me/h_y_o_o/417";
             obj.sub = () => [
                 this.Support_icon()
             ];
