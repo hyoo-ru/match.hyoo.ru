@@ -19400,6 +19400,26 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_vk extends $mol_object2 {
+        static init() {
+            this.send('VKWebAppInit');
+        }
+        static send(handler, params = {}) {
+            const glob = $mol_dom_context;
+            glob.AndroidBridge?.[handler](JSON.stringify(params));
+            glob.webkit?.messageHandlers?.[handler].postMessage(params);
+            glob.ReactNativeWebView?.postMessage({ handler, params });
+            glob.parent.postMessage({ handler, params, type: 'vk-connect' }, '*');
+        }
+    }
+    $.$mol_vk = $mol_vk;
+    setTimeout(() => $mol_vk.init());
+})($ || ($ = {}));
+//mol/vk/vk.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $hyoo_meta_link extends $mol_link {
         minimal_height() {
             return 40;

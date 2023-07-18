@@ -387,7 +387,8 @@
     "$mol_wire_stale",
     "$mol_offline_install",
     "$mol_offline",
-    "$hyoo_crowd_dict"
+    "$hyoo_crowd_dict",
+    "$mol_vk"
   ],
   "dependencies": {
     "jsdom": "*",

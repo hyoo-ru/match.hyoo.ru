@@ -4839,6 +4839,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_vk extends $mol_object2 {
+        static init(): void;
+        static send(handler: string, params?: Record<string, any>): void;
+    }
+}
+
+declare namespace $ {
     class $hyoo_meta_link extends $mol_link {
         minimal_height(): number;
         id(): `${string}_${string}`;
