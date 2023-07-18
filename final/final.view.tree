@@ -1,7 +1,7 @@
 $hyoo_match_final $mol_page
 	title \Ждём персон
 	self $hyoo_match_single
-	tools /
+	foot /
 		<= Reset $mol_button_minor
 			title \Заново 💦
 			click? <=> reset? null

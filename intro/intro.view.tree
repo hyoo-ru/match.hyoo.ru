@@ -1,6 +1,6 @@
 $hyoo_match_intro $mol_page
 	title \Знакомство
-	tools /
+	foot /
 		<= Next $mol_link
 			title \Поехали 💨
 			arg * \
