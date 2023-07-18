@@ -676,7 +676,7 @@ $mol_text_list_item $mol_paragraph
 $hyoo_match_final $mol_page
 	title \Ждём персон
 	self $hyoo_match_single
-	tools /
+	foot /
 		<= Reset $mol_button_minor
 			title \Заново 💦
 			click? <=> reset? null
@@ -1090,7 +1090,7 @@ $mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C
 
 $hyoo_match_intro $mol_page
 	title \Знакомство
-	tools /
+	foot /
 		<= Next $mol_link
 			title \Поехали 💨
 			arg * \
@@ -1294,7 +1294,7 @@ $hyoo_match_single_settings $mol_page
 		age_pref_all => age_pref_all
 	bid_required* \Обязательно
 	bid_one* \Хотябы один
-	tools /
+	foot /
 		<= Incoplete $mol_paragraph title \Недозаполнен 🙈
 		<= Next $mol_link
 			title \Виден всем ✅

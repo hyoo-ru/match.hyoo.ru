@@ -3533,7 +3533,7 @@ declare namespace $ {
     class $hyoo_match_final extends $mol_page {
         title(): string;
         self(): $hyoo_match_single;
-        tools(): readonly any[];
+        foot(): readonly any[];
         body(): readonly any[];
         reset(next?: any): any;
         Reset(): $mol_button_minor;
@@ -4316,7 +4316,7 @@ declare namespace $ {
 declare namespace $ {
     class $hyoo_match_intro extends $mol_page {
         title(): string;
-        tools(): readonly any[];
+        foot(): readonly any[];
         body(): readonly any[];
         Next(): $$.$mol_link;
         Content(): $$.$mol_text;
@@ -4575,7 +4575,7 @@ declare namespace $ {
         single(): $hyoo_match_single;
         bid_required(id: any): string;
         bid_one(id: any): string;
-        tools(): readonly any[];
+        foot(): readonly any[];
         body(): readonly any[];
         Incoplete(): $$.$mol_paragraph;
         Next(): $$.$mol_link;
