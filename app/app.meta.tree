@@ -1,4 +1,5 @@
 include \/mol/offline/install
+include \/mol/vk
 
 deploy \/hyoo/match/app/manifest.json
 deploy \/hyoo/match/logo/logo.svg
