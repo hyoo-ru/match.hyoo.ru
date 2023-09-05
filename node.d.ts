@@ -2020,7 +2020,11 @@ declare namespace $ {
         param(): string;
         spread(next?: any): string;
         spreads(): Record<string, any>;
-        Spread(): $mol_view;
+        Spread(id: any): $mol_view;
+        Spread_default(): any;
+        spread_ids(): readonly string[];
+        menu_filter_enabled(): boolean;
+        spread_ids_filtered(): readonly string[];
         pages(): readonly any[];
         Spread_close(): $$.$mol_link;
         Menu_logo(): any;
@@ -2053,9 +2057,13 @@ declare namespace $ {
 declare namespace $.$$ {
     class $mol_book2_catalog extends $.$mol_book2_catalog {
         pages(): any[];
+        spread_ids(): string[];
         menu_body(): ($mol_list | $mol_search)[];
+        menu_filter_enabled(): boolean;
         menu_links(): $mol_link[];
-        Spread(): any;
+        spread_ids_filtered(): string[];
+        Spread(id: string): any;
+        Spread_default(): any;
         spread(next?: string): string;
         arg(spread: string): {
             [x: string]: string | null;

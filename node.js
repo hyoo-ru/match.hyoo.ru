@@ -6928,9 +6928,21 @@ var $;
         spreads() {
             return {};
         }
-        Spread() {
+        Spread(id) {
             const obj = new this.$.$mol_view();
             return obj;
+        }
+        Spread_default() {
+            return null;
+        }
+        spread_ids() {
+            return [];
+        }
+        menu_filter_enabled() {
+            return false;
+        }
+        spread_ids_filtered() {
+            return [];
         }
         pages() {
             return [
@@ -7040,7 +7052,7 @@ var $;
         $mol_mem
     ], $mol_book2_catalog.prototype, "spread", null);
     __decorate([
-        $mol_mem
+        $mol_mem_key
     ], $mol_book2_catalog.prototype, "Spread", null);
     __decorate([
         $mol_mem
@@ -7093,7 +7105,7 @@ var $;
     (function ($$) {
         class $mol_book2_catalog extends $.$mol_book2_catalog {
             pages() {
-                const spread = this.Spread();
+                const spread = this.spread() === '' ? this.Spread_default() : this.Spread(this.spread());
                 return [
                     this.Menu(),
                     ...spread
@@ -7103,19 +7115,31 @@ var $;
                         : [],
                 ];
             }
+            spread_ids() {
+                return Object.keys(this.spreads());
+            }
             menu_body() {
                 return [
-                    ...Object.keys(this.spreads()).length >= 10 ? [this.Menu_filter()] : [],
+                    ...this.menu_filter_enabled() ? [this.Menu_filter()] : [],
                     this.Menu_links(),
                 ];
             }
+            menu_filter_enabled() {
+                return this.spread_ids().length >= 10;
+            }
             menu_links() {
-                return Object.keys(this.spreads())
-                    .filter($mol_match_text(this.menu_filter(), spread => [this.spread_title(spread)]))
+                return this.spread_ids_filtered()
                     .map(spread => this.Menu_link(spread));
             }
-            Spread() {
-                return this.spreads()[this.spread()];
+            spread_ids_filtered() {
+                return this.spread_ids()
+                    .filter($mol_match_text(this.menu_filter(), spread => [this.spread_title(spread)]));
+            }
+            Spread(id) {
+                return this.spreads()[id];
+            }
+            Spread_default() {
+                return this.spreads()[''];
             }
             spread(next) {
                 return this.$.$mol_state_arg.value(this.param(), next) ?? '';
@@ -7127,7 +7151,7 @@ var $;
                 return { [this.param()]: null };
             }
             spread_title(spread) {
-                const page = this.spreads()[spread];
+                const page = this.Spread(spread);
                 return page instanceof $mol_book2
                     && page.menu_title()
                     || page.title();
@@ -7136,6 +7160,9 @@ var $;
         __decorate([
             $mol_mem
         ], $mol_book2_catalog.prototype, "pages", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "spread_ids", null);
         __decorate([
             $mol_mem
         ], $mol_book2_catalog.prototype, "menu_body", null);
