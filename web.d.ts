@@ -1901,9 +1901,7 @@ declare namespace $ {
         spread_ids_filtered(): readonly string[];
         pages(): readonly any[];
         Spread_close(): $$.$mol_link;
-        Menu_logo(): any;
         menu_title(): string;
-        menu_item_title(): string;
         menu_tools(): readonly any[];
         menu_head(): readonly any[];
         menu_filter(next?: any): string;
@@ -1932,7 +1930,7 @@ declare namespace $ {
 declare namespace $.$$ {
     class $mol_book2_catalog extends $.$mol_book2_catalog {
         pages(): any[];
-        spread_ids(): string[];
+        spread_ids(): readonly string[];
         menu_body(): ($mol_list | $mol_search)[];
         menu_filter_enabled(): boolean;
         menu_links(): $mol_link[];
