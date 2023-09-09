@@ -3610,6 +3610,18 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_icon_trash_can extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_trash_can_outline extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
     class $mol_icon_chevron_left extends $mol_icon {
         path(): string;
     }
@@ -3702,16 +3714,15 @@ declare namespace $ {
         bubble_content(): readonly any[];
         value_number(next?: any): number;
         value_moment(next?: any): $mol_time_moment;
-        today_enabled(): boolean;
+        enabled(): boolean;
         today_click(event?: any): any;
         Today_icon(): $mol_icon_calendar_today;
         Today(): $mol_button_minor;
         value(next?: any): string;
         input_mask(id: any): string;
-        enabled(): boolean;
         Input(): $$.$mol_format;
         clear(event?: any): any;
-        Clear_icon(): $mol_icon_cross;
+        Clear_icon(): $mol_icon_trash_can_outline;
         Clear(): $mol_button_minor;
         input_content(): readonly any[];
         Input_row(): $mol_view;
@@ -3733,6 +3744,7 @@ declare namespace $ {
     class $mol_date_calendar extends $mol_calendar {
         day_content(id: any): readonly any[];
         day_click(id: any, event?: any): any;
+        enabled(): boolean;
         Day_button(id: any): $mol_button_minor;
     }
 }
@@ -3756,7 +3768,6 @@ declare namespace $.$$ {
         day_click(day: string): void;
         prev(): void;
         next(): void;
-        today_enabled(): boolean;
         today_click(): void;
     }
 }
@@ -4601,7 +4612,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_picture extends Object {
+    class $mol_picture extends $mol_object2 {
         readonly canvas: HTMLCanvasElement;
         constructor(canvas: HTMLCanvasElement);
         get context(): CanvasRenderingContext2D | null;
