@@ -2888,7 +2888,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/book2/book2.view.css", "[mol_book2] {\n\tdisplay: flex;\n\tflex-flow: row nowrap;\n\talign-items: stretch;\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tmargin: 0;\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_line); */\n\t/* transform: translateZ(0); */\n\ttransition: none;\n\toverflow: overlay;\n\tscroll-snap-type: x mandatory;\n\tpadding: 0 1px;\n\tscroll-padding: 0 1px;\n\tgap: 1px;\n}\n\n[mol_book2] > * {\n/* \tflex: none; */\n\tscroll-snap-stop: always;\n\tscroll-snap-align: end;\n\tposition: relative;\n\tmin-height: 100%;\n\tmax-height: 100%;\n\tmax-width: 100%;\n\tflex-shrink: 0;\n}\n\n[mol_book2] > *:not(:first-of-type):before,\n[mol_book2] > *:not(:last-of-type)::after {\n\tcontent: '';\n\tposition: absolute;\n\ttop: 1.5rem;\n\twidth: 1px;\n\theight: 1rem;\n\tbackground: var(--mol_theme_special);\n\tborder-radius: var(--mol_gap_round);\n\topacity: .5;\n}\n[mol_book2] > *:not(:first-of-type):before {\n\tleft: -1px;\n}\n[mol_book2] > *:not(:last-of-type)::after {\n\tright: -1px;\n}\n\n:where([mol_book2]) > * {\n\tbackground-color: var(--mol_theme_card);\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_back); */\n}\n\n[mol_book2] > [mol_book2] {\n\tdisplay: contents;\n}\n\n[mol_book2] > *:first-child {\n\tscroll-snap-align: start;\n}\n\n[mol_book2] > [mol_view] {\n\ttransform: none; /* prevent content clipping */\n}\n\n[mol_book2_placeholder] {\n\tflex: 1 1 0;\n\tbackground: none;\n}\n\n[mol_book2_gap] {\n\tbackground: none;\n\tflex-grow: 1;\n\tscroll-snap-align: none;\n\tmargin-right: -1px;\n\tbox-shadow: none;\n}\n\n[mol_book2_gap]::before,\n[mol_book2_gap]::after {\n\tdisplay: none;\n}\n");
+    $mol_style_attach("mol/book2/book2.view.css", "[mol_book2] {\n\tdisplay: flex;\n\tflex-flow: row nowrap;\n\talign-items: stretch;\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tmargin: 0;\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_line); */\n\t/* transform: translateZ(0); */\n\ttransition: none;\n\toverflow: overlay;\n\tscroll-snap-type: x mandatory;\n\tpadding: 0 1px;\n\tscroll-padding: 0 1px;\n\tgap: 1px;\n}\n\n[mol_book2] > * {\n/* \tflex: none; */\n\tscroll-snap-stop: always;\n\tscroll-snap-align: end;\n\tposition: relative;\n\tmin-height: 100%;\n\tmax-height: 100%;\n\tmax-width: 100%;\n\tflex-shrink: 0;\n}\n\n[mol_book2] > *:not(:first-of-type):before,\n[mol_book2] > *:not(:last-of-type)::after {\n\tcontent: '';\n\tposition: absolute;\n\ttop: 1.5rem;\n\twidth: 1px;\n\theight: 1rem;\n\tbackground: var(--mol_theme_focus);\n\tborder-radius: var(--mol_gap_round);\n\topacity: .5;\n}\n[mol_book2] > *:not(:first-of-type):before {\n\tleft: -1px;\n}\n[mol_book2] > *:not(:last-of-type)::after {\n\tright: -1px;\n}\n\n:where([mol_book2]) > * {\n\tbackground-color: var(--mol_theme_card);\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_back); */\n}\n\n[mol_book2] > [mol_book2] {\n\tdisplay: contents;\n}\n\n[mol_book2] > *:first-child {\n\tscroll-snap-align: start;\n}\n\n[mol_book2] > [mol_view] {\n\ttransform: none; /* prevent content clipping */\n}\n\n[mol_book2_placeholder] {\n\tflex: 1 1 0;\n\tbackground: none;\n}\n\n[mol_book2_gap] {\n\tbackground: none;\n\tflex-grow: 1;\n\tscroll-snap-align: none;\n\tmargin-right: -1px;\n\tbox-shadow: none;\n}\n\n[mol_book2_gap]::before,\n[mol_book2_gap]::after {\n\tdisplay: none;\n}\n");
 })($ || ($ = {}));
 //mol/book2/-css/book2.view.css.ts
 ;
@@ -10040,6 +10040,9 @@ var $;
         const { rem, px } = $mol_style_unit;
         $mol_style_define($mol_text_code, {
             whiteSpace: 'pre-wrap',
+            font: {
+                family: 'monospace',
+            },
             Rows: {
                 padding: $mol_gap.text,
             },
@@ -18705,6 +18708,19 @@ var $;
                 const Fund = this.world().Fund($hyoo_page_side);
                 return ids.map(id => Fund.Item(id));
             }
+            following() {
+                return this.following_in() ?? this.following_out();
+            }
+            following_in() {
+                return this.pages().at(-1) ?? null;
+            }
+            following_out() {
+                const book = this.book();
+                if (!book)
+                    return null;
+                const pages = book.pages();
+                return pages[pages.indexOf(this) - 1] ?? book.following_out();
+            }
             bookmarked(id, next) {
                 const node = this.bookmarks_node();
                 if (!node)
@@ -18841,6 +18857,12 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_page_side.prototype, "pages", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_page_side.prototype, "following_in", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_page_side.prototype, "following_out", null);
         __decorate([
             $mol_mem_key
         ], $hyoo_page_side.prototype, "bookmarked", null);
@@ -20976,6 +20998,9 @@ var $;
         authors() {
             return this.side().authors();
         }
+        following() {
+            return this.side().following();
+        }
         side() {
             const obj = new this.$.$hyoo_page_side();
             return obj;
@@ -21176,11 +21201,17 @@ var $;
             obj.sub = () => this.author_list();
             return obj;
         }
+        Following() {
+            const obj = new this.$.$hyoo_meta_link();
+            obj.meta = () => this.following();
+            return obj;
+        }
         Signature() {
             const obj = new this.$.$mol_view();
             obj.sub = () => [
                 this.Changed(),
-                this.Author_list()
+                this.Author_list(),
+                this.Following()
             ];
             return obj;
         }
@@ -21272,6 +21303,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_page_side_view.prototype, "Author_list", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_page_side_view.prototype, "Following", null);
     __decorate([
         $mol_mem
     ], $hyoo_page_side_view.prototype, "Signature", null);
@@ -21366,6 +21400,9 @@ var $;
             details() {
                 return this.editing() ? this.side_details() : this.side_release();
             }
+            Following() {
+                return this.following() ? super.Following() : null;
+            }
             author_list() {
                 return [...this.authors()].map(peer => this.Author_link(peer));
             }
@@ -21438,6 +21475,13 @@ var $;
                 direction: 'row-reverse',
                 wrap: 'wrap',
             },
+        },
+        Following: {
+            flex: {
+                grow: 1,
+                shrink: 1,
+            },
+            color: $mol_theme.special,
         },
     });
 })($ || ($ = {}));
