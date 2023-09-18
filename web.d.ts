@@ -4154,27 +4154,36 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $hyoo_sync_online extends $mol_link {
+    class $hyoo_sync_online extends $mol_select {
         minimal_width(): number;
         minimal_height(): number;
+        dictionary(): string[];
+        master_cursor(next?: any): number;
         yard(): $hyoo_sync_yard<unknown>;
-        uri(): string;
-        sub(): readonly any[];
-        attr(): Record<string, any>;
+        Filter(): any;
+        option_content(id: any): readonly any[];
+        trigger_content(): readonly any[];
+        master_id(id: any): string;
+        Option_logo(id: any): $$.$mol_avatar;
         master_link(): string;
         Well(): $$.$mol_avatar;
         Fail(): $mol_icon_sync_off;
+        link_content(): readonly any[];
         hint(): string;
         message(): string;
+        Link(): $$.$mol_link;
     }
 }
 
 declare namespace $.$$ {
     class $hyoo_sync_online extends $.$hyoo_sync_online {
         message(): string;
-        sub(): $mol_icon_sync_off[];
+        link_content(): $mol_icon_sync_off[];
         hint(): string;
         master_link(): string;
+        master_id(index: number): string;
+        option_label(index: number): string;
+        value(next?: string): string;
     }
 }
 
