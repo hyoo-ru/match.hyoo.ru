@@ -947,6 +947,8 @@ var $;
                 result = compare_pojo(left, right);
             else if (!Reflect.getPrototypeOf(left_proto))
                 result = compare_pojo(left, right);
+            else if (Symbol.toPrimitive in left)
+                result = compare_primitive(left, right);
             else if (Array.isArray(left))
                 result = compare_array(left, right);
             else if (left instanceof Set)
@@ -957,8 +959,6 @@ var $;
                 result = compare_buffer(left, right);
             else if (Symbol.iterator in left)
                 result = compare_iterator(left[Symbol.iterator](), right[Symbol.iterator]());
-            else if (Symbol.toPrimitive in left)
-                result = compare_primitive(left, right);
             else
                 result = false;
         }
@@ -8364,7 +8364,7 @@ var $;
         $mol_action
     ], $hyoo_meta_model.prototype, "steal_rights", null);
     __decorate([
-        $mol_mem_key
+        $mol_mem
     ], $hyoo_meta_model.prototype, "whole", null);
     $.$hyoo_meta_model = $hyoo_meta_model;
 })($ || ($ = {}));
