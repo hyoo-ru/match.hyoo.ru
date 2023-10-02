@@ -5967,7 +5967,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: .5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
+    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
 })($ || ($ = {}));
 //mol/list/-css/list.view.css.ts
 ;
@@ -14159,9 +14159,9 @@ var $;
             ];
         }
         Filter() {
-            const obj = new this.$.$mol_string();
-            obj.value = (next) => this.filter_pattern(next);
-            obj.hint = () => this.$.$mol_locale.text('$mol_select_Filter_hint');
+            const obj = new this.$.$mol_search();
+            obj.query = (next) => this.filter_pattern(next);
+            obj.hint = () => this.filter_hint();
             obj.submit = (event) => this.submit(event);
             obj.enabled = () => this.enabled();
             return obj;
@@ -14231,6 +14231,9 @@ var $;
                 this.Menu()
             ];
             return obj;
+        }
+        filter_hint() {
+            return this.$.$mol_locale.text('$mol_select_filter_hint');
         }
         submit(event) {
             if (event !== undefined)
@@ -14445,6 +14448,11 @@ var $;
         drop_enabled() {
             return this.enabled();
         }
+        event_select(id, next) {
+            if (next !== undefined)
+                return next;
+            return null;
+        }
         align_hor() {
             return "right";
         }
@@ -14472,8 +14480,12 @@ var $;
             const obj = new this.$.$mol_icon_plus();
             return obj;
         }
+        filter_pattern(next) {
+            return this.Pick().filter_pattern(next);
+        }
         Pick() {
             const obj = new this.$.$mol_select();
+            obj.event_select = (id, next) => this.event_select(id, next);
             obj.align_hor = () => this.align_hor();
             obj.options = () => this.options_pickable();
             obj.value = (next) => this.pick(next);
@@ -14493,6 +14505,9 @@ var $;
     __decorate([
         $mol_mem_key
     ], $mol_select_list.prototype, "remove", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_select_list.prototype, "event_select", null);
     __decorate([
         $mol_mem
     ], $mol_select_list.prototype, "pick", null);
@@ -14519,14 +14534,11 @@ var $;
                 if (!key)
                     return '';
                 this.value([...this.value(), key]);
-                new $mol_after_frame(() => {
-                    if (!this.pick_enabled())
-                        return;
-                    this.Pick().filter_pattern('');
-                    this.Pick().Trigger().focused(true);
-                    this.Pick().open();
-                });
                 return '';
+            }
+            event_select(id, event) {
+                event?.preventDefault();
+                this.pick(id);
             }
             options() {
                 return Object.keys(this.dictionary());
@@ -14541,26 +14553,22 @@ var $;
                 const value = this.dictionary()[key];
                 return value == null ? key : value;
             }
-            badge_title(index) {
-                return this.option_title(this.value()[index]);
+            badge_title(key) {
+                return this.option_title(key);
             }
             pick_enabled() {
                 return this.options_pickable().length > 0;
             }
             Badges() {
                 return this.value()
-                    .map((_, index) => this.Badge(index))
+                    .map(id => this.Badge(id))
                     .reverse();
             }
             title() {
                 return this.value().map(key => this.option_title(key)).join(' + ');
             }
-            remove(index) {
-                const value = this.value();
-                this.value([
-                    ...value.slice(0, index),
-                    ...value.slice(index + 1),
-                ]);
+            remove(key) {
+                this.value(this.value().filter(id => id !== key));
             }
         }
         __decorate([
@@ -16887,6 +16895,9 @@ var $;
 var $;
 (function ($) {
     class $mol_check_list extends $mol_view {
+        dictionary() {
+            return {};
+        }
         Option(id) {
             const obj = new this.$.$mol_check();
             obj.checked = (next) => this.option_checked(id, next);
@@ -16949,6 +16960,18 @@ var $;
         class $mol_check_list extends $.$mol_check_list {
             options() {
                 return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
             }
             keys() {
                 return Object.keys(this.options());
