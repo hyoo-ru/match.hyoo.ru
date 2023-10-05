@@ -9630,6 +9630,13 @@ var $;
         list() {
             return this.yoke([])?.residents() ?? [];
         }
+        times() {
+            const land = this.yoke([]);
+            land?.pub.promote();
+            return Object.fromEntries([...land?._unit_all.values() ?? []]
+                .filter(unit => unit.data && unit.kind() === $hyoo_crowd_unit_kind.join)
+                .map(unit => [unit.auth, $hyoo_crowd_time_stamp(unit.time)]));
+        }
         total() {
             return this.list().length;
         }
@@ -9646,6 +9653,9 @@ var $;
             }
         }
     }
+    __decorate([
+        $mol_mem
+    ], $hyoo_crowd_counter.prototype, "times", null);
     $.$hyoo_crowd_counter = $hyoo_crowd_counter;
 })($ || ($ = {}));
 //hyoo/crowd/counter/counter.ts
