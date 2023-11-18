@@ -2076,6 +2076,30 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_base64_encode(src: string | Uint8Array): string;
+}
+
+declare namespace $ {
+    function $mol_base64_encode_web(str: string | Uint8Array): string;
+}
+
+declare namespace $ {
+    function $mol_base64_encode_safe(buffer: Uint8Array): string;
+}
+
+declare namespace $ {
+    function $mol_base64_decode(base64: string): Uint8Array;
+}
+
+declare namespace $ {
+    function $mol_base64_decode_web(base64Str: string): Uint8Array;
+}
+
+declare namespace $ {
+    function $mol_base64_decode_safe(str: string): Uint8Array;
+}
+
+declare namespace $ {
     function $mol_crypto_auditor_pair(this: $): Promise<{
         public: $mol_crypto_auditor_public;
         private: $mol_crypto_auditor_private;
@@ -2084,24 +2108,28 @@ declare namespace $ {
         readonly native: CryptoKey & {
             type: 'public';
         };
-        static size: number;
+        static size_str: number;
+        static size_bin: number;
         constructor(native: CryptoKey & {
             type: 'public';
         });
-        static from(serial: string): Promise<$mol_crypto_auditor_public>;
+        static from(serial: string | Uint8Array): Promise<$mol_crypto_auditor_public>;
         serial(): Promise<string>;
+        toArray(): Promise<Uint8Array>;
         verify(data: BufferSource, sign: BufferSource): Promise<boolean>;
     }
     class $mol_crypto_auditor_private extends Object {
         readonly native: CryptoKey & {
             type: 'private';
         };
-        static size: number;
+        static size_str: number;
+        static size_bin: number;
         constructor(native: CryptoKey & {
             type: 'private';
         });
-        static from(serial: string): Promise<$mol_crypto_auditor_private>;
+        static from(serial: string | Uint8Array): Promise<$mol_crypto_auditor_private>;
         serial(): Promise<string>;
+        toArray(): Promise<Uint8Array>;
         sign(data: BufferSource): Promise<ArrayBuffer>;
         public(): Promise<$mol_crypto_auditor_public>;
     }
@@ -4656,14 +4684,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_base64_decode(base64: string): Uint8Array;
-}
-
-declare namespace $ {
-    function $mol_base64_decode_web(base64Str: string): Uint8Array;
-}
-
-declare namespace $ {
     class $mol_crypto_secret extends Object {
         readonly native: CryptoKey & {
             type: 'secret';
@@ -4695,14 +4715,6 @@ declare namespace $ {
 declare namespace $ {
     function $mol_wait_rest_async(this: $): Promise<unknown>;
     function $mol_wait_rest(this: $): unknown;
-}
-
-declare namespace $ {
-    function $mol_base64_encode(src: string | Uint8Array): string;
-}
-
-declare namespace $ {
-    function $mol_base64_encode_web(str: string | Uint8Array): string;
 }
 
 declare namespace $.$$ {
