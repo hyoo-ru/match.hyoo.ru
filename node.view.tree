@@ -28,6 +28,7 @@ $mol_link $mol_view
 		target <= target \_self
 		download <= file_name \
 		mol_link_current <= current false
+		rel <= relation \
 	sub /$mol_view_content
 		<= title
 	arg *
@@ -2086,6 +2087,7 @@ $hyoo_page_menu $hyoo_meta_menu
 			meta <= side $hyoo_page_side
 			hint @ \Profile
 			Title null
+			relation \nofollow
 		<= Title
 		<= Tools
 	Logo null
