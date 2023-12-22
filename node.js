@@ -11843,7 +11843,7 @@ var $;
                 return `https://www.youtube.com/embed/${encodeURIComponent(this.video_id())}?autoplay=1&loop=1`;
             }
             video_id() {
-                return this.uri().match(/^https\:\/\/www\.youtube\.com\/(?:embed\/|watch\?v=)([^\/&?#]+)/)?.[1]
+                return this.uri().match(/^https\:\/\/www\.youtube\.com\/(?:embed\/|shorts\/|watch\?v=)([^\/&?#]+)/)?.[1]
                     ?? this.uri().match(/^https\:\/\/youtu\.be\/([^\/&?#]+)/)?.[1]
                     ?? 'about:blank';
             }
@@ -17860,6 +17860,9 @@ var $;
         }
         get context() {
             return this.canvas.getContext('2d');
+        }
+        get bitmap() {
+            return this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
         }
         static fit(image, width = Number.POSITIVE_INFINITY, height = width) {
             if (image instanceof Blob)

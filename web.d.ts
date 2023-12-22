@@ -4592,6 +4592,7 @@ declare namespace $ {
         readonly canvas: HTMLCanvasElement;
         constructor(canvas: HTMLCanvasElement);
         get context(): CanvasRenderingContext2D | null;
+        get bitmap(): ImageData;
         static fit(image: Exclude<CanvasImageSource, VideoFrame> | Blob | string, width?: number, height?: number): $mol_picture;
         static make(image: Exclude<CanvasImageSource, VideoFrame>, width: number, height?: number): $mol_picture;
         static sizes(image: Exclude<CanvasImageSource, VideoFrame>): number[];
