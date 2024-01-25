@@ -18485,13 +18485,14 @@ var $;
 var $;
 (function ($) {
     const algorithm = {
-        name: 'AES-CBC',
+        name: 'AES-GCM',
         length: 128,
         tagLength: 32,
     };
     class $mol_crypto_secret extends Object {
         native;
         static size = 16;
+        static extra = 4;
         constructor(native) {
             super();
             this.native = native;
@@ -30466,7 +30467,7 @@ var $;
 var $;
 (function ($) {
     function $mol_crypto_salt() {
-        return $mol_crypto_native.getRandomValues(new Uint8Array(16));
+        return $mol_crypto_native.getRandomValues(new Uint8Array(12));
     }
     $.$mol_crypto_salt = $mol_crypto_salt;
 })($ || ($ = {}));
@@ -30704,7 +30705,7 @@ var $;
             const data = new Uint8Array([1, 2, 3]);
             const salt = $mol_crypto_salt();
             const closed = await cipher.encrypt(data, salt);
-            $mol_assert_equal(closed.byteLength, 16);
+            $mol_assert_equal(closed.byteLength, data.byteLength + $mol_crypto_secret.extra);
         },
         async 'decrypt self encrypted with auto generated key'() {
             const cipher = await $mol_crypto_secret.generate();
