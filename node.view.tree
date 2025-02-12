@@ -15,27 +15,6 @@ $mol_book2 $mol_scroll
 	Placeholder $mol_view
 	Gap* $mol_view title \
 
-$mol_link $mol_view
-	uri \
-	dom_name \a
-	uri_off \
-	uri_native null
-	external false
-	attr *
-		^
-		href <= uri_toggle \
-		title <= hint_safe <= hint \
-		target <= target \_self
-		download <= file_name \
-		mol_link_current <= current false
-		rel <= relation \
-	sub /$mol_view_content
-		<= title
-	arg *
-	event *
-		^
-		click?event <=> click?event <=> event_click?event null
-
 $mol_pop $mol_view
 	showed? false
 	align_vert \
@@ -59,42 +38,6 @@ $mol_pop_bubble $mol_view
 		^
 		mol_pop_align <= align \
 		tabindex 0
-
-$mol_speck $mol_view
-	attr *
-		^
-		mol_theme <= theme \$mol_theme_accent
-	style *
-		^
-		minHeight \1em
-	sub /
-		<= value null
-
-$mol_button $mol_view
-	enabled true
-	click?event null
-	event_click?event null
-	event *
-		^
-		click?event <=> event_activate?event null
-		dblclick?event <=> clicks?event null
-		keydown?event <=> event_key_press?event null 
-	attr *
-		^
-		disabled <= disabled false
-		role \button
-		tabindex <= tab_index 0
-		title <= hint_safe <= hint \
-	sub /$mol_view_content
-		<= title
-	Speck $mol_speck
-		value <= error \
-
-$mol_button_typed $mol_button
-	minimal_height 40
-	minimal_width 40
-
-$mol_button_minor $mol_button_typed
 
 $mol_hotkey $mol_plugin
 	event *
@@ -189,7 +132,43 @@ $mol_icon $mol_svg_root
 		<= Path $mol_svg_path
 			geometry <= path \
 
-$mol_icon_cross $mol_icon path \M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z
+$mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
+
+$mol_speck $mol_view
+	attr *
+		^
+		mol_theme <= theme \$mol_theme_accent
+	style *
+		^
+		minHeight \1em
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	click?event null
+	event_click?event null
+	event *
+		^
+		click?event <=> event_activate?event null
+		dblclick?event <=> clicks?event null
+		keydown?event <=> event_key_press?event null 
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_safe <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+		value <= error \
+
+$mol_button_typed $mol_button
+	minimal_height 40
+	minimal_width 40
+
+$mol_button_minor $mol_button_typed
 
 $mol_list $mol_view
 	render_visible_only true
@@ -246,10 +225,12 @@ $mol_search $mol_pop
 				hint @ \Clear
 				click?event <=> clear?event null
 				sub /
-					<= Clear_icon $mol_icon_cross
+					<= Clear_icon $mol_icon_close
 	bubble_content /$mol_view_content
-		<= Menu $mol_list
-			rows <= menu_items /$mol_view
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_items /$mol_view
 	Suggest* $mol_button_minor
 		click?event <=> suggest_select*?event null
 		sub <= suggest_content* /$mol_view_content
@@ -257,9 +238,30 @@ $mol_search $mol_pop
 				haystack <= suggest_label* \
 				needle <= query? \
 
+$mol_link $mol_view
+	uri \
+	dom_name \a
+	uri_off \
+	uri_native null
+	external false
+	attr *
+		^
+		href <= uri_toggle \
+		title <= hint_safe <= hint \
+		target <= target \_self
+		download <= file_name \
+		mol_link_current <= current false
+		rel <= relation \
+	sub /$mol_view_content
+		<= title
+	arg *
+	event *
+		^
+		click?event <=> click?event <=> event_click?event null
+
 $mol_page $mol_view
 	dom_name \article
-	field *
+	attr *
 		^
 		tabIndex <= tabindex -1
 	sub /
@@ -299,6 +301,7 @@ $mol_book2_catalog $mol_book2
 			Title => Menu_title
 			title <= menu_title \
 			Tools => Menu_tools
+			Logo <= Menu_logo null
 			tools /
 				^ menu_tools
 				^ addon_tools
@@ -309,9 +312,10 @@ $mol_book2_catalog $mol_book2
 				<= Menu_filter $mol_search
 					query? <=> menu_filter? \
 				<= Menu_links $mol_list
+					Empty <= Menu_links_empty $mol_view
 					rows <= menu_links /
 						<= Menu_link*0 $mol_link
-							arg <= arg* *
+							arg <= menu_link_arg* <= arg* *
 							sub <= menu_link_content* /
 								<= Menu_link_title* $mol_dimmer
 									needle <= menu_filter
@@ -319,8 +323,153 @@ $mol_book2_catalog $mol_book2
 			foot <= menu_foot /
 	Spread_close $mol_link
 		arg <= spread_close_arg *
+		hint @ \Close page
 		sub /
-			<= Spread_close_icon $mol_icon_cross
+			<= Spread_close_icon $mol_icon_close
+
+$mol_theme_auto $mol_plugin
+	attr * mol_theme <= theme \
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
+
+$mol_pick $mol_pop
+	event *
+		^
+		keydown?event <=> keydown?event null
+	Anchor <= Trigger $mol_check
+		minimal_width 40
+		minimal_height 40
+		enabled <= trigger_enabled true
+		checked? <=> showed?
+		clicks? <=> clicks? null
+		sub <= trigger_content /$mol_view_content
+			<= title
+		hint <= hint \
+
+$mol_icon_dots_vertical $mol_icon path \M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
+
+$mol_select $mol_pick
+	dictionary? *
+	options /string
+	value? \
+	option_label_default \
+	Option_row* $mol_button_minor
+		event_click?event <=> event_select*?event null
+		sub <= option_content* /
+			<= Option_label* $mol_dimmer
+				haystack <= option_label* \
+				needle <= filter_pattern? \
+	No_options $mol_view
+		sub /
+			<= no_options_message @ \No options
+	plugins /
+		^
+		<= Nav $mol_nav
+			keys_y <= nav_components /$mol_view
+			current_y?component <=> option_focused?component null
+			cycle? <=> nav_cycle? true
+	hint @ \Pick..
+	bubble_content /
+		<= Filter
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_content /$mol_view
+	Filter $mol_search
+		query? <=> filter_pattern? \
+		hint <= filter_hint @ \Filter..
+		submit?event <=> submit?event null
+		enabled <= enabled true
+	Trigger_icon $mol_icon_dots_vertical
+
+$mol_avatar $mol_icon
+	view_box \0 0 24 24
+	id \
+	path \M 12 12 l 0 0 M 0 0 l 0 0 M 24 24 l 0 0 M 0 24 l 0 0 M 24 0 l 0 0
+
+$mol_icon_sync $mol_icon path \M12,18A6,6 0 0,1 6,12C6,11 6.25,10.03 6.7,9.2L5.24,7.74C4.46,8.97 4,10.43 4,12A8,8 0 0,0 12,20V23L16,19L12,15M12,4V1L8,5L12,9V6A6,6 0 0,1 18,12C18,13 17.75,13.97 17.3,14.8L18.76,16.26C19.54,15.03 20,13.57 20,12A8,8 0 0,0 12,4Z
+
+$mol_icon_sync_off $mol_icon path \M20,4H14V10L16.24,7.76C17.32,8.85 18,10.34 18,12C18,13 17.75,13.94 17.32,14.77L18.78,16.23C19.55,15 20,13.56 20,12C20,9.79 19.09,7.8 17.64,6.36L20,4M2.86,5.41L5.22,7.77C4.45,9 4,10.44 4,12C4,14.21 4.91,16.2 6.36,17.64L4,20H10V14L7.76,16.24C6.68,15.15 6,13.66 6,12C6,11 6.25,10.06 6.68,9.23L14.76,17.31C14.5,17.44 14.26,17.56 14,17.65V19.74C14.79,19.53 15.54,19.2 16.22,18.78L18.58,21.14L19.85,19.87L4.14,4.14L2.86,5.41M10,6.35V4.26C9.2,4.47 8.45,4.8 7.77,5.22L9.23,6.68C9.5,6.56 9.73,6.44 10,6.35Z
+
+$hyoo_sync_online $mol_select
+	minimal_width 40
+	minimal_height 40
+	yard $hyoo_sync_yard<any>
+		master_list => dictionary
+		master_cursor? => master_cursor?
+	Filter null
+	option_content* /
+		<= Option_logo* $mol_avatar
+			id <= master_id* \
+		<= option_label*
+	trigger_content /
+		<= Link $mol_link
+			uri <= master_link \
+			sub <= link_content /
+				<= Well $mol_avatar
+					id <= master_link \
+				<= Fail $mol_icon_sync_off
+			hint <= message <= hint \$hyoo_sync
+
+$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
+
+$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
+
+$mol_link_source $mol_link
+	hint @ \Source code
+	sub /
+		<= Icon $mol_icon_script_text
+
+$mol_icon_face $mol_icon path \M9,11.75C8.31,11.75 7.75,12.31 7.75,13C7.75,13.69 8.31,14.25 9,14.25C9.69,14.25 10.25,13.69 10.25,13C10.25,12.31 9.69,11.75 9,11.75M15,11.75C14.31,11.75 13.75,12.31 13.75,13C13.75,13.69 14.31,14.25 15,14.25C15.69,14.25 16.25,13.69 16.25,13C16.25,12.31 15.69,11.75 15,11.75M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,11.71 4,11.42 4.05,11.14C6.41,10.09 8.28,8.16 9.26,5.77C11.07,8.33 14.05,10 17.42,10C18.2,10 18.95,9.91 19.67,9.74C19.88,10.45 20,11.21 20,12C20,16.41 16.41,20 12,20Z
+
+$mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C19.26,11.28 19.15,10.59 18.96,9.95C18.31,10.1 17.63,10.18 16.92,10.18C13.86,10.18 11.15,8.67 9.5,6.34C8.61,8.5 6.91,10.26 4.77,11.22C4.73,11.47 4.73,11.74 4.73,12A7.27,7.27 0 0,0 12,19.27C13.05,19.27 14.06,19.04 14.97,18.63C15.54,19.72 15.8,20.26 15.78,20.26C14.14,20.81 12.87,21.08 12,21.08C9.58,21.08 7.27,20.13 5.57,18.42C4.53,17.38 3.76,16.11 3.33,14.73H2V10.18H3.09C3.93,6.04 7.6,2.92 12,2.92C14.4,2.92 16.71,3.87 18.42,5.58C19.69,6.84 20.54,8.45 20.89,10.18H22V14.67H22V14.69L22,14.73H21.94L18.38,18L13.08,17.4V15.73H17.91L18.72,14.76M9.27,11.77C9.57,11.77 9.86,11.89 10.07,12.11C10.28,12.32 10.4,12.61 10.4,12.91C10.4,13.21 10.28,13.5 10.07,13.71C9.86,13.92 9.57,14.04 9.27,14.04C8.64,14.04 8.13,13.54 8.13,12.91C8.13,12.28 8.64,11.77 9.27,11.77M14.72,11.77C15.35,11.77 15.85,12.28 15.85,12.91C15.85,13.54 15.35,14.04 14.72,14.04C14.09,14.04 13.58,13.54 13.58,12.91A1.14,1.14 0 0,1 14.72,11.77Z
+
+$mol_image $mol_view
+	dom_name \img
+	field *any
+		^
+		src <= uri \
+		alt <= title
+		loading <= loading \eager
+		decoding <= decoding \async
+		crossOrigin <= cors null
+	attr *any
+		^
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
+		load? <=> load? null
+	minimal_width 16
+	minimal_height 16
+
+$mol_link_iconed $mol_link
+	sub /
+		<= Icon $mol_image
+			uri <= icon \
+			title \
+	content /
+		<= title <= uri
+	host \
 
 $mol_stack $mol_view
 
@@ -337,7 +486,7 @@ $mol_text_code_token_link $mol_text_code_token
 		href <= uri \
 		target \_blank
 
-$mol_text_code_row $mol_paragraph
+$mol_text_code_line $mol_paragraph
 	text \
 	minimal_height 24
 	numb_showed true
@@ -356,9 +505,9 @@ $mol_text_code_row $mol_paragraph
 		uri <= token_uri* \
 	find_pos* null
 
-$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M12,3C12.55,3 13,3.45 13,4C13,4.55 12.55,5 12,5C11.45,5 11,4.55 11,4C11,3.45 11.45,3 12,3
+$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
 
-$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M12,3C12.55,3 13,3.45 13,4C13,4.55 12.55,5 12,5C11.45,5 11,4.55 11,4C11,3.45 11.45,3 12,3M7,7H17V5H19V19H5V5H7V7Z
+$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
 
 $mol_button_copy $mol_button_minor
 	blobs /$mol_blob
@@ -386,7 +535,7 @@ $mol_text_code $mol_stack
 		<= Rows $mol_list
 			render_visible_only <= render_visible_only false
 			rows <= rows /
-				<= Row*0 $mol_text_code_row
+				<= Row*0 $mol_text_code_line
 					numb_showed <= sidebar_showed
 					numb <= row_numb* 0
 					text <= row_text* \
@@ -401,19 +550,6 @@ $mol_float $mol_view
 	style *
 		^
 		minHeight \auto
-
-$mol_check $mol_button_minor
-	attr *
-		^
-		mol_check_checked <= checked? false
-		aria-checked <= aria_checked \false
-		role <= aria_role \checkbox
-	sub /$mol_view_content
-		<= Icon null
-		<= label /
-			<= Title $mol_view
-				sub /
-					<= title \
 
 $mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
 
@@ -479,33 +615,6 @@ $mol_grid_cell $mol_view
 
 $mol_grid_number $mol_grid_cell
 
-$mol_image $mol_view
-	dom_name \img
-	field *
-		^
-		src <= uri \
-		alt <= title
-		loading <= loading \eager
-		decoding <= decoding \async
-		crossOrigin <= cors null
-	attr *
-		^
-		width <= natural_width? 0
-		height <= natural_height? 0
-	event *
-		load? <=> load? null
-	minimal_width 16
-	minimal_height 16
-
-$mol_link_iconed $mol_link
-	sub /
-		<= Icon $mol_image
-			uri <= icon \
-			title \
-	content /
-		<= title <= uri
-	host \
-
 $mol_embed_native $mol_scroll
 	uri? \
 	dom_name \object
@@ -530,10 +639,9 @@ $mol_frame $mol_embed_native
 		^
 		data null
 		type null
+		allow <= allow \
 		src <= uri? \about:config
 		srcdoc <= html null
-		allow <= allow \
-		- allowfullscreen <=
 	fullscreen true
 	accelerometer true
 	autoplay true
@@ -543,7 +651,7 @@ $mol_frame $mol_embed_native
 	clipboard_read true
 	clipboard_write true
 
-$mol_embed_youtube $mol_check
+$mol_embed_service $mol_check
 	uri \
 	video_preview \
 	video_id \
@@ -558,6 +666,10 @@ $mol_embed_youtube $mol_check
 			uri <= video_embed \
 
 
+$mol_embed_youtube $mol_embed_service
+
+$mol_embed_rutube $mol_embed_service
+
 $mol_embed_any $mol_view
 	Image $mol_image
 		title <= title \
@@ -568,12 +680,29 @@ $mol_embed_any $mol_view
 	Youtube $mol_embed_youtube
 		title <= title \
 		uri <= uri \
+	Rutube $mol_embed_rutube
+		title <= title \
+		uri <= uri \
+
+$mol_expander $mol_list
+	rows /
+		<= Label $mol_view
+			sub /
+				<= Trigger $mol_check_expand
+					checked? <=> expanded? false
+					expandable <= expandable true
+					label <= label /
+						<= title
+				<= Tools null
+		<= Content $mol_list
+			rows <= content /
 
 $mol_text $mol_list
 	uri_base \
 	text \
 	param \
 	flow_tokens /
+	block_text* \
 	auto /
 		<= auto_scroll null
 	- \Blocks
@@ -631,7 +760,7 @@ $mol_text $mol_list
 		dom_name \span
 		type <= line_type* \
 		sub <= line_content* /
-	Code_line* $mol_text_code_row
+	Code_line* $mol_text_code_line
 		numb_showed false
 		highlight <= highlight \
 		text <= line_text* \
@@ -646,6 +775,14 @@ $mol_text $mol_list
 	Embed* $mol_embed_any
 		uri <= link_uri* \
 		title <= line_text* \
+	- \Spoilers
+	Spoiler* $mol_expander
+		label /
+			<= Spoiler_label* $mol_text
+				text <= spoiler_label* \
+		content /
+			<= Spoiler_content* $mol_text
+				text <= spoiler_content* \
 
 $mol_text_header $mol_paragraph
 	level 1
@@ -661,18 +798,6 @@ $mol_text_span $mol_paragraph
 		^
 		mol_text_type <= type \
 
-$mol_icon_share $mol_icon path \M21,12L14,5V9C7,10 4,15 3,20C5.5,16.5 9,14.9 14,14.9V19L21,12Z
-
-$mol_icon_share_variant $mol_icon path \M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8C19.66,8 21,6.66 21,5C21,3.34 19.66,2 18,2C16.34,2 15,3.34 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9C4.34,9 3,10.34 3,12C3,13.66 4.34,15 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19C20.92,17.39 19.61,16.08 18,16.08Z
-
-$mol_button_share $mol_button_minor
-	uri \
-	capture null
-	hint @ \Share
-	sub /
-		<= Icon $mol_icon_share_variant
-		<= title \
-
 $mol_text_list $mol_text
 	auto_scroll null
 	attr *
@@ -687,200 +812,180 @@ $mol_text_list_item $mol_paragraph
 		^
 		mol_text_list_item_index <= index 0
 
-$hyoo_match_final $mol_page
-	title \Ждём персон
-	self $hyoo_match_single
+$hyoo_match_intro $mol_page
+	title \Знакомимся
 	foot /
-		<= Reset $mol_button_minor
-			title \Заново 💦
-			click? <=> reset? null
+		<= Next $mol_link
+			title \Поехали 💨
+			arg * \
+				\settings
 	body /
-		<= Result $mol_text text \Никого пока нет под твои критерии 😭
-		<= Share $mol_button_share
-			capture <= Content
-			uri \/
-			title \Расскажи остальным:
 		<= Content $mol_text
 			text \
-				\" 🔥 Tinder ушёл... встречай **match.hyoo.ru** - сервис знакомств, которому выгодно, чтобы ты нашёл себе пару и свалил в закат.
-				\" Никаких фейков, мёртвых душ, рекламы и вымогательства денег. Поделись с друзьями - пусть тоже найдут свою половинку 💞
-				\" Проект не коммерческий, так что вся надежда на тебя!
+				\" 🚧 Без рекламы и премиумов
+				\" 🎭 Без фейков и мёртвых душ
+				\" 📸 Только самые свежие фотки
+				\" 🎲 Святой рандом и никакого AI
+				\
+				\! **Правила**
+				\  ! \\Почему это работает?\https://page.hyoo.ru/#!=rkjlvv_lle0qa\\
+				\
+				\" 🤳 Заполни свой \\профиль\#!=settings\\
+				\" 📅 Обновляй фото каждый день
+				\" 💗 Лайкай других \\персон\#!=look\\
+				\" 💬 Общайся при взаимности
+				\" 🔄 Возвращайся через час
+				\
+				\**Это всё не ради денег, но ради любви**
+				\
+				\" Расскажи о \\match.hyoo.ru\https://match.hyoo.ru/\\ всем
+				\" Поддержи \\рублём\https://boosty.to/hyoo\\ если не влом
 
-$mol_pick $mol_pop
-	event *
-		^
-		keydown?event <=> keydown?event null
-	Anchor <= Trigger $mol_check
-		minimal_width 40
-		minimal_height 40
-		enabled <= trigger_enabled true
-		checked? <=> showed?
-		clicks? <=> clicks? null
-		sub <= trigger_content /$mol_view_content
-			<= title
-		hint <= hint \
-
-$mol_icon_calendar $mol_icon path \M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z
-
-$mol_icon_calendar_today $mol_icon path \M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3Z
-
-$mol_format $mol_string
-	allow \0123456789
-	hint <= mask*0 \
-	keyboard \numeric
-
-$mol_icon_trash_can $mol_icon path \M9,3V4H4V6H5V19C5,20.1 5.9,21 7,21H17C18.1,21 19,20.1 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z
-
-$mol_icon_trash_can_outline $mol_icon path \M9,3V4H4V6H5V19C5,20.1 5.9,21 7,21H17C18.1,21 19,20.1 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z
-
-$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
-
-$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
-
-$mol_hor $mol_view
-
-$mol_calendar $mol_list
-	sub /
-		<= Head $mol_view
-			sub <= head /
-				<= Title $mol_view
-					minimal_height 24
-					sub /
-						<= title \
-		<= Weekdays $mol_hor
-			sub <= weekdays /$mol_view
-	weeks /$mol_view
-	weeks_count 6
-	-
-	Weekday* $mol_calendar_day
-		holiday <= weekend* false
-		sub /
-			<= weekday* \
-	-
-	Week* $mol_hor
-		sub <= week_days* /$mol_view
-	-
-	Day* $mol_calendar_day
-		ghost <= day_ghost* false
-		holiday <= day_holiday* false
-		selected <= day_selected* false
-		today <= day_today* false
-		theme <= day_theme* null
-		sub <= day_content* /
-			<= day_text* \
-	-
-	month_string \
-	month_moment $mol_time_moment
-
-$mol_calendar_day $mol_view
-	minimal_height 24
-	minimal_width 36
+$mol_video_player $mol_view
+	dom_name \video
+	playing? false
+	play null
+	pause null
+	volume? 0
+	time? 0
+	duration 0
 	attr *
-		mol_calendar_holiday <= holiday false
-		mol_calendar_ghost <= ghost false
-		mol_calendar_selected <= selected false
-		mol_calendar_today <= today false
-		mol_theme <= theme null
+		src <= uri \
+		controls <= controls true
+		autoplay <= autoplay true
+		playsinline <= inline true
+		loop <= loop false
+		muted <= muted false
+		poster <= poster \
+	field *
+		srcObject <= stream null
+	event *
+		volumechange? <=> revolume? null
+		timeupdate? <=> retime? null
+		durationchange? <=> redurate? null
+		playing? <=> playing_event? null
+		play? <=> play_event? null
+		pause? <=> pause_event? null
 
-$mol_date $mol_pick
-	Icon $mol_icon_calendar
-	-
-	bubble_content /
-		<= Input_row $mol_view sub <= input_content /
-			<= Today $mol_button_minor
-				hint @ \Today
-				enabled <= enabled true
-				click?event <=> today_click?event null
-				sub /
-					<= Today_icon $mol_icon_calendar_today
-			<= Input $mol_format
-				value? <=> value? \
-				value_changed? => value_changed?
-				mask* <= input_mask* \
-				enabled <= enabled true
-			<= Clear $mol_button_minor
-				hint @ \Clear
-				enabled <= enabled true
-				click?event <=> clear?event null
-				sub /
-					<= Clear_icon $mol_icon_trash_can_outline
-		<= Calendar $mol_date_calendar
-			enabled <= enabled true
-			month_moment <= month_moment <= value_moment
-			day_selected* <= day_selected* false
-			day_click*?event <=> day_click*?event null
-			Title => Calendar_title
-			head /
-				<= Calendar_tools $mol_view
-					sub /
-						<= Prev $mol_button_minor
-							hint <= prev_hint @ \Previous month
-							click?event <=> prev?event null
-							sub /
-								<= Prev_icon $mol_icon_chevron_left
-						<= Calendar_title
-						<= Next $mol_button_minor
-							hint <= next_hint @ \Next month
-							click?event <=> next?event null
-							sub /
-								<= Next_icon $mol_icon_chevron_right
-	-
-	value_number? +NaN
-	value_moment? $mol_time_moment
+$mol_video_camera $mol_video_player
+	controls false
+	style *
+		transform <= transform \
+	video_constraints *
+		facingMode <= facing \user
+		aspectRatio <= aspect 1
+		width * ideal <= width <= size 720
+		height * ideal <= height <= size
+	video_settings *
+		brightness <= brightness 128
+		sharpness <= sharpness 2
+		contrast <= contrast 32
+		saturation <= saturation 64
+		advanced /
+			* colorTemperature <= temperature 4000
+			* torch <= torch false
 
-$mol_date_calendar $mol_calendar
-	day_content* /
-		<= Day_button* $mol_button_minor
-			title <= day_text*
-			event_click?event <=> day_click*?event null
+
+$mol_labeler $mol_list
+	rows /
+		<= Label $mol_view
+			minimal_height 32
+			sub <= label /$mol_view_content
+				<= title
+		<= Content $mol_view
 			minimal_height 24
-			enabled <= enabled true
+			sub <= content /
 
-$mol_icon_window_close $mol_icon path \M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z
+$mol_form_field $mol_labeler
+	bids /string
+	label /
+		<= name \
+		<= Bid $mol_view
+			sub / <= bid \
+	content / <= control null
 
-$mol_icon_heart $mol_icon path \M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
 
-$mol_icon_heart_flash $mol_icon path \M16.5,2.83C14.76,2.83 13.09,3.64 12,4.9C10.91,3.64 9.24,2.83 7.5,2.83C4.42,2.83 2,5.24 2,8.33C2,12.1 5.4,15.19 10.55,19.86L12,21.17L13.45,19.86C18.6,15.19 22,12.1 22,8.33C22,5.24 19.58,2.83 16.5,2.83M12,17.83V13.83H9L12,6.83V10.83H15
+$mol_switch $mol_check_list
+	value? \
 
 $mol_row $mol_view
 
-$mol_icon_heart_outline $mol_icon path \M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z
-
-$mol_icon_dots_vertical $mol_icon path \M12,16C13.1,16 14,16.9 14,18C14,19.1 13.1,20 12,20C10.9,20 10,19.1 10,18C10,16.9 10.9,16 12,16M12,10C13.1,10 14,10.9 14,12C14,13.1 13.1,14 12,14C10.9,14 10,13.1 10,12C10,10.9 10.9,10 12,10M12,4C13.1,4 14,4.9 14,6C14,7.1 13.1,8 12,8C10.9,8 10,7.1 10,6C10,4.9 10.9,4 12,4Z
-
-$mol_select $mol_pick
-	dictionary? *
-	options /string
-	value? \
-	option_label_default \
-	Option_row* $mol_button_minor
-		event_click?event <=> event_select*?event null
-		sub <= option_content* /
-			<= Option_label* $mol_dimmer
-				haystack <= option_label* \
-				needle <= filter_pattern? \
-	No_options $mol_view
-		sub /
-			<= no_options_message @ \No options
-	plugins /
+$mol_form $mol_list
+	submit_allowed true
+	submit_blocked false
+	event *
 		^
-		<= Nav $mol_nav
-			keys_y <= nav_components /$mol_view
-			current_y?component <=> option_focused?component null
-			cycle? <=> nav_cycle? true
-	hint @ \Pick..
-	bubble_content /
-		<= Filter
-		<= Bubble_pane $mol_scroll
-			sub /
-				<= Menu $mol_list
-					rows <= menu_content /$mol_view
-	Filter $mol_search
-		query? <=> filter_pattern? \
-		hint <= filter_hint @ \Filter..
-		submit?event <=> submit?event null
-		enabled <= enabled true
-	Trigger_icon $mol_icon_dots_vertical
+		keydown?event <=> keydown?event null
+	submit?event null
+	rows /
+		<= Body $mol_list
+			sub <= body <= form_fields /$mol_form_field
+		<= Foot $mol_row
+			sub <= foot <= buttons /$mol_view
+
+$mol_form_group $mol_view
+
+$hyoo_match_univer $mol_select
+	options /
+		\Академия тыла
+		\Архи Строй
+		\Бонч-Бруевича
+		\Вагановка
+		\Ветеринарный
+		\Воен Мед
+		\Воен Мор
+		\Военмех
+		\ГИКиТ
+		\ГУАП
+		\Герцена
+		\Гидромет
+		\Горный
+		\Гос Пед Мед
+		\Граж авиа
+		\Духовная академия
+		\ИТМО
+		\Консерватория
+		\Корабелка
+		\Кулёк
+		\ЛЭТИ
+		\Лесгафта
+		\Лесопилка
+		\МБИ
+		\МВД
+		\МЧС
+		\Макаровка
+		\Мечникова
+		\Михайловка
+		\Можайка
+		\Муха
+		\Пед Мед
+		\Первый мед
+		\Политех
+		\Профсоюзов
+		\Путей сообщения
+		\РХГА
+		\Репина
+		\СПбГУ
+		\Связи
+		\Театралка
+		\Текстильный
+		\Техноложка
+		\Финэк
+		\Фрейда
+		\Хим-Фарма
+		\Христиански
 
 $mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 
@@ -908,13 +1013,9 @@ $mol_select_list $mol_view
 
 $hyoo_match_places $mol_select_list
 	dictionary *
-		- \Planetes
-		mars \Марс
-		moon \Луна
-		earth \Земля
 		- \Cities
-		RU-MOW \Москва
 		RU-SPE \Санкт-Петербург
+		RU-MOW \Москва
 		UA-40 \Севастополь
 		- \States
 		RU-AMU \Амурская область
@@ -1029,220 +1130,10 @@ $hyoo_match_places $mol_select_list
 		america-nord \Северная Америка
 		antarctica \Антарктида
 		oceania \Oceania
-
-$hyoo_match_single_page $mol_page
-	title \Персоны
-	self $hyoo_match_single
-	pair $hyoo_match_single
-		title => name
-		greet => greet
-		contacts => contacts
-		places => places
-		photo_moment => photo_moment
-	mutual false
-	title_content / <= name
-	tools /
-		<= Moment $mol_date
-			value_moment <= photo_moment
-	body /
-		<= Gallery $mol_stack sub <= gallery /
-			<= Photo $mol_image
-				uri <= photo \
-			<= Skip $mol_button_minor
-				hint \Пропустить
-				click? <=> skip? null
-				sub /
-					<= Skip_icon $mol_icon_window_close
-			<= Mutual $mol_row sub /
-				<= Mutual_icon $mol_icon_heart_flash
-			<= Like $mol_button_minor
-				hint \Нравится
-				click? <=> like? null
-				sub /
-					<= Like_icon $mol_icon_heart_outline
-		<= Match $mol_list rows /
-			<= Match_hint $mol_text text <= match_hint \++Удача!++ --У вас есть {timeout} мин. для свидания.--
-			<= Contacts $mol_text
-				text <= contacts
-		<= Places $hyoo_match_places
-			enabled false
-			Pick null
-			value? <= places
-		<= Brief $mol_text
-			text <= greet
-
-$mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
-
-$mol_check_icon $mol_check
-
-$mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z
-
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_6
-	hint @ \Toggle lights
-	checked? <=> lights? false
-
-$mol_avatar $mol_icon
-	view_box \0 0 24 24
-	id \
-	path \M 12 12 l 0 0 M 0 0 l 0 0 M 24 24 l 0 0 M 0 24 l 0 0 M 24 0 l 0 0
-
-$mol_icon_sync $mol_icon path \M12,18C8.69,18 6,15.31 6,12C6,11 6.25,10.03 6.7,9.2L5.24,7.74C4.46,8.97 4,10.43 4,12C4,16.42 7.58,20 12,20V23L16,19L12,15M12,4V1L8,5L12,9V6C15.31,6 18,8.69 18,12C18,13 17.75,13.97 17.3,14.8L18.76,16.26C19.54,15.03 20,13.57 20,12C20,7.58 16.42,4 12,4Z
-
-$mol_icon_sync_off $mol_icon path \M20,4H14V10L16.24,7.76C17.32,8.85 18,10.34 18,12C18,13 17.75,13.94 17.32,14.77L18.78,16.23C19.55,15 20,13.56 20,12C20,9.79 19.09,7.8 17.64,6.36L20,4M2.86,5.41L5.22,7.77C4.45,9 4,10.44 4,12C4,14.21 4.91,16.2 6.36,17.64L4,20H10V14L7.76,16.24C6.68,15.15 6,13.66 6,12C6,11 6.25,10.06 6.68,9.23L14.76,17.31C14.5,17.44 14.26,17.56 14,17.65V19.74C14.79,19.53 15.54,19.2 16.22,18.78L18.58,21.14L19.85,19.87L4.14,4.14L2.86,5.41M10,6.35V4.26C9.2,4.47 8.45,4.8 7.77,5.22L9.23,6.68C9.5,6.56 9.73,6.44 10,6.35Z
-
-$hyoo_sync_online $mol_select
-	minimal_width 40
-	minimal_height 40
-	yard $hyoo_sync_yard
-		master_list => dictionary
-		master_cursor? => master_cursor?
-	Filter null
-	option_content* /
-		<= Option_logo* $mol_avatar
-			id <= master_id* \
-		<= option_label*
-	trigger_content /
-		<= Link $mol_link
-			uri <= master_link \
-			sub <= link_content /
-				<= Well $mol_avatar
-					id <= master_link \
-				<= Fail $mol_icon_sync_off
-			hint <= message <= hint \$hyoo_sync
-
-$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
-
-$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
-
-$mol_link_source $mol_link
-	hint @ \Source code
-	sub /
-		<= Icon $mol_icon_script_text
-
-$mol_icon_face $mol_icon path \M9,11.75C8.31,11.75 7.75,12.31 7.75,13C7.75,13.69 8.31,14.25 9,14.25C9.69,14.25 10.25,13.69 10.25,13C10.25,12.31 9.69,11.75 9,11.75M15,11.75C14.31,11.75 13.75,12.31 13.75,13C13.75,13.69 14.31,14.25 15,14.25C15.69,14.25 16.25,13.69 16.25,13C16.25,12.31 15.69,11.75 15,11.75M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,11.71 4,11.42 4.05,11.14C6.41,10.09 8.28,8.16 9.26,5.77C11.07,8.33 14.05,10 17.42,10C18.2,10 18.95,9.91 19.67,9.74C19.88,10.45 20,11.21 20,12C20,16.41 16.41,20 12,20Z
-
-$mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C19.26,11.28 19.15,10.59 18.96,9.95C18.31,10.1 17.63,10.18 16.92,10.18C13.86,10.18 11.15,8.67 9.5,6.34C8.61,8.5 6.91,10.26 4.77,11.22C4.73,11.47 4.73,11.74 4.73,12C4.73,16.02 7.98,19.27 12,19.27C13.05,19.27 14.06,19.04 14.97,18.63C15.54,19.72 15.8,20.26 15.78,20.26C14.14,20.81 12.87,21.08 12,21.08C9.58,21.08 7.27,20.13 5.57,18.42C4.53,17.38 3.76,16.11 3.33,14.73H2V10.18H3.09C3.93,6.04 7.6,2.92 12,2.92C14.4,2.92 16.71,3.87 18.42,5.58C19.69,6.84 20.54,8.45 20.89,10.18H22V14.67H22V14.69L22,14.73H21.94L18.38,18L13.08,17.4V15.73H17.91L18.72,14.76M9.27,11.77C9.57,11.77 9.86,11.89 10.07,12.11C10.28,12.32 10.4,12.61 10.4,12.91C10.4,13.21 10.28,13.5 10.07,13.71C9.86,13.92 9.57,14.04 9.27,14.04C8.64,14.04 8.13,13.54 8.13,12.91C8.13,12.28 8.64,11.77 9.27,11.77M14.72,11.77C15.35,11.77 15.85,12.28 15.85,12.91C15.85,13.54 15.35,14.04 14.72,14.04C14.09,14.04 13.58,13.54 13.58,12.91C13.58,12.28 14.09,11.77 14.72,11.77Z
-
-$hyoo_match_intro $mol_page
-	title \Знакомство
-	foot /
-		<= Next $mol_link
-			title \Поехали 💨
-			arg * \
-				\settings
-	body /
-		<= Content $mol_text
-			text \
-				\" 🚧 Без рекламы и вымогательства
-				\" 🎭 Без фейков и мёртвых душ
-				\" 📸 Фокус только на поиске пары
-				\
-				\! **Правила**
-				\  ! \\Почему это работает?\https://page.hyoo.ru/#!=rkjlvv_lle0qa\\
-				\
-				\" 🤳 Заполни свой \\профиль\#!=settings\\
-				\" 📅 Обновляй фото каждый день
-				\" 💗 Лайкай других \\персон\#!=look\\
-				\" 💬 Общайся при взаимности
-				\" 🔄 Возвращайся через час
-				\
-				\**Это всё не ради денег, но ради любви**
-				\
-				\" \\Расскажи о $hyoo_match всем\https://match.hyoo.ru/\\
-				\" \\Поддержи нас рублём\https://boosty.to/hyoo\\
-
-$mol_video_player $mol_view
-	dom_name \video
-	playing? false
-	volume? 0
-	time? 0
-	duration 0
-	attr *
-		src <= uri \
-		controls <= controls true
-		autoplay <= autoplay true
-		playsinline <= inline true
-		loop <= loop false
-		poster <= poster \
-	field *
-		srcObject <= stream null
-	event *
-		volumechange?event <=> revolume?event null
-		timeupdate?event <=> retime?event null
-		durationchange?event <=> redurate?event null
-		playing?event <=> play_started?event null
-		play?event <=> play?event null
-		pause?event <=> pause?event null
-
-$mol_video_camera $mol_video_player
-	controls false
-	style *
-		transform <= transform \
-	video_constraints *
-		facingMode <= facing \user
-		aspectRatio <= aspect 1
-		width * ideal <= width <= size 720
-		height * ideal <= height <= size
-	video_settings *
-		brightness <= brightness 128
-		sharpness <= sharpness 2
-		contrast <= contrast 32
-		saturation <= saturation 64
-		advanced /
-			* colorTemperature <= temperature 4000
-			* torch <= torch false
-
-
-$mol_labeler $mol_list
-	rows /
-		<= Label $mol_view
-			minimal_height 32
-			sub <= label /$mol_view_content
-				<= title
-		<= Content $mol_view
-			minimal_height 24
-			sub <= content /
-
-$mol_form_field $mol_labeler
-	bids /string
-	label /
-		<= name \
-		<= Bid $mol_view
-			sub / <= bid \
-	content / <= control null
-
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
-$mol_form $mol_list
-	submit_allowed true
-	submit_blocked false
-	event *
-		^
-		keydown?event <=> keydown?event null
-	submit?event null
-	rows /
-		<= Body $mol_list
-			sub <= body <= form_fields /$mol_form_field
-		<= Foot $mol_row
-			sub <= foot <= buttons /$mol_view
-
-$mol_form_group $mol_view
+		- \Planetes
+		earth \Земля
+		moon \Луна
+		mars \Марс
 
 $mol_textarea $mol_stack
 	attr *
@@ -1269,7 +1160,8 @@ $mol_textarea $mol_stack
 			row_numb* <= row_numb* 0
 			sidebar_showed <= sidebar_showed
 			highlight <= highlight \
-	symbols_alt *
+			syntax <= syntax $mol_syntax2
+	symbols_alt *string
 		comma \<
 		period \>
 		dash \−
@@ -1292,9 +1184,9 @@ $mol_textarea $mol_stack
 		bracketOpen \[
 		bracketClose \]
 		slashBack \|
-	symbols_alt_ctrl *
+	symbols_alt_ctrl *string
 		space \ 
-	symbols_alt_shift *
+	symbols_alt_shift *string
 		V \✅
 		X \❌
 		O \⭕
@@ -1327,6 +1219,7 @@ $hyoo_match_single_settings $mol_page
 		greet? => greet?
 		contacts? => contacts?
 		places? => places?
+		univer? => univer?
 		sex_self? => sex_self?
 		age_self? => age_self?
 		sex_pref*? => sex_pref*?
@@ -1335,10 +1228,13 @@ $hyoo_match_single_settings $mol_page
 		age_pref_all => age_pref_all
 	bid_required* \Обязательно
 	bid_one* \Хотябы один
+	tools /
+		<= Invisible $mol_paragraph title \🙈 Не виден
+		<= Visible $mol_paragraph title \👀 Виден всем
 	foot /
-		<= Incoplete $mol_paragraph title \Недозаполнен 🙈
+		<= Incoplete $mol_paragraph title \❌ Профиль недозаполнен
 		<= Next $mol_link
-			title \Виден всем ✅
+			title \✅ Смотреть другиих
 			arg * \
 				\look
 	body /
@@ -1363,28 +1259,28 @@ $hyoo_match_single_settings $mol_page
 				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
-				name \Я ...
+				name \Я из этих ...
 				bids /
 					<= bid_required*age_self
 					<= bid_required*sex_self
-				Content <= Self_controls $mol_list rows /
+				Content <= Self_controls $mol_view sub /
 					<= Age_self $mol_switch
 						value? <=> age_self?
 						options *
-							young \Молодой
-							adult \Взрослый
-							mature \Зрелый
+							young \Молодых
+							adult \Взрослых
+							mature \Зрелых
 					<= Sex_self $mol_switch
 						value? <=> sex_self?
 						options *
-							female \Женщина
-							male \Мужчина
+							female \Женщин
+							male \Мужчин
 			<= Pref $mol_form_field
 				name @ \Мне нравятся ...
 				bids /
 					<= bid_one*age_pref_all
 					<= bid_one*sex_pref_all
-				Content <= Pref_controls $mol_list rows /
+				Content <= Pref_controls $mol_view sub /
 					<= Age_pref $mol_check_list
 						option_checked*? <=> age_pref*?
 						options *
@@ -1396,13 +1292,19 @@ $hyoo_match_single_settings $mol_page
 						options *
 							female \Женщины
 							male \Мужчины
-		<= Places_field $mol_form_field
-			name \Регионы
-			bids /
-				<= bid_one*places
-			Content <= Places $hyoo_match_places
-				value? <=> places?
-				pick_enabled <= places_enabled true
+		<= Location $mol_form_group sub /
+			<= Univer_field $mol_form_field
+				name \Универ
+				bids /
+				Content <= Univer $hyoo_match_univer
+					value? <=> univer?
+			<= Places_field $mol_form_field
+				name \Регионы
+				bids /
+					<= bid_one*places
+				Content <= Places $hyoo_match_places
+					value? <=> places?
+					pick_enabled <= places_enabled true
 		- <= Syntax $mol_link_iconed
 			hint \MarkedText
 			uri \https://marked.hyoo.ru/
@@ -1423,7 +1325,7 @@ $hyoo_match_single_settings $mol_page
 				hint \как с вами связаться
 				value? <=> contacts?
 
-$mol_icon_eye $mol_icon path \M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
+$mol_icon_eye $mol_icon path \M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
 
 $mol_password $mol_view
 	type? \password
@@ -1440,7 +1342,7 @@ $mol_password $mol_view
 
 $hyoo_meta_safe $mol_page
 	title @ \Private keys
-	yard $hyoo_sync_yard
+	yard $hyoo_sync_yard<any>
 	bid_pass_long @ \> 7 letters
 	key_size 144
 	attr *
@@ -1514,6 +1416,205 @@ $hyoo_match_lobby_page $mol_page
 				<= Single*0_0 $hyoo_match_single_card
 					single <= single* $hyoo_match_single
 
+$mol_icon_share $mol_icon path \M21,12L14,5V9C7,10 4,15 3,20C5.5,16.5 9,14.9 14,14.9V19L21,12Z
+
+$mol_icon_share_variant $mol_icon path \M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z
+
+$mol_button_share $mol_button_minor
+	uri \
+	capture null
+	hint @ \Share
+	sub /
+		<= Icon $mol_icon_share_variant
+		<= title \
+
+$hyoo_match_final $mol_page
+	title \Ждём персон
+	self $hyoo_match_single
+	foot /
+		<= Reset $mol_button_minor
+			title \Заново 💦
+			click? <=> reset? null
+	body /
+		<= Result $mol_text text \Никого пока нет под твои критерии 😭
+		<= Share $mol_button_share
+			capture <= Content
+			uri \/
+			title \Расскажи остальным:
+		<= Content $mol_text
+			text \
+				\" 💞 Поздравляю всех, кто уже нашёл свою вторую половинку!
+				\" 💔 А кто сейчас грустит один - заползай на match.hyoo.ru - сервис знакомств, которому выгодно, чтобы ты нашёл себе пару и свалил в закат.
+				\" ✨ Никаких фейков, мёртвых душ, рекламы, премиумов и геймификаций. Ищи, пока не найдёшь.
+				\" 🤙 Поделись в своих каналах или закидывай в чаты, где обитаешь - пусть каждый найдёт свою любовь.
+				\" 🙏 Проект не коммерческий, так что вся надежда на тебя: чем больше соберём народу, тем больше найдётся пар.
+
+$mol_icon_calendar $mol_icon path \M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z
+
+$mol_icon_calendar_today $mol_icon path \M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z
+
+$mol_format $mol_string
+	allow \0123456789
+	hint <= mask*0 \
+	keyboard \numeric
+
+$mol_icon_trash_can $mol_icon path \M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z
+
+$mol_icon_trash_can_outline $mol_icon path \M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z
+
+$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
+
+$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
+
+$mol_hor $mol_view
+
+$mol_calendar $mol_list
+	sub /
+		<= Head $mol_view
+			sub <= head /
+				<= Title $mol_view
+					minimal_height 24
+					sub /
+						<= title \
+		<= Weekdays $mol_hor
+			sub <= weekdays /$mol_view
+	weeks /$mol_view
+	weeks_count 6
+	-
+	Weekday* $mol_calendar_day
+		holiday <= weekend* false
+		sub /
+			<= weekday* \
+	-
+	Week* $mol_hor
+		sub <= week_days* /$mol_view
+	-
+	Day* $mol_calendar_day
+		ghost <= day_ghost* false
+		holiday <= day_holiday* false
+		selected <= day_selected* false
+		today <= day_today* false
+		theme <= day_theme* null
+		sub <= day_content* /
+			<= day_text* \
+	-
+	month_string \
+	month_moment $mol_time_moment
+
+$mol_calendar_day $mol_view
+	minimal_height 24
+	minimal_width 36
+	attr *
+		mol_calendar_holiday <= holiday false
+		mol_calendar_ghost <= ghost false
+		mol_calendar_selected <= selected false
+		mol_calendar_today <= today false
+		mol_theme <= theme null
+
+$mol_date $mol_pick
+	Icon $mol_icon_calendar
+	-
+	bubble_content /
+		<= Input_row $mol_view sub <= input_content /
+			<= Today $mol_button_minor
+				hint @ \Today
+				enabled <= enabled true
+				click?event <=> today_click?event null
+				sub /
+					<= Today_icon $mol_icon_calendar_today
+			<= Input $mol_format
+				value? <=> value? \
+				value_changed? => value_changed?
+				mask* <= input_mask* \
+				enabled <= enabled true
+			<= Clear $mol_button_minor
+				hint @ \Clear
+				enabled <= enabled true
+				click?event <=> clear?event null
+				sub /
+					<= Clear_icon $mol_icon_trash_can_outline
+		<= Calendar $mol_date_calendar
+			enabled <= enabled true
+			month_moment <= month_moment <= value_moment
+			day_selected* <= day_selected* false
+			day_click*?event <=> day_click*?event null
+			Title => Calendar_title
+			head /
+				<= Calendar_tools $mol_view
+					sub /
+						<= Prev $mol_button_minor
+							hint <= prev_hint @ \Previous month
+							click?event <=> prev?event null
+							sub /
+								<= Prev_icon $mol_icon_chevron_left
+						<= Calendar_title
+						<= Next $mol_button_minor
+							hint <= next_hint @ \Next month
+							click?event <=> next?event null
+							sub /
+								<= Next_icon $mol_icon_chevron_right
+	-
+	value_number? +NaN
+	value_moment? $mol_time_moment
+
+$mol_date_calendar $mol_calendar
+	day_content* /
+		<= Day_button* $mol_button_minor
+			title <= day_text*
+			event_click?event <=> day_click*?event null
+			minimal_height 24
+			enabled <= enabled true
+
+$mol_icon_window_close $mol_icon path \M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z
+
+$mol_icon_heart $mol_icon path \M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z
+
+$mol_icon_heart_flash $mol_icon path \M16.5,2.83C14.76,2.83 13.09,3.64 12,4.9C10.91,3.64 9.24,2.83 7.5,2.83C4.42,2.83 2,5.24 2,8.33C2,12.1 5.4,15.19 10.55,19.86L12,21.17L13.45,19.86C18.6,15.19 22,12.1 22,8.33C22,5.24 19.58,2.83 16.5,2.83M12,17.83V13.83H9L12,6.83V10.83H15
+
+$mol_icon_heart_outline $mol_icon path \M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z
+
+$hyoo_match_single_page $mol_page
+	title \Персоны
+	self $hyoo_match_single
+	pair $hyoo_match_single
+		title => name
+		greet => greet
+		contacts => contacts
+		places => places
+		photo_moment => photo_moment
+	mutual false
+	title_content / <= name
+	tools /
+		<= Moment $mol_date
+			enabled false
+			value_moment <= photo_moment
+	body /
+		<= Gallery $mol_stack sub <= gallery /
+			<= Photo $mol_image
+				uri <= photo \
+			<= Skip $mol_button_minor
+				hint \Пропустить
+				click? <=> skip? null
+				sub /
+					<= Skip_icon $mol_icon_window_close
+			<= Mutual $mol_row sub /
+				<= Mutual_icon $mol_icon_heart_flash
+			<= Like $mol_button_minor
+				hint \Нравится
+				click? <=> like? null
+				sub /
+					<= Like_icon $mol_icon_heart_outline
+		<= Match $mol_list rows /
+			<= Match_hint $mol_text text <= match_hint \++Удача!++ --У вас есть {timeout} мин. для свидания.--
+			<= Contacts $mol_text
+				text <= contacts
+		<= Places $hyoo_match_places
+			enabled false
+			Pick null
+			value? <= places
+		<= Brief $mol_text
+			text <= greet
+
 $hyoo_match_app $mol_book2_catalog
 	lobby $hyoo_match_lobby
 	self $hyoo_match_single
@@ -1523,7 +1624,7 @@ $hyoo_match_app $mol_book2_catalog
 	auto /
 		<= lobby_update null
 		<= redirects null
-	menu_title \$hyoo_match
+	menu_title \match.hyoo.ru
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	menu_body /
@@ -1536,7 +1637,7 @@ $hyoo_match_app $mol_book2_catalog
 			uri \https://github.com/hyoo-ru/match.hyoo.ru/
 		<= Support $mol_link_iconed
 			hint \Поддержка
-			uri \https://t.me/h_y_o_o/417
+			uri \https://t.me/nin_jin
 			sub /
 				<= Support_icon $mol_icon_face_agent
 	Placeholder null
@@ -1584,7 +1685,7 @@ $hyoo_page_side_news $mol_page
 					title <= item_title* \
 					Avatar null
 
-$mol_icon_magnify $mol_icon path \M9.5,3C13.09,3 16,5.91 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16C5.91,16 3,13.09 3,9.5C3,5.91 5.91,3 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z
+$mol_icon_magnify $mol_icon path \M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z
 
 $mol_icon_pencil $mol_icon path \M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z
 
@@ -1669,7 +1770,7 @@ $hyoo_meta_menu_items $mol_list
 							hint @ \Remove
 							click? <=> item_remove*? null
 							sub /
-								<= Item_remove_icon* $mol_icon_cross
+								<= Item_remove_icon* $mol_icon_close
 						<= Item_pin* $mol_button_minor
 							hint @ \Pin here
 							click? <=> item_pin*? null
@@ -1699,7 +1800,7 @@ $hyoo_meta_menu_items $mol_list
 $hyoo_meta_menu $mol_page
 	editable true
 	item_moved*? null
-	yard $hyoo_sync_yard
+	yard $hyoo_sync_yard<any>
 	item* $hyoo_meta_model
 		title => item_title*
 	list $hyoo_crowd_list
@@ -1795,13 +1896,13 @@ $mol_search_jumper $mol_search
 				enter?event <=> forward?event
 				escape? <=> escape? null
 
-$mol_icon_information $mol_icon path \M13,9H11V7H13M13,17H11V11H13M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2Z
+$mol_icon_information $mol_icon path \M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
 
-$mol_icon_information_outline $mol_icon path \M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M11,17H13V11H11V17Z
+$mol_icon_information_outline $mol_icon path \M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z
 
-$mol_icon_bookmark $mol_icon path \M17,3H7C5.9,3 5,3.9 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z
+$mol_icon_bookmark $mol_icon path \M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z
 
-$mol_icon_bookmark_outline $mol_icon path \M17,18L12,15.82L7,18V5H17M17,3H7C5.9,3 5,3.9 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z
+$mol_icon_bookmark_outline $mol_icon path \M17,18L12,15.82L7,18V5H17M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z
 
 $hyoo_page_side_view $mol_page
 	profile $hyoo_page_side
@@ -1857,9 +1958,6 @@ $hyoo_page_side_view $mol_page
 			hint @ \Bookmark page
 			checked? <=> bookmark? false
 			Icon <= Bookmark_icon $mol_icon_bookmark_outline
-	slides_content \
-		\# {title}
-		\{details}
 	body /
 		<= Details $mol_text
 			text <= details \
@@ -1877,11 +1975,9 @@ $hyoo_page_side_view $mol_page
 				<= Following $hyoo_meta_link
 					meta <= following
 
-$mol_string_button $mol_string
-
 $mol_icon_publish $mol_icon path \M5,4V6H19V4H5M5,14H9V20H15V14H19L12,7L5,14Z
 
-$mol_icon_export $mol_icon path \M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15C16.1,4 17,4.9 17,6V9H15V6H3V18H15V15H17V18C17,19.1 16.1,20 15,20H3C1.9,20 1,19.1 1,18Z
+$mol_icon_export $mol_icon path \M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z
 
 $mol_icon_download $mol_icon path \M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z
 
@@ -1895,13 +1991,16 @@ $mol_button_download $mol_button_minor
 
 $mol_icon_shield $mol_icon path \M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z
 
-$mol_icon_shield_account $mol_icon path \M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5C13.66,5 15,6.34 15,8C15,9.66 13.66,11 12,11C10.34,11 9,9.66 9,8C9,6.34 10.34,5 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z
+$mol_icon_shield_account $mol_icon path \M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z
+
+$mol_string_button $mol_string
 
 $hyoo_page_side_edit $mol_page
 	side $hyoo_page_side
 		title? => title?
 		details? => details?
 		details_selection? => details_selection?
+		content_full => content_full
 		aura? => aura?
 		editable => editable
 		released => released
@@ -1942,7 +2041,7 @@ $hyoo_page_side_edit $mol_page
 			Icon <= Rights_icon $mol_icon_shield_account
 		<= Close $mol_button_minor
 			click? <=> close? null
-			sub / <= Close_icon $mol_icon_cross
+			sub / <= Close_icon $mol_icon_close
 	body /
 		<= Details_edit $mol_textarea
 			hint @ \Details
@@ -1955,19 +2054,6 @@ $hyoo_page_side_edit $mol_page
 				hint @ \hyper link
 				value? <=> aura?
 				enabled <= editable
-
-$mol_expander $mol_list
-	rows /
-		<= Label $mol_view
-			sub /
-				<= Trigger $mol_check_expand
-					checked? <=> expanded? false
-					expandable <= expandable true
-					label <= label /
-						<= title
-				<= Tools null
-		<= Content $mol_list
-			rows <= content /
 
 $hyoo_page_side_info $mol_page
 	Text $mol_text
@@ -1989,7 +2075,7 @@ $hyoo_page_side_info $mol_page
 		<= Close $mol_button_minor
 			click? <=> close? null
 			sub /
-				<= Close_icon $mol_icon_cross
+				<= Close_icon $mol_icon_close
 	body /
 		<= Stat $mol_view sub /
 			<= Size $mol_labeler
@@ -2039,10 +2125,8 @@ $hyoo_page_side_info $mol_page
 				- Empty <= Word_list_empty $mol_card
 					title @ \No words
 
-$mol_button_major $mol_button_typed
-	attr *
-		^
-		mol_theme \$mol_theme_accent
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
 
 $hyoo_meta_rights $mol_page
 	title @ \Rights
@@ -2076,11 +2160,11 @@ $hyoo_meta_rights $mol_page
 								title @ \Allow anyone
 								click? <=> editor_fill_all? null
 
-$mol_icon_key $mol_icon path \M7,14C5.9,14 5,13.1 5,12C5,10.9 5.9,10 7,10C8.1,10 9,10.9 9,12C9,13.1 8.1,14 7,14M12.65,10C11.83,7.67 9.61,6 7,6C3.69,6 1,8.69 1,12C1,15.31 3.69,18 7,18C9.61,18 11.83,16.33 12.65,14H17V18H21V14H23V10H12.65Z
+$mol_icon_key $mol_icon path \M7 14C5.9 14 5 13.1 5 12S5.9 10 7 10 9 10.9 9 12 8.1 14 7 14M12.6 10C11.8 7.7 9.6 6 7 6C3.7 6 1 8.7 1 12S3.7 18 7 18C9.6 18 11.8 16.3 12.6 14H16V18H20V14H23V10H12.6Z
 
-$mol_icon_key_variant $mol_icon path \M22,18V22H18V19H15V16H12L9.74,13.74C9.19,13.91 8.61,14 8,14C4.69,14 2,11.31 2,8C2,4.69 4.69,2 8,2C11.31,2 14,4.69 14,8C14,8.61 13.91,9.19 13.74,9.74L22,18M7,5C5.9,5 5,5.9 5,7C5,8.1 5.9,9 7,9C8.1,9 9,8.1 9,7C9,5.9 8.1,5 7,5Z
+$mol_icon_key_variant $mol_icon path \M22,18V22H18V19H15V16H12L9.74,13.74C9.19,13.91 8.61,14 8,14A6,6 0 0,1 2,8A6,6 0 0,1 8,2A6,6 0 0,1 14,8C14,8.61 13.91,9.19 13.74,9.74L22,18M7,5A2,2 0 0,0 5,7A2,2 0 0,0 7,9A2,2 0 0,0 9,7A2,2 0 0,0 7,5Z
 
-$mol_icon_image $mol_icon path \M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19Z
+$mol_icon_image $mol_icon path \M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z
 
 $hyoo_page_menu $hyoo_meta_menu
 	title @ \In Bookmarks
@@ -2165,14 +2249,14 @@ $hyoo_page $mol_book2
 				<= Rights_close $mol_button_minor
 					click? <=> rights_close? null
 					sub /
-						<= Сlose_icon $mol_icon_cross
+						<= Close_icon $mol_icon_close
 		<= Safe $hyoo_meta_safe
 			yard <= yard
 			tools /
 				<= Safe_close $mol_button_minor
 					click? <=> safe_close? null
 					sub /
-						<= Safe_icon $mol_icon_cross
+						<= Safe_icon $mol_icon_close
 	Placeholder <= Menu $hyoo_page_menu
 		yard <= yard
 		side <= profile
