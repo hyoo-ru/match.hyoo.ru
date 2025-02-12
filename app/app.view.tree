@@ -7,7 +7,7 @@ $hyoo_match_app $mol_book2_catalog
 	auto /
 		<= lobby_update null
 		<= redirects null
-	menu_title \$hyoo_match
+	menu_title \match.hyoo.ru
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	menu_body /
@@ -20,7 +20,7 @@ $hyoo_match_app $mol_book2_catalog
 			uri \https://github.com/hyoo-ru/match.hyoo.ru/
 		<= Support $mol_link_iconed
 			hint \Поддержка
-			uri \https://t.me/h_y_o_o/417
+			uri \https://t.me/nin_jin
 			sub /
 				<= Support_icon $mol_icon_face_agent
 	Placeholder null

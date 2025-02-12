@@ -8,6 +8,18 @@ namespace $.$$ {
 			},
 		},
 		
+		Body_content: {
+			gap: $mol_gap.block,
+		},
+		
+		Invisible: {
+			padding: $mol_gap.text,
+		},
+		
+		Visible: {
+			padding: $mol_gap.text,
+		},
+		
 		Incoplete: {
 			color: $mol_theme.focus,
 			padding: $mol_gap.text,
@@ -36,7 +48,7 @@ namespace $.$$ {
 		Contacts_hint: {
 			padding: $mol_gap.text,
 			color: $mol_theme.shade,
-			margin: { bottom: `-2.5rem` },
+			margin: { bottom: `-3.25rem` },
 			alignSelf: `flex-end`,
 			zIndex: $mol_layer.speck,
 		},
@@ -45,6 +57,12 @@ namespace $.$$ {
 			flex: {
 				shrink: 0,
 				grow: 0,
+			},
+		},
+		
+		$mol_check_list: {
+			flex: {
+				direction: 'column',
 			},
 		},
 		

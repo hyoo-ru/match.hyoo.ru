@@ -61,6 +61,11 @@ namespace $ {
 		}
 		
 		@ $mol_mem
+		univer( next?: string ) {
+			return this.sub( '$hyoo_match_single:univer', $hyoo_crowd_reg ).str( next )
+		}
+		
+		@ $mol_mem
 		sex_self( next?: string ) {
 			return this.sub( '$hyoo_match_single:sex_self', $hyoo_crowd_reg ).str( next )
 		}

@@ -1,12 +1,8 @@
 $hyoo_match_places $mol_select_list
 	dictionary *
-		- \Planetes
-		mars \Марс
-		moon \Луна
-		earth \Земля
 		- \Cities
-		RU-MOW \Москва
 		RU-SPE \Санкт-Петербург
+		RU-MOW \Москва
 		UA-40 \Севастополь
 		- \States
 		RU-AMU \Амурская область
@@ -121,3 +117,7 @@ $hyoo_match_places $mol_select_list
 		america-nord \Северная Америка
 		antarctica \Антарктида
 		oceania \Oceania
+		- \Planetes
+		earth \Земля
+		moon \Луна
+		mars \Марс

@@ -35,6 +35,13 @@ namespace $.$$ {
 				: [ this.Photo(), this.Shot_hint() ]
 		}
 		
+		@ $mol_mem
+		tools() {
+			return [
+				... this.ready() ? [ this.Visible() ] : [ this.Invisible() ],
+			]
+		}
+		
 		Incoplete() {
 			if( this.ready() ) return null as never
 			return super.Incoplete()

@@ -7,6 +7,7 @@ $hyoo_match_single_settings $mol_page
 		greet? => greet?
 		contacts? => contacts?
 		places? => places?
+		univer? => univer?
 		sex_self? => sex_self?
 		age_self? => age_self?
 		sex_pref*? => sex_pref*?
@@ -15,10 +16,13 @@ $hyoo_match_single_settings $mol_page
 		age_pref_all => age_pref_all
 	bid_required* \Обязательно
 	bid_one* \Хотябы один
+	tools /
+		<= Invisible $mol_paragraph title \🙈 Не виден
+		<= Visible $mol_paragraph title \👀 Виден всем
 	foot /
-		<= Incoplete $mol_paragraph title \Недозаполнен 🙈
+		<= Incoplete $mol_paragraph title \❌ Профиль недозаполнен
 		<= Next $mol_link
-			title \Виден всем ✅
+			title \✅ Смотреть другиих
 			arg * \
 				\look
 	body /
@@ -43,28 +47,28 @@ $hyoo_match_single_settings $mol_page
 				value? <=> name?
 		<= Tags $mol_form_group sub /
 			<= Self $mol_form_field
-				name \Я ...
+				name \Я из этих ...
 				bids /
 					<= bid_required*age_self
 					<= bid_required*sex_self
-				Content <= Self_controls $mol_list rows /
+				Content <= Self_controls $mol_view sub /
 					<= Age_self $mol_switch
 						value? <=> age_self?
 						options *
-							young \Молодой
-							adult \Взрослый
-							mature \Зрелый
+							young \Молодых
+							adult \Взрослых
+							mature \Зрелых
 					<= Sex_self $mol_switch
 						value? <=> sex_self?
 						options *
-							female \Женщина
-							male \Мужчина
+							female \Женщин
+							male \Мужчин
 			<= Pref $mol_form_field
 				name @ \Мне нравятся ...
 				bids /
 					<= bid_one*age_pref_all
 					<= bid_one*sex_pref_all
-				Content <= Pref_controls $mol_list rows /
+				Content <= Pref_controls $mol_view sub /
 					<= Age_pref $mol_check_list
 						option_checked*? <=> age_pref*?
 						options *
@@ -76,13 +80,20 @@ $hyoo_match_single_settings $mol_page
 						options *
 							female \Женщины
 							male \Мужчины
-		<= Places_field $mol_form_field
-			name \Регионы
-			bids /
-				<= bid_one*places
-			Content <= Places $hyoo_match_places
-				value? <=> places?
-				pick_enabled <= places_enabled true
+		<= Location $mol_form_group sub /
+			<= Univer_field $mol_form_field
+				name \Универ
+				bids /
+				Content <= Univer $hyoo_match_univer
+					value? <=> univer?
+					pick_enabled <= univer_enabled true
+			<= Places_field $mol_form_field
+				name \Регионы
+				bids /
+					<= bid_one*places
+				Content <= Places $hyoo_match_places
+					value? <=> places?
+					pick_enabled <= places_enabled true
 		- <= Syntax $mol_link_iconed
 			hint \MarkedText
 			uri \https://marked.hyoo.ru/
