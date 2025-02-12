@@ -21,7 +21,7 @@ namespace $.$$ {
 			
 			if( next ) return true
 			
-			const pic = $mol_picture.fit( this.video(), 720 )
+			const pic = $mol_picture.fit( this.video() as HTMLVideoElement, 720 )
 			const blob = pic.format( 'image/jpeg' )!
 			this.single().photo( blob )
 			
