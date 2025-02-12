@@ -11,6 +11,7 @@ $hyoo_match_single_page $mol_page
 	title_content / <= name
 	tools /
 		<= Moment $mol_date
+			enabled false
 			value_moment <= photo_moment
 	body /
 		<= Gallery $mol_stack sub <= gallery /

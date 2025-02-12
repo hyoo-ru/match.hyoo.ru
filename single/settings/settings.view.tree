@@ -86,7 +86,6 @@ $hyoo_match_single_settings $mol_page
 				bids /
 				Content <= Univer $hyoo_match_univer
 					value? <=> univer?
-					pick_enabled <= univer_enabled true
 			<= Places_field $mol_form_field
 				name \Регионы
 				bids /
