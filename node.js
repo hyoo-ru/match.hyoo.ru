@@ -24003,7 +24003,7 @@ var $;
                 return found;
             }
             lobby() {
-                const land_id = 'evbktk_nufd3e';
+                const land_id = 'a0bbhe_21ksc6';
                 const rights = new Uint8Array($mol_fetch.buffer(require(`/hyoo/match/app/${land_id}!${land_id}.bin`)));
                 $mol_wire_sync(this.yard().world()).apply(rights);
                 return this.yard().land(land_id).chief.as($hyoo_match_lobby);
@@ -24151,7 +24151,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-var $node = $node || {} ; $node[ "/hyoo/match/app/evbktk_nufd3e!evbktk_nufd3e.bin" ] = "data:application/octet-stream;base64,KLWXNQqK8NUotZc1Corw1Si1lzUKivDVKLWXNQqK8NUAAAAAAAAAAAAAAAAAAAAAr3K+zwAAWAAiX09IM1FJdUJqV2FIaHF0dDVjRm1uV0dUNXdPc3o2cWZKNS1Tbmx0cExNRWpMNTdRWUFoNnF3RlFOT2xYczFNMC1LTTE4MWZ5MWZ1Wm04VmF0bF9HQXMiUw/6zD0ezKRQz+qqWxg5LY06j1806q/P3Y3BiFK6LS6rk2CMTTBkezKxlvm+TJw3Kok5OdU3QgXSZ+fT8PhKXCi1lzUKivDVKLWXNQqK8NUotZc1Corw1ePP4hHPDJHgAAAAAAAAAAAAAAAAAAAAALByvs8AAAEAMwAAAAAAAACFxVuuCU9JeG4UOPwrHRF1vSvLZiIrgWRyC11NJInUPeh9RkolCfHGUN3Scs76CNhmGtmXXBBvMtsBEEkiQpqzKLWXNQqK8NUotZc1Corw1Si1lzUKivDVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsXK+zwAAAQAxAAAAAAAAAEtDetoYpmt7cRomrYaX53jZ6Xp0pMJtMiDMdyk++jR2QGY41uMSGUr28832YM/X0PivFG4NTf7hj3hnQiluf0I="
+var $node = $node || {} ; $node[ "/hyoo/match/app/a0bbhe_21ksc6!a0bbhe_21ksc6.bin" ] = "data:application/octet-stream;base64,4nYSJHa1XQfidhIkdrVdB+J2EiR2tV0H4nYSJHa1XQcAAAAAAAAAAAAAAAAAAAAABk2V7wAAWAAidkZuSnpKNDNadnl1VEExLXFNcGNaQUJMdzNva0NoZk9qbDN5bGhFR3o0d0lCQzRjV01hZjJ5QlRzMjhFQWNlUzJUTS1YZm5OSThCdGU2azd5WlpKVDQiwTa8aZnLjfnECd1Eg+TFiGdA3zuKG3e8ISr5gW/84nzgQsPiNNFgJv+RwiekFOiFQNaaQa4K5Y4Z0m5dcp/nWeJ2EiR2tV0H4nYSJHa1XQfidhIkdrVdB+PP4hHPDJHgAAAAAAAAAAAAAAAAAAAAAAdNle8AAAEAMwAAAAAAAACHZU00lLWe4X2wI1Pps9LcJbzbCyjjKWZb9MrU+R0q56gFMKHR6a9sRWAwQ0G1XJsVoJvmqQYT32vVLI5UfqJu4nYSJHa1XQfidhIkdrVdB+J2EiR2tV0HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACE2V7wAAAQAxAAAAAAAAABZCkNV+R/lNoc7gLAfXt3EJVrLF3IdHfXDg0Ox6lm3V1lPCVqSQywxbO/oediF+3ZzWddEwTe/XG21tXZ3/hO0="
 
 
 //# sourceMappingURL=node.js.map
