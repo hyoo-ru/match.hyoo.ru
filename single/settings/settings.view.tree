@@ -22,7 +22,7 @@ $hyoo_match_single_settings $mol_page
 	foot /
 		<= Incoplete $mol_paragraph title \❌ Профиль недозаполнен
 		<= Next $mol_link
-			title \✅ Смотреть другиих
+			title \✅ Смотреть других
 			arg * \
 				\look
 	body /
