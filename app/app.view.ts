@@ -21,7 +21,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		lobby() {
-			const land_id = 'evbktk_nufd3e' as $mol_int62_string
+			const land_id = 'a0bbhe_21ksc6' as $mol_int62_string
 			const rights = new Uint8Array( $mol_fetch.buffer( require( `/hyoo/match/app/${land_id}!${land_id}.bin` ) ) )
 			$mol_wire_sync( this.yard().world() ).apply( rights )	
 			return this.yard().land( land_id ).chief.as( $hyoo_match_lobby )
