@@ -6536,6 +6536,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_crypto_restack(error: any): never;
+}
+
+declare namespace $ {
     class $mol_crypto_sacred extends $mol_buffer {
         static size: 16;
         static make(): $mol_crypto_sacred;
