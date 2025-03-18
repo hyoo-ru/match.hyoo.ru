@@ -2980,18 +2980,21 @@ var $;
 		pages(){
 			return [];
 		}
+		Placeholder(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		placeholders(){
+			return [(this.Placeholder())];
+		}
 		menu_title(){
 			return "";
 		}
 		sub(){
-			return (this.pages());
+			return [...(this.pages()), ...(this.placeholders())];
 		}
 		minimal_width(){
 			return 0;
-		}
-		Placeholder(){
-			const obj = new this.$.$mol_view();
-			return obj;
 		}
 		Gap(id){
 			const obj = new this.$.$mol_view();
@@ -3057,8 +3060,8 @@ var $;
                 return this.pages()[0]?.title() || this.title();
             }
             sub() {
-                const placeholder = this.Placeholder();
-                const next = [...this.pages(), placeholder];
+                const placeholders = this.placeholders();
+                const next = [...this.pages(), ...placeholders];
                 const prev = $mol_mem_cached(() => this.sub()) ?? [];
                 for (let i = 1; i++;) {
                     const p = prev[prev.length - i];
@@ -3067,7 +3070,7 @@ var $;
                         break;
                     if (p === n)
                         continue;
-                    if (n === placeholder)
+                    if (placeholders.includes(n))
                         continue;
                     new this.$.$mol_after_tick(() => {
                         const b = this.dom_node();
@@ -6940,6 +6943,14 @@ var $;
                     || page.title()
                     || spread;
             }
+            spread_current_book() {
+                const spread = this.spread_current();
+                return spread instanceof $mol_book2 ? spread : null;
+            }
+            placeholders() {
+                const spread_placeholders = this.spread_current_book()?.placeholders() ?? [];
+                return spread_placeholders.length ? spread_placeholders : super.placeholders();
+            }
         }
         __decorate([
             $mol_mem
@@ -6959,6 +6970,9 @@ var $;
         __decorate([
             $mol_mem
         ], $mol_book2_catalog.prototype, "spread", null);
+        __decorate([
+            $mol_mem
+        ], $mol_book2_catalog.prototype, "placeholders", null);
         $$.$mol_book2_catalog = $mol_book2_catalog;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
