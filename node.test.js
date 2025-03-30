@@ -5976,7 +5976,7 @@ var $;
                     min = 0;
                     top = Math.ceil(rect?.top ?? 0);
                     while (min < (kids.length - 1)) {
-                        const height = kids[min].minimal_height();
+                        const height = kids[min]?.minimal_height() ?? 0;
                         if (top + height >= limit_top)
                             break;
                         top += height;
@@ -5998,21 +5998,21 @@ var $;
                 }
                 while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
                     --min2;
-                    top2 -= kids[min2].minimal_height();
+                    top2 -= kids[min2]?.minimal_height() ?? 0;
                 }
                 while (bottom2 < limit_bottom && max2 < kids.length) {
-                    bottom2 += kids[max2].minimal_height();
+                    bottom2 += kids[max2]?.minimal_height() ?? 0;
                     ++max2;
                 }
                 return [min2, max2];
             }
             gap_before() {
                 const skipped = this.sub().slice(0, this.view_window()[0]);
-                return Math.max(0, skipped.reduce((sum, view) => sum + view.minimal_height(), 0));
+                return Math.max(0, skipped.reduce((sum, view) => sum + (view?.minimal_height() ?? 0), 0));
             }
             gap_after() {
                 const skipped = this.sub().slice(this.view_window()[1]);
-                return Math.max(0, skipped.reduce((sum, view) => sum + view.minimal_height(), 0));
+                return Math.max(0, skipped.reduce((sum, view) => sum + (view?.minimal_height() ?? 0), 0));
             }
             sub_visible() {
                 return [
@@ -6024,7 +6024,7 @@ var $;
             minimal_height() {
                 return this.sub().reduce((sum, view) => {
                     try {
-                        return sum + view.minimal_height();
+                        return sum + (view?.minimal_height() ?? 0);
                     }
                     catch (error) {
                         $mol_fail_log(error);
@@ -7395,6 +7395,9 @@ var $;
 		}
 		spread_ids_filtered(){
 			return [];
+		}
+		spread_current(){
+			return null;
 		}
 		menu_tools(){
 			return [];
