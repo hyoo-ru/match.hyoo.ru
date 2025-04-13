@@ -1876,6 +1876,7 @@ $hyoo_page_side_menu $hyoo_meta_menu
 $mol_bar $mol_view
 
 $mol_paginator $mol_bar
+	step 1
 	sub /
 		<= Backward $mol_button_minor
 			hint <= backward_hint @ \Backward
