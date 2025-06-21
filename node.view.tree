@@ -455,15 +455,13 @@ $mol_icon_face_agent $mol_icon path \M18.72,14.76C19.07,13.91 19.26,13 19.26,12C
 
 $mol_image $mol_view
 	dom_name \img
-	field *any
+	attr *any
 		^
 		src <= uri \
 		alt <= title
 		loading <= loading \eager
 		decoding <= decoding \async
 		crossOrigin <= cors null
-	attr *any
-		^
 		width <= natural_width 0
 		height <= natural_height 0
 	event *any
