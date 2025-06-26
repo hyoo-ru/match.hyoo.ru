@@ -337,7 +337,8 @@ $mol_book2_catalog $mol_book2
 			<= Spread_close_icon $mol_icon_close
 
 $mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
 $mol_check $mol_button_minor
 	attr *
