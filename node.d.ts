@@ -1607,7 +1607,7 @@ declare namespace $ {
         protected copy(to: string): void;
         protected drop(): void;
         protected read(): Uint8Array<ArrayBuffer>;
-        protected write(buffer: Uint8Array): undefined;
+        protected write(buffer: Uint8Array<ArrayBuffer>): undefined;
         protected kids(): this[];
         resolve(path: string): this;
         relate(base?: $mol_file): string;
@@ -2783,11 +2783,11 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_base64_encode(src: string | Uint8Array): string;
+    function $mol_base64_encode(src: string | Uint8Array<ArrayBuffer>): string;
 }
 
 declare namespace $ {
-    function $mol_base64_encode_node(str: string | Uint8Array): string;
+    function $mol_base64_encode_node(str: string | Uint8Array<ArrayBuffer>): string;
 }
 
 declare namespace $ {
@@ -2799,7 +2799,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_base64_url_encode(buffer: Uint8Array): string;
+    function $mol_base64_url_encode(buffer: Uint8Array<ArrayBuffer>): string;
     function $mol_base64_url_decode(str: string): Uint8Array<ArrayBuffer>;
 }
 
@@ -2817,9 +2817,9 @@ declare namespace $ {
         constructor(native: CryptoKey & {
             type: 'public';
         });
-        static from(serial: string | Uint8Array): Promise<$mol_crypto_auditor_public>;
+        static from(serial: string | Uint8Array<ArrayBuffer>): Promise<$mol_crypto_auditor_public>;
         serial(): Promise<string>;
-        toArray(): Promise<Uint8Array>;
+        toArray(): Promise<Uint8Array<ArrayBuffer>>;
         verify(data: BufferSource, sign: BufferSource): Promise<boolean>;
     }
     class $mol_crypto_auditor_private extends Object {
@@ -2831,9 +2831,9 @@ declare namespace $ {
         constructor(native: CryptoKey & {
             type: 'private';
         });
-        static from(serial: string | Uint8Array): Promise<$mol_crypto_auditor_private>;
+        static from(serial: string | Uint8Array<ArrayBuffer>): Promise<$mol_crypto_auditor_private>;
         serial(): Promise<string>;
-        toArray(): Promise<Uint8Array>;
+        toArray(): Promise<Uint8Array<ArrayBuffer>>;
         sign(data: BufferSource): Promise<ArrayBuffer>;
         public(): Promise<$mol_crypto_auditor_public>;
     }
@@ -6623,7 +6623,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_base64_ae_encode(buffer: Uint8Array): string;
+    function $mol_base64_ae_encode(buffer: Uint8Array<ArrayBuffer>): string;
     function $mol_base64_ae_decode(str: string): Uint8Array<ArrayBuffer>;
 }
 
