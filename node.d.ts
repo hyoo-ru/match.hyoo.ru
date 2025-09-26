@@ -6938,7 +6938,7 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    function $mol_array_shuffle<Item>(array: readonly Item[]): Item[];
+    function $mol_array_shuffle<Item>(array: readonly Item[]): any[];
 }
 
 declare namespace $ {
