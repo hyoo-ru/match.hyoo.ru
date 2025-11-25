@@ -2738,7 +2738,9 @@ declare namespace $.$$ {
     }
 }
 
-declare let $hyoo_sync_revision: string;
+declare namespace $ {
+    let $hyoo_sync_revision: string;
+}
 
 declare namespace $ {
     type $mol_int62_string = `${string}_${string}`;

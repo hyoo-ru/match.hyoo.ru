@@ -7860,7 +7860,10 @@ var $;
 
 ;
 "use strict";
-let $hyoo_sync_revision = "echo";
+var $;
+(function ($) {
+    $.$hyoo_sync_revision = "echo";
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -20149,6 +20152,18 @@ var $;
         else {
             $mol_dom.addEventListener('DOMContentLoaded', () => {
                 navigator.serviceWorker.register('web.js').then(reg => {
+                    reg.addEventListener('updatefound', () => {
+                        $$.$mol_log3_rise({
+                            place: '$mol_offline',
+                            message: 'Outdated',
+                        });
+                        const worker = reg.installing;
+                        worker.addEventListener('statechange', () => {
+                            if (worker.state !== 'activated')
+                                return;
+                            window.location.reload();
+                        });
+                    });
                 });
             });
         }
