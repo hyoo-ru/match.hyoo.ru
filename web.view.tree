@@ -17,19 +17,44 @@ $mol_book2 $mol_scroll
 	minimal_width 0
 	Gap* $mol_view title \
 
+$mol_ghost $mol_view
+	Sub $mol_view
+
+$mol_follower $mol_ghost
+	Anchor $mol_view
+	align /number
+		-.5
+		-.5
+	offset /number
+		0
+		0
+	style *
+		^
+		transform <= transform \
+
 $mol_pop $mol_view
 	showed? false
 	align_vert \
 	align_hor \
+	align \bottom_center
 	prefer \vert
+	auto /
+		<= bubble null
 	sub /
 		<= Anchor null
 	sub_visible /
 		<= Anchor
-		<= Bubble $mol_pop_bubble
-			align <= align \bottom_center
-			content <= bubble_content /$mol_view_content
-			height_max <= height_max 9999
+		<= Follower $mol_follower
+			offset <= bubble_offset /number
+				0
+				1
+			align <= bubble_align /number
+				0
+				0
+			Anchor <= Anchor
+			Sub <= Bubble $mol_pop_bubble
+				content <= bubble_content /$mol_view_content
+				height_max <= height_max 9999
 
 $mol_pop_bubble $mol_view
 	sub <= content /$mol_view_content
@@ -38,8 +63,8 @@ $mol_pop_bubble $mol_view
 		maxHeight <= height_max 9999
 	attr *
 		^
-		mol_pop_align <= align \
 		tabindex 0
+		popover \manual
 
 $mol_hotkey $mol_plugin
 	event *
@@ -1720,9 +1745,6 @@ $mol_icon_magnify $mol_icon path \M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.
 $mol_icon_pencil $mol_icon path \M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z
 
 $mol_icon_pencil_outline $mol_icon path \M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z
-
-$mol_ghost $mol_view
-	Sub $mol_view
 
 $mol_drag $mol_ghost
 	event *
