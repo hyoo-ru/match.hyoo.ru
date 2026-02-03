@@ -6357,6 +6357,7 @@ declare namespace $ {
         static sizes(image: Exclude<CanvasImageSource, VideoFrame>): number[];
         static load(uri: string): Promise<HTMLImageElement>;
         format(type: 'image/png' | 'image/jpeg' | 'image/webp', quality?: number): Blob | null;
+        url(type?: "image/png" | "image/jpeg" | "image/webp", quality?: number): string;
     }
 }
 

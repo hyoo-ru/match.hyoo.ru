@@ -17233,10 +17233,16 @@ var $;
         format(type, quality = .9) {
             return new Promise(done => this.canvas.toBlob(done, type, quality));
         }
+        url(type = 'image/webp', quality = .9) {
+            return this.canvas.toDataURL(type, quality);
+        }
     }
     __decorate([
         $mol_action
     ], $mol_picture.prototype, "format", null);
+    __decorate([
+        $mol_action
+    ], $mol_picture.prototype, "url", null);
     __decorate([
         $mol_action
     ], $mol_picture, "fit", null);
